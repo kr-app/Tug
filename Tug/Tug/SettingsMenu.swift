@@ -24,28 +24,16 @@ class SettingsMenu: NSObject, NSMenuDelegate {
 		}))
 
 		menu.addItem(NSMenuItem.separator())
-		
 		menu.addItem(THMenuItem(withTitle: THLocalizedString("Preferences…"), block: { () in
 			PreferencesWindowController.shared.showWindow(nil)
 		}))
 
 		menu.addItem(NSMenuItem.separator())
-
 		menu.addItem(THMenuItem(withTitle: THLocalizedString("Channel List…"), block: { () in
 			ChannelListWindowController.shared.showWindow(nil)
 		}))
 
 		menu.addItem(NSMenuItem.separator())
-
-		menu.addItem(THMenuItem(withTitle: THLocalizedString("HELP_GOTO_WEBSITE"), block: { () in
-			
-		}))
-		menu.addItem(THMenuItem(withTitle: THLocalizedString("HELP_EMAIL_SUPPORT"), block: { () in
-			
-		}))
-
-		menu.addItem(NSMenuItem.separator())
-
 		menu.addItem(THMenuItem(withTitle: THLocalizedString("Quit"), block: { () in
 			NSApplication.shared.terminate(nil)
 		}))

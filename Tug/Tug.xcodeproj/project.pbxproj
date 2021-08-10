@@ -64,7 +64,6 @@
 		64C5721722A555FB000B6EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C5721622A555FB000B6EC3 /* Assets.xcassets */; };
 		64C5721A22A555FB000B6EC3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64C5721822A555FB000B6EC3 /* MainMenu.xib */; };
 		64CA81AF26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 64CA819C26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt */; };
-		64CA81B026879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 64CA819D26879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt */; };
 		64CA81B126879FAF00A9CBCE /* THSafariList_CurrentSite.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 64CA819E26879FAF00A9CBCE /* THSafariList_CurrentSite.scpt */; };
 		64CA81B726879FAF00A9CBCE /* THSafariScriptingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CA81A926879FAF00A9CBCE /* THSafariScriptingTools.swift */; };
 		64CC07C4269AD412003D9392 /* THBgColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C3269AD412003D9392 /* THBgColorView.swift */; };
@@ -177,7 +176,6 @@
 		64C5721B22A555FB000B6EC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64C5721C22A555FB000B6EC3 /* Tug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tug.entitlements; sourceTree = "<group>"; };
 		64CA819C26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = THSafariScriptingTools_CreateWindowIfNeeded.scpt; sourceTree = "<group>"; };
-		64CA819D26879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = THSafariScriptingTools_SourceOfFrontSite.scpt; sourceTree = "<group>"; };
 		64CA819E26879FAF00A9CBCE /* THSafariList_CurrentSite.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = THSafariList_CurrentSite.scpt; sourceTree = "<group>"; };
 		64CA81A926879FAF00A9CBCE /* THSafariScriptingTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THSafariScriptingTools.swift; sourceTree = "<group>"; };
 		64CC07C3269AD412003D9392 /* THBgColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THBgColorView.swift; sourceTree = "<group>"; };
@@ -394,7 +392,6 @@
 			isa = PBXGroup;
 			children = (
 				64CA819C26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt */,
-				64CA819D26879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt */,
 				64CA819E26879FAF00A9CBCE /* THSafariList_CurrentSite.scpt */,
 			);
 			path = THSafariScriptingTools.scripts;
@@ -595,7 +592,6 @@
 				64015183269C534A00C4DF9A /* PreferencesWindowController.xib in Resources */,
 				64CA81AF26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt in Resources */,
 				64E727DA2699B442000B516A /* MenuListController.xib in Resources */,
-				64CA81B026879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt in Resources */,
 				64CA81B126879FAF00A9CBCE /* THSafariList_CurrentSite.scpt in Resources */,
 				64C5721A22A555FB000B6EC3 /* MainMenu.xib in Resources */,
 			);

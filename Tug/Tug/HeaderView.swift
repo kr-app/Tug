@@ -10,9 +10,10 @@ class HeaderView: NSView, THOverViewDelegateProtocol {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 
+//		let isDark = THOSAppearance.isDarkMode()
 //		self.bgColor = NSColor(calibratedWhite: 0.2, alpha: 1.0)
 
-		let isDark = THOSAppearance.isDarkMode()
+		self.menu = SettingsMenu.shared.menu
 
 		addMoreButtonView.repString = "+"
 	}

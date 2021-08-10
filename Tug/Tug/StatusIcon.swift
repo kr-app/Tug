@@ -49,10 +49,6 @@ class StatusIcon: NSObject {
 
 	override init() {
 		self.barItem = NSStatusBar.system.statusItem(withLength: -1)
-
-//		Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (timer: Timer) in
-//			//print("isHighlighted: \(self.barItem.button!.isHighlighted)")
-//		})
 	}
 	
 	func updateBadge() {
@@ -66,14 +62,12 @@ class StatusIcon: NSObject {
 		barItem.button!.image = icon
 		barItem.button!.alternateImage = barIcon.th_tinted(withColor: .white)
 //		let c = barItem.button!.cell?.isHighlighted
-//
-//
-//		print("")
+//		barItem.button!.sendAction(on: [.leftMouseUp, .rightMouseUp])
+
 	}
 	
 	func setIsPressed(_ pressed: Bool) {
 		barItem.button?.highlight(pressed)
-		
 	}
 
 }
