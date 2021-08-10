@@ -6,7 +6,7 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-	private let parentAppAlive = THParentAppAlive(withParentAppIdentifier: "com.magnesium-app.com.Tug")
+	private let parentAppAlive = THParentAppAlive(withParentAppIdentifier: "com.kr-app.com.Tug")
 	private var previewController: PreviewController?
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -49,7 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 										object: nil,
 										userInfo: [	PPPaneRequester.keyAction: "show",
 															PPPaneRequester.keyPoint: NSStringFromPoint(NSPoint(600, 300)),
-															PPPaneRequester.keyData: "http://macbidouille.com/news/2021/07/19/le-point-sur-les-rumeurs-des-futurs-macbook-pro"])
+															PPPaneRequester.keyData: "http://www.microsoft.com"])
 		perform(#selector(n_panePreviewRequest), with: n3, afterDelay: 10.0)
 
 	}

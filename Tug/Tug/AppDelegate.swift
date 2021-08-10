@@ -29,24 +29,6 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 		THRunningApp.killOtherApps()
 #endif
 
-/*		for rss in [		["macg.com", "https://www.macg.co/news/feed"],
-							["lefigaro.fr", "https://www.lefigaro.fr/rss/figaro_actualites.xml"],
-							[nil, "https://www.lemonde.fr/rss/une.xml"],
-							["lepoint.fr", "https://www.lepoint.fr/rss.xml"],
-							["macbidouille.com", "https://macbidouille.com/rss"],
-							["ladepeche.fr", "https://www.ladepeche.fr/rss.xml"],
-							["latribune.fr", "https://www.latribune.fr/feed.xml"],
-							["grimper.com", "https://www.grimper.com/feed/all"],
-							["valeursactuelles.com", "https://www.valeursactuelles.com/feed?post_type=post"],
-							["letemps.ch", "https://www.letemps.ch/feed"],
-							["macrumors.com", "http://feeds.macrumors.com/MacRumors-All"],
-							["aljazeera.com", "https://www.aljazeera.com/xml/rss/all.xml"],
-							["20minutes.fr", "https://www.20minutes.fr/rss/une.xml"],
-							[nil, "https://www.ledauphine.com/rss"]
-					] {
-			RssChannelManager.shared.addChannel(withSite: rss[0] , url: URL(string: rss[1]!)!)
-		}*/
-
 		THIconDownloader.shared.setDiskRetention(3.0.th_day)
 		THIconDownloader.shared.validity = 0.0
 		THIconDownloader.shared.maxSize = 74.0
@@ -56,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 		THWebIconLoader.shared.validity = 0.0
 		THWebIconLoader.shared.excludedHosts = THIconDownloader.shared.excludedHosts
 
-		THHelperRunningApp.shared.configure(withAppIdentifier: "com.parrotsoft.TugViewer")
+		THHelperRunningApp.shared.configure(withAppIdentifier: "com.kr-app.TugViewer")
 
 //		THCheckForUpdates.shared.configure(appBuild: nil, infoURL: nil)
 //		THCheckForUpdates.shared.synchronizeAtLaunch()
