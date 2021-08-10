@@ -1,0 +1,989 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		64015181269C533C00C4DF9A /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64015180269C533C00C4DF9A /* PreferencesWindowController.swift */; };
+		64015183269C534A00C4DF9A /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64015182269C534A00C4DF9A /* PreferencesWindowController.xib */; };
+		64015190269C54C000C4DF9A /* THHelperRunningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6401518F269C54C000C4DF9A /* THHelperRunningApp.swift */; };
+		64015198269C54D000C4DF9A /* THHotKeyFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64015193269C54D000C4DF9A /* THHotKeyFieldView.m */; };
+		64015199269C54D000C4DF9A /* THHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 64015194269C54D000C4DF9A /* THHotKey.m */; };
+		6401519A269C54D000C4DF9A /* THHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 64015197269C54D000C4DF9A /* THHotKeyCenter.m */; };
+		640151C5269C70B200C4DF9A /* ChannelListWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640151C4269C70B200C4DF9A /* ChannelListWindowController.swift */; };
+		640151C8269C70BE00C4DF9A /* ChannelListWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 640151C7269C70BE00C4DF9A /* ChannelListWindowController.xib */; };
+		640151CA269C779B00C4DF9A /* THNSButtonBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640151C9269C779B00C4DF9A /* THNSButtonBlock.swift */; };
+		640151D6269C7F5600C4DF9A /* THLocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640151D5269C7F5600C4DF9A /* THLocalizedString.swift */; };
+		6424BCBF269F54F8008E7084 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6424BCBE269F54F8008E7084 /* UserPreferences.swift */; };
+		6426432722A5CAEA007B0EAB /* THFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 642642FC22A5CAEA007B0EAB /* THFoundation.m */; };
+		6426432822A5CAEA007B0EAB /* THLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 642642FF22A5CAEA007B0EAB /* THLog.m */; };
+		643417DB267551080046CD56 /* THLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643417DA267551080046CD56 /* THLogger.swift */; };
+		643F07472699F843002DDA3B /* MenuCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643F07462699F843002DDA3B /* MenuCellView.swift */; };
+		643F075E269A0BC3002DDA3B /* PWPaneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643F075D269A0BC3002DDA3B /* PWPaneWindow.swift */; };
+		644C3E492576A63600127BC6 /* THOSAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644C3E482576A63600127BC6 /* THOSAppearance.swift */; };
+		64576AFA26C26BF500CE9356 /* THFrontmostAppSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64576AF926C26BF500CE9356 /* THFrontmostAppSaver.swift */; };
+		6458CE902698DEE200E3885F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458CE8F2698DEE200E3885F /* AppDelegate.swift */; };
+		6458CE942698DEE500E3885F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6458CE932698DEE500E3885F /* Assets.xcassets */; };
+		6458CE972698DEE500E3885F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6458CE952698DEE500E3885F /* Main.storyboard */; };
+		6458CEA42698DFC000E3885F /* PPPanePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6458CE9E2698DFC000E3885F /* PPPanePreviewController.m */; };
+		6458CEAF2698E58100E3885F /* PPPaneRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458CEAD2698E57D00E3885F /* PPPaneRequester.swift */; };
+		6458CEB32698E83E00E3885F /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458CEB22698E83E00E3885F /* PreviewController.swift */; };
+		6458CEB42698E8CC00E3885F /* THLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6473AF162545B842006003A8 /* THLog.swift */; };
+		6458CEB52698E8CE00E3885F /* THLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643417DA267551080046CD56 /* THLogger.swift */; };
+		6458CEB62698E8D200E3885F /* THFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649212E6255873D7002E3F78 /* THFoundation.swift */; };
+		6458CEB72698E8DF00E3885F /* PPPaneRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458CEAD2698E57D00E3885F /* PPPaneRequester.swift */; };
+		6458CEB92698E8F700E3885F /* PreviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6458CEB82698E8F700E3885F /* PreviewController.xib */; };
+		6458CEBD2698F1CA00E3885F /* THCocoaExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646E18ED2567382D00CD1B2D /* THCocoaExtensions.swift */; };
+		6458CEBE2698F1CD00E3885F /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AB664D2476D17200587F1D /* THExtensions.swift */; };
+		6458CEBF2698F1E400E3885F /* THFormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */; };
+		6458CEC02698F1F300E3885F /* THFileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64898D73256131E8002945CE /* THFileManagerExtensions.swift */; };
+		6458CEC12698F20A00E3885F /* THRunningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64774B5C256ADE0500D9D5B3 /* THRunningApp.swift */; };
+		6458CEC22698F21800E3885F /* THStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B3661256AD47F00D3D29F /* THStringExtensions.swift */; };
+		6458CEC32698F27000E3885F /* THLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 642642FF22A5CAEA007B0EAB /* THLog.m */; };
+		6458CEC82698F77C00E3885F /* TugViewer.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6458CE8D2698DEE200E3885F /* TugViewer.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6464C25026A22E4300933317 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6464C25226A22E4300933317 /* Localizable.strings */; };
+		646E18EE2567382D00CD1B2D /* THCocoaExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646E18ED2567382D00CD1B2D /* THCocoaExtensions.swift */; };
+		6473AF172545B842006003A8 /* THLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6473AF162545B842006003A8 /* THLog.swift */; };
+		6475383526ADC84400895ED6 /* THHighlightedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6475383426ADC84400895ED6 /* THHighlightedTableView.swift */; };
+		64774B5D256ADE0500D9D5B3 /* THRunningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64774B5C256ADE0500D9D5B3 /* THRunningApp.swift */; };
+		647888382347BED1002927D2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647888372347BED1002927D2 /* SystemConfiguration.framework */; };
+		647B34EB2668F11000785E10 /* THOpenInBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647B34EA2668F11000785E10 /* THOpenInBrowser.swift */; };
+		64898D74256131E8002945CE /* THFileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64898D73256131E8002945CE /* THFileManagerExtensions.swift */; };
+		648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B3661256AD47F00D3D29F /* THStringExtensions.swift */; };
+		648FC491256591E10067B491 /* AddMoreMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648FC490256591E10067B491 /* AddMoreMenu.swift */; };
+		649212E7255873D7002E3F78 /* THFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649212E6255873D7002E3F78 /* THFoundation.swift */; };
+		64AB664E2476D17200587F1D /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AB664D2476D17200587F1D /* THExtensions.swift */; };
+		64B8A3FF26A5B3CD00C4CFED /* THFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 642642FC22A5CAEA007B0EAB /* THFoundation.m */; };
+		64BA6384267F7C3900E044A3 /* THNetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6383267F7C3900E044A3 /* THNetworkStatus.swift */; };
+		64BACF4026AC3547000E4F97 /* THParentAppAlive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BACF3F26AC3547000E4F97 /* THParentAppAlive.swift */; };
+		64BD394D256EF1D300988D08 /* THDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BD394C256EF1D300988D08 /* THDataExtensions.swift */; };
+		64C5721522A555F9000B6EC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5721422A555F9000B6EC3 /* AppDelegate.swift */; };
+		64C5721722A555FB000B6EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C5721622A555FB000B6EC3 /* Assets.xcassets */; };
+		64C5721A22A555FB000B6EC3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64C5721822A555FB000B6EC3 /* MainMenu.xib */; };
+		64CA81AF26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 64CA819C26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt */; };
+		64CA81B026879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 64CA819D26879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt */; };
+		64CA81B126879FAF00A9CBCE /* THSafariList_CurrentSite.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 64CA819E26879FAF00A9CBCE /* THSafariList_CurrentSite.scpt */; };
+		64CA81B726879FAF00A9CBCE /* THSafariScriptingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CA81A926879FAF00A9CBCE /* THSafariScriptingTools.swift */; };
+		64CC07C4269AD412003D9392 /* THBgColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C3269AD412003D9392 /* THBgColorView.swift */; };
+		64CC07C6269B002B003D9392 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C5269B002B003D9392 /* HeaderView.swift */; };
+		64CC07C8269B011D003D9392 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C7269B011D003D9392 /* SettingsMenu.swift */; };
+		64CC07CA269B089F003D9392 /* THNSMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C9269B089F003D9392 /* THNSMenuExtensions.swift */; };
+		64CC07D5269B5BD3003D9392 /* PPPanePreviewWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07D3269B557A003D9392 /* PPPanePreviewWindow.swift */; };
+		64CE9A2C25BF70A6004EC688 /* THUnixCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CE9A2A25BF70A6004EC688 /* THUnixCommand.m */; };
+		64DC4D22269A42A9006BAA4B /* StatusIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DC4D21269A42A9006BAA4B /* StatusIcon.swift */; };
+		64E4B03822AD2B2C001E2340 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E4B03422AD2B22001E2340 /* libxml2.2.tbd */; };
+		64E727A22699AFC1000B516A /* MenuListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E727A12699AFC1000B516A /* MenuListController.swift */; };
+		64E727C72699B228000B516A /* THOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E727AB2699B228000B516A /* THOverView.swift */; };
+		64E727D22699B228000B516A /* THHighlightedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E727BD2699B228000B516A /* THHighlightedTableView.m */; };
+		64E727DA2699B442000B516A /* MenuListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E727D92699B442000B516A /* MenuListController.xib */; };
+		64EDAB5C2680A1E8001D5AC0 /* THDictionarySerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */; };
+		64F08F4E25606F6200857C8E /* THFormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */; };
+		64F354F926C1CFF400B18F41 /* RssChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F354F526C1CFF400B18F41 /* RssChannel.swift */; };
+		64F354FA26C1CFF400B18F41 /* RssChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F354F626C1CFF400B18F41 /* RssChannelItem.swift */; };
+		64F354FB26C1CFF400B18F41 /* RssChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F354F726C1CFF400B18F41 /* RssChannelManager.swift */; };
+		64F354FC26C1CFF400B18F41 /* RssScriptingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F354F826C1CFF400B18F41 /* RssScriptingTools.swift */; };
+		64F3555A26C1D67000B18F41 /* THIconDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3555726C1D67000B18F41 /* THIconDownloader.swift */; };
+		64F3555C26C1D67000B18F41 /* THDistantItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3555926C1D67000B18F41 /* THDistantItem.swift */; };
+		64F3556326C1D69800B18F41 /* THXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F3555F26C1D69800B18F41 /* THXMLParser.m */; };
+		64F3556426C1D69800B18F41 /* THXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F3556026C1D69800B18F41 /* THXMLElement.m */; };
+		64F3556526C1D69800B18F41 /* THRssFeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3556126C1D69800B18F41 /* THRssFeedParser.swift */; };
+		64F3559826C1D82E00B18F41 /* THSharedLoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F3558826C1D82E00B18F41 /* THSharedLoginItems.m */; };
+		64F3559A26C1D82E00B18F41 /* THAppInLoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3558A26C1D82E00B18F41 /* THAppInLoginItem.swift */; };
+		64F355A326C1D86400B18F41 /* THAsScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F355A026C1D86400B18F41 /* THAsScript.swift */; };
+		64F576FB269F01B6008186FE /* THNSImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F576FA269F01B6008186FE /* THNSImageExtensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6458CEA82698E04A00E3885F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 64C5720922A555F9000B6EC3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6458CE8C2698DEE200E3885F;
+			remoteInfo = TugViewer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6458CEC72698F77100E3885F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6458CEC82698F77C00E3885F /* TugViewer.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		64015180269C533C00C4DF9A /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		64015182269C534A00C4DF9A /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
+		6401518F269C54C000C4DF9A /* THHelperRunningApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THHelperRunningApp.swift; sourceTree = "<group>"; };
+		64015192269C54D000C4DF9A /* THHotKeyCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHotKeyCenter.h; sourceTree = "<group>"; };
+		64015193269C54D000C4DF9A /* THHotKeyFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHotKeyFieldView.m; sourceTree = "<group>"; };
+		64015194269C54D000C4DF9A /* THHotKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHotKey.m; sourceTree = "<group>"; };
+		64015195269C54D000C4DF9A /* THHotKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHotKey.h; sourceTree = "<group>"; };
+		64015196269C54D000C4DF9A /* THHotKeyFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHotKeyFieldView.h; sourceTree = "<group>"; };
+		64015197269C54D000C4DF9A /* THHotKeyCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHotKeyCenter.m; sourceTree = "<group>"; };
+		640151C4269C70B200C4DF9A /* ChannelListWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListWindowController.swift; sourceTree = "<group>"; };
+		640151C7269C70BE00C4DF9A /* ChannelListWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelListWindowController.xib; sourceTree = "<group>"; };
+		640151C9269C779B00C4DF9A /* THNSButtonBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THNSButtonBlock.swift; sourceTree = "<group>"; };
+		640151D5269C7F5600C4DF9A /* THLocalizedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLocalizedString.swift; sourceTree = "<group>"; };
+		6424BCBE269F54F8008E7084 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		642642FC22A5CAEA007B0EAB /* THFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFoundation.m; sourceTree = "<group>"; };
+		642642FF22A5CAEA007B0EAB /* THLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLog.m; sourceTree = "<group>"; };
+		6426431322A5CAEA007B0EAB /* THLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLog.h; sourceTree = "<group>"; };
+		6426431622A5CAEA007B0EAB /* THFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFoundation.h; sourceTree = "<group>"; };
+		6426434722A5CF40007B0EAB /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		643417DA267551080046CD56 /* THLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLogger.swift; sourceTree = "<group>"; };
+		643F07462699F843002DDA3B /* MenuCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCellView.swift; sourceTree = "<group>"; };
+		643F075D269A0BC3002DDA3B /* PWPaneWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PWPaneWindow.swift; sourceTree = "<group>"; };
+		644C3E482576A63600127BC6 /* THOSAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THOSAppearance.swift; sourceTree = "<group>"; };
+		64576AF926C26BF500CE9356 /* THFrontmostAppSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFrontmostAppSaver.swift; sourceTree = "<group>"; };
+		6458CE8D2698DEE200E3885F /* TugViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TugViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6458CE8F2698DEE200E3885F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6458CE932698DEE500E3885F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6458CE962698DEE500E3885F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6458CE982698DEE500E3885F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6458CE9E2698DFC000E3885F /* PPPanePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPanePreviewController.m; sourceTree = "<group>"; };
+		6458CEA22698DFC000E3885F /* PPPanePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPanePreviewController.h; sourceTree = "<group>"; };
+		6458CEA72698DFE700E3885F /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		6458CEAD2698E57D00E3885F /* PPPaneRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPPaneRequester.swift; sourceTree = "<group>"; };
+		6458CEB22698E83E00E3885F /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		6458CEB82698E8F700E3885F /* PreviewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviewController.xib; sourceTree = "<group>"; };
+		6464C25126A22E4300933317 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		646E18ED2567382D00CD1B2D /* THCocoaExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCocoaExtensions.swift; sourceTree = "<group>"; };
+		6473AF162545B842006003A8 /* THLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLog.swift; sourceTree = "<group>"; };
+		6475383426ADC84400895ED6 /* THHighlightedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THHighlightedTableView.swift; sourceTree = "<group>"; };
+		64774B5C256ADE0500D9D5B3 /* THRunningApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THRunningApp.swift; sourceTree = "<group>"; };
+		647888372347BED1002927D2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		647B34EA2668F11000785E10 /* THOpenInBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THOpenInBrowser.swift; sourceTree = "<group>"; };
+		64898D73256131E8002945CE /* THFileManagerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFileManagerExtensions.swift; sourceTree = "<group>"; };
+		648B3661256AD47F00D3D29F /* THStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THStringExtensions.swift; sourceTree = "<group>"; };
+		648FC490256591E10067B491 /* AddMoreMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMoreMenu.swift; sourceTree = "<group>"; };
+		649212E6255873D7002E3F78 /* THFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFoundation.swift; sourceTree = "<group>"; };
+		64AB664D2476D17200587F1D /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
+		64BA6383267F7C3900E044A3 /* THNetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNetworkStatus.swift; sourceTree = "<group>"; };
+		64BACF3F26AC3547000E4F97 /* THParentAppAlive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THParentAppAlive.swift; sourceTree = "<group>"; };
+		64BD394C256EF1D300988D08 /* THDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THDataExtensions.swift; sourceTree = "<group>"; };
+		64C5721122A555F9000B6EC3 /* Tug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		64C5721422A555F9000B6EC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		64C5721622A555FB000B6EC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		64C5721922A555FB000B6EC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		64C5721B22A555FB000B6EC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64C5721C22A555FB000B6EC3 /* Tug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tug.entitlements; sourceTree = "<group>"; };
+		64CA819C26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = THSafariScriptingTools_CreateWindowIfNeeded.scpt; sourceTree = "<group>"; };
+		64CA819D26879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = THSafariScriptingTools_SourceOfFrontSite.scpt; sourceTree = "<group>"; };
+		64CA819E26879FAF00A9CBCE /* THSafariList_CurrentSite.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = THSafariList_CurrentSite.scpt; sourceTree = "<group>"; };
+		64CA81A926879FAF00A9CBCE /* THSafariScriptingTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THSafariScriptingTools.swift; sourceTree = "<group>"; };
+		64CC07C3269AD412003D9392 /* THBgColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THBgColorView.swift; sourceTree = "<group>"; };
+		64CC07C5269B002B003D9392 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		64CC07C7269B011D003D9392 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		64CC07C9269B089F003D9392 /* THNSMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNSMenuExtensions.swift; sourceTree = "<group>"; };
+		64CC07D3269B557A003D9392 /* PPPanePreviewWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPPanePreviewWindow.swift; sourceTree = "<group>"; };
+		64CE9A2A25BF70A6004EC688 /* THUnixCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THUnixCommand.m; sourceTree = "<group>"; };
+		64CE9A2B25BF70A6004EC688 /* THUnixCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THUnixCommand.h; sourceTree = "<group>"; };
+		64DC4D1A269A3329006BAA4B /* TugViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TugViewer.entitlements; sourceTree = "<group>"; };
+		64DC4D21269A42A9006BAA4B /* StatusIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusIcon.swift; sourceTree = "<group>"; };
+		64E4B03422AD2B22001E2340 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		64E4B03522AD2B22001E2340 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		64E727A12699AFC1000B516A /* MenuListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListController.swift; sourceTree = "<group>"; };
+		64E727AB2699B228000B516A /* THOverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THOverView.swift; sourceTree = "<group>"; };
+		64E727AE2699B228000B516A /* THHighlightedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHighlightedTableView.h; sourceTree = "<group>"; };
+		64E727BD2699B228000B516A /* THHighlightedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHighlightedTableView.m; sourceTree = "<group>"; };
+		64E727D92699B442000B516A /* MenuListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuListController.xib; sourceTree = "<group>"; };
+		64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THDictionarySerialization.swift; sourceTree = "<group>"; };
+		64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFormatterExtensions.swift; sourceTree = "<group>"; };
+		64F354F526C1CFF400B18F41 /* RssChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannel.swift; sourceTree = "<group>"; };
+		64F354F626C1CFF400B18F41 /* RssChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItem.swift; sourceTree = "<group>"; };
+		64F354F726C1CFF400B18F41 /* RssChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelManager.swift; sourceTree = "<group>"; };
+		64F354F826C1CFF400B18F41 /* RssScriptingTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssScriptingTools.swift; sourceTree = "<group>"; };
+		64F3555726C1D67000B18F41 /* THIconDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THIconDownloader.swift; sourceTree = "<group>"; };
+		64F3555926C1D67000B18F41 /* THDistantItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THDistantItem.swift; sourceTree = "<group>"; };
+		64F3555E26C1D69800B18F41 /* THXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THXMLElement.h; sourceTree = "<group>"; };
+		64F3555F26C1D69800B18F41 /* THXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THXMLParser.m; sourceTree = "<group>"; };
+		64F3556026C1D69800B18F41 /* THXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THXMLElement.m; sourceTree = "<group>"; };
+		64F3556126C1D69800B18F41 /* THRssFeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THRssFeedParser.swift; sourceTree = "<group>"; };
+		64F3556226C1D69800B18F41 /* THXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THXMLParser.h; sourceTree = "<group>"; };
+		64F3558826C1D82E00B18F41 /* THSharedLoginItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSharedLoginItems.m; sourceTree = "<group>"; };
+		64F3558A26C1D82E00B18F41 /* THAppInLoginItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THAppInLoginItem.swift; sourceTree = "<group>"; };
+		64F3559126C1D82E00B18F41 /* THSharedLoginItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSharedLoginItems.h; sourceTree = "<group>"; };
+		64F355A026C1D86400B18F41 /* THAsScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THAsScript.swift; sourceTree = "<group>"; };
+		64F576FA269F01B6008186FE /* THNSImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNSImageExtensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6458CE8A2698DEE200E3885F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64C5720E22A555F9000B6EC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				647888382347BED1002927D2 /* SystemConfiguration.framework in Frameworks */,
+				64E4B03822AD2B2C001E2340 /* libxml2.2.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		64015191269C54D000C4DF9A /* THHotKey */ = {
+			isa = PBXGroup;
+			children = (
+				64015195269C54D000C4DF9A /* THHotKey.h */,
+				64015194269C54D000C4DF9A /* THHotKey.m */,
+				64015192269C54D000C4DF9A /* THHotKeyCenter.h */,
+				64015197269C54D000C4DF9A /* THHotKeyCenter.m */,
+				64015196269C54D000C4DF9A /* THHotKeyFieldView.h */,
+				64015193269C54D000C4DF9A /* THHotKeyFieldView.m */,
+			);
+			name = THHotKey;
+			path = ../../THCommon/Classes/THHotKey;
+			sourceTree = "<group>";
+		};
+		642642AA22A5CA97007B0EAB /* THUserSpace */ = {
+			isa = PBXGroup;
+			children = (
+				64576AF926C26BF500CE9356 /* THFrontmostAppSaver.swift */,
+				6401518F269C54C000C4DF9A /* THHelperRunningApp.swift */,
+				647B34EA2668F11000785E10 /* THOpenInBrowser.swift */,
+				64BACF3F26AC3547000E4F97 /* THParentAppAlive.swift */,
+			);
+			name = THUserSpace;
+			path = ../../THCommon/Classes/THUserSpace;
+			sourceTree = "<group>";
+		};
+		642642FB22A5CAEA007B0EAB /* THFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				649212E6255873D7002E3F78 /* THFoundation.swift */,
+				64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */,
+				6473AF162545B842006003A8 /* THLog.swift */,
+				643417DA267551080046CD56 /* THLogger.swift */,
+				640151D5269C7F5600C4DF9A /* THLocalizedString.swift */,
+				64BA6383267F7C3900E044A3 /* THNetworkStatus.swift */,
+				64774B5C256ADE0500D9D5B3 /* THRunningApp.swift */,
+				644C3E482576A63600127BC6 /* THOSAppearance.swift */,
+				6426431622A5CAEA007B0EAB /* THFoundation.h */,
+				642642FC22A5CAEA007B0EAB /* THFoundation.m */,
+				6426431322A5CAEA007B0EAB /* THLog.h */,
+				642642FF22A5CAEA007B0EAB /* THLog.m */,
+				64CE9A2B25BF70A6004EC688 /* THUnixCommand.h */,
+				64CE9A2A25BF70A6004EC688 /* THUnixCommand.m */,
+			);
+			name = THFoundation;
+			path = ../../THCommon/Classes/THFoundation;
+			sourceTree = "<group>";
+		};
+		6426434822A5D072007B0EAB /* THExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				64AB664D2476D17200587F1D /* THExtensions.swift */,
+				646E18ED2567382D00CD1B2D /* THCocoaExtensions.swift */,
+				64BD394C256EF1D300988D08 /* THDataExtensions.swift */,
+				64898D73256131E8002945CE /* THFileManagerExtensions.swift */,
+				64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */,
+				64CC07C9269B089F003D9392 /* THNSMenuExtensions.swift */,
+				648B3661256AD47F00D3D29F /* THStringExtensions.swift */,
+				64F576FA269F01B6008186FE /* THNSImageExtensions.swift */,
+			);
+			name = THExtensions;
+			path = ../../THCommon/Classes/THExtensions;
+			sourceTree = "<group>";
+		};
+		6458CE8E2698DEE200E3885F /* TugViewer */ = {
+			isa = PBXGroup;
+			children = (
+				64DC4D1A269A3329006BAA4B /* TugViewer.entitlements */,
+				6458CEA72698DFE700E3885F /* Bridging-Header.h */,
+				6458CE8F2698DEE200E3885F /* AppDelegate.swift */,
+				6458CEB22698E83E00E3885F /* PreviewController.swift */,
+				6458CEB82698E8F700E3885F /* PreviewController.xib */,
+				6458CE932698DEE500E3885F /* Assets.xcassets */,
+				6458CE952698DEE500E3885F /* Main.storyboard */,
+				6458CE982698DEE500E3885F /* Info.plist */,
+			);
+			path = TugViewer;
+			sourceTree = "<group>";
+		};
+		6458CE9D2698DFC000E3885F /* PPPanePreview */ = {
+			isa = PBXGroup;
+			children = (
+				643F075D269A0BC3002DDA3B /* PWPaneWindow.swift */,
+				64CC07D3269B557A003D9392 /* PPPanePreviewWindow.swift */,
+				6458CEAD2698E57D00E3885F /* PPPaneRequester.swift */,
+				6458CEA22698DFC000E3885F /* PPPanePreviewController.h */,
+				6458CE9E2698DFC000E3885F /* PPPanePreviewController.m */,
+			);
+			name = PPPanePreview;
+			path = ../../THCommon/Classes/PPPanePreview;
+			sourceTree = "<group>";
+		};
+		64C5720822A555F9000B6EC3 = {
+			isa = PBXGroup;
+			children = (
+				64E4B03322AD2B22001E2340 /* Frameworks */,
+				642642FB22A5CAEA007B0EAB /* THFoundation */,
+				6426434822A5D072007B0EAB /* THExtensions */,
+				64F3559F26C1D86400B18F41 /* THAppleScript */,
+				64F3555626C1D67000B18F41 /* THDistant */,
+				64015191269C54D000C4DF9A /* THHotKey */,
+				64F3558426C1D82E00B18F41 /* THFinderFile */,
+				642642AA22A5CA97007B0EAB /* THUserSpace */,
+				64F3555D26C1D69800B18F41 /* THXmlParser */,
+				64E727A92699B228000B516A /* THView */,
+				6458CE9D2698DFC000E3885F /* PPPanePreview */,
+				64CA819626879FAF00A9CBCE /* THSafari */,
+				64F354F426C1CFF400B18F41 /* THRssChannel */,
+				64C5721322A555F9000B6EC3 /* Tug */,
+				6458CE8E2698DEE200E3885F /* TugViewer */,
+				64C5721222A555F9000B6EC3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		64C5721222A555F9000B6EC3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64C5721122A555F9000B6EC3 /* Tug.app */,
+				6458CE8D2698DEE200E3885F /* TugViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64C5721322A555F9000B6EC3 /* Tug */ = {
+			isa = PBXGroup;
+			children = (
+				64DC4D21269A42A9006BAA4B /* StatusIcon.swift */,
+				6424BCBE269F54F8008E7084 /* UserPreferences.swift */,
+				64015180269C533C00C4DF9A /* PreferencesWindowController.swift */,
+				64015182269C534A00C4DF9A /* PreferencesWindowController.xib */,
+				640151C4269C70B200C4DF9A /* ChannelListWindowController.swift */,
+				640151C7269C70BE00C4DF9A /* ChannelListWindowController.xib */,
+				64CC07D0269B20FB003D9392 /* MenuList */,
+				6426434722A5CF40007B0EAB /* Bridging-Header.h */,
+				64C5721422A555F9000B6EC3 /* AppDelegate.swift */,
+				64C5721622A555FB000B6EC3 /* Assets.xcassets */,
+				64C5721822A555FB000B6EC3 /* MainMenu.xib */,
+				64C5721B22A555FB000B6EC3 /* Info.plist */,
+				6464C25226A22E4300933317 /* Localizable.strings */,
+				64C5721C22A555FB000B6EC3 /* Tug.entitlements */,
+			);
+			path = Tug;
+			sourceTree = "<group>";
+		};
+		64CA819626879FAF00A9CBCE /* THSafari */ = {
+			isa = PBXGroup;
+			children = (
+				64CA81A926879FAF00A9CBCE /* THSafariScriptingTools.swift */,
+				64CA819B26879FAF00A9CBCE /* THSafariScriptingTools.scripts */,
+			);
+			name = THSafari;
+			path = ../../THCommon/Classes/THSafari;
+			sourceTree = "<group>";
+		};
+		64CA819B26879FAF00A9CBCE /* THSafariScriptingTools.scripts */ = {
+			isa = PBXGroup;
+			children = (
+				64CA819C26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt */,
+				64CA819D26879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt */,
+				64CA819E26879FAF00A9CBCE /* THSafariList_CurrentSite.scpt */,
+			);
+			path = THSafariScriptingTools.scripts;
+			sourceTree = "<group>";
+		};
+		64CC07D0269B20FB003D9392 /* MenuList */ = {
+			isa = PBXGroup;
+			children = (
+				648FC490256591E10067B491 /* AddMoreMenu.swift */,
+				64CC07C7269B011D003D9392 /* SettingsMenu.swift */,
+				64CC07C5269B002B003D9392 /* HeaderView.swift */,
+				643F07462699F843002DDA3B /* MenuCellView.swift */,
+				64E727A12699AFC1000B516A /* MenuListController.swift */,
+				64E727D92699B442000B516A /* MenuListController.xib */,
+			);
+			name = MenuList;
+			sourceTree = "<group>";
+		};
+		64E4B03322AD2B22001E2340 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				647888372347BED1002927D2 /* SystemConfiguration.framework */,
+				64E4B03422AD2B22001E2340 /* libxml2.2.tbd */,
+				64E4B03522AD2B22001E2340 /* libxml2.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		64E727A92699B228000B516A /* THView */ = {
+			isa = PBXGroup;
+			children = (
+				64CC07C3269AD412003D9392 /* THBgColorView.swift */,
+				64E727AB2699B228000B516A /* THOverView.swift */,
+				640151C9269C779B00C4DF9A /* THNSButtonBlock.swift */,
+				6475383426ADC84400895ED6 /* THHighlightedTableView.swift */,
+				64E727AE2699B228000B516A /* THHighlightedTableView.h */,
+				64E727BD2699B228000B516A /* THHighlightedTableView.m */,
+			);
+			name = THView;
+			path = ../../THCommon/Classes/THView;
+			sourceTree = "<group>";
+		};
+		64F354F426C1CFF400B18F41 /* THRssChannel */ = {
+			isa = PBXGroup;
+			children = (
+				64F354F526C1CFF400B18F41 /* RssChannel.swift */,
+				64F354F626C1CFF400B18F41 /* RssChannelItem.swift */,
+				64F354F726C1CFF400B18F41 /* RssChannelManager.swift */,
+				64F354F826C1CFF400B18F41 /* RssScriptingTools.swift */,
+			);
+			name = THRssChannel;
+			path = ../../THCommon/Classes/THRssChannel;
+			sourceTree = "<group>";
+		};
+		64F3555626C1D67000B18F41 /* THDistant */ = {
+			isa = PBXGroup;
+			children = (
+				64F3555726C1D67000B18F41 /* THIconDownloader.swift */,
+				64F3555926C1D67000B18F41 /* THDistantItem.swift */,
+			);
+			name = THDistant;
+			path = ../../THCommon/Classes/THDistant;
+			sourceTree = "<group>";
+		};
+		64F3555D26C1D69800B18F41 /* THXmlParser */ = {
+			isa = PBXGroup;
+			children = (
+				64F3556126C1D69800B18F41 /* THRssFeedParser.swift */,
+				64F3556026C1D69800B18F41 /* THXMLElement.m */,
+				64F3555E26C1D69800B18F41 /* THXMLElement.h */,
+				64F3556226C1D69800B18F41 /* THXMLParser.h */,
+				64F3555F26C1D69800B18F41 /* THXMLParser.m */,
+			);
+			name = THXmlParser;
+			path = ../../THCommon/Classes/THXmlParser;
+			sourceTree = "<group>";
+		};
+		64F3558426C1D82E00B18F41 /* THFinderFile */ = {
+			isa = PBXGroup;
+			children = (
+				64F3558A26C1D82E00B18F41 /* THAppInLoginItem.swift */,
+				64F3559126C1D82E00B18F41 /* THSharedLoginItems.h */,
+				64F3558826C1D82E00B18F41 /* THSharedLoginItems.m */,
+			);
+			name = THFinderFile;
+			path = ../../THCommon/Classes/THFinderFile;
+			sourceTree = "<group>";
+		};
+		64F3559F26C1D86400B18F41 /* THAppleScript */ = {
+			isa = PBXGroup;
+			children = (
+				64F355A026C1D86400B18F41 /* THAsScript.swift */,
+			);
+			name = THAppleScript;
+			path = ../../THCommon/Classes/THAppleScript;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6458CE8C2698DEE200E3885F /* TugViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6458CE9C2698DEE500E3885F /* Build configuration list for PBXNativeTarget "TugViewer" */;
+			buildPhases = (
+				6458CE892698DEE200E3885F /* Sources */,
+				6458CE8A2698DEE200E3885F /* Frameworks */,
+				6458CE8B2698DEE200E3885F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TugViewer;
+			productName = TugViewer;
+			productReference = 6458CE8D2698DEE200E3885F /* TugViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		64C5721022A555F9000B6EC3 /* Tug */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64C5721F22A555FB000B6EC3 /* Build configuration list for PBXNativeTarget "Tug" */;
+			buildPhases = (
+				64C5720D22A555F9000B6EC3 /* Sources */,
+				64C5720E22A555F9000B6EC3 /* Frameworks */,
+				64C5720F22A555F9000B6EC3 /* Resources */,
+				6458CEC72698F77100E3885F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6458CEA92698E04A00E3885F /* PBXTargetDependency */,
+			);
+			name = Tug;
+			productName = Tug;
+			productReference = 64C5721122A555F9000B6EC3 /* Tug.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64C5720922A555F9000B6EC3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				ORGANIZATIONNAME = "Michaël Parrot";
+				TargetAttributes = {
+					6458CE8C2698DEE200E3885F = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					64C5721022A555F9000B6EC3 = {
+						CreatedOnToolsVersion = 10.2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 64C5720C22A555F9000B6EC3 /* Build configuration list for PBXProject "Tug" */;
+			compatibilityVersion = "Xcode 12.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				fr,
+			);
+			mainGroup = 64C5720822A555F9000B6EC3;
+			productRefGroup = 64C5721222A555F9000B6EC3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64C5721022A555F9000B6EC3 /* Tug */,
+				6458CE8C2698DEE200E3885F /* TugViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6458CE8B2698DEE200E3885F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6458CEB92698E8F700E3885F /* PreviewController.xib in Resources */,
+				6458CE942698DEE500E3885F /* Assets.xcassets in Resources */,
+				6458CE972698DEE500E3885F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64C5720F22A555F9000B6EC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64C5721722A555FB000B6EC3 /* Assets.xcassets in Resources */,
+				6464C25026A22E4300933317 /* Localizable.strings in Resources */,
+				640151C8269C70BE00C4DF9A /* ChannelListWindowController.xib in Resources */,
+				64015183269C534A00C4DF9A /* PreferencesWindowController.xib in Resources */,
+				64CA81AF26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt in Resources */,
+				64E727DA2699B442000B516A /* MenuListController.xib in Resources */,
+				64CA81B026879FAF00A9CBCE /* THSafariScriptingTools_SourceOfFrontSite.scpt in Resources */,
+				64CA81B126879FAF00A9CBCE /* THSafariList_CurrentSite.scpt in Resources */,
+				64C5721A22A555FB000B6EC3 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6458CE892698DEE200E3885F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6458CEC32698F27000E3885F /* THLog.m in Sources */,
+				6458CEB62698E8D200E3885F /* THFoundation.swift in Sources */,
+				6458CEBE2698F1CD00E3885F /* THExtensions.swift in Sources */,
+				6458CEBF2698F1E400E3885F /* THFormatterExtensions.swift in Sources */,
+				6458CEC22698F21800E3885F /* THStringExtensions.swift in Sources */,
+				6458CEC02698F1F300E3885F /* THFileManagerExtensions.swift in Sources */,
+				6458CEB42698E8CC00E3885F /* THLog.swift in Sources */,
+				64CC07D5269B5BD3003D9392 /* PPPanePreviewWindow.swift in Sources */,
+				6458CEB72698E8DF00E3885F /* PPPaneRequester.swift in Sources */,
+				64BACF4026AC3547000E4F97 /* THParentAppAlive.swift in Sources */,
+				6458CEBD2698F1CA00E3885F /* THCocoaExtensions.swift in Sources */,
+				6458CEA42698DFC000E3885F /* PPPanePreviewController.m in Sources */,
+				6458CEB52698E8CE00E3885F /* THLogger.swift in Sources */,
+				64B8A3FF26A5B3CD00C4CFED /* THFoundation.m in Sources */,
+				6458CEB32698E83E00E3885F /* PreviewController.swift in Sources */,
+				6458CE902698DEE200E3885F /* AppDelegate.swift in Sources */,
+				6458CEC12698F20A00E3885F /* THRunningApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64C5720D22A555F9000B6EC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64F355A326C1D86400B18F41 /* THAsScript.swift in Sources */,
+				64DC4D22269A42A9006BAA4B /* StatusIcon.swift in Sources */,
+				64F3556526C1D69800B18F41 /* THRssFeedParser.swift in Sources */,
+				64015199269C54D000C4DF9A /* THHotKey.m in Sources */,
+				64CC07C8269B011D003D9392 /* SettingsMenu.swift in Sources */,
+				64774B5D256ADE0500D9D5B3 /* THRunningApp.swift in Sources */,
+				64F354FA26C1CFF400B18F41 /* RssChannelItem.swift in Sources */,
+				64CC07CA269B089F003D9392 /* THNSMenuExtensions.swift in Sources */,
+				640151C5269C70B200C4DF9A /* ChannelListWindowController.swift in Sources */,
+				6458CEAF2698E58100E3885F /* PPPaneRequester.swift in Sources */,
+				64F354FB26C1CFF400B18F41 /* RssChannelManager.swift in Sources */,
+				649212E7255873D7002E3F78 /* THFoundation.swift in Sources */,
+				64CC07C4269AD412003D9392 /* THBgColorView.swift in Sources */,
+				6426432722A5CAEA007B0EAB /* THFoundation.m in Sources */,
+				64C5721522A555F9000B6EC3 /* AppDelegate.swift in Sources */,
+				64F3555A26C1D67000B18F41 /* THIconDownloader.swift in Sources */,
+				6424BCBF269F54F8008E7084 /* UserPreferences.swift in Sources */,
+				64576AFA26C26BF500CE9356 /* THFrontmostAppSaver.swift in Sources */,
+				6426432822A5CAEA007B0EAB /* THLog.m in Sources */,
+				6401519A269C54D000C4DF9A /* THHotKeyCenter.m in Sources */,
+				64BA6384267F7C3900E044A3 /* THNetworkStatus.swift in Sources */,
+				648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */,
+				64AB664E2476D17200587F1D /* THExtensions.swift in Sources */,
+				640151CA269C779B00C4DF9A /* THNSButtonBlock.swift in Sources */,
+				644C3E492576A63600127BC6 /* THOSAppearance.swift in Sources */,
+				64BD394D256EF1D300988D08 /* THDataExtensions.swift in Sources */,
+				64015198269C54D000C4DF9A /* THHotKeyFieldView.m in Sources */,
+				648FC491256591E10067B491 /* AddMoreMenu.swift in Sources */,
+				643417DB267551080046CD56 /* THLogger.swift in Sources */,
+				64CC07C6269B002B003D9392 /* HeaderView.swift in Sources */,
+				646E18EE2567382D00CD1B2D /* THCocoaExtensions.swift in Sources */,
+				64F3556426C1D69800B18F41 /* THXMLElement.m in Sources */,
+				6475383526ADC84400895ED6 /* THHighlightedTableView.swift in Sources */,
+				64015181269C533C00C4DF9A /* PreferencesWindowController.swift in Sources */,
+				64E727D22699B228000B516A /* THHighlightedTableView.m in Sources */,
+				64015190269C54C000C4DF9A /* THHelperRunningApp.swift in Sources */,
+				64F354FC26C1CFF400B18F41 /* RssScriptingTools.swift in Sources */,
+				64CA81B726879FAF00A9CBCE /* THSafariScriptingTools.swift in Sources */,
+				64898D74256131E8002945CE /* THFileManagerExtensions.swift in Sources */,
+				647B34EB2668F11000785E10 /* THOpenInBrowser.swift in Sources */,
+				64F354F926C1CFF400B18F41 /* RssChannel.swift in Sources */,
+				64E727C72699B228000B516A /* THOverView.swift in Sources */,
+				64EDAB5C2680A1E8001D5AC0 /* THDictionarySerialization.swift in Sources */,
+				64CE9A2C25BF70A6004EC688 /* THUnixCommand.m in Sources */,
+				64F3559A26C1D82E00B18F41 /* THAppInLoginItem.swift in Sources */,
+				640151D6269C7F5600C4DF9A /* THLocalizedString.swift in Sources */,
+				6473AF172545B842006003A8 /* THLog.swift in Sources */,
+				64F3555C26C1D67000B18F41 /* THDistantItem.swift in Sources */,
+				643F075E269A0BC3002DDA3B /* PWPaneWindow.swift in Sources */,
+				64F08F4E25606F6200857C8E /* THFormatterExtensions.swift in Sources */,
+				643F07472699F843002DDA3B /* MenuCellView.swift in Sources */,
+				64F576FB269F01B6008186FE /* THNSImageExtensions.swift in Sources */,
+				64F3559826C1D82E00B18F41 /* THSharedLoginItems.m in Sources */,
+				64F3556326C1D69800B18F41 /* THXMLParser.m in Sources */,
+				64E727A22699AFC1000B516A /* MenuListController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6458CEA92698E04A00E3885F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6458CE8C2698DEE200E3885F /* TugViewer */;
+			targetProxy = 6458CEA82698E04A00E3885F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6458CE952698DEE500E3885F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6458CE962698DEE500E3885F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6464C25226A22E4300933317 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6464C25126A22E4300933317 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		64C5721822A555FB000B6EC3 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64C5721922A555FB000B6EC3 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6458CE9A2698DEE500E3885F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TugViewer/TugViewer.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 100;
+				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TugViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.parrotsoft.TugViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TugViewer/Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "TH_APP-Swift.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6458CE9B2698DEE500E3885F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TugViewer/TugViewer.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 100;
+				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = TugViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.parrotsoft.TugViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TugViewer/Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "TH_APP-Swift.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		64C5721D22A555FB000B6EC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+					"TH_TARGET_OSX=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		64C5721E22A555FB000B6EC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = "TH_TARGET_OSX=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		64C5722022A555FB000B6EC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Tug/Tug.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
+				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = $SDKROOT/usr/include/libxml2;
+				INFOPLIST_FILE = Tug/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magnesium-app.com.Tug";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tug/Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "TH_APP-Swift.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		64C5722122A555FB000B6EC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Tug/Tug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
+				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = $SDKROOT/usr/include/libxml2;
+				INFOPLIST_FILE = Tug/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magnesium-app.com.Tug";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tug/Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "TH_APP-Swift.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6458CE9C2698DEE500E3885F /* Build configuration list for PBXNativeTarget "TugViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6458CE9A2698DEE500E3885F /* Debug */,
+				6458CE9B2698DEE500E3885F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64C5720C22A555F9000B6EC3 /* Build configuration list for PBXProject "Tug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64C5721D22A555FB000B6EC3 /* Debug */,
+				64C5721E22A555FB000B6EC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64C5721F22A555FB000B6EC3 /* Build configuration list for PBXNativeTarget "Tug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64C5722022A555FB000B6EC3 /* Debug */,
+				64C5722122A555FB000B6EC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 64C5720922A555F9000B6EC3 /* Project object */;
+}

@@ -1,0 +1,19 @@
+// Localizable.strings (English)
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+"Tug Preferences" = "Tug Preferences";
+
+"Relaunch Tug on Login" = "Relaunch Tug on Login";
+
+"Cancel" = "Cancel";
+"Delete" = "Delete";
+
+"HELP_GOTO_WEBSITE" = "Go to the Tug Website…";
+"HELP_CONTACT_SUPPORT_OR_FEEDBACK" = "Contact Support or Send Feedback…";
+"HELP_EMAIL_SUPPORT" = "Contact Support by E-mail…";
+"HELP_SUBMIT_REPORT" = "Submit Problem Report...";
+
+"Preferences…" = "Preferences…";
+"Quit Tug" = "Quit Tug";
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
