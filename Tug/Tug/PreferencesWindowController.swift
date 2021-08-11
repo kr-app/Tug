@@ -32,23 +32,23 @@ class PreferencesWindowController : NSWindowController,
 																isEnabled: hotKey?.isEnabled ?? false)
 		
 		refreshInterval.removeAllItems()
-		refreshInterval.menu!.addItem(NSMenuItem(withTitle: THLocalizedString("Default (5 min)"), tag: 0, enabled: true))
+		refreshInterval.menu!.addItem(NSMenuItem(title: THLocalizedString("Default (5 min)"), tag: 0, enabled: true))
 		refreshInterval.menu!.addItem(NSMenuItem.separator())
-		refreshInterval.menu!.addItem(NSMenuItem(withTitle: THLocalizedString("15 minutes"), tag: 15, enabled: true))
-		refreshInterval.menu!.addItem(NSMenuItem(withTitle: THLocalizedString("30 minutes"), tag: 30, enabled: true))
-		refreshInterval.menu!.addItem(NSMenuItem(withTitle: THLocalizedString("1 hour"), tag: 60, enabled: true))
+		refreshInterval.menu!.addItem(NSMenuItem(title: THLocalizedString("15 minutes"), tag: 15, enabled: true))
+		refreshInterval.menu!.addItem(NSMenuItem(title: THLocalizedString("30 minutes"), tag: 30, enabled: true))
+		refreshInterval.menu!.addItem(NSMenuItem(title: THLocalizedString("1 hour"), tag: 60, enabled: true))
 		refreshInterval.selectItem(withTag: UserPreferences.shared.refreshInterval ?? 0)
 		
 		actionOnClick.removeAllItems()
-		actionOnClick.menu!.addItem(NSMenuItem(withTitle: THLocalizedString("None"), representedObject: "none", enabled: true))
+		actionOnClick.menu!.addItem(NSMenuItem(title: THLocalizedString("None"), representedObject: "none", enabled: true))
 		actionOnClick.menu!.addItem(NSMenuItem.separator())
-		actionOnClick.menu!.addItem(NSMenuItem(withTitle: THLocalizedString("Show Preview"), representedObject: nil, enabled: true))
-		actionOnClick.menu!.addItem(NSMenuItem(withTitle: THLocalizedString("Open in Browser"), representedObject: "openInBrowser", enabled: true))
+		actionOnClick.menu!.addItem(NSMenuItem(title: THLocalizedString("Show Preview"), representedObject: nil, enabled: true))
+		actionOnClick.menu!.addItem(NSMenuItem(title: THLocalizedString("Open in Browser"), representedObject: "openInBrowser", enabled: true))
 		actionOnClick.selectItem(withRepresentedObject: UserPreferences.shared.actionOnItemClick)
 
 		previewPopMenu.removeAllItems()
-		previewPopMenu.menu!.addItem(NSMenuItem(withTitle: THLocalizedString("Hide"), tag: 0, enabled: true))
-		previewPopMenu.menu!.addItem(NSMenuItem(withTitle: THLocalizedString("Keep"), tag: 1, enabled: true))
+		previewPopMenu.menu!.addItem(NSMenuItem(title: THLocalizedString("Hide"), tag: 0, enabled: true))
+		previewPopMenu.menu!.addItem(NSMenuItem(title: THLocalizedString("Keep"), tag: 1, enabled: true))
 		previewPopMenu.selectItem(withTag: UserPreferences.shared.previewHighlightMode ?? 0)
 	}
 	

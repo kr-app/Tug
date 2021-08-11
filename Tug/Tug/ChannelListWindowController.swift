@@ -37,7 +37,7 @@ class ChannelListWindowController : NSWindowController,
 	@IBOutlet var minusButton: THNSButtonBlock!
 	
 	private var objectList: [[String: Any]]?
-	private let todayDf = THTodayDateFormatter(withTodayFormat: "HMS", otherFormatter: DateFormatter(withDateStyle: .medium, timeStyle: .medium))
+	private let todayDf = THTodayDateFormatter(todayFormat: "HMS", otherFormatter: DateFormatter(dateStyle: .medium, timeStyle: .medium))
 	private var channelOnCreation: RssChannel?
 	
 	// MARK: -

@@ -10,7 +10,7 @@ class AddMoreMenu: NSObject, NSMenuDelegate {
 
 	override init() {
 		super.init()
-		menu = NSMenu(withTitle: "menu", delegate: self, autoenablesItems: false)
+		menu = NSMenu(title: "menu", delegate: self, autoenablesItems: false)
 	}
 	
 	func menuNeedsUpdate(_ menu: NSMenu) {
@@ -28,11 +28,11 @@ class AddMoreMenu: NSObject, NSMenuDelegate {
 		}
 	
 		if let url = url {
-			menu.addItem(NSMenuItem(withTitle: THLocalizedString("Add \"\(url.th_reducedHost)\""), target: self, action: #selector(mi_menuAction), representedObject: url, tag: 13,  enabled: true))
-			menu.addItem(NSMenuItem(withTitle: url.absoluteString, enabled: false))
+			menu.addItem(NSMenuItem(title: THLocalizedString("Add \"\(url.th_reducedHost)\""), target: self, action: #selector(mi_menuAction), representedObject: url, tag: 13,  enabled: true))
+			menu.addItem(NSMenuItem(title: url.absoluteString, enabled: false))
 		}
 		else {
-			menu.addItem(NSMenuItem(withTitle: THLocalizedString("No URL in pasteboard"), enabled: false))
+			menu.addItem(NSMenuItem(title: THLocalizedString("No URL in pasteboard"), enabled: false))
 		}
 		menu.addItem(NSMenuItem.separator())
 		
@@ -41,18 +41,18 @@ class AddMoreMenu: NSObject, NSMenuDelegate {
 		let installedRss = rssFromBrowser?.first(where: { RssChannelManager.shared.channel(withUrl: $0.rss) != nil })
 
 		if let rss = installedRss {
-			menu.addItem(NSMenuItem(withTitle: THLocalizedString("RSS for \"\(rss.title)\" Installed"), enabled: false))
+			menu.addItem(NSMenuItem(title: THLocalizedString("RSS for \"\(rss.title)\" Installed"), enabled: false))
 		}
 		else if rssFromBrowser != nil && rssFromBrowser!.count > 0 {
 			for rss in rssFromBrowser! {
-				menu.addItem(NSMenuItem(withTitle: THLocalizedString("Add \"\(rss.title)\""), target: self, action: #selector(mi_menuAction), representedObject: rss, tag: 12, enabled: true))
-				menu.addItem(NSMenuItem(withTitle: rss.rss.absoluteString, enabled: false))
-				menu.addItem(NSMenuItem(withTitle: rss.site.th_reducedHost, enabled: false))
+				menu.addItem(NSMenuItem(title: THLocalizedString("Add \"\(rss.title)\""), target: self, action: #selector(mi_menuAction), representedObject: rss, tag: 12, enabled: true))
+				menu.addItem(NSMenuItem(title: rss.rss.absoluteString, enabled: false))
+				menu.addItem(NSMenuItem(title: rss.site.th_reducedHost, enabled: false))
 				menu.addItem(NSMenuItem.separator())
 			}
 		}
 		else {
-			menu.addItem(NSMenuItem(withTitle: THLocalizedString("No RSS from current browser"), enabled: false))
+			menu.addItem(NSMenuItem(title: THLocalizedString("No RSS from current browser"), enabled: false))
 		}
 
 	}

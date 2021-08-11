@@ -11,30 +11,30 @@ class SettingsMenu: NSObject, NSMenuDelegate {
 	
 	override init() {
 		super.init()
-		menu = NSMenu(withTitle: "menu", delegate: self, autoenablesItems: false)
+		menu = NSMenu(title: "menu", delegate: self, autoenablesItems: false)
 	}
 	
 	func menuNeedsUpdate(_ menu: NSMenu) {
 
 		menu.removeAllItems()
 
-		menu.addItem(THMenuItem(withTitle: THLocalizedString("About Tug…"), block: { () in
+		menu.addItem(THMenuItem(title: THLocalizedString("About Tug…"), block: { () in
 			NSApplication.shared.activate(ignoringOtherApps: true)
 			NSApplication.shared.orderFrontStandardAboutPanel(nil)
 		}))
 
 		menu.addItem(NSMenuItem.separator())
-		menu.addItem(THMenuItem(withTitle: THLocalizedString("Preferences…"), block: { () in
+		menu.addItem(THMenuItem(title: THLocalizedString("Preferences…"), block: { () in
 			PreferencesWindowController.shared.showWindow(nil)
 		}))
 
 		menu.addItem(NSMenuItem.separator())
-		menu.addItem(THMenuItem(withTitle: THLocalizedString("Channel List…"), block: { () in
+		menu.addItem(THMenuItem(title: THLocalizedString("Channel List…"), block: { () in
 			ChannelListWindowController.shared.showWindow(nil)
 		}))
 
 		menu.addItem(NSMenuItem.separator())
-		menu.addItem(THMenuItem(withTitle: THLocalizedString("Quit"), block: { () in
+		menu.addItem(THMenuItem(title: THLocalizedString("Quit"), block: { () in
 			NSApplication.shared.terminate(nil)
 		}))
 

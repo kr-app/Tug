@@ -54,8 +54,8 @@ class MenuCellView : THHighlightedTableCellView {
 
 	@IBOutlet var infoLabel: NSTextField!
 
-	private static let pub_df = DateFormatter(withDateFormat: "MMM dd, HH:mm")
-	private static let todat_df = THTodayDateFormatter(withTodayFormat: "HM")
+	private static let pub_df = DateFormatter(dateFormat: "MMM dd, HH:mm")
+	private static let todat_df = THTodayDateFormatter(todayFormat: "HM")
 	private static let ago_df = RelativeDateTimeFormatter(withUnitsStyle: .short)
 	
 	private var object: [String: Any]?
