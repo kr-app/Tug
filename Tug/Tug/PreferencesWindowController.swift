@@ -9,7 +9,6 @@ class PreferencesWindowController : NSWindowController,
 
 	static let shared = PreferencesWindowController(windowNibName: "PreferencesWindowController")
 
-	@IBOutlet var checkForUpdateButton: NSButton!
 	@IBOutlet var relaunchOnLoginButton: NSButton!
 	@IBOutlet var hotKeyButton: NSButton!
 	@IBOutlet var hotKeyField: THHotKeyFieldView!

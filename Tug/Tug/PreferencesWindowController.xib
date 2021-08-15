@@ -9,7 +9,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindowController" customModule="Tug" customModuleProvider="target">
             <connections>
                 <outlet property="actionOnClick" destination="elt-wD-n70" id="ZpC-tX-4e3"/>
-                <outlet property="checkForUpdateButton" destination="wmr-wk-hRc" id="KFE-Dy-nW6"/>
                 <outlet property="hotKeyButton" destination="kKD-5B-oyo" id="4cj-w1-44o"/>
                 <outlet property="hotKeyField" destination="sfD-DR-3xb" id="M8D-X6-OUE"/>
                 <outlet property="previewPopMenu" destination="u9e-QF-gSK" id="Jbc-Fb-Fva"/>
@@ -22,14 +21,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
-            <rect key="contentRect" x="196" y="240" width="420" height="274"/>
+            <rect key="contentRect" x="196" y="240" width="420" height="250"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1366" height="743"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="420" height="274"/>
+                <rect key="frame" x="0.0" y="0.0" width="420" height="250"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WNu-bW-rb6" customClass="THNSTextFieldLocalized" customModule="Tug" customModuleProvider="target">
-                        <rect key="frame" x="18" y="238" width="124" height="16"/>
+                        <rect key="frame" x="18" y="214" width="124" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="General" id="OP4-Ye-3xm">
                             <font key="font" metaFont="systemBold"/>
@@ -76,14 +75,6 @@
                         <connections>
                             <action selector="hotKeyButtonAction:" target="-2" id="Vnj-1g-Ewr"/>
                         </connections>
-                    </button>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wmr-wk-hRc" customClass="THNSButtonLocalized" customModule="Tug" customModuleProvider="target">
-                        <rect key="frame" x="18" y="213" width="382" height="18"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Check for Updates Automatically" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="fNt-wz-7vf">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
                     </button>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sfD-DR-3xb" customClass="THHotKeyFieldView">
                         <rect key="frame" x="240" y="161" width="160" height="26"/>
@@ -175,7 +166,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="7tG-4l-uvR"/>
             </connections>
-            <point key="canvasLocation" x="-111" y="-55"/>
+            <point key="canvasLocation" x="-112" y="-70"/>
         </window>
     </objects>
 </document>
