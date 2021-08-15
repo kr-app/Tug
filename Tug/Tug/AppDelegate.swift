@@ -40,8 +40,12 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 
 		THHelperRunningApp.shared.configure(withAppIdentifier: "com.kr-app.TugViewer")
 
-//		THCheckForUpdates.shared.configure(appBuild: nil, infoURL: nil)
-//		THCheckForUpdates.shared.synchronizeAtLaunch()
+		let filtersFile = FileManager.th_appSupportPath().th_appendingPathComponent("filters.plist")
+		var filters = RssChannelFilter.filters(fromFile: filtersFile)
+
+//		filters.append(RssChannelFilter(title: RssChannelFilterString(mode: .begin, string: "")))
+		RssChannelManager.shared.filters = filters ?? []
+//		RssChannelFilter.saveFilters(filters: filters, toFile: filtersFile)
 
 		barIcon.barItem.button!.target = self
 		barIcon.barItem.button!.action = #selector(barItemAction)
