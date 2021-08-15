@@ -223,7 +223,7 @@ class MenuListController: NSViewController,
 			return
 		}
 		
-		let channels = RssChannelManager.shared.wallChannels()//.wallChannels(withDateRef: recentRef)
+		let channels = RssChannelManager.shared.channels//.wallChannels()//.wallChannels(withDateRef: recentRef)
 
 		var nbu = 0
 		for channel in channels {
@@ -237,7 +237,7 @@ class MenuListController: NSViewController,
 	private func updateUIIObjectList() {
 		
 		recentRef = RssChannelManager.shared.recentRefDate()
-		let channels = RssChannelManager.shared.wallChannels()//.wallChannels(withDateRef: recentRef)
+		let channels = RssChannelManager.shared.channels//.wallChannels()//.wallChannels(withDateRef: recentRef)
 		var items = [(channel: RssChannel, item: RssChannelItem)]()
 
 		for channel in channels {
@@ -265,13 +265,16 @@ class MenuListController: NSViewController,
 		}
 
 		items.sort(by: {
-					if $0.item.pinned != $1.item.pinned {
-						return $0.item.pinned == true
-					}
-					if $0.item.checkedDate != nil && $1.item.checkedDate != nil {
-						return $0.item.checkedDate! > $1.item.checkedDate!
-					}
-					return $0.item.wallDate > $1.item.wallDate
+			let rcv0 = $0.item.received!
+			let rcv1 = $1.item.received!
+			
+			if rcv0 == rcv1 {
+				if let up0 = $0.item.published, let up1 = $1.item.published {
+					return up0 > up1
+				}
+			}
+
+			return rcv0 > rcv1
 		})
 
 		var objectList = [[String: Any]]()
