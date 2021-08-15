@@ -55,6 +55,8 @@
 		648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B3661256AD47F00D3D29F /* THStringExtensions.swift */; };
 		648FC491256591E10067B491 /* AddMoreMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648FC490256591E10067B491 /* AddMoreMenu.swift */; };
 		649212E7255873D7002E3F78 /* THFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649212E6255873D7002E3F78 /* THFoundation.swift */; };
+		64A7ECC326C707BB00911C40 /* RssPubDateConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A7ECC226C707BB00911C40 /* RssPubDateConvertor.swift */; };
+		64A7ECC526C70AB100911C40 /* RssChannelItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A7ECC426C70AB100911C40 /* RssChannelItemFilter.swift */; };
 		64AB664E2476D17200587F1D /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AB664D2476D17200587F1D /* THExtensions.swift */; };
 		64B8A3FF26A5B3CD00C4CFED /* THFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 642642FC22A5CAEA007B0EAB /* THFoundation.m */; };
 		64BA6384267F7C3900E044A3 /* THNetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6383267F7C3900E044A3 /* THNetworkStatus.swift */; };
@@ -165,6 +167,8 @@
 		648B3661256AD47F00D3D29F /* THStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THStringExtensions.swift; sourceTree = "<group>"; };
 		648FC490256591E10067B491 /* AddMoreMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMoreMenu.swift; sourceTree = "<group>"; };
 		649212E6255873D7002E3F78 /* THFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFoundation.swift; sourceTree = "<group>"; };
+		64A7ECC226C707BB00911C40 /* RssPubDateConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssPubDateConvertor.swift; sourceTree = "<group>"; };
+		64A7ECC426C70AB100911C40 /* RssChannelItemFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItemFilter.swift; sourceTree = "<group>"; };
 		64AB664D2476D17200587F1D /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
 		64BA6383267F7C3900E044A3 /* THNetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNetworkStatus.swift; sourceTree = "<group>"; };
 		64BACF3F26AC3547000E4F97 /* THParentAppAlive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THParentAppAlive.swift; sourceTree = "<group>"; };
@@ -437,10 +441,12 @@
 		64F354F426C1CFF400B18F41 /* THRssChannel */ = {
 			isa = PBXGroup;
 			children = (
-				64F354F526C1CFF400B18F41 /* RssChannel.swift */,
-				64F354F626C1CFF400B18F41 /* RssChannelItem.swift */,
-				64F354F726C1CFF400B18F41 /* RssChannelManager.swift */,
 				64F354F826C1CFF400B18F41 /* RssScriptingTools.swift */,
+				64A7ECC226C707BB00911C40 /* RssPubDateConvertor.swift */,
+				64F354F626C1CFF400B18F41 /* RssChannelItem.swift */,
+				64A7ECC426C70AB100911C40 /* RssChannelItemFilter.swift */,
+				64F354F526C1CFF400B18F41 /* RssChannel.swift */,
+				64F354F726C1CFF400B18F41 /* RssChannelManager.swift */,
 			);
 			name = THRssChannel;
 			path = ../../THCommon/Classes/THRssChannel;
@@ -651,6 +657,8 @@
 				64BA6384267F7C3900E044A3 /* THNetworkStatus.swift in Sources */,
 				648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */,
 				64AB664E2476D17200587F1D /* THExtensions.swift in Sources */,
+				64A7ECC326C707BB00911C40 /* RssPubDateConvertor.swift in Sources */,
+				64A7ECC526C70AB100911C40 /* RssChannelItemFilter.swift in Sources */,
 				640151CA269C779B00C4DF9A /* THNSButtonBlock.swift in Sources */,
 				644C3E492576A63600127BC6 /* THOSAppearance.swift in Sources */,
 				64BD394D256EF1D300988D08 /* THDataExtensions.swift in Sources */,
