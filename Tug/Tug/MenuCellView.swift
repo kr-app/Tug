@@ -104,24 +104,28 @@ class MenuCellView : THHighlightedTableCellView {
 
 			// icon
 			var img = THIconDownloader.shared.icon(atURL: item.thumbnail, startUpdate: true)
-//			img = img?.th_image(withCorner: 6.0)
+			if isHighlighted == false && item.checked == true && item.pinned == false {
+				img = img?.th_imageGray()//.th_image(withCorner: 6.0)
+			}
 
 			if img == nil {
 				img = THWebIconLoader.shared.icon(forHost: channel.webLink?.host ?? channel.url.host, startUpdate: true, allowsGeneric: true)
 			}
 			imageView!.image = img
-			imageView!.alphaValue =  (isHighlighted == false && item.checked == true) ? 0.9 : 1.0
+			imageView!.alphaValue = (isHighlighted == false && item.checked == true) ? 0.9 : 1.0
 
 			// title
-			let f_attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.boldSystemFont(ofSize: NSFont.systemFontSize(for: .regular)),
-																					.foregroundColor: itemColor]
+			let f_attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.boldSystemFont(ofSize: 15.0),
+																					.foregroundColor: itemColor,
+																					.baselineOffset: 1.0]
 	
 			let title = (item.pinned ? "📌" : "") + (item.title/*?.th_displayTitle(maxLength: maxWidth, attrs: itemTitleAttrs, truncate: .byTruncatingTail)*/ ?? "--")
 			let mi_title = NSMutableAttributedString(string: title, attributes: f_attrs)
 
 			if let text = item.content/*?.th_displayTitle(maxLength: maxWidth, attrs: itemTitleAttrs, truncate: .byTruncatingTail) */{
-				let attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .regular)),
-																					.foregroundColor: itemColor]
+				let attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.systemFont(ofSize: 14.0),
+																					.foregroundColor: itemColor,
+																					.baselineOffset: 2.0]
 				mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrs))
 			}
 			textField!.attributedStringValue = mi_title

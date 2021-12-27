@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 
 		THIconDownloader.shared.setDiskRetention(3.0.th_day)
 		THIconDownloader.shared.validity = 0.0
-		THIconDownloader.shared.maxSize = 74.0
+		THIconDownloader.shared.maxSize = 84.0
 		THIconDownloader.shared.cropIcon = true
 		THIconDownloader.shared.excludedHosts = ["static.latribune.fr"]
 
@@ -41,12 +41,9 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 		THHelperRunningApp.shared.configure(withAppIdentifier: "com.kr-app.TugViewer")
 
 		let filtersFile = FileManager.th_appSupportPath().th_appendingPathComponent("filters.plist")
-		var filters = RssChannelFilter.filters(fromFile: filtersFile)
-
-//		filters.append(RssChannelFilter(title: RssChannelFilterString(mode: .begin, string: "")))
-		RssChannelManager.shared.filters = filters ?? []
-//		RssChannelFilter.saveFilters(filters: filters, toFile: filtersFile)
-
+		let filterManager = RssChannelFilterManager(filePath: filtersFile)
+		RssChannelManager.shared.filterManager = filterManager
+		
 		barIcon.barItem.button!.target = self
 		barIcon.barItem.button!.action = #selector(barItemAction)
 		barIcon.barItem.button!.sendAction(on: [.leftMouseUp, .rightMouseUp]) // This is important
@@ -68,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 
 			RssChannelManager.shared.refresh()
 		})
-		
+				
 		NotificationCenter.default.addObserver(self, selector: #selector(n_rssChannelUpdated), name: RssChannelManager.channelUpdatedNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(n_rssChannelItemUpdated), name: RssChannelManager.channelItemUpdatedNotification, object: nil)
 	}

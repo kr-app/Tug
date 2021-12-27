@@ -21,14 +21,14 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="86" horizontalPageScroll="10" verticalLineScroll="86" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1S-yX-EKf" customClass="THHighlightedTableViewScrollView">
+                <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="98" horizontalPageScroll="10" verticalLineScroll="98" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1S-yX-EKf" customClass="THHighlightedTableViewScrollView">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="222"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="gIg-CI-cjV">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="222"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="plain" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="86" viewBased="YES" id="d31-gh-Dnv" customClass="MenuTableView" customModule="Tug" customModuleProvider="target">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="plain" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="98" viewBased="YES" id="d31-gh-Dnv" customClass="MenuTableView" customModule="Tug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="222"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -47,11 +47,11 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView identifier="normal_cell_id" id="k9F-Lu-eJA" customClass="MenuCellView" customModule="Tug" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="480" height="86"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="480" height="98"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fxv-Uf-i5z">
-                                                        <rect key="frame" x="91" y="16" width="383" height="67"/>
+                                                        <rect key="frame" x="97" y="13" width="376" height="83"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="zIN-tG-GOc">
                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -60,15 +60,15 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HqI-7M-P3p">
-                                                        <rect key="frame" x="10" y="7" width="74" height="74"/>
+                                                        <rect key="frame" x="8" y="8" width="84" height="84"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="16F-Zd-FKi"/>
                                                     </imageView>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fht-rm-xmL">
-                                                        <rect key="frame" x="91" y="4" width="383" height="14"/>
+                                                        <rect key="frame" x="97" y="4" width="376" height="16"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                         <textFieldCell key="cell" alignment="right" title="Label" id="HBe-7a-BIA">
-                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
@@ -81,7 +81,7 @@
                                                 </connections>
                                             </tableCellView>
                                             <tableCellView identifier="onerror_cell_id" id="wMr-Nc-BWQ">
-                                                <rect key="frame" x="0.0" y="86" width="480" height="60"/>
+                                                <rect key="frame" x="0.0" y="98" width="480" height="60"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UJ-sI-zCr">
@@ -102,7 +102,7 @@ Pq</string>
                                                 </connections>
                                             </tableCellView>
                                             <tableCellView identifier="sep_cell_id" id="VUt-RW-HYJ">
-                                                <rect key="frame" x="0.0" y="146" width="480" height="17"/>
+                                                <rect key="frame" x="0.0" y="158" width="480" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </tableCellView>
                                         </prototypeCellViews>

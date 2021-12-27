@@ -57,7 +57,7 @@ class StatusIcon: NSObject {
 
 		let transp = THOSAppearance.hasReduceTransparency()
 		
-		let icon = barIcon.th_tinted(withColor: nbu ? (transp == true ? .black : .white) : NSColor(calibratedWhite: 0.5, alpha: 1.0))
+		let icon = barIcon.th_tinted(withColor: nbu ? (transp == true ? .black : . black) : NSColor(calibratedWhite: 0.5, alpha: 1.0))
 		
 		barItem.button!.image = icon
 		barItem.button!.alternateImage = barIcon.th_tinted(withColor: .white)

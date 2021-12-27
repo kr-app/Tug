@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,6 +11,7 @@
                 <outlet property="c_icon" destination="neF-cH-9a7" id="fNJ-2c-IGc"/>
                 <outlet property="c_lastErrorLabel" destination="Jfx-k5-gce" id="bfX-Cp-4gs"/>
                 <outlet property="c_lastUpdateLabel" destination="3ps-uE-faC" id="rTg-xj-Rni"/>
+                <outlet property="c_onOff" destination="zOF-Kt-Aun" id="dau-dg-xy2"/>
                 <outlet property="c_titleLabel" destination="E7P-v8-W2M" id="kJe-G3-cXf"/>
                 <outlet property="c_urLabel" destination="tLH-aa-nJM" id="AMd-il-KkH"/>
                 <outlet property="minusButton" destination="pfb-yh-STY" id="4BN-fq-9NE"/>
@@ -25,7 +26,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="587" height="341"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1366" height="743"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1366" height="745"/>
             <value key="minSize" type="size" width="587" height="341"/>
             <value key="maxSize" type="size" width="587" height="341"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
@@ -58,11 +59,11 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView identifier="cell_id" id="HZ9-WT-ZUa">
-                                                    <rect key="frame" x="0.0" y="0.0" width="151" height="24"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="139" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMu-jd-dYw">
-                                                            <rect key="frame" x="25" y="5" width="125" height="14"/>
+                                                            <rect key="frame" x="25" y="5" width="113" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="e2V-db-fGq">
                                                                 <font key="font" metaFont="smallSystem"/>
@@ -221,12 +222,30 @@ qQ</string>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="zOF-Kt-Aun">
+                    <rect key="frame" x="316" y="278" width="42" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <connections>
+                        <action selector="onOffAction:" target="-2" id="PNy-dF-blH"/>
+                    </connections>
+                </switch>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vnL-Og-kAe">
+                    <rect key="frame" x="292" y="137" width="70" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Clean" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8a4-z5-iHO">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="cleanAction:" target="-2" id="JjE-8q-1rJ"/>
+                    </connections>
+                </button>
             </subviews>
-            <point key="canvasLocation" x="257" y="-287.5"/>
+            <point key="canvasLocation" x="-183" y="-464"/>
         </customView>
     </objects>
     <resources>
-        <image name="NSAddTemplate" width="15" height="13"/>
-        <image name="NSRemoveTemplate" width="15" height="4"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

@@ -74,6 +74,8 @@ class MenuListController: NSViewController,
 		tableView.backgroundColor = .clear
 		//tableView.menu=_paneRightMenu.menu
 		tableView.doubleAction = #selector(tableViewDoubleAction)
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(n_iconDownloaderDidLoad), name: THIconDownloader.didLoadNotification, object: nil)
 	}
 	
 	deinit {
@@ -103,6 +105,27 @@ class MenuListController: NSViewController,
 
 			cancelUpdatePreview()
 			hidePreview(animated: true)
+		}
+	}
+	
+	@objc func n_iconDownloaderDidLoad(_ notification: Notification) {
+		guard 	let url = notification.userInfo?["url"] as? URL,
+					let objectList = objectList
+		else {
+			return
+		}
+
+		for (idx, object) in objectList.enumerated() {
+			let kind = object["kind"] as! Int
+
+			if kind == 1 {
+				let item = object["item"] as! RssChannelItem
+
+				if item.thumbnail == url {
+					tableView.th_reloadData(forRowIndexes: IndexSet(integer: idx), columnIndexes: nil)
+					break
+				}
+			}
 		}
 	}
 	
@@ -516,14 +539,14 @@ class MenuListController: NSViewController,
 			}
 		}
 
-		updatePreviewForRow(UserPreferences.shared.previewHighlightMode == 1 ? highlightedRow : -1)
+		openPreviewForRow(UserPreferences.shared.previewHighlightMode == 1 ? highlightedRow : -1)
 	}
 
 	// MARK: -
 	
 	func cancelUpdatePreview() {
 		previewItemIndex = -1
-		NSObject.cancelPreviousPerformRequests(withTarget: self, selector:#selector(updatePreview), object: nil)
+		NSObject.cancelPreviousPerformRequests(withTarget: self, selector:#selector(openPreviewOfCurrentItem), object: nil)
 	}
 	
 	private func closePreview(animated: Bool) {
@@ -549,9 +572,11 @@ class MenuListController: NSViewController,
 		return nil
 	}
 
-	@objc func updatePreview() {
+	@objc func openPreviewOfCurrentItem() {
 		var previewItemId: String?
-		var link: URL?
+		
+		var channel: RssChannel?
+		var item: RssChannelItem?
 
 		if previewItemIndex != -1 {
 			let object = objectList![previewItemIndex]
@@ -560,13 +585,12 @@ class MenuListController: NSViewController,
 			previewItemId = previewItemIdFromObject(object)
 
 			if kind == 1 {
-				let item = object["item"] as! RssChannelItem
-
-				link = item.link
+				channel = object["channel"] as! RssChannel
+				item = object["item"] as! RssChannelItem
 			}
 		}
 
-		if link == nil {
+		if channel == nil || item?.link == nil {
 			previewItemId = nil
 		}
 
@@ -580,6 +604,8 @@ class MenuListController: NSViewController,
 			hidePreview(animated: true)
 			return
 		}
+		
+		//RssChannelManager.shared.markReaded(item: item!, ofChannel: channel!.identifier)
 
 //		let rowRect = tableView.rect(ofRow: previewItemIndex)
 //
@@ -591,10 +617,10 @@ class MenuListController: NSViewController,
 		var pt = self.tableView.convertWindowPoint(ofRow: previewItemIndex)
 		pt.y = (self.view.window!.frame.size.height / 2.0).rounded(.down)
 
-		PPPaneRequester.shared.requestShowAtPoint(pt, withData: link!.absoluteString)
+		PPPaneRequester.shared.requestShowAtPoint(pt, withData: item!.link!.absoluteString)
 	}
 	
-	private func updatePreviewForRow(_ row: Int) {
+	private func openPreviewForRow(_ row: Int) {
 
 		if self.previewItemId != nil {
 			cancelUpdatePreview()
@@ -606,7 +632,7 @@ class MenuListController: NSViewController,
 			}
 
 			self.previewItemIndex = row
-			perform(#selector(updatePreview), with: nil, afterDelay: 0.01)
+			perform(#selector(openPreviewOfCurrentItem), with: nil, afterDelay: 0.01)
 		}
 		else {
 			cancelUpdatePreview()
@@ -616,31 +642,22 @@ class MenuListController: NSViewController,
 				return
 			}
 
-			perform(#selector(updatePreview), with: nil, afterDelay: 0.01)
+			perform(#selector(openPreviewOfCurrentItem), with: nil, afterDelay: 0.01)
 		}
 
 	}
-
-	// MARK: -
 	
-	@IBAction func tableViewAction(_ sender: NSTableView) {
-		if UserPreferences.shared.actionOnItemClick == "openInBrowser" {
-			tableViewDoubleAction(sender)
-		}
-		else if UserPreferences.shared.actionOnItemClick != "none" {
-			updatePreviewForRow(sender.selectedRow)
-		}
-	}
+	// MARK: -
 
-	@objc func tableViewDoubleAction(_ sender: NSTableView) {
-		
-		updatePreviewForRow(-1)
+	private func openInWebBrower(_ row: Int) {
 
-		if sender.clickedRow == -1 {
+		openPreviewForRow(-1)
+
+		if row == -1 {
 			return
 		}
 
-		let object = objectList![sender.clickedRow]
+		let object = objectList![row]
 		let kind = object["kind"] as! Int
 		
 		if kind == 1 {
@@ -654,7 +671,8 @@ class MenuListController: NSViewController,
 			}
 
 			RssChannelManager.shared.markChecked(item: item, ofChannel: channel.identifier)
-
+			//RssChannelManager.shared.markReaded(item: item, ofChannel: channel.identifier)
+			
 			DispatchQueue.main.async {
 				if THSafariScriptingTools.createWindowIfNecessary() == false {
 					THLogError("createWindowIfNecessary == false")
@@ -670,6 +688,21 @@ class MenuListController: NSViewController,
 			delegate?.paneViewControllerDidPresentExternalItem(self)
 		}
 
+	}
+
+	// MARK: -
+	
+	@IBAction func tableViewAction(_ sender: NSTableView) {
+		if UserPreferences.shared.actionOnItemClick == "openInBrowser" {
+			openInWebBrower(sender.clickedRow)
+		}
+		else if UserPreferences.shared.actionOnItemClick != "none" {
+			openPreviewForRow(sender.selectedRow)
+		}
+	}
+
+	@objc func tableViewDoubleAction(_ sender: NSTableView) {
+		openInWebBrower(sender.clickedRow)
 	}
 	
 	// MARK: -

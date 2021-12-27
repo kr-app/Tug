@@ -31,8 +31,6 @@
 	</dict>
 	<key>NSAppleEventsUsageDescription</key>
 	<string>Manage Safari Windows</string>
-	<key>NSHumanReadableCopyright</key>
-	<string>2021</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

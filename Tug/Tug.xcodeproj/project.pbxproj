@@ -17,6 +17,7 @@
 		640151C8269C70BE00C4DF9A /* ChannelListWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 640151C7269C70BE00C4DF9A /* ChannelListWindowController.xib */; };
 		640151CA269C779B00C4DF9A /* THNSButtonBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640151C9269C779B00C4DF9A /* THNSButtonBlock.swift */; };
 		640151D6269C7F5600C4DF9A /* THLocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640151D5269C7F5600C4DF9A /* THLocalizedString.swift */; };
+		6418CA5627105C790019FAEC /* THDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BD394C256EF1D300988D08 /* THDataExtensions.swift */; };
 		6424BCBF269F54F8008E7084 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6424BCBE269F54F8008E7084 /* UserPreferences.swift */; };
 		6426432722A5CAEA007B0EAB /* THFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 642642FC22A5CAEA007B0EAB /* THFoundation.m */; };
 		6426432822A5CAEA007B0EAB /* THLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 642642FF22A5CAEA007B0EAB /* THLog.m */; };
@@ -55,6 +56,8 @@
 		648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B3661256AD47F00D3D29F /* THStringExtensions.swift */; };
 		648FC491256591E10067B491 /* AddMoreMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648FC490256591E10067B491 /* AddMoreMenu.swift */; };
 		649212E7255873D7002E3F78 /* THFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649212E6255873D7002E3F78 /* THFoundation.swift */; };
+		6492EC6226C98C8E0023F935 /* THWebPageAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492EC6126C98C8E0023F935 /* THWebPageAttributes.swift */; };
+		6492EC6426C997400023F935 /* RssStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492EC6326C997400023F935 /* RssStringExtension.swift */; };
 		64A7ECC326C707BB00911C40 /* RssPubDateConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A7ECC226C707BB00911C40 /* RssPubDateConvertor.swift */; };
 		64A7ECC526C70AB100911C40 /* RssChannelItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A7ECC426C70AB100911C40 /* RssChannelItemFilter.swift */; };
 		64AB664E2476D17200587F1D /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AB664D2476D17200587F1D /* THExtensions.swift */; };
@@ -167,6 +170,8 @@
 		648B3661256AD47F00D3D29F /* THStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THStringExtensions.swift; sourceTree = "<group>"; };
 		648FC490256591E10067B491 /* AddMoreMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMoreMenu.swift; sourceTree = "<group>"; };
 		649212E6255873D7002E3F78 /* THFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFoundation.swift; sourceTree = "<group>"; };
+		6492EC6126C98C8E0023F935 /* THWebPageAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THWebPageAttributes.swift; sourceTree = "<group>"; };
+		6492EC6326C997400023F935 /* RssStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssStringExtension.swift; sourceTree = "<group>"; };
 		64A7ECC226C707BB00911C40 /* RssPubDateConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssPubDateConvertor.swift; sourceTree = "<group>"; };
 		64A7ECC426C70AB100911C40 /* RssChannelItemFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItemFilter.swift; sourceTree = "<group>"; };
 		64AB664D2476D17200587F1D /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
@@ -442,9 +447,10 @@
 			isa = PBXGroup;
 			children = (
 				64F354F826C1CFF400B18F41 /* RssScriptingTools.swift */,
+				6492EC6326C997400023F935 /* RssStringExtension.swift */,
 				64A7ECC226C707BB00911C40 /* RssPubDateConvertor.swift */,
-				64F354F626C1CFF400B18F41 /* RssChannelItem.swift */,
 				64A7ECC426C70AB100911C40 /* RssChannelItemFilter.swift */,
+				64F354F626C1CFF400B18F41 /* RssChannelItem.swift */,
 				64F354F526C1CFF400B18F41 /* RssChannel.swift */,
 				64F354F726C1CFF400B18F41 /* RssChannelManager.swift */,
 			);
@@ -457,6 +463,7 @@
 			children = (
 				64F3555726C1D67000B18F41 /* THIconDownloader.swift */,
 				64F3555926C1D67000B18F41 /* THDistantItem.swift */,
+				6492EC6126C98C8E0023F935 /* THWebPageAttributes.swift */,
 			);
 			name = THDistant;
 			path = ../../THCommon/Classes/THDistant;
@@ -541,7 +548,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "Michaël Parrot";
 				TargetAttributes = {
 					6458CE8C2698DEE200E3885F = {
@@ -623,6 +630,7 @@
 				6458CEBD2698F1CA00E3885F /* THCocoaExtensions.swift in Sources */,
 				6458CEA42698DFC000E3885F /* PPPanePreviewController.m in Sources */,
 				6458CEB52698E8CE00E3885F /* THLogger.swift in Sources */,
+				6418CA5627105C790019FAEC /* THDataExtensions.swift in Sources */,
 				64B8A3FF26A5B3CD00C4CFED /* THFoundation.m in Sources */,
 				6458CEB32698E83E00E3885F /* PreviewController.swift in Sources */,
 				6458CE902698DEE200E3885F /* AppDelegate.swift in Sources */,
@@ -675,6 +683,7 @@
 				64F354FC26C1CFF400B18F41 /* RssScriptingTools.swift in Sources */,
 				64CA81B726879FAF00A9CBCE /* THSafariScriptingTools.swift in Sources */,
 				64898D74256131E8002945CE /* THFileManagerExtensions.swift in Sources */,
+				6492EC6226C98C8E0023F935 /* THWebPageAttributes.swift in Sources */,
 				647B34EB2668F11000785E10 /* THOpenInBrowser.swift in Sources */,
 				64F354F926C1CFF400B18F41 /* RssChannel.swift in Sources */,
 				64E727C72699B228000B516A /* THOverView.swift in Sources */,
@@ -683,6 +692,7 @@
 				64F3559A26C1D82E00B18F41 /* THAppInLoginItem.swift in Sources */,
 				640151D6269C7F5600C4DF9A /* THLocalizedString.swift in Sources */,
 				6473AF172545B842006003A8 /* THLog.swift in Sources */,
+				6492EC6426C997400023F935 /* RssStringExtension.swift in Sources */,
 				64F3555C26C1D67000B18F41 /* THDistantItem.swift in Sources */,
 				643F075E269A0BC3002DDA3B /* PWPaneWindow.swift in Sources */,
 				64F08F4E25606F6200857C8E /* THFormatterExtensions.swift in Sources */,

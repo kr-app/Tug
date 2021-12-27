@@ -25,6 +25,7 @@ class ChannelListWindowController : NSWindowController,
 
 	@IBOutlet var tableView: NSTableView!
 
+	@IBOutlet var c_onOff: NSSwitch!
 	@IBOutlet var c_icon: NSImageView!
 	@IBOutlet var c_titleLabel: NSTextField!
 	@IBOutlet var c_urLabel: NSTextField!
@@ -131,6 +132,7 @@ class ChannelListWindowController : NSWindowController,
 
 		c_icon.image = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
 		c_titleLabel.objectValue = channel.title
+		c_onOff.state = channel.disabled == true ? .off : .on
 
 		c_urLabel.objectValue = channel.url
 
@@ -167,9 +169,28 @@ class ChannelListWindowController : NSWindowController,
 	}
 	
 	// MARK: -
-	
-	@IBAction func urlChangeAction(_ sender: NSTextField) {
 
+	@IBAction func onOffAction(_ sender: NSSwitch) {
+		let row = self.tableView.selectedRow
+		if row == -1 {
+			return
+		}
+		
+		let disabled = sender.state == .off
+
+		let object = objectList![row]
+		let channel = object["channel"] as! RssChannel
+
+		RssChannelManager.shared.setDisabled(disabled, channel: channel.identifier)
+	
+		if disabled == false {
+			RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+				self.updateUISelection()
+			})
+		}
+	}
+
+	@IBAction func urlChangeAction(_ sender: NSTextField) {
 		let row = self.tableView.selectedRow
 		if row == -1 {
 			return
@@ -201,10 +222,26 @@ class ChannelListWindowController : NSWindowController,
 		}
 
 		RssChannelManager.shared.setUrl(nUrl, ofChannel: channel.identifier)
+	
 		RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
 			self.updateUISelection()
 		})
-		
+	}
+	
+	@IBAction func cleanAction(_ sender: NSButton) {
+		let row = self.tableView.selectedRow
+		if row == -1 {
+			return
+		}
+
+		let object = objectList![row]
+		let channel = object["channel"] as! RssChannel
+
+		RssChannelManager.shared.clean(channel: channel.identifier)
+	
+		RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+			self.updateUISelection()
+		})
 	}
 
 }
