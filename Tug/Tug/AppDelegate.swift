@@ -34,6 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 		THIconDownloader.shared.maxSize = 84.0
 		THIconDownloader.shared.cropIcon = true
 		THIconDownloader.shared.excludedHosts = ["static.latribune.fr"]
+		THIconDownloader.shared.inMemory = 25
 
 		THWebIconLoader.shared.validity = 0.0
 		THWebIconLoader.shared.excludedHosts = THIconDownloader.shared.excludedHosts

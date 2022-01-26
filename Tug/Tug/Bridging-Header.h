@@ -6,7 +6,7 @@
 //#import "THDictionarySerialization.h"
 
 // THView
-#import "THHighlightedTableView.h"
+//#import "THHighlightedTableView.h"
 //#import "THTextOverLabel.h"
 
 // THAppleScript

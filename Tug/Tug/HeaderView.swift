@@ -27,8 +27,8 @@ class HeaderView: NSView, THOverViewDelegateProtocol {
 	
 	func overView(_ sender: THOverView, drawRect rect: NSRect, withState state: THOverViewState) {
 		if sender == addMoreButtonView {
-
-			let isDark = THOSAppearance.isDarkMode()
+			
+			let isDark = self.effectiveAppearance.name == .darkAqua
 
 			let color = isDark == true ?	(NSColor(calibratedWhite: state == .pressed ? 0.9 : state == .highlighted ? 0.8 : 1.0, alpha: 1.0)) :
 														(NSColor(calibratedWhite: state == .pressed ? 0.1 : state == .highlighted ? 0.2 : 0.0, alpha: 1.0))

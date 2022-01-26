@@ -22,11 +22,17 @@ protocol MenuListControllerDelegateProtocol: AnyObject {
 	func paneViewControllerDidPresentExternalItem(_ menuListController: MenuListController)
 }
 
-class MenuListController: NSViewController,
-																		NSWindowDelegate,
-																		NSTableViewDataSource,
-																		NSTableViewDelegate,
-																		NSSearchFieldDelegate {
+struct ObjectItem {
+	let kind: Int
+	var channel: RssChannel?
+	var item: RssChannelItem?
+	var error: String?
+}
+
+class MenuListController: NSViewController,	NSWindowDelegate,
+																		NSTableViewDataSource, NSTableViewDelegate, NSMenuDelegate,
+																		NSSearchFieldDelegate,
+																		THHighlightedTableViewDelegateProtocol{
 
 	@IBOutlet var headerView: HeaderView!
 	@IBOutlet var headerLabel: NSTextField!
@@ -40,7 +46,7 @@ class MenuListController: NSViewController,
 
 	private weak var delegate: MenuListControllerDelegateProtocol?
 	private var myWindow: PWPaneWindow?
-	private var objectList: [[String: Any]]?
+	private var objectList: [ObjectItem]?
 	private var searchedText: String?
 
 	private var previewItemIndex = -1
@@ -72,7 +78,7 @@ class MenuListController: NSViewController,
 //		searchField.appearance = NSAppearance(named: .darkAqua)
 		
 		tableView.backgroundColor = .clear
-		//tableView.menu=_paneRightMenu.menu
+		tableView.menu = NSMenu(title: "menu", delegate: self, autoenablesItems: false)
 		tableView.doubleAction = #selector(tableViewDoubleAction)
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(n_iconDownloaderDidLoad), name: THIconDownloader.didLoadNotification, object: nil)
@@ -115,20 +121,81 @@ class MenuListController: NSViewController,
 			return
 		}
 
-		for (idx, object) in objectList.enumerated() {
-			let kind = object["kind"] as! Int
-
-			if kind == 1 {
-				let item = object["item"] as! RssChannelItem
-
-				if item.thumbnail == url {
-					tableView.th_reloadData(forRowIndexes: IndexSet(integer: idx), columnIndexes: nil)
-					break
-				}
-			}
+		if let firstIdx = objectList.firstIndex(where: { $0.kind == 1 && $0.item?.thumbnail == url }) {
+			tableView.th_reloadData(forRowIndexes: IndexSet(integer: firstIdx), columnIndexes: nil)
 		}
 	}
 	
+	// MARK: -
+	
+	private func saveVisibleVisibleItems() {
+		func firstVisibleItem() -> ObjectItem? {
+			guard let objectList = objectList
+			else {
+				return nil
+			}
+
+			let visibleRows = self.tableView.rows(in: self.tableView.visibleRect)
+			if visibleRows.location < 3 {
+				return nil
+			}
+	
+			for i in visibleRows.location..<visibleRows.location + visibleRows.length {
+				let object = objectList[i]
+				if object.kind == 1 {
+					return object
+				}
+			}
+			
+			return nil
+		}
+
+		if let topItem = firstVisibleItem() {
+			UserDefaults.standard.set("\(topItem.channel!.identifier)}-{\(topItem.item!.identifier)", forKey: "PaneViewController-TopItem")
+		}
+		else {
+			UserDefaults.standard.removeObject(forKey: "PaneViewController-TopItem")
+		}
+	}
+	
+	private func restoreVisitleItems() {
+/*		guard 	let objectList = objectList,
+					let topItem = UserDefaults.standard.string(forKey: "PaneViewController-TopItem")
+		else {
+			return
+		}
+	
+		let channelId = topItem.components(separatedBy: "}-{").first!
+		let itemId = topItem.components(separatedBy: "}-{").last!
+
+		guard let idx = objectList.firstIndex(where: { $0.kind == 1 && $0.channel?.identifier == channelId && $0.item?.identifier == itemId })
+		else {
+			return
+		}
+		
+		if objectList[idx].item!.checked == false {
+			return
+		}
+		
+		let vrect = tableView.rect(ofRow: idx)
+		tableView.scrollToVisible(NSRect(vrect.origin.x, vrect.origin.y, 0.0, 0.0))*/
+	}
+
+	private func pin(_ pinned: Bool, row: Int, item: RssChannelItem, channelId: String) {
+		RssChannelManager.shared.markPinned(pinned: pinned, item: item, ofChannel: channelId)
+
+//		let cellView = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as? MenuCellView
+//		cellView?.updateCell(forObject: object)
+
+		tableView.th_reloadData(forRowIndexes: IndexSet(integer: row))
+		updateUIHeader()
+	}
+
+	private func delete(item: RssChannelItem, channelId: String) {
+		RssChannelManager.shared.removeItem(item, ofChannel: channelId)
+		self.updateUI()
+	}
+
 	// MARK: -
 
 	func canHidePaneWindow() -> Bool {
@@ -183,11 +250,12 @@ class MenuListController: NSViewController,
 		myWindow = win
 		
 		updateUI()
-
-		self.tableView.startHighlightedTracking()
-		win.makeFirstResponder(self.tableView)
+	
+		tableView.startHighlightedTracking()
+		win.makeFirstResponder(tableView)
 		win.makeKeyAndOrderFront(nil)
-
+		restoreVisitleItems()
+	
 		NSAnimationContext.runAnimationGroup({ (context) in
 			context.duration = 0.1
 			win.animator().alphaValue = 1.0
@@ -208,9 +276,10 @@ class MenuListController: NSViewController,
 		isHidding = true
 
 		if win.hasUserCustomFrameSize {
-			UserDefaults.standard.setValue(NSStringFromSize(win.frame.size), forKey: "PaneViewController-FrameSize")
+			UserDefaults.standard.set(NSStringFromSize(win.frame.size), forKey: "PaneViewController-FrameSize")
 		}
-
+		
+		saveVisibleVisibleItems()
 		self.tableView.stopHighlightedTracking()
 		closePreview(animated: true)
 		
@@ -300,12 +369,23 @@ class MenuListController: NSViewController,
 			return rcv0 > rcv1
 		})
 
-		var objectList = [[String: Any]]()
+		var objectList = [ObjectItem]()
 
 		// On error
 		let channelsOnError = RssChannelManager.shared.channelsOnError()
 		if channelsOnError.count > 0 {
-			objectList.append(["kind": 2, "channels": channelsOnError])
+
+			var error: String
+			if channels.count == 1 {
+				error = "\(channels.first!.url.th_reducedHost) " + THLocalizedString("on error") + "\n"
+				error += (channels.first?.lastError) ?? ""
+			}
+			else {
+				error = "\(channels.count) " + THLocalizedString("channels on error") + "\n"
+				error += (channels.first!.lastError) ?? ""
+			}
+
+			objectList.append(ObjectItem(kind: 2, error: error))
 		}
 
 //		if menu.th_lastItem()?.isSeparatorItem == false {
@@ -317,21 +397,21 @@ class MenuListController: NSViewController,
 		let unreadedItems = items.filter({ $0.item.pinned == false && $0.item.checkedDate == nil })
 		if unreadedItems.count > 0 {
 			for item in unreadedItems {
-				objectList.append(["kind": 1, "channel": item.channel, "item": item.item])
+				objectList.append(ObjectItem(kind: 1, channel: item.channel, item: item.item))
 			}
-			objectList.append(["kind": 3])
+			objectList.append(ObjectItem(kind: 3))
 		}
 
 		let pinnedItems = items.filter({ $0.item.pinned == true })
 		if pinnedItems.count > 0 {
 			for item in pinnedItems {
-				objectList.append(["kind": 1, "channel": item.channel, "item": item.item])
+				objectList.append(ObjectItem(kind: 1, channel: item.channel, item: item.item))
 			}
-			objectList.append(["kind": 3])
+			objectList.append(ObjectItem(kind: 3))
 		}
 
-		for item in items.filter({ $0.item.pinned == false && $0.item.checkedDate != nil }) {
-			objectList.append(["kind": 1, "channel": item.channel, "item": item.item])
+		for item in items.filter({ $0.channel.disabled == false && $0.item.pinned == false && $0.item.checkedDate != nil }) {
+			objectList.append(ObjectItem(kind: 1, channel: item.channel, item: item.item))
 		}
 
 		self.objectList = objectList
@@ -381,22 +461,26 @@ class MenuListController: NSViewController,
 	func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
 
 		let object = objectList![row]
-		let kind = object["kind"] as! Int
 		
-		if kind == 1 {
-			let row_id = NSUserInterfaceItemIdentifier(rawValue: "row_id")
-			var rowView = tableView.makeView(withIdentifier: row_id, owner: self) as? MenuListRowView
+		if object.kind == 1 {
+			let rowId = NSUserInterfaceItemIdentifier(rawValue: "rowId")
+			var rowView = tableView.makeView(withIdentifier: rowId, owner: self) as? MenuListRowView
+			
 			if rowView == nil {
 				rowView = MenuListRowView(frame: .zero)
-				rowView!.identifier = row_id
+				rowView!.identifier = rowId
 			}
+			else {
+				rowView!.isHighlightedRow = false
+			}
+
 			return rowView!
 		}
-		else if kind == 2 {
+		else if object.kind == 2 {
 			let rowView = MenuListErrRowView(frame: .zero)
 			return rowView
 		}
-		else if kind == 3 {
+		else if object.kind == 3 {
 			let rowView = MenuListSepRowView(frame: .zero)
 			return rowView
 		}
@@ -406,34 +490,21 @@ class MenuListController: NSViewController,
 
 	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		let object = objectList![row]
-		let kind = object["kind"] as! Int
 
-		if kind == 1 {
+		if object.kind == 1 {
 			let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "normal_cell_id"), owner: self) as! MenuCellView
 			cell.updateCell(forObject: object)
 			return cell
 		}
-		else if kind == 2 {
+		else if object.kind == 2 {
 			let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "onerror_cell_id"), owner: self) as! NSTableCellView
 
-			let channels = object["channels"] as! [RssChannel]
-
-			var s: String!
-			if channels.count == 1 {
-				s = "\(channels.first!.url.th_reducedHost) " + THLocalizedString("on error") + "\n"
-				s += (channels.first?.lastError) ?? ""
-			}
-			else {
-				s = "\(channels.count) " + THLocalizedString("channels on error") + "\n"
-				s += (channels.first!.lastError) ?? ""
-			}
-
 			cell.textField!.textColor = .white
-			cell.textField!.objectValue =  s
+			cell.textField!.objectValue =  object.error
 
 			return cell
 		}
-		else if kind == 3 {
+		else if object.kind == 3 {
 			let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sep_cell_id"), owner: self) as! NSTableCellView
 			return cell
 		}
@@ -443,14 +514,12 @@ class MenuListController: NSViewController,
 	
 	func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		let object = objectList![row]
-		let kind = object["kind"] as! Int
-		return kind == 3 ? 19.0 : kind == 2 ? 57.0 : tableView.rowHeight
+		return object.kind == 3 ? 19.0 : object.kind == 2 ? 57.0 : tableView.rowHeight
 	}
 
 	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
 		let object = objectList![row]
-		let kind = object["kind"] as! Int
-		return kind == 1
+		return object.kind == 1
 	}
 	
 	func tableViewSelectionDidChange(_ notification: Notification) {
@@ -460,41 +529,28 @@ class MenuListController: NSViewController,
 	func tableView(_ tableView: NSTableView, rowActionsForRow row: Int, edge: NSTableView.RowActionEdge) -> [NSTableViewRowAction] {
 
 		let object = objectList![row]
-		let kind = object["kind"] as! Int
 		
-		if kind == 1 {
+		if object.kind == 1 {
 	
-			let channel = object["channel"] as! RssChannel
-			let item = object["item"] as! RssChannelItem
+			let channel = object.channel!
+			let item = object.item!
 			
 			if edge == .leading {
-				
 				let pinned = item.pinned
 				let title = pinned == true ? THLocalizedString("Unpin") : THLocalizedString("Pin")
-				
+			
 				let ra = NSTableViewRowAction(style: .regular, title: title, handler: { (action: NSTableViewRowAction, row: Int) in
-					RssChannelManager.shared.markPinned(pinned: !pinned, item: item, ofChannel: channel.identifier)
-
-//					let cellView = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as? MenuCellView
-//					cellView?.updateCell(forObject: object)
-	
-					self.tableView.th_reloadData(forRowIndexes: IndexSet(integer: row))
-					self.updateUIHeader()
-
+					self.pin(!pinned, row: row, item: item, channelId: channel.identifier)
 					tableView.rowActionsVisible = false
 				})
 				ra.backgroundColor = .purple
 				
 				return [ra]
 			}
-
 			else if edge == .trailing {
 				let ra = NSTableViewRowAction(style: .destructive, title: THLocalizedString("Delete"), handler: { (action: NSTableViewRowAction, row: Int) in
-
-					RssChannelManager.shared.removeItem(item, ofChannel: channel.identifier)
+					self.delete(item: item, channelId: channel.identifier)
 					tableView.rowActionsVisible = false
-
-					self.updateUI()
 				})
 				return [ra]
 			}
@@ -512,10 +568,9 @@ class MenuListController: NSViewController,
 
 		if highlightedRow != -1 {
 			let object = objectList![highlightedRow]
-			let kind = object["kind"] as! Int
 
 			let rowView = tableView.rowView(atRow: highlightedRow , makeIfNecessary: false) as? MenuListRowView
-			rowView?.isHighlightedRow = kind == 1
+			rowView?.isHighlightedRow = object.kind == 1
 		}
 
 		if tableView.selectedRow != highlightedRow {
@@ -524,11 +579,10 @@ class MenuListController: NSViewController,
 
 		if highlightedRow != -1 {
 			let object = objectList![highlightedRow]
-			let kind = object["kind"] as! Int
 
-			if kind == 1 {
-				let channel = object["channel"] as! RssChannel
-				let item = object["item"] as! RssChannelItem
+			if object.kind == 1 {
+				let channel = object.channel!
+				let item = object.item!
 
 				RssChannelManager.shared.markChecked(item: item, ofChannel: channel.identifier)
 
@@ -559,13 +613,11 @@ class MenuListController: NSViewController,
 		PPPaneRequester.shared.requestHide(withAnimation: animated)
 	}
 	
-	private func previewItemIdFromObject(_ object: [String: Any]) -> String? {
+	private func previewItemIdFromObject(_ object: ObjectItem) -> String? {
 
-		let kind = object["kind"] as! Int
-
-		if kind == 1 {
-			let channel = object["channel"] as! RssChannel
-			let item = object["item"] as! RssChannelItem
+		if object.kind == 1 {
+			let channel = object.channel!
+			let item = object.item!
 			return "{" + channel.url.absoluteString + "}" + "{" + item.identifier + "}"
 		}
 
@@ -580,13 +632,12 @@ class MenuListController: NSViewController,
 
 		if previewItemIndex != -1 {
 			let object = objectList![previewItemIndex]
-			let kind = object["kind"] as! Int
 
 			previewItemId = previewItemIdFromObject(object)
 
-			if kind == 1 {
-				channel = object["channel"] as! RssChannel
-				item = object["item"] as! RssChannelItem
+			if object.kind == 1 {
+				channel = object.channel!
+				item = object.item!
 			}
 		}
 
@@ -614,7 +665,7 @@ class MenuListController: NSViewController,
 //		//NSPoint p=[self.view.window.contentView convertPoint:rowPoint toView:self.tableView]
 //		pt = tableView.window!.convertToScreen(NSRect(pt.x, pt.y, 0.0, 0.0)).origin
 
-		var pt = self.tableView.convertWindowPoint(ofRow: previewItemIndex)
+		var pt = tableView.convertWindowPoint(forRow: previewItemIndex)
 		pt.y = (self.view.window!.frame.size.height / 2.0).rounded(.down)
 
 		PPPaneRequester.shared.requestShowAtPoint(pt, withData: item!.link!.absoluteString)
@@ -658,12 +709,10 @@ class MenuListController: NSViewController,
 		}
 
 		let object = objectList![row]
-		let kind = object["kind"] as! Int
-		
-		if kind == 1 {
-
-			let channel = object["channel"] as! RssChannel
-			let item = object["item"] as! RssChannelItem
+	
+		if object.kind == 1 {
+			let channel = object.channel!
+			let item = object.item!
 
 			guard let link = item.link
 			else {
@@ -674,9 +723,9 @@ class MenuListController: NSViewController,
 			//RssChannelManager.shared.markReaded(item: item, ofChannel: channel.identifier)
 			
 			DispatchQueue.main.async {
-				if THSafariScriptingTools.createWindowIfNecessary() == false {
-					THLogError("createWindowIfNecessary == false")
-				}
+//				if THSafariScriptingTools.createWindowIfNecessary() == false {
+//					THLogError("createWindowIfNecessary == false")
+//				}
 
 				THOpenInBrowser.shared.open(url: link, completion: {(ok: Bool) in
 					if ok == false {
@@ -706,6 +755,35 @@ class MenuListController: NSViewController,
 	}
 	
 	// MARK: -
+	
+	func menuNeedsUpdate(_ menu: NSMenu) {
+		menu.removeAllItems()
+		
+		let row = tableView.clickedRow
+		if row == -1 {
+			return
+		}
+		
+		let object = objectList![row]
+		if object.kind == 1 {
+
+			let channel = object.channel!
+			let item = object.item!
+			
+			let pinned = item.pinned
+			menu.addItem(THMenuItem(title: pinned == true ? THLocalizedString("Unpin") : THLocalizedString("Pin"), block: {() in
+				self.pin(!pinned, row: row, item: item, channelId: channel.identifier)
+			}))
+
+			menu.addItem(NSMenuItem.separator())
+
+			menu.addItem(THMenuItem(title: THLocalizedString("Delete"), block: {() in
+				self.delete(item: item, channelId: channel.identifier)
+			}))
+		}
+	}
+	
+	// MARK: -
 
 	@IBAction func searchFieldAction(_ sender: NSSearchField) {
 	}
@@ -716,7 +794,6 @@ class MenuListController: NSViewController,
 			updateUI()
 		}
 	}
-	
-	
+
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------

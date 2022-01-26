@@ -9,7 +9,8 @@ class MenuListRowView: THHighlightedTableRowView {
 		let frameSz = self.frame.size
 		
 		if isHighlightedRow == true {
-			let isDark = THOSAppearance.isDarkMode()
+			let isDark = self.effectiveAppearance.name == .darkAqua
+
 			NSColor(calibratedWhite: isDark ? 0.1 : 0.15, alpha: 1.0).set()
 			NSBezierPath.fill(NSRect(0.0, 0.0, frameSz.width, frameSz.height))
 		}
@@ -58,7 +59,7 @@ class MenuCellView : THHighlightedTableCellView {
 	private static let todat_df = THTodayDateFormatter(todayFormat: "HM")
 	private static let ago_df = RelativeDateTimeFormatter(withUnitsStyle: .short)
 	
-	private var object: [String: Any]?
+	private var object: ObjectItem?
 	private var currentBackgroundStyle: NSView.BackgroundStyle = .normal
 
 	override var backgroundStyle: NSView.BackgroundStyle { didSet {
@@ -80,7 +81,7 @@ class MenuCellView : THHighlightedTableCellView {
 		imageView?.layer?.masksToBounds = true
 	}
 
-	func updateCell(forObject object: [String: Any]) {
+	func updateCell(forObject object: ObjectItem) {
 		self.object = object
 		updateCellFromObject()
 	}
@@ -90,13 +91,11 @@ class MenuCellView : THHighlightedTableCellView {
 		else {
 			return
 		}
-
-		let kind = object["kind"] as! Int
 		
-		if kind == 1 {
+		if object.kind == 1 {
 			
-			let channel = object["channel"] as! RssChannel
-			let item = object["item"] as! RssChannelItem
+			let channel = object.channel!
+			let item = object.item!
 
 			//let isDark = self.effectiveAppearance.name == .darkAqua
 			let isHighlighted = isHighlightedRow || self.backgroundStyle == .emphasized
@@ -152,8 +151,8 @@ class MenuCellView : THHighlightedTableCellView {
 			infoLabel.stringValue = info
 
 		}
-		else if kind == 2 {
-			textField!.objectValue = object["title"] as? String
+		else if object.kind == 2 {
+			textField!.objectValue = nil
 			textField!.textColor = .red
 		}
 	

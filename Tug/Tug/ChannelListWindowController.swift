@@ -142,6 +142,15 @@ class ChannelListWindowController : NSWindowController,
 		c_lastErrorLabel.stringValue = channel.lastError ?? "--"
 	}
 	
+	private func reloadSelectedRow() {
+		let row = self.tableView.selectedRow
+		if row == -1 {
+			return
+		}
+		
+		tableView.th_reloadData(forRowIndexes: IndexSet(integer: row))
+	}
+	
 	// MARK: -
 	
 	func numberOfRows(in tableView: NSTableView) -> Int {
@@ -155,9 +164,11 @@ class ChannelListWindowController : NSWindowController,
 		let object = objectList![row]
 		let channel = object["channel"] as! RssChannel
 		
+		let icon = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
+		
 		let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell_id"), owner: self) as! NSTableCellView
 
-		cell.imageView?.image = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
+		cell.imageView?.image =  channel.disabled ? icon?.th_imageGray() : icon
 		cell.textField?.stringValue = channel.url?.th_reducedHost ?? channel.url?.absoluteString ?? ""
 //		cell.textField?.textColor = channel.lastError != nil ? .red : (selectedRow == row ? .white : .black)
 
@@ -182,7 +193,8 @@ class ChannelListWindowController : NSWindowController,
 		let channel = object["channel"] as! RssChannel
 
 		RssChannelManager.shared.setDisabled(disabled, channel: channel.identifier)
-	
+		reloadSelectedRow()
+
 		if disabled == false {
 			RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
 				self.updateUISelection()

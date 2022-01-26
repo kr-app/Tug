@@ -81,7 +81,6 @@
 		64E4B03822AD2B2C001E2340 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E4B03422AD2B22001E2340 /* libxml2.2.tbd */; };
 		64E727A22699AFC1000B516A /* MenuListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E727A12699AFC1000B516A /* MenuListController.swift */; };
 		64E727C72699B228000B516A /* THOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E727AB2699B228000B516A /* THOverView.swift */; };
-		64E727D22699B228000B516A /* THHighlightedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E727BD2699B228000B516A /* THHighlightedTableView.m */; };
 		64E727DA2699B442000B516A /* MenuListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E727D92699B442000B516A /* MenuListController.xib */; };
 		64EDAB5C2680A1E8001D5AC0 /* THDictionarySerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */; };
 		64F08F4E25606F6200857C8E /* THFormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */; };
@@ -200,8 +199,6 @@
 		64E4B03522AD2B22001E2340 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		64E727A12699AFC1000B516A /* MenuListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListController.swift; sourceTree = "<group>"; };
 		64E727AB2699B228000B516A /* THOverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THOverView.swift; sourceTree = "<group>"; };
-		64E727AE2699B228000B516A /* THHighlightedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHighlightedTableView.h; sourceTree = "<group>"; };
-		64E727BD2699B228000B516A /* THHighlightedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHighlightedTableView.m; sourceTree = "<group>"; };
 		64E727D92699B442000B516A /* MenuListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuListController.xib; sourceTree = "<group>"; };
 		64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THDictionarySerialization.swift; sourceTree = "<group>"; };
 		64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFormatterExtensions.swift; sourceTree = "<group>"; };
@@ -436,8 +433,6 @@
 				64E727AB2699B228000B516A /* THOverView.swift */,
 				640151C9269C779B00C4DF9A /* THNSButtonBlock.swift */,
 				6475383426ADC84400895ED6 /* THHighlightedTableView.swift */,
-				64E727AE2699B228000B516A /* THHighlightedTableView.h */,
-				64E727BD2699B228000B516A /* THHighlightedTableView.m */,
 			);
 			name = THView;
 			path = ../../THCommon/Classes/THView;
@@ -548,7 +543,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = "Michaël Parrot";
 				TargetAttributes = {
 					6458CE8C2698DEE200E3885F = {
@@ -678,7 +673,6 @@
 				64F3556426C1D69800B18F41 /* THXMLElement.m in Sources */,
 				6475383526ADC84400895ED6 /* THHighlightedTableView.swift in Sources */,
 				64015181269C533C00C4DF9A /* PreferencesWindowController.swift in Sources */,
-				64E727D22699B228000B516A /* THHighlightedTableView.m in Sources */,
 				64015190269C54C000C4DF9A /* THHelperRunningApp.swift in Sources */,
 				64F354FC26C1CFF400B18F41 /* RssScriptingTools.swift in Sources */,
 				64CA81B726879FAF00A9CBCE /* THSafariScriptingTools.swift in Sources */,
@@ -746,13 +740,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TugViewer/TugViewer.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
+				DEVELOPMENT_TEAM = 56HL22VV9A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -776,13 +769,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TugViewer/TugViewer.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
+				DEVELOPMENT_TEAM = 56HL22VV9A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = TugViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -852,7 +844,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -911,7 +903,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -925,9 +917,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tug/Tug.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
+				DEVELOPMENT_TEAM = 56HL22VV9A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = $SDKROOT/usr/include/libxml2;
 				INFOPLIST_FILE = Tug/Info.plist;
