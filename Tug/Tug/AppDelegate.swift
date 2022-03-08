@@ -30,18 +30,18 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 #endif
 
 		THIconDownloader.shared.setDiskRetention(3.0.th_day)
-		THIconDownloader.shared.validity = 0.0
-		THIconDownloader.shared.maxSize = 84.0
-		THIconDownloader.shared.cropIcon = true
-		THIconDownloader.shared.excludedHosts = ["static.latribune.fr"]
-		THIconDownloader.shared.inMemory = 25
+		THIconDownloader.shared.configuration.validity = 0.0
+		THIconDownloader.shared.configuration.maxSize = 84.0
+		THIconDownloader.shared.configuration.cropIcon = true
+		THIconDownloader.shared.configuration.excludedHosts = ["static.latribune.fr"]
+		THIconDownloader.shared.configuration.inMemory = 25
 
-		THWebIconLoader.shared.validity = 0.0
-		THWebIconLoader.shared.excludedHosts = THIconDownloader.shared.excludedHosts
+		THWebIconLoader.shared.configuration.validity = 0.0
+		THWebIconLoader.shared.configuration.excludedHosts = THIconDownloader.shared.configuration.excludedHosts
 
 		THHelperRunningApp.shared.configure(withAppIdentifier: "com.kr-app.TugViewer")
 
-		let filtersFile = FileManager.th_appSupportPath().th_appendingPathComponent("filters.plist")
+		let filtersFile = FileManager.th_documentsPath().th_appendingPathComponent("filters.plist")
 		let filterManager = RssChannelFilterManager(filePath: filtersFile)
 		RssChannelManager.shared.filterManager = filterManager
 		
@@ -155,8 +155,10 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 	// MARK: -
 
 	private func paneWindowIsVisible() -> Bool {
-		if menuListController != nil && menuListController!.isHidding == false {
-			return true
+		if let menuListController = self.menuListController {
+			if menuListController.isHidding == false || menuListController.isShowing == true {
+				return true
+			}
 		}
 		return false
 	}

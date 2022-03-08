@@ -99,22 +99,22 @@ class MenuCellView : THHighlightedTableCellView {
 
 			//let isDark = self.effectiveAppearance.name == .darkAqua
 			let isHighlighted = isHighlightedRow || self.backgroundStyle == .emphasized
-			let itemColor = isHighlighted == true ? .white : item.checked ? NSColor(calibratedWhite: 0.4, alpha: 1.0): .black
+			let itemColor = isHighlighted == true ? .white : item.checked ? NSColor(calibratedWhite: 0.2, alpha: 1.0): .black
 
 			// icon
 			var img = THIconDownloader.shared.icon(atURL: item.thumbnail, startUpdate: true)
+			if img == nil {
+				img = THWebIconLoader.shared.icon(forHost: channel.webLink?.host ?? channel.url.host, startUpdate: true, allowsGeneric: true)
+			}
 			if isHighlighted == false && item.checked == true && item.pinned == false {
 				img = img?.th_imageGray()//.th_image(withCorner: 6.0)
 			}
 
-			if img == nil {
-				img = THWebIconLoader.shared.icon(forHost: channel.webLink?.host ?? channel.url.host, startUpdate: true, allowsGeneric: true)
-			}
 			imageView!.image = img
 			imageView!.alphaValue = (isHighlighted == false && item.checked == true) ? 0.9 : 1.0
 
 			// title
-			let f_attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.boldSystemFont(ofSize: 15.0),
+			let f_attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.boldSystemFont(ofSize: 13.0),
 																					.foregroundColor: itemColor,
 																					.baselineOffset: 1.0]
 	
@@ -122,7 +122,7 @@ class MenuCellView : THHighlightedTableCellView {
 			let mi_title = NSMutableAttributedString(string: title, attributes: f_attrs)
 
 			if let text = item.content/*?.th_displayTitle(maxLength: maxWidth, attrs: itemTitleAttrs, truncate: .byTruncatingTail) */{
-				let attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.systemFont(ofSize: 14.0),
+				let attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.systemFont(ofSize: 13.0),
 																					.foregroundColor: itemColor,
 																					.baselineOffset: 2.0]
 				mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrs))

@@ -36,7 +36,7 @@ class AddMoreMenu: NSObject, NSMenuDelegate {
 		}
 		menu.addItem(NSMenuItem.separator())
 		
-		// RSS of front site
+/*		// RSS of front site
 		let rssFromBrowser = RssScriptingTools.shared.rssFeedOfFrontBrowser()
 		let installedRss = rssFromBrowser?.first(where: { RssChannelManager.shared.channel(withUrl: $0.rss) != nil })
 
@@ -54,21 +54,21 @@ class AddMoreMenu: NSObject, NSMenuDelegate {
 		else {
 			menu.addItem(NSMenuItem(title: THLocalizedString("No RSS from current browser"), enabled: false))
 		}
-
+*/
 	}
 
 	@objc func mi_menuAction(_ sender: NSMenuItem) {
 		if sender.tag == 12 { // add rss
 			let rss = sender.representedObject as! RssFromSource
-			if RssChannelManager.shared.addChannel(url: rss.rss) == nil {
-				THLogError("addChannel == nil rss:\(rss)")
-			}
+//			if RssChannelManager.shared.addChannel(url: rss.rss) == nil {
+//				THLogError("addChannel == nil rss:\(rss)")
+//			}
 		}
 		else if sender.tag == 13 { // add url
 			let url = sender.representedObject as! URL
-			if RssChannelManager.shared.addChannel(url: url) == nil {
-				THLogError("addChannel == nil url:\(url)")
-			}
+//			if RssChannelManager.shared.addChannel(url: url) == nil {
+//				THLogError("addChannel == nil url:\(url)")
+//			}
 		}
 	}
 

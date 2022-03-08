@@ -57,9 +57,6 @@
 		648FC491256591E10067B491 /* AddMoreMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648FC490256591E10067B491 /* AddMoreMenu.swift */; };
 		649212E7255873D7002E3F78 /* THFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649212E6255873D7002E3F78 /* THFoundation.swift */; };
 		6492EC6226C98C8E0023F935 /* THWebPageAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492EC6126C98C8E0023F935 /* THWebPageAttributes.swift */; };
-		6492EC6426C997400023F935 /* RssStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492EC6326C997400023F935 /* RssStringExtension.swift */; };
-		64A7ECC326C707BB00911C40 /* RssPubDateConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A7ECC226C707BB00911C40 /* RssPubDateConvertor.swift */; };
-		64A7ECC526C70AB100911C40 /* RssChannelItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A7ECC426C70AB100911C40 /* RssChannelItemFilter.swift */; };
 		64AB664E2476D17200587F1D /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AB664D2476D17200587F1D /* THExtensions.swift */; };
 		64B8A3FF26A5B3CD00C4CFED /* THFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 642642FC22A5CAEA007B0EAB /* THFoundation.m */; };
 		64BA6384267F7C3900E044A3 /* THNetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6383267F7C3900E044A3 /* THNetworkStatus.swift */; };
@@ -68,10 +65,6 @@
 		64C5721522A555F9000B6EC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5721422A555F9000B6EC3 /* AppDelegate.swift */; };
 		64C5721722A555FB000B6EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C5721622A555FB000B6EC3 /* Assets.xcassets */; };
 		64C5721A22A555FB000B6EC3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64C5721822A555FB000B6EC3 /* MainMenu.xib */; };
-		64CA81AF26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 64CA819C26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt */; };
-		64CA81B126879FAF00A9CBCE /* THSafariList_CurrentSite.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 64CA819E26879FAF00A9CBCE /* THSafariList_CurrentSite.scpt */; };
-		64CA81B726879FAF00A9CBCE /* THSafariScriptingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CA81A926879FAF00A9CBCE /* THSafariScriptingTools.swift */; };
-		64CC07C4269AD412003D9392 /* THBgColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C3269AD412003D9392 /* THBgColorView.swift */; };
 		64CC07C6269B002B003D9392 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C5269B002B003D9392 /* HeaderView.swift */; };
 		64CC07C8269B011D003D9392 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C7269B011D003D9392 /* SettingsMenu.swift */; };
 		64CC07CA269B089F003D9392 /* THNSMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C9269B089F003D9392 /* THNSMenuExtensions.swift */; };
@@ -84,19 +77,27 @@
 		64E727DA2699B442000B516A /* MenuListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E727D92699B442000B516A /* MenuListController.xib */; };
 		64EDAB5C2680A1E8001D5AC0 /* THDictionarySerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */; };
 		64F08F4E25606F6200857C8E /* THFormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */; };
-		64F354F926C1CFF400B18F41 /* RssChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F354F526C1CFF400B18F41 /* RssChannel.swift */; };
-		64F354FA26C1CFF400B18F41 /* RssChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F354F626C1CFF400B18F41 /* RssChannelItem.swift */; };
-		64F354FB26C1CFF400B18F41 /* RssChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F354F726C1CFF400B18F41 /* RssChannelManager.swift */; };
-		64F354FC26C1CFF400B18F41 /* RssScriptingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F354F826C1CFF400B18F41 /* RssScriptingTools.swift */; };
 		64F3555A26C1D67000B18F41 /* THIconDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3555726C1D67000B18F41 /* THIconDownloader.swift */; };
 		64F3555C26C1D67000B18F41 /* THDistantItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3555926C1D67000B18F41 /* THDistantItem.swift */; };
-		64F3556326C1D69800B18F41 /* THXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F3555F26C1D69800B18F41 /* THXMLParser.m */; };
-		64F3556426C1D69800B18F41 /* THXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F3556026C1D69800B18F41 /* THXMLElement.m */; };
-		64F3556526C1D69800B18F41 /* THRssFeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3556126C1D69800B18F41 /* THRssFeedParser.swift */; };
 		64F3559826C1D82E00B18F41 /* THSharedLoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F3558826C1D82E00B18F41 /* THSharedLoginItems.m */; };
 		64F3559A26C1D82E00B18F41 /* THAppInLoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3558A26C1D82E00B18F41 /* THAppInLoginItem.swift */; };
-		64F355A326C1D86400B18F41 /* THAsScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F355A026C1D86400B18F41 /* THAsScript.swift */; };
 		64F576FB269F01B6008186FE /* THNSImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F576FA269F01B6008186FE /* THNSImageExtensions.swift */; };
+		BE0B09C627D7F8F500DEE577 /* YtChannelFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09B027D7F8F500DEE577 /* YtChannelFeed.swift */; };
+		BE0B09C727D7F8F500DEE577 /* YtChannelVideoId.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09B127D7F8F500DEE577 /* YtChannelVideoId.swift */; };
+		BE0B09C927D7F8F500DEE577 /* YtChannelFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09B327D7F8F500DEE577 /* YtChannelFilter.swift */; };
+		BE0B09CA27D7F8F500DEE577 /* YtChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09B427D7F8F500DEE577 /* YtChannelManager.swift */; };
+		BE0B09CB27D7F8F500DEE577 /* YtChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09B527D7F8F500DEE577 /* YtChannel.swift */; };
+		BE0B09D127D7F8F500DEE577 /* THXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09C227D7F8F500DEE577 /* THXMLParser.m */; };
+		BE0B09D227D7F8F500DEE577 /* THXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09C327D7F8F500DEE577 /* THXMLElement.m */; };
+		BE0B09D327D7F8F500DEE577 /* THRssFeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09C427D7F8F500DEE577 /* THRssFeedParser.swift */; };
+		BE0B09DD27D7F91E00DEE577 /* THColoredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09DC27D7F91E00DEE577 /* THColoredView.swift */; };
+		BE0B09EC27D7F97400DEE577 /* RssChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09E527D7F97400DEE577 /* RssChannel.swift */; };
+		BE0B09ED27D7F97400DEE577 /* RssStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09E627D7F97400DEE577 /* RssStringExtension.swift */; };
+		BE0B09EE27D7F97400DEE577 /* RssChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09E727D7F97400DEE577 /* RssChannelItem.swift */; };
+		BE0B09EF27D7F97400DEE577 /* RssChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09E827D7F97400DEE577 /* RssChannelManager.swift */; };
+		BE0B09F127D7F97400DEE577 /* RssPubDateConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09EA27D7F97400DEE577 /* RssPubDateConvertor.swift */; };
+		BE0B09F227D7F97400DEE577 /* RssChannelItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09EB27D7F97400DEE577 /* RssChannelItemFilter.swift */; };
+		BE0B09FD27D7F9A900DEE577 /* THFinderMdItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09FC27D7F9A900DEE577 /* THFinderMdItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,9 +171,6 @@
 		648FC490256591E10067B491 /* AddMoreMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMoreMenu.swift; sourceTree = "<group>"; };
 		649212E6255873D7002E3F78 /* THFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFoundation.swift; sourceTree = "<group>"; };
 		6492EC6126C98C8E0023F935 /* THWebPageAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THWebPageAttributes.swift; sourceTree = "<group>"; };
-		6492EC6326C997400023F935 /* RssStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssStringExtension.swift; sourceTree = "<group>"; };
-		64A7ECC226C707BB00911C40 /* RssPubDateConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssPubDateConvertor.swift; sourceTree = "<group>"; };
-		64A7ECC426C70AB100911C40 /* RssChannelItemFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItemFilter.swift; sourceTree = "<group>"; };
 		64AB664D2476D17200587F1D /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
 		64BA6383267F7C3900E044A3 /* THNetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNetworkStatus.swift; sourceTree = "<group>"; };
 		64BACF3F26AC3547000E4F97 /* THParentAppAlive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THParentAppAlive.swift; sourceTree = "<group>"; };
@@ -183,10 +181,6 @@
 		64C5721922A555FB000B6EC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		64C5721B22A555FB000B6EC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64C5721C22A555FB000B6EC3 /* Tug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tug.entitlements; sourceTree = "<group>"; };
-		64CA819C26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = THSafariScriptingTools_CreateWindowIfNeeded.scpt; sourceTree = "<group>"; };
-		64CA819E26879FAF00A9CBCE /* THSafariList_CurrentSite.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = THSafariList_CurrentSite.scpt; sourceTree = "<group>"; };
-		64CA81A926879FAF00A9CBCE /* THSafariScriptingTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THSafariScriptingTools.swift; sourceTree = "<group>"; };
-		64CC07C3269AD412003D9392 /* THBgColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THBgColorView.swift; sourceTree = "<group>"; };
 		64CC07C5269B002B003D9392 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		64CC07C7269B011D003D9392 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		64CC07C9269B089F003D9392 /* THNSMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNSMenuExtensions.swift; sourceTree = "<group>"; };
@@ -202,22 +196,31 @@
 		64E727D92699B442000B516A /* MenuListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuListController.xib; sourceTree = "<group>"; };
 		64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THDictionarySerialization.swift; sourceTree = "<group>"; };
 		64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFormatterExtensions.swift; sourceTree = "<group>"; };
-		64F354F526C1CFF400B18F41 /* RssChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannel.swift; sourceTree = "<group>"; };
-		64F354F626C1CFF400B18F41 /* RssChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItem.swift; sourceTree = "<group>"; };
-		64F354F726C1CFF400B18F41 /* RssChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelManager.swift; sourceTree = "<group>"; };
-		64F354F826C1CFF400B18F41 /* RssScriptingTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssScriptingTools.swift; sourceTree = "<group>"; };
 		64F3555726C1D67000B18F41 /* THIconDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THIconDownloader.swift; sourceTree = "<group>"; };
 		64F3555926C1D67000B18F41 /* THDistantItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THDistantItem.swift; sourceTree = "<group>"; };
-		64F3555E26C1D69800B18F41 /* THXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THXMLElement.h; sourceTree = "<group>"; };
-		64F3555F26C1D69800B18F41 /* THXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THXMLParser.m; sourceTree = "<group>"; };
-		64F3556026C1D69800B18F41 /* THXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THXMLElement.m; sourceTree = "<group>"; };
-		64F3556126C1D69800B18F41 /* THRssFeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THRssFeedParser.swift; sourceTree = "<group>"; };
-		64F3556226C1D69800B18F41 /* THXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THXMLParser.h; sourceTree = "<group>"; };
 		64F3558826C1D82E00B18F41 /* THSharedLoginItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSharedLoginItems.m; sourceTree = "<group>"; };
 		64F3558A26C1D82E00B18F41 /* THAppInLoginItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THAppInLoginItem.swift; sourceTree = "<group>"; };
 		64F3559126C1D82E00B18F41 /* THSharedLoginItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSharedLoginItems.h; sourceTree = "<group>"; };
-		64F355A026C1D86400B18F41 /* THAsScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THAsScript.swift; sourceTree = "<group>"; };
 		64F576FA269F01B6008186FE /* THNSImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNSImageExtensions.swift; sourceTree = "<group>"; };
+		BE0B09B027D7F8F500DEE577 /* YtChannelFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelFeed.swift; sourceTree = "<group>"; };
+		BE0B09B127D7F8F500DEE577 /* YtChannelVideoId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelVideoId.swift; sourceTree = "<group>"; };
+		BE0B09B327D7F8F500DEE577 /* YtChannelFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelFilter.swift; sourceTree = "<group>"; };
+		BE0B09B427D7F8F500DEE577 /* YtChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelManager.swift; sourceTree = "<group>"; };
+		BE0B09B527D7F8F500DEE577 /* YtChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannel.swift; sourceTree = "<group>"; };
+		BE0B09C127D7F8F500DEE577 /* THXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THXMLElement.h; sourceTree = "<group>"; };
+		BE0B09C227D7F8F500DEE577 /* THXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THXMLParser.m; sourceTree = "<group>"; };
+		BE0B09C327D7F8F500DEE577 /* THXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THXMLElement.m; sourceTree = "<group>"; };
+		BE0B09C427D7F8F500DEE577 /* THRssFeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THRssFeedParser.swift; sourceTree = "<group>"; };
+		BE0B09C527D7F8F500DEE577 /* THXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THXMLParser.h; sourceTree = "<group>"; };
+		BE0B09DC27D7F91E00DEE577 /* THColoredView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THColoredView.swift; sourceTree = "<group>"; };
+		BE0B09E527D7F97400DEE577 /* RssChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannel.swift; sourceTree = "<group>"; };
+		BE0B09E627D7F97400DEE577 /* RssStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssStringExtension.swift; sourceTree = "<group>"; };
+		BE0B09E727D7F97400DEE577 /* RssChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItem.swift; sourceTree = "<group>"; };
+		BE0B09E827D7F97400DEE577 /* RssChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelManager.swift; sourceTree = "<group>"; };
+		BE0B09EA27D7F97400DEE577 /* RssPubDateConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssPubDateConvertor.swift; sourceTree = "<group>"; };
+		BE0B09EB27D7F97400DEE577 /* RssChannelItemFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItemFilter.swift; sourceTree = "<group>"; };
+		BE0B09FB27D7F9A900DEE577 /* THFinderMdItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFinderMdItem.h; sourceTree = "<group>"; };
+		BE0B09FC27D7F9A900DEE577 /* THFinderMdItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFinderMdItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,8 +253,7 @@
 				64015196269C54D000C4DF9A /* THHotKeyFieldView.h */,
 				64015193269C54D000C4DF9A /* THHotKeyFieldView.m */,
 			);
-			name = THHotKey;
-			path = ../../THCommon/Classes/THHotKey;
+			path = THHotKey;
 			sourceTree = "<group>";
 		};
 		642642AA22A5CA97007B0EAB /* THUserSpace */ = {
@@ -262,8 +264,7 @@
 				647B34EA2668F11000785E10 /* THOpenInBrowser.swift */,
 				64BACF3F26AC3547000E4F97 /* THParentAppAlive.swift */,
 			);
-			name = THUserSpace;
-			path = ../../THCommon/Classes/THUserSpace;
+			path = THUserSpace;
 			sourceTree = "<group>";
 		};
 		642642FB22A5CAEA007B0EAB /* THFoundation */ = {
@@ -284,8 +285,7 @@
 				64CE9A2B25BF70A6004EC688 /* THUnixCommand.h */,
 				64CE9A2A25BF70A6004EC688 /* THUnixCommand.m */,
 			);
-			name = THFoundation;
-			path = ../../THCommon/Classes/THFoundation;
+			path = THFoundation;
 			sourceTree = "<group>";
 		};
 		6426434822A5D072007B0EAB /* THExtensions */ = {
@@ -300,8 +300,7 @@
 				648B3661256AD47F00D3D29F /* THStringExtensions.swift */,
 				64F576FA269F01B6008186FE /* THNSImageExtensions.swift */,
 			);
-			name = THExtensions;
-			path = ../../THCommon/Classes/THExtensions;
+			path = THExtensions;
 			sourceTree = "<group>";
 		};
 		6458CE8E2698DEE200E3885F /* TugViewer */ = {
@@ -328,26 +327,15 @@
 				6458CEA22698DFC000E3885F /* PPPanePreviewController.h */,
 				6458CE9E2698DFC000E3885F /* PPPanePreviewController.m */,
 			);
-			name = PPPanePreview;
-			path = ../../THCommon/Classes/PPPanePreview;
+			path = PPPanePreview;
 			sourceTree = "<group>";
 		};
 		64C5720822A555F9000B6EC3 = {
 			isa = PBXGroup;
 			children = (
 				64E4B03322AD2B22001E2340 /* Frameworks */,
-				642642FB22A5CAEA007B0EAB /* THFoundation */,
-				6426434822A5D072007B0EAB /* THExtensions */,
-				64F3559F26C1D86400B18F41 /* THAppleScript */,
-				64F3555626C1D67000B18F41 /* THDistant */,
-				64015191269C54D000C4DF9A /* THHotKey */,
-				64F3558426C1D82E00B18F41 /* THFinderFile */,
-				642642AA22A5CA97007B0EAB /* THUserSpace */,
-				64F3555D26C1D69800B18F41 /* THXmlParser */,
-				64E727A92699B228000B516A /* THView */,
-				6458CE9D2698DFC000E3885F /* PPPanePreview */,
-				64CA819626879FAF00A9CBCE /* THSafari */,
-				64F354F426C1CFF400B18F41 /* THRssChannel */,
+				BE0B08B827D7F8D000DEE577 /* THCommon */,
+				BE0B09AE27D7F8F500DEE577 /* THClasses */,
 				64C5721322A555F9000B6EC3 /* Tug */,
 				6458CE8E2698DEE200E3885F /* TugViewer */,
 				64C5721222A555F9000B6EC3 /* Products */,
@@ -384,25 +372,6 @@
 			path = Tug;
 			sourceTree = "<group>";
 		};
-		64CA819626879FAF00A9CBCE /* THSafari */ = {
-			isa = PBXGroup;
-			children = (
-				64CA81A926879FAF00A9CBCE /* THSafariScriptingTools.swift */,
-				64CA819B26879FAF00A9CBCE /* THSafariScriptingTools.scripts */,
-			);
-			name = THSafari;
-			path = ../../THCommon/Classes/THSafari;
-			sourceTree = "<group>";
-		};
-		64CA819B26879FAF00A9CBCE /* THSafariScriptingTools.scripts */ = {
-			isa = PBXGroup;
-			children = (
-				64CA819C26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt */,
-				64CA819E26879FAF00A9CBCE /* THSafariList_CurrentSite.scpt */,
-			);
-			path = THSafariScriptingTools.scripts;
-			sourceTree = "<group>";
-		};
 		64CC07D0269B20FB003D9392 /* MenuList */ = {
 			isa = PBXGroup;
 			children = (
@@ -429,28 +398,12 @@
 		64E727A92699B228000B516A /* THView */ = {
 			isa = PBXGroup;
 			children = (
-				64CC07C3269AD412003D9392 /* THBgColorView.swift */,
+				BE0B09DC27D7F91E00DEE577 /* THColoredView.swift */,
 				64E727AB2699B228000B516A /* THOverView.swift */,
 				640151C9269C779B00C4DF9A /* THNSButtonBlock.swift */,
 				6475383426ADC84400895ED6 /* THHighlightedTableView.swift */,
 			);
-			name = THView;
-			path = ../../THCommon/Classes/THView;
-			sourceTree = "<group>";
-		};
-		64F354F426C1CFF400B18F41 /* THRssChannel */ = {
-			isa = PBXGroup;
-			children = (
-				64F354F826C1CFF400B18F41 /* RssScriptingTools.swift */,
-				6492EC6326C997400023F935 /* RssStringExtension.swift */,
-				64A7ECC226C707BB00911C40 /* RssPubDateConvertor.swift */,
-				64A7ECC426C70AB100911C40 /* RssChannelItemFilter.swift */,
-				64F354F626C1CFF400B18F41 /* RssChannelItem.swift */,
-				64F354F526C1CFF400B18F41 /* RssChannel.swift */,
-				64F354F726C1CFF400B18F41 /* RssChannelManager.swift */,
-			);
-			name = THRssChannel;
-			path = ../../THCommon/Classes/THRssChannel;
+			path = THView;
 			sourceTree = "<group>";
 		};
 		64F3555626C1D67000B18F41 /* THDistant */ = {
@@ -460,41 +413,83 @@
 				64F3555926C1D67000B18F41 /* THDistantItem.swift */,
 				6492EC6126C98C8E0023F935 /* THWebPageAttributes.swift */,
 			);
-			name = THDistant;
-			path = ../../THCommon/Classes/THDistant;
-			sourceTree = "<group>";
-		};
-		64F3555D26C1D69800B18F41 /* THXmlParser */ = {
-			isa = PBXGroup;
-			children = (
-				64F3556126C1D69800B18F41 /* THRssFeedParser.swift */,
-				64F3556026C1D69800B18F41 /* THXMLElement.m */,
-				64F3555E26C1D69800B18F41 /* THXMLElement.h */,
-				64F3556226C1D69800B18F41 /* THXMLParser.h */,
-				64F3555F26C1D69800B18F41 /* THXMLParser.m */,
-			);
-			name = THXmlParser;
-			path = ../../THCommon/Classes/THXmlParser;
+			path = THDistant;
 			sourceTree = "<group>";
 		};
 		64F3558426C1D82E00B18F41 /* THFinderFile */ = {
 			isa = PBXGroup;
 			children = (
 				64F3558A26C1D82E00B18F41 /* THAppInLoginItem.swift */,
+				BE0B09FB27D7F9A900DEE577 /* THFinderMdItem.h */,
+				BE0B09FC27D7F9A900DEE577 /* THFinderMdItem.m */,
 				64F3559126C1D82E00B18F41 /* THSharedLoginItems.h */,
 				64F3558826C1D82E00B18F41 /* THSharedLoginItems.m */,
 			);
-			name = THFinderFile;
-			path = ../../THCommon/Classes/THFinderFile;
+			path = THFinderFile;
 			sourceTree = "<group>";
 		};
-		64F3559F26C1D86400B18F41 /* THAppleScript */ = {
+		BE0B08B827D7F8D000DEE577 /* THCommon */ = {
 			isa = PBXGroup;
 			children = (
-				64F355A026C1D86400B18F41 /* THAsScript.swift */,
+				642642FB22A5CAEA007B0EAB /* THFoundation */,
+				6426434822A5D072007B0EAB /* THExtensions */,
+				64F3555626C1D67000B18F41 /* THDistant */,
+				64015191269C54D000C4DF9A /* THHotKey */,
+				64F3558426C1D82E00B18F41 /* THFinderFile */,
+				642642AA22A5CA97007B0EAB /* THUserSpace */,
+				64E727A92699B228000B516A /* THView */,
+				6458CE9D2698DFC000E3885F /* PPPanePreview */,
+				BE0B09E427D7F97400DEE577 /* THRssChannel */,
 			);
-			name = THAppleScript;
-			path = ../../THCommon/Classes/THAppleScript;
+			name = THCommon;
+			path = ../../THCommon;
+			sourceTree = "<group>";
+		};
+		BE0B09AE27D7F8F500DEE577 /* THClasses */ = {
+			isa = PBXGroup;
+			children = (
+				BE0B09AF27D7F8F500DEE577 /* THYtChannel */,
+				BE0B09C027D7F8F500DEE577 /* THXmlParser */,
+			);
+			name = THClasses;
+			path = ../../../Sources/THClasses;
+			sourceTree = "<group>";
+		};
+		BE0B09AF27D7F8F500DEE577 /* THYtChannel */ = {
+			isa = PBXGroup;
+			children = (
+				BE0B09B027D7F8F500DEE577 /* YtChannelFeed.swift */,
+				BE0B09B127D7F8F500DEE577 /* YtChannelVideoId.swift */,
+				BE0B09B327D7F8F500DEE577 /* YtChannelFilter.swift */,
+				BE0B09B527D7F8F500DEE577 /* YtChannel.swift */,
+				BE0B09B427D7F8F500DEE577 /* YtChannelManager.swift */,
+			);
+			path = THYtChannel;
+			sourceTree = "<group>";
+		};
+		BE0B09C027D7F8F500DEE577 /* THXmlParser */ = {
+			isa = PBXGroup;
+			children = (
+				BE0B09C127D7F8F500DEE577 /* THXMLElement.h */,
+				BE0B09C227D7F8F500DEE577 /* THXMLParser.m */,
+				BE0B09C327D7F8F500DEE577 /* THXMLElement.m */,
+				BE0B09C427D7F8F500DEE577 /* THRssFeedParser.swift */,
+				BE0B09C527D7F8F500DEE577 /* THXMLParser.h */,
+			);
+			path = THXmlParser;
+			sourceTree = "<group>";
+		};
+		BE0B09E427D7F97400DEE577 /* THRssChannel */ = {
+			isa = PBXGroup;
+			children = (
+				BE0B09EA27D7F97400DEE577 /* RssPubDateConvertor.swift */,
+				BE0B09E627D7F97400DEE577 /* RssStringExtension.swift */,
+				BE0B09EB27D7F97400DEE577 /* RssChannelItemFilter.swift */,
+				BE0B09E727D7F97400DEE577 /* RssChannelItem.swift */,
+				BE0B09E527D7F97400DEE577 /* RssChannel.swift */,
+				BE0B09E827D7F97400DEE577 /* RssChannelManager.swift */,
+			);
+			path = THRssChannel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -598,9 +593,7 @@
 				6464C25026A22E4300933317 /* Localizable.strings in Resources */,
 				640151C8269C70BE00C4DF9A /* ChannelListWindowController.xib in Resources */,
 				64015183269C534A00C4DF9A /* PreferencesWindowController.xib in Resources */,
-				64CA81AF26879FAF00A9CBCE /* THSafariScriptingTools_CreateWindowIfNeeded.scpt in Resources */,
 				64E727DA2699B442000B516A /* MenuListController.xib in Resources */,
-				64CA81B126879FAF00A9CBCE /* THSafariList_CurrentSite.scpt in Resources */,
 				64C5721A22A555FB000B6EC3 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,21 +630,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64F355A326C1D86400B18F41 /* THAsScript.swift in Sources */,
 				64DC4D22269A42A9006BAA4B /* StatusIcon.swift in Sources */,
-				64F3556526C1D69800B18F41 /* THRssFeedParser.swift in Sources */,
 				64015199269C54D000C4DF9A /* THHotKey.m in Sources */,
+				BE0B09ED27D7F97400DEE577 /* RssStringExtension.swift in Sources */,
 				64CC07C8269B011D003D9392 /* SettingsMenu.swift in Sources */,
 				64774B5D256ADE0500D9D5B3 /* THRunningApp.swift in Sources */,
-				64F354FA26C1CFF400B18F41 /* RssChannelItem.swift in Sources */,
+				BE0B09EF27D7F97400DEE577 /* RssChannelManager.swift in Sources */,
+				BE0B09EE27D7F97400DEE577 /* RssChannelItem.swift in Sources */,
+				BE0B09C627D7F8F500DEE577 /* YtChannelFeed.swift in Sources */,
+				BE0B09C727D7F8F500DEE577 /* YtChannelVideoId.swift in Sources */,
+				BE0B09DD27D7F91E00DEE577 /* THColoredView.swift in Sources */,
 				64CC07CA269B089F003D9392 /* THNSMenuExtensions.swift in Sources */,
+				BE0B09D227D7F8F500DEE577 /* THXMLElement.m in Sources */,
 				640151C5269C70B200C4DF9A /* ChannelListWindowController.swift in Sources */,
 				6458CEAF2698E58100E3885F /* PPPaneRequester.swift in Sources */,
-				64F354FB26C1CFF400B18F41 /* RssChannelManager.swift in Sources */,
+				BE0B09FD27D7F9A900DEE577 /* THFinderMdItem.m in Sources */,
 				649212E7255873D7002E3F78 /* THFoundation.swift in Sources */,
-				64CC07C4269AD412003D9392 /* THBgColorView.swift in Sources */,
 				6426432722A5CAEA007B0EAB /* THFoundation.m in Sources */,
 				64C5721522A555F9000B6EC3 /* AppDelegate.swift in Sources */,
+				BE0B09D327D7F8F500DEE577 /* THRssFeedParser.swift in Sources */,
 				64F3555A26C1D67000B18F41 /* THIconDownloader.swift in Sources */,
 				6424BCBF269F54F8008E7084 /* UserPreferences.swift in Sources */,
 				64576AFA26C26BF500CE9356 /* THFrontmostAppSaver.swift in Sources */,
@@ -660,40 +657,39 @@
 				64BA6384267F7C3900E044A3 /* THNetworkStatus.swift in Sources */,
 				648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */,
 				64AB664E2476D17200587F1D /* THExtensions.swift in Sources */,
-				64A7ECC326C707BB00911C40 /* RssPubDateConvertor.swift in Sources */,
-				64A7ECC526C70AB100911C40 /* RssChannelItemFilter.swift in Sources */,
 				640151CA269C779B00C4DF9A /* THNSButtonBlock.swift in Sources */,
 				644C3E492576A63600127BC6 /* THOSAppearance.swift in Sources */,
+				BE0B09C927D7F8F500DEE577 /* YtChannelFilter.swift in Sources */,
 				64BD394D256EF1D300988D08 /* THDataExtensions.swift in Sources */,
 				64015198269C54D000C4DF9A /* THHotKeyFieldView.m in Sources */,
 				648FC491256591E10067B491 /* AddMoreMenu.swift in Sources */,
 				643417DB267551080046CD56 /* THLogger.swift in Sources */,
 				64CC07C6269B002B003D9392 /* HeaderView.swift in Sources */,
 				646E18EE2567382D00CD1B2D /* THCocoaExtensions.swift in Sources */,
-				64F3556426C1D69800B18F41 /* THXMLElement.m in Sources */,
 				6475383526ADC84400895ED6 /* THHighlightedTableView.swift in Sources */,
+				BE0B09F127D7F97400DEE577 /* RssPubDateConvertor.swift in Sources */,
 				64015181269C533C00C4DF9A /* PreferencesWindowController.swift in Sources */,
+				BE0B09F227D7F97400DEE577 /* RssChannelItemFilter.swift in Sources */,
 				64015190269C54C000C4DF9A /* THHelperRunningApp.swift in Sources */,
-				64F354FC26C1CFF400B18F41 /* RssScriptingTools.swift in Sources */,
-				64CA81B726879FAF00A9CBCE /* THSafariScriptingTools.swift in Sources */,
 				64898D74256131E8002945CE /* THFileManagerExtensions.swift in Sources */,
+				BE0B09EC27D7F97400DEE577 /* RssChannel.swift in Sources */,
+				BE0B09D127D7F8F500DEE577 /* THXMLParser.m in Sources */,
 				6492EC6226C98C8E0023F935 /* THWebPageAttributes.swift in Sources */,
 				647B34EB2668F11000785E10 /* THOpenInBrowser.swift in Sources */,
-				64F354F926C1CFF400B18F41 /* RssChannel.swift in Sources */,
 				64E727C72699B228000B516A /* THOverView.swift in Sources */,
+				BE0B09CB27D7F8F500DEE577 /* YtChannel.swift in Sources */,
 				64EDAB5C2680A1E8001D5AC0 /* THDictionarySerialization.swift in Sources */,
+				BE0B09CA27D7F8F500DEE577 /* YtChannelManager.swift in Sources */,
 				64CE9A2C25BF70A6004EC688 /* THUnixCommand.m in Sources */,
 				64F3559A26C1D82E00B18F41 /* THAppInLoginItem.swift in Sources */,
 				640151D6269C7F5600C4DF9A /* THLocalizedString.swift in Sources */,
 				6473AF172545B842006003A8 /* THLog.swift in Sources */,
-				6492EC6426C997400023F935 /* RssStringExtension.swift in Sources */,
 				64F3555C26C1D67000B18F41 /* THDistantItem.swift in Sources */,
 				643F075E269A0BC3002DDA3B /* PWPaneWindow.swift in Sources */,
 				64F08F4E25606F6200857C8E /* THFormatterExtensions.swift in Sources */,
 				643F07472699F843002DDA3B /* MenuCellView.swift in Sources */,
 				64F576FB269F01B6008186FE /* THNSImageExtensions.swift in Sources */,
 				64F3559826C1D82E00B18F41 /* THSharedLoginItems.m in Sources */,
-				64F3556326C1D69800B18F41 /* THXMLParser.m in Sources */,
 				64E727A22699AFC1000B516A /* MenuListController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -844,7 +840,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -903,7 +899,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

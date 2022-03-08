@@ -35,23 +35,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		let n = Notification(	name: PPPaneRequester.requestNotificationName,
 										object: nil,
-										userInfo: [	PPPaneRequester.keyAction: "show",
-															PPPaneRequester.keyPoint: NSStringFromPoint(NSPoint(600, 300)),
-															PPPaneRequester.keyData: "https://www.apple.com"])
+										userInfo: [	PPPaneRequesterKey.action: "show",
+															PPPaneRequesterKey.point: NSStringFromPoint(NSPoint(600, 300)),
+															PPPaneRequesterKey.data: "https://www.apple.com"])
 		perform(#selector(n_panePreviewRequest), with: n, afterDelay: 1.0)
 
-		let n2 = Notification(	name: PPPaneRequester.requestNotificationName,
-										object: nil,
-										userInfo: [	PPPaneRequester.keyAction: "hide"])
-		perform(#selector(n_panePreviewRequest), with: n2, afterDelay: 5.0)
-
-		let n3 = Notification(	name: PPPaneRequester.requestNotificationName,
-										object: nil,
-										userInfo: [	PPPaneRequester.keyAction: "show",
-															PPPaneRequester.keyPoint: NSStringFromPoint(NSPoint(600, 300)),
-															PPPaneRequester.keyData: "http://www.microsoft.com"])
-		perform(#selector(n_panePreviewRequest), with: n3, afterDelay: 10.0)
-
+//		let n2 = Notification(	name: PPPaneRequester.requestNotificationName,
+//										object: nil,
+//										userInfo: [	PPPaneRequester.keyAction: "hide"])
+//		perform(#selector(n_panePreviewRequest), with: n2, afterDelay: 5.0)
+//
+//		let n3 = Notification(	name: PPPaneRequester.requestNotificationName,
+//										object: nil,
+//										userInfo: [	PPPaneRequester.keyAction: "show",
+//															PPPaneRequester.keyPoint: NSStringFromPoint(NSPoint(600, 300)),
+//															PPPaneRequester.keyData: "http://www.microsoft.com"])
+//		perform(#selector(n_panePreviewRequest), with: n3, afterDelay: 10.0)
 	}
 #endif
 
@@ -65,18 +64,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			return
 		}
 
-		let action = info[PPPaneRequester.keyAction] as? String
+		let action = info[PPPaneRequesterKey.action] as? String
 
 		if action == "show" {
-			guard 	let point = info[PPPaneRequester.keyPoint] as? String,
-						let link = info[PPPaneRequester.keyData] as? String,
+			guard 	let point = info[PPPaneRequesterKey.point] as? String,
+						let link = info[PPPaneRequesterKey.data] as? String,
 						let screen = NSScreen.main
 			else {
 				THLogError("point | link | screen, notification:\(notification)")
 				return
 			}
 	
-			let parentPid = info[PPPaneRequester.keyParentPid] as! pid_t
+			let parentPid = info[PPPaneRequesterKey.parentPid] as! pid_t
 			parentAppAlive.update(withParentPid: parentPid)
 	
 			if previewController == nil {
@@ -87,10 +86,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			previewController!.showAtPoint(NSPointFromString(point), link: URL(string: link)!, onScreen: screen)
 		}
 		else if action == "hide" {
-			previewController?.hideWindow(animated: (info[PPPaneRequester.keyAnimated] as? Bool) ?? true)
+			previewController?.hideWindow(animated: (info[PPPaneRequesterKey.animated] as? Bool) ?? true)
 		}
 		else if action == "close" {
-			previewController?.hideWindow(animated: (info[PPPaneRequester.keyAnimated] as? Bool) ?? true)
+			previewController?.hideWindow(animated: (info[PPPaneRequesterKey.animated] as? Bool) ?? true)
 			NSApplication.shared.terminate(nil)
 		}
 	}

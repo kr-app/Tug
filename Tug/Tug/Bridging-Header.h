@@ -13,6 +13,7 @@
 //#import "THAsScriptEnlacement.h"
 
 // THFinderFile
+#import "THFinderMdItem.h"
 #import "THSharedLoginItems.h"
 
 // THXmlParser
