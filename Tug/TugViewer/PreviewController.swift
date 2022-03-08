@@ -4,6 +4,20 @@ import Cocoa
 import WebKit
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
+class PreviewContainerView: NSView {
+
+	override func setFrameSize(_ newSize: NSSize) {
+		super.setFrameSize(newSize)
+
+		if let webView = self.subviews.first(where: {$0 is WKWebView }) {
+			webView.frame.size = NSSize(newSize.width * 1.333, newSize.height * 1.333)
+		}
+	}
+}
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
 class PreviewController: PPPanePreviewController, WKNavigationDelegate {
 
 	@IBOutlet var mErrorTitleLabel: NSTextField!
@@ -59,11 +73,15 @@ class PreviewController: PPPanePreviewController, WKNavigationDelegate {
 //		webPreferences.minimumFontSize = 13.0
 
 		let margin: CGFloat = 0.0
-		let webView = WKWebView(frame: NSRect(	margin,
-																				margin,
-																				self.view.frame.size.width - (margin * 2.0),
-																				self.view.frame.size.height - (margin * 2.0)),
-													configuration: wConf)
+		let containerView = PreviewContainerView(frame: NSRect(	margin,
+																										margin,
+																										self.view.frame.width - (margin * 2.0),
+																										self.view.frame.height - (margin * 2.0)))
+		containerView.autoresizingMask = [.width, .height]
+		containerView.scaleUnitSquare(to: NSSize(0.75, 0.75))
+
+		let webView = WKWebView(	frame: NSRect(0.0, 0.0, containerView.frame.width * 1.333, containerView.frame.height * 1.333),
+														configuration: wConf)
 		webView.autoresizingMask = [.width, .height]
 		webView.navigationDelegate = self
 //		webView.allowsMagnification = true
@@ -73,7 +91,9 @@ class PreviewController: PPPanePreviewController, WKNavigationDelegate {
 		webView.addObserver(self, forKeyPath: "title", options: .new, context: nil)
 
 		mWebView = webView
-		self.view.addSubview(webView)
+
+		containerView.addSubview(webView)
+		self.view.addSubview(containerView)
 	}
 
 	// MARK: -
