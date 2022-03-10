@@ -60,10 +60,10 @@ class ChannelListWindowController : NSWindowController,
 			let row = self.tableView.selectedRow
 
 			let object = self.objectList![row]
-			let channel = object["channel"] as! RssChannel
+			let channel = object["channel"] as! Channel
 
-			let title = THLocalizedString("Are you sure you want to delete \"") + channel.url.th_reducedHost + "\""
-			let msg = channel.url.absoluteString
+			let title = THLocalizedString("Are you sure you want to delete \"") + channel.url!.th_reducedHost + "\""
+			let msg = channel.url?.absoluteString
 			let alert = NSAlert(withTitle: title, message: msg, buttons: [THLocalizedString("Delete"), THLocalizedString("Cancel")])
 
 			alert.beginSheetModal(for: self.window!, completionHandler: {(response: NSApplication.ModalResponse) in
@@ -128,7 +128,7 @@ class ChannelListWindowController : NSWindowController,
 		}
 
 		let object = objectList![row]
-		let channel = object["channel"] as! RssChannel
+		let channel = object["channel"] as! Channel
 
 		c_icon.image = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
 		c_titleLabel.objectValue = channel.title
@@ -162,7 +162,7 @@ class ChannelListWindowController : NSWindowController,
 //		let selectedRow = self.tableView.selectedRow
 
 		let object = objectList![row]
-		let channel = object["channel"] as! RssChannel
+		let channel = object["channel"] as! Channel
 		
 		let icon = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
 		
@@ -190,9 +190,9 @@ class ChannelListWindowController : NSWindowController,
 		let disabled = sender.state == .off
 
 		let object = objectList![row]
-		let channel = object["channel"] as! RssChannel
+		let channel = object["channel"] as! Channel
 
-		RssChannelManager.shared.setDisabled(disabled, channel: channel.identifier)
+		RssChannelManager.shared.setAttribute(disabled: disabled, channel: channel.identifier)
 		reloadSelectedRow()
 
 		if disabled == false {
@@ -210,7 +210,7 @@ class ChannelListWindowController : NSWindowController,
 
 		let object = objectList![row]
 		let kind = object["kind"] as! Int
-		let channel = object["channel"] as! RssChannel
+		let channel = object["channel"] as! Channel
 
 		let url = c_urLabel.stringValue.trimmingCharacters(in: .whitespaces)
 	
@@ -233,7 +233,7 @@ class ChannelListWindowController : NSWindowController,
 			return
 		}
 
-		RssChannelManager.shared.setUrl(nUrl, ofChannel: channel.identifier)
+		RssChannelManager.shared.setAttribute(url: nUrl, channel: channel.identifier)
 	
 		RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
 			self.updateUISelection()
@@ -247,7 +247,7 @@ class ChannelListWindowController : NSWindowController,
 		}
 
 		let object = objectList![row]
-		let channel = object["channel"] as! RssChannel
+		let channel = object["channel"] as! Channel
 
 		RssChannelManager.shared.clean(channel: channel.identifier)
 	

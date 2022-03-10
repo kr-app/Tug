@@ -53,11 +53,15 @@ class StatusIcon: NSObject {
 	
 	func updateBadge() {
 		let ref = RssChannelManager.shared.recentRefDate()
-		let nbu = RssChannelManager.shared.hasWallChannels(withDateRef: ref, atLeast: 10)
+		var hasUnread = RssChannelManager.shared.hasWallChannels(withDateRef: ref, atLeast: 10)
+
+		if hasUnread == false {
+			hasUnread = YtChannelManager.shared.hasUnreaded()
+		}
 
 		let transp = THOSAppearance.hasReduceTransparency()
 		
-		let icon = barIcon.th_tinted(withColor: nbu ? (transp == true ? .black : . black) : NSColor(calibratedWhite: 0.5, alpha: 1.0))
+		let icon = barIcon.th_tinted(withColor: hasUnread ? (transp == true ? .black : . black) : NSColor(calibratedWhite: 0.5, alpha: 1.0))
 		
 		barItem.button!.image = icon
 		barItem.button!.alternateImage = barIcon.th_tinted(withColor: .white)

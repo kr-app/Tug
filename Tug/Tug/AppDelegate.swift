@@ -41,10 +41,6 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 
 		THHelperRunningApp.shared.configure(withAppIdentifier: "com.kr-app.TugViewer")
 
-		let filtersFile = FileManager.th_documentsPath().th_appendingPathComponent("filters.plist")
-		let filterManager = RssChannelFilterManager(filePath: filtersFile)
-		RssChannelManager.shared.filterManager = filterManager
-		
 		barIcon.barItem.button!.target = self
 		barIcon.barItem.button!.action = #selector(barItemAction)
 		barIcon.barItem.button!.sendAction(on: [.leftMouseUp, .rightMouseUp]) // This is important
@@ -54,6 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 	
 		if THNetworkStatus.hasNetwork() == true {
 			RssChannelManager.shared.refresh()
+			YtChannelManager.shared.refresh()
 		}
 
 		barIcon.updateBadge()
@@ -65,14 +62,15 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 			}
 
 			RssChannelManager.shared.refresh()
+			YtChannelManager.shared.refresh()
 		})
 				
-		NotificationCenter.default.addObserver(self, selector: #selector(n_rssChannelUpdated), name: RssChannelManager.channelUpdatedNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(n_rssChannelItemUpdated), name: RssChannelManager.channelItemUpdatedNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(n_channelUpdated), name: ChannelManager.channelUpdatedNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(n_channelItemUpdated), name: ChannelManager.channelItemUpdatedNotification, object: nil)
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
-		RssChannelManager.shared.synchronise()
+//		RssChannelManager.shared.synchronise()
 	}
 
 	func applicationWillBecomeActive(_ notification: Notification) {
@@ -225,10 +223,10 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 	
 	// MARK: -
 
-	@objc func n_rssChannelUpdated(_ notification: Notification) {
+	@objc private func n_channelUpdated(_ notification: Notification) {
 
-		let channel = notification.userInfo!["channel"] as! RssChannel
-		//let item = notification.userInfo!["item"] as? RssChannelItem
+		let channel = notification.userInfo!["channel"] as! Channel
+		//let item = notification.userInfo!["item"] as? ChannelItem
 
 		for item in channel.items {
 			if item.checked == true || THIconDownloader.shared.hasData(forIconUrl: item.thumbnail) == true {
@@ -240,10 +238,10 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 		barIcon.updateBadge()
 	}
 
-	@objc func n_rssChannelItemUpdated(_ notification: Notification) {
+	@objc private func n_channelItemUpdated(_ notification: Notification) {
 
-//		let channel = notification.userInfo!["channel"] as! RssChannel
-//		let item = notification.userInfo!["item"] as! RssChannelItem
+//		let channel = notification.userInfo!["channel"] as! Channel
+//		let item = notification.userInfo!["item"] as! ChannelItem
 
 		barIcon.updateBadge()
 	}

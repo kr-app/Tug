@@ -58,7 +58,7 @@ class MenuCellView : THHighlightedTableCellView {
 	private static let pub_df = DateFormatter(dateFormat: "MMM dd, HH:mm")
 	private static let todat_df = THTodayDateFormatter(todayFormat: "HM")
 	private static let ago_df = RelativeDateTimeFormatter(withUnitsStyle: .short)
-	
+
 	private var object: ObjectItem?
 	private var currentBackgroundStyle: NSView.BackgroundStyle = .normal
 
@@ -91,9 +91,9 @@ class MenuCellView : THHighlightedTableCellView {
 		else {
 			return
 		}
-		
-		if object.kind == 1 {
-			
+
+		if object.kind == .rss || object.kind == .yt {
+
 			let channel = object.channel!
 			let item = object.item!
 
@@ -104,31 +104,27 @@ class MenuCellView : THHighlightedTableCellView {
 			// icon
 			var img = THIconDownloader.shared.icon(atURL: item.thumbnail, startUpdate: true)
 			if img == nil {
-				img = THWebIconLoader.shared.icon(forHost: channel.webLink?.host ?? channel.url.host, startUpdate: true, allowsGeneric: true)
+				img = THWebIconLoader.shared.icon(forHost: channel.webLink?.host ?? channel.url?.host, startUpdate: true, allowsGeneric: true)
 			}
 			if isHighlighted == false && item.checked == true && item.pinned == false {
 				img = img?.th_imageGray()//.th_image(withCorner: 6.0)
 			}
 
-			imageView!.image = img
-			imageView!.alphaValue = (isHighlighted == false && item.checked == true) ? 0.9 : 1.0
+			self.imageView!.image = img
+			self.imageView!.alphaValue = (isHighlighted == false && item.checked == true) ? 0.9 : 1.0
 
-			// title
-			let f_attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.boldSystemFont(ofSize: 13.0),
-																					.foregroundColor: itemColor,
-																					.baselineOffset: 1.0]
-	
-			let title = (item.pinned ? "📌" : "") + (item.title/*?.th_displayTitle(maxLength: maxWidth, attrs: itemTitleAttrs, truncate: .byTruncatingTail)*/ ?? "--")
-			let mi_title = NSMutableAttributedString(string: title, attributes: f_attrs)
+			// labels
+			let attrsTitle: [NSAttributedString.Key: Any] = [.font: NSFont.boldSystemFont(ofSize: 13.0), .foregroundColor: itemColor, .baselineOffset: 1.0]
+			let attrsSubTitle: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 13.0), .foregroundColor: itemColor, .baselineOffset: 2.0]
 
-			if let text = item.content/*?.th_displayTitle(maxLength: maxWidth, attrs: itemTitleAttrs, truncate: .byTruncatingTail) */{
-				let attrs: [NSAttributedString.Key: Any] = [ 	.font: NSFont.systemFont(ofSize: 13.0),
-																					.foregroundColor: itemColor,
-																					.baselineOffset: 2.0]
-				mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrs))
+			let title = (item.pinned ? "📌" : "") + (item.title ?? "--")
+			let mi_title = NSMutableAttributedString(string: title, attributes: attrsTitle)
+
+			if let text = item.content {
+				mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrsSubTitle))
 			}
-			textField!.attributedStringValue = mi_title
-		
+			self.textField!.attributedStringValue = mi_title
+
 			// info
 			var pubDate: String?
 			if let published = item.published {
@@ -139,19 +135,39 @@ class MenuCellView : THHighlightedTableCellView {
 					pubDate = Self.todat_df.string(from: published, otherFormatter: Self.pub_df)
 				}
 			}
-		
-			var info = "\(channel.url.th_reducedHost) • \(pubDate ?? "nil")"
+
+			var info = "\(channel.url?.th_reducedHost) • \(pubDate ?? "nil")"
+//				let info = "\(channel.title) • \(pubDate) • \(item.displayViews())"
 
 			if let published = item.published, let updated = item.updated, published != updated {
 				let updated = Self.todat_df.string(from: updated, otherFormatter: Self.pub_df)
 				info += ", updated: \(updated)"
 			}
 
-			infoLabel.textColor = itemColor
-			infoLabel.stringValue = info
+			self.infoLabel.textColor = itemColor
+			self.infoLabel.stringValue = info
 
+
+//				// icon
+//				var img = THIconDownloader.shared.icon(atURL: item.thumbnail, startUpdate: true)
+//				let corner: CGFloat = 6.0
+//
+//				img = img?.th_image(withCorner: corner)
+//
+//				if img == nil {
+//					let m_sz = THIconDownloader.shared.configuration.maxSize
+//					let i_sz = NSSize(m_sz, (m_sz * 0.75).rounded(.down))
+//					let i = NSImage(size: i_sz)
+//
+//					i.lockFocus()
+//						NSColor(white: 0.75, alpha: 1.0).set()
+//						NSBezierPath(roundedRect: NSRect(0.0, 0.0, i_sz.width, i_sz.height), xRadius: corner, yRadius: corner).fill()
+//					i.unlockFocus()
+//
+//					img = i
+//				}
 		}
-		else if object.kind == 2 {
+		else if object.kind == .error {
 			textField!.objectValue = nil
 			textField!.textColor = .red
 		}
