@@ -28,6 +28,12 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	// MARK: -
 
+	func displayTitle() -> String {
+		return self.title ?? self.url?.th_reducedHost ?? self.link?.th_reducedHost ?? "nil"
+	}
+
+	// MARK: -
+
 	func dictionaryRepresentation() -> THDictionaryRepresentation {
 
 		let coder = THDictionaryRepresentation()
@@ -72,6 +78,11 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	func getFilename(withExt ext: String) -> String {
 		return "\(identifier)".th_appendingPathExtension(ext)
+	}
+
+	func getFileUrl(dirPath: String) -> URL {
+		let path = dirPath.th_appendingPathComponent(getFilename(withExt: "plist"))
+		return URL(fileURLWithPath: path)
 	}
 
 	func save(toDir dirPath: String) -> Bool {

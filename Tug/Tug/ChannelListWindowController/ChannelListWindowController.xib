@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,22 +12,22 @@
                 <outlet property="c_lastUpdateLabel" destination="3ps-uE-faC" id="rTg-xj-Rni"/>
                 <outlet property="c_onOff" destination="zOF-Kt-Aun" id="dau-dg-xy2"/>
                 <outlet property="c_titleLabel" destination="E7P-v8-W2M" id="kJe-G3-cXf"/>
-                <outlet property="c_urLabel" destination="tLH-aa-nJM" id="AMd-il-KkH"/>
+                <outlet property="c_urlField" destination="tLH-aa-nJM" id="vkE-xK-dtz"/>
                 <outlet property="minusButton" destination="pfb-yh-STY" id="4BN-fq-9NE"/>
                 <outlet property="noSelectionView" destination="eA5-p2-IXp" id="i38-yv-3Ai"/>
                 <outlet property="plusButton" destination="NQ1-eQ-fmd" id="jt9-2u-aRP"/>
                 <outlet property="tableView" destination="0Vu-0h-9VT" id="MI4-gC-gYx"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="BS8-d0-0Xj"/>
+                <outlet property="ytDetailsViewController" destination="rX2-hw-M7G" id="AzT-ox-6Pq"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="587" height="341"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1366" height="745"/>
-            <value key="minSize" type="size" width="587" height="341"/>
-            <value key="maxSize" type="size" width="587" height="341"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <value key="minSize" type="size" width="400" height="300"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="587" height="341"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -40,13 +39,13 @@
                             <rect key="frame" x="1" y="1" width="183" height="279"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="0Vu-0h-9VT">
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="fullWidth" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="0Vu-0h-9VT">
                                     <rect key="frame" x="0.0" y="0.0" width="183" height="279"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="139" minWidth="40" maxWidth="1000" id="49Q-a2-te6">
+                                        <tableColumn width="162" minWidth="40" maxWidth="1000" id="49Q-a2-te6">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -59,11 +58,11 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView identifier="cell_id" id="HZ9-WT-ZUa">
-                                                    <rect key="frame" x="0.0" y="0.0" width="139" height="24"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="174" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMu-jd-dYw">
-                                                            <rect key="frame" x="25" y="5" width="113" height="14"/>
+                                                            <rect key="frame" x="25" y="5" width="148" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="e2V-db-fGq">
                                                                 <font key="font" metaFont="smallSystem"/>
@@ -143,7 +142,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="dn0-bd-eKt"/>
             </connections>
-            <point key="canvasLocation" x="210.5" y="164.5"/>
+            <point key="canvasLocation" x="-58" y="145"/>
         </window>
         <customView id="lZk-WT-MHV" userLabel="SelectionChannel">
             <rect key="frame" x="0.0" y="0.0" width="376" height="321"/>
@@ -241,11 +240,12 @@ qQ</string>
                     </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="-183" y="-464"/>
+            <point key="canvasLocation" x="-318" y="-516"/>
         </customView>
+        <viewController id="rX2-hw-M7G" customClass="YtChannelDetailsViewController" customModule="Tug" customModuleProvider="target"/>
     </objects>
     <resources>
-        <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="NSAddTemplate" width="14" height="13"/>
+        <image name="NSRemoveTemplate" width="14" height="4"/>
     </resources>
 </document>

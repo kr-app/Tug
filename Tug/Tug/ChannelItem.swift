@@ -25,7 +25,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 	var pinned: Bool { get { return pinndedDate != nil } }
 
 	override var description: String {
-		th_description("identifier: \(identifier) published: \(published) updated:\(updated) title: \(title?.th_truncate(maxChars: 20, by: .byTruncatingTail))")
+		th_description("identifier: \(identifier) published: \(published) updated:\(updated) title: \(title?.th_truncate(max: 20))")
 	}
 
 	override init() {

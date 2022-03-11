@@ -59,7 +59,7 @@ class MenuCellView : THHighlightedTableCellView {
 	private static let todat_df = THTodayDateFormatter(todayFormat: "HM")
 	private static let ago_df = RelativeDateTimeFormatter(withUnitsStyle: .short)
 
-	private var object: ObjectItem?
+	private var object: MenuObjectItem?
 	private var currentBackgroundStyle: NSView.BackgroundStyle = .normal
 
 	override var backgroundStyle: NSView.BackgroundStyle { didSet {
@@ -81,7 +81,7 @@ class MenuCellView : THHighlightedTableCellView {
 		imageView?.layer?.masksToBounds = true
 	}
 
-	func updateCell(forObject object: ObjectItem) {
+	func updateCell(forObject object: MenuObjectItem) {
 		self.object = object
 		updateCellFromObject()
 	}
@@ -99,7 +99,7 @@ class MenuCellView : THHighlightedTableCellView {
 
 			//let isDark = self.effectiveAppearance.name == .darkAqua
 			let isHighlighted = isHighlightedRow || self.backgroundStyle == .emphasized
-			let itemColor = isHighlighted == true ? .white : item.checked ? NSColor(calibratedWhite: 0.2, alpha: 1.0): .black
+			let itemColor = isHighlighted == true ? .white : item.checked ? NSColor(calibratedWhite: 0.33, alpha: 1.0): .black
 
 			// icon
 			var img = THIconDownloader.shared.icon(atURL: item.thumbnail, startUpdate: true)
@@ -117,13 +117,23 @@ class MenuCellView : THHighlightedTableCellView {
 			let attrsTitle: [NSAttributedString.Key: Any] = [.font: NSFont.boldSystemFont(ofSize: 13.0), .foregroundColor: itemColor, .baselineOffset: 1.0]
 			let attrsSubTitle: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 13.0), .foregroundColor: itemColor, .baselineOffset: 2.0]
 
-			let title = (item.pinned ? "📌" : "") + (item.title ?? "--")
-			let mi_title = NSMutableAttributedString(string: title, attributes: attrsTitle)
-
-			if let text = item.content {
-				mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrsSubTitle))
+			if object.kind == .rss {
+				let title = (item.pinned ? "📌" : "") + (item.title ?? "--")
+				let mi_title = NSMutableAttributedString(string: title, attributes: attrsTitle)
+				if let text = item.content {
+					mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrsSubTitle))
+				}
+				self.textField!.attributedStringValue = mi_title
 			}
-			self.textField!.attributedStringValue = mi_title
+			else if object.kind == .yt {
+				let title = (item.pinned ? "📌" : "") + channel.displayTitle()
+				let mi_title = NSMutableAttributedString(string: title, attributes: attrsTitle)
+				mi_title.append(NSAttributedString(string: "\n\(item.title)", attributes: attrsSubTitle))
+				if let text = item.content {
+					mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrsSubTitle))
+				}
+				self.textField!.attributedStringValue = mi_title
+			}
 
 			// info
 			var pubDate: String?
@@ -136,8 +146,16 @@ class MenuCellView : THHighlightedTableCellView {
 				}
 			}
 
-			var info = "\(channel.url?.th_reducedHost) • \(pubDate ?? "nil")"
-//				let info = "\(channel.title) • \(pubDate) • \(item.displayViews())"
+			var info: String!
+			if object.kind == .rss {
+				info = "\(channel.url?.th_reducedHost) • " + (pubDate ?? "nil")
+			}
+			else if object.kind == .yt {
+				info = pubDate ?? "nil"
+				if let views = item.displayViews() {
+					info += "• \(views)"
+				}
+			}
 
 			if let published = item.published, let updated = item.updated, published != updated {
 				let updated = Self.todat_df.string(from: updated, otherFormatter: Self.pub_df)
@@ -146,7 +164,6 @@ class MenuCellView : THHighlightedTableCellView {
 
 			self.infoLabel.textColor = itemColor
 			self.infoLabel.stringValue = info
-
 
 //				// icon
 //				var img = THIconDownloader.shared.icon(atURL: item.thumbnail, startUpdate: true)

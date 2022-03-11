@@ -70,25 +70,7 @@ class YtChannel: Channel {
 	}
 
 	override func updateRequest() -> URLRequest {
-		var url = "https://www.youtube.com"
-
-		if videoId.kind == .channelId {
-			url += "/feeds/videos.xml?channel_id=\(videoId.identifier)"
-		}
-		else if videoId.kind == .userId {
-			url += "/feeds/videos.xml?user=\(videoId.identifier)"
-		}
-		else {
-			THFatalError("channelId == nil && userId == nil")
-		}
-	
-		//UCRXiA3h1no_PFkb1JCP0yMA
-
-//		https://www.youtube.com/feeds/videos.xml?channel_id=CHANNELID
-//		https://www.youtube.com/feeds/videos.xml?user=USERID
-//		https://www.youtube.com/feeds/videos.xml?playlist_id=YOUR_YOUTUBE_PLAYLIST_NUMBER
-		
-		return URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15.0)
+		return URLRequest(url: videoId.url(), cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15.0)
 	}
 
 	func shouldUpdate() -> Bool {
@@ -107,7 +89,7 @@ class YtChannel: Channel {
 
 		let items = self.items.sorted(by: { ($0.published ?? $0.received)!  >  ($1.published ?? $1.received)! })
 		if items.isEmpty == true {
-			return luNow < -1.th_day
+			return luNow < -6.th_hour
 		}
 
 		// plus de 15 jours -> 1 update / jour
@@ -130,7 +112,7 @@ class YtChannel: Channel {
 
 			// le dernier + la moitier du temps normal -> 1 par jour
 			if (last + (normal / 2.0)) > Date().timeIntervalSinceReferenceDate {
-				return luNow < -1.th_day
+				return luNow < -6.th_hour
 			}
 
 			if normalDay >= 3.0 {
@@ -210,18 +192,9 @@ class YtChannel: Channel {
 				
 				let group = c.childNamed("group")
 				var thumbnail = group?.childNamed("thumbnail")?.attribute(forKey: "url") as? String
-				var content = group?.childNamed("description")?.childs()?.first?.content()
-				content = content?.replacingOccurrences(of: "\n\n", with: "\n\n")
+				var content = group?.childNamed("description")?.childs()?.first?.content()?.th_truncate(max: 300)
+				content = content?.replacingOccurrences(of: "\n\n", with: "\n")
 
-/*				var rating: String? = nil
-				if let starRating = group?.childNamed("community")?.childNamed("starRating") {
-					if let count = starRating.attribute(forKey: "count") as? String {
-						if Int(count)! > 0 {
-							rating = starRating.attribute(forKey: "average") as? String
-						}
-					}
-				}*/
-				
 				let views = group?.childNamed("community")?.childNamed("statistics")?.attribute(forKey: "views") as? String
 
 				// live en attente…
@@ -281,9 +254,13 @@ class YtChannel: Channel {
 //					item.checked = true
 //				}
 
-				if YtChannelFilter.shared.ruleFor(channel: self, item: item) == 1 {
+				let rule = YtChannelFilter.shared.ruleFor(channel: self, item: item)
+				if rule == .markReaded {
 //					log(.info, "excluded item:\(item)")
 					item.checkedDate = Date()
+				}
+				else if rule == .ignore {
+					continue
 				}
 		
 				items.append(item)

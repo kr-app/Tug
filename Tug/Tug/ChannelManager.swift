@@ -133,3 +133,20 @@ extension ChannelManager {
 
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+extension ChannelManager {
+
+	func revealFile(channel channelId: String) {
+		guard let channel = channel(withId: channelId)
+		else {
+			return
+		}
+
+		let fileUrl = channel.getFileUrl(dirPath: dirPath)
+		NSWorkspace.shared.activateFileViewerSelecting([fileUrl])
+	}
+
+}
+//--------------------------------------------------------------------------------------------------------------------------------------------

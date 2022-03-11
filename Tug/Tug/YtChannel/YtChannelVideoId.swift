@@ -29,6 +29,25 @@ struct YtChannelVideoId: Equatable, THDictionarySerializationProtocol {
 		self.kind = YtChannelVideoIdKind(rawValue: dictionaryRepresentation.int(forKey: "kind")!)!
 		self.identifier = dictionaryRepresentation.string(forKey: "identifier")!
 	}
+
+	func url() -> URL {
+
+//		UCRXiA3h1no_PFkb1JCP0yMA
+//		https://www.youtube.com/feeds/videos.xml?channel_id=CHANNELID
+//		https://www.youtube.com/feeds/videos.xml?user=USERID
+//		https://www.youtube.com/feeds/videos.xml?playlist_id=YOUR_YOUTUBE_PLAYLIST_NUMBER
+
+		let base = "https://www.youtube.com"
+
+		if kind == .channelId {
+			return URL(string: base + "/feeds/videos.xml?channel_id=\(identifier)")!
+		}
+		if kind == .userId {
+			return URL(string: base + "/feeds/videos.xml?user=\(identifier)")!
+		}
+
+		THFatalError("channelId == nil && userId == nil")
+	}
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 

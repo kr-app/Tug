@@ -120,7 +120,7 @@ class RssChannel: Channel {
 			}
 
 			let link = item.value(named: "link")?.content
-			var content = item.value(named: "description")?.content
+			var content = item.value(named: "description")?.content?.th_truncate(max: 300, by: .byTruncatingTail)
 
 			let guid = item.value(named: "guid")?.content
 			var mediaUrl = item.value(named: "media:content")?.attributes?["url"] as? String
@@ -167,7 +167,7 @@ class RssChannel: Channel {
 
 			let old_item = items.first(where: { $0.identifier == identifier })
 
-			let item = ChannelItem()
+			let item = RssChannelItem()
 
 			item.identifier = identifier
 
@@ -189,32 +189,31 @@ class RssChannel: Channel {
 				item.thumbnail = old_item?.thumbnail
 			}
 
-//			if item.thumbnail == nil {
-//				if let link = item.link {
-//
-//					if 	link.absoluteString.contains("aljazeera.com") ||
-//						link.absoluteString.contains("lefigaro.fr") ||
-//						link.absoluteString.contains("theskatingtimes.com") ||
-//						link.absoluteString.contains("macg.co") ||
-//						link.absoluteString.contains("macrumors.com") ||
-//						link.absoluteString.contains("arstechnica") ||
-//						link.absoluteString.contains("valeursactuelles.com") ||
-//						link.absoluteString.contains("lopinion.fr") ||
-//						link.absoluteString.contains("goldenskate.com") ||
-//						link.absoluteString.contains("generation-trail.com")
-//
-//					{
-//						item.articleImage = RssArticleImage(link: link)
-//						item.articleImage!.start( {(ok: Bool, error: String?) in
-//							if ok == false {
-//								THLogError("link:\(link.absoluteString)")
-//								return
-//							}
-//							item.thumbnail = item.articleImage?.extractedImage
-//						})
-//					}
-//				}
-//			}
+			if item.thumbnail == nil {
+				if let link = item.link {
+
+					let a_finir = 1
+					if 	link.absoluteString.contains("aljazeera.com") ||
+						link.absoluteString.contains("lefigaro.fr") ||
+						link.absoluteString.contains("theskatingtimes.com") ||
+						link.absoluteString.contains("macg.co") ||
+						link.absoluteString.contains("macrumors.com") ||
+						link.absoluteString.contains("arstechnica") ||
+						link.absoluteString.contains("valeursactuelles.com") ||
+						link.absoluteString.contains("lopinion.fr") ||
+						link.absoluteString.contains("goldenskate.com") ||
+						link.absoluteString.contains("generation-trail.com") {
+						item.articleImage = RssArticleImage(link: link)
+						item.articleImage!.start( {(ok: Bool, error: String?) in
+							if ok == false {
+								THLogError("link:\(link.absoluteString)")
+								return
+							}
+							item.thumbnail = item.articleImage?.extractedImage
+						})
+					}
+				}
+			}
 
 			if items.first(where: { $0.isLike(item) }) != nil {
 				THLogError("found like item for item:\(item)")

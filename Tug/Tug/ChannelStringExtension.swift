@@ -1,7 +1,8 @@
-// RssStringExtension.swift
+// ChannelStringExtension.swift
 
 import Cocoa
 
+//--------------------------------------------------------------------------------------------------------------------------------------------
 extension String {
 
 	func th_purifiedHtmlBestAsPossible() -> String {
@@ -47,5 +48,12 @@ extension String {
 			
 		return nc
 	}
+
+	func th_trimEmoji() -> String {
+		return self.unicodeScalars.filter { !$0.properties.isEmojiPresentation }.reduce("") {
+			$0 + String($1)
+		}
+	}
+
 }
-				
+//--------------------------------------------------------------------------------------------------------------------------------------------

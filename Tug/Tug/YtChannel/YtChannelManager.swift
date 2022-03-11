@@ -7,7 +7,7 @@ class YtChannelManager: ChannelManager {
 
 	static let shared = YtChannelManager(dirPath: FileManager.th_documentsPath("YtChannels"))
 
-	private var channels = [YtChannel]()
+	private(set) var channels = [YtChannel]()
 
 	// MARK: -
 	

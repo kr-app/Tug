@@ -37,7 +37,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 	private weak var delegate: MenuListControllerDelegateProtocol?
 	private var myWindow: PWPaneWindow?
-	private var objectList: [ObjectItem]?
+	private var objectList: [MenuObjectItem]?
 	private var searchedText: String?
 
 	private var previewItemIndex = -1
@@ -172,12 +172,12 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		tableView.scrollToVisible(NSRect(vrect.origin.x, vrect.origin.y, 0.0, 0.0))*/
 	}
 
-	private func pin(_ pinned: Bool, row: Int, item: ChannelItem, channel: Channel) {
+	private func mark(checked: Bool? = nil, pinned: Bool? = nil, row: Int, item: ChannelItem, channel: Channel) {
 		if let channel = channel as? RssChannel {
-			RssChannelManager.shared.mark(pinned: pinned, item: item, channel: channel.identifier)
+			RssChannelManager.shared.mark(checked: checked, pinned: pinned, item: item, channel: channel.identifier)
 		}
 		else if let channel = channel as? YtChannel {
-			YtChannelManager.shared.mark(pinned: pinned, item: item, channel: channel.identifier)
+			YtChannelManager.shared.mark(checked: checked, pinned: pinned, item: item, channel: channel.identifier)
 		}
 
 //		let cellView = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as? MenuCellView
@@ -331,25 +331,25 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	
 	private func updateUIIObjectList() {
 
-		func itemFromChannelsOnError(_ channels: [Channel]) -> ObjectItem {
+		func itemFromChannelsOnError(_ channels: [Channel]) -> MenuObjectItem {
 			let channel = channels.first!
 
 			var title: String!
 			if channels.count == 1 {
-				title = "\"" + channel.title! + "\" " + THLocalizedString("is on error") + "\n" + (channel.lastError ?? "?")
+				title = "\"\(channel.displayTitle())\" " + THLocalizedString("is on error") + "\n" + (channel.lastError ?? "?")
 			}
 			else {
 				title = "\(channels.count) " + THLocalizedString("channels on error")
 				title += "\n" + (channel.lastError ?? "?")
 			}
 
-			return ObjectItem(kind: .error, error: title)
+			return MenuObjectItem(kind: .error, error: title)
 		}
 
 		let showRss = true
 		let showYt = true
 
-		var objectList = [ObjectItem]()
+		var objectList = [MenuObjectItem]()
 
 		if showYt {
 
@@ -360,7 +360,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			let unreadedChannels = YtChannelManager.shared.unreadedChannels()
 			for channel in unreadedChannels {
 				for item in channel.items.filter( {$0.checked == false }) {
-					objectList.append(ObjectItem(kind: .yt, channel: channel, item: item))
+					objectList.append(MenuObjectItem(kind: .yt, channel: channel, item: item))
 				}
 			}
 		}
@@ -421,9 +421,9 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			let unreadedItems = items.filter({ $0.item.pinned == false && $0.item.checkedDate == nil })
 			if unreadedItems.count > 0 {
 				for item in unreadedItems {
-					objectList.append(ObjectItem(kind: .rss, channel: item.channel, item: item.item))
+					objectList.append(MenuObjectItem(kind: .rss, channel: item.channel, item: item.item))
 				}
-				objectList.append(ObjectItem(kind: .separator))
+//				objectList.append(ObjectItem(kind: .separator))
 			}
 
 			if showYt {
@@ -433,7 +433,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 				for channel in recentChannels {
 					for item in channel.items {
 						if item.checked == true && item.isRecent(refDate: recentRef) == true {
-							objectList.append(ObjectItem(kind: .yt, channel: channel, item: item))
+							objectList.append(MenuObjectItem(kind: .yt, channel: channel, item: item))
 						}
 					}
 				}
@@ -442,13 +442,13 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			let pinnedItems = items.filter({ $0.item.pinned == true })
 			if pinnedItems.count > 0 {
 				for item in pinnedItems {
-					objectList.append(ObjectItem(kind: .rss, channel: item.channel, item: item.item))
+					objectList.append(MenuObjectItem(kind: .rss, channel: item.channel, item: item.item))
 				}
-				objectList.append(ObjectItem(kind: .separator))
+//				objectList.append(MenuObjectItem(kind: .separator))
 			}
 
 			for item in items.filter({ $0.channel.disabled == false && $0.item.pinned == false && $0.item.checkedDate != nil }) {
-				objectList.append(ObjectItem(kind: .rss, channel: item.channel, item: item.item))
+				objectList.append(MenuObjectItem(kind: .rss, channel: item.channel, item: item.item))
 			}
 		}
 
@@ -484,6 +484,10 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 		win.ignoresUserFrameResizing = true
 		win.setFrame(wRect, display: true, animate: animated)
+	}
+
+	private func objectItem(at row: Int) -> MenuObjectItem? {
+		return row == -1 ? nil : objectList?[row]
 	}
 
 	// MARK: -
@@ -574,16 +578,25 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			let item = object.item!
 
 			if edge == .leading {
-				let pinned = item.pinned
-				let title = pinned == true ? THLocalizedString("Unpin") : THLocalizedString("Pin")
+				let checked = item.checked
+				let cTitle = checked == true ? THLocalizedString("Unread") : THLocalizedString("Read")
 			
-				let ra = NSTableViewRowAction(style: .regular, title: title, handler: { (action: NSTableViewRowAction, row: Int) in
-					self.pin(!pinned, row: row, item: item, channel: channel)
+				let checkedRa = NSTableViewRowAction(style: .regular, title: cTitle, handler: { (action: NSTableViewRowAction, row: Int) in
+					self.mark(checked: !checked, row: row, item: item, channel: channel)
 					tableView.rowActionsVisible = false
 				})
-				ra.backgroundColor = .purple
-				
-				return [ra]
+				checkedRa.backgroundColor = .cyan
+
+				let pinned = item.pinned
+				let pTitle = pinned == true ? THLocalizedString("Unpin") : THLocalizedString("Pin")
+
+				let pinRa = NSTableViewRowAction(style: .regular, title: pTitle, handler: { (action: NSTableViewRowAction, row: Int) in
+					self.mark(pinned: !pinned, row: row, item: item, channel: channel)
+					tableView.rowActionsVisible = false
+				})
+				pinRa.backgroundColor = .purple
+
+				return [checkedRa, pinRa]
 			}
 			else if edge == .trailing {
 				let ra = NSTableViewRowAction(style: .destructive, title: THLocalizedString("Delete"), handler: { (action: NSTableViewRowAction, row: Int) in
@@ -651,7 +664,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		PPPaneRequester.shared.requestHide(withAnimation: animated)
 	}
 	
-	private func previewItemIdFromObject(_ object: ObjectItem) -> String? {
+	private func previewItemIdFromObject(_ object: MenuObjectItem) -> String? {
 
 		if object.kind == .rss || object.kind == .yt {
 			let channel = object.channel!
@@ -743,16 +756,15 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	
 	// MARK: -
 
-	private func openInWebBrower(_ row: Int) {
+	private func openInWebBrower(_ object: MenuObjectItem?) {
 
 		openPreviewForRow(-1)
 
-		if row == -1 {
+		guard let object = object
+		else {
 			return
 		}
 
-		let object = objectList![row]
-	
 		if object.kind == .rss || object.kind == .yt {
 			let channel = object.channel!
 			let item = object.item!
@@ -768,13 +780,19 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			else if let channel = channel as? YtChannel {
 				YtChannelManager.shared.mark(checked: true, item: item, channel: channel.identifier)
 			}
-			
-			THOpenInBrowser.shared.open(url: link, completion: {(ok: Bool) in
-				if ok == false {
-					THLogError("open == false link:\(link)")
+
+			DispatchQueue.main.async {
+				if THFirefoxScriptingTools.createWindowIfNecessary() == false {
+					THLogError("createWindowIfNecessary == false link:\(link)")
 				}
-			})
-			
+
+				THOpenInBrowser.shared.open(url: link, completion: {(ok: Bool) in
+					if ok == false {
+						THLogError("open == false link:\(link)")
+					}
+				})
+			}
+
 			delegate?.paneViewControllerDidPresentExternalItem(self)
 		}
 	}
@@ -783,15 +801,15 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	
 	@IBAction func tableViewAction(_ sender: NSTableView) {
 		if UserPreferences.shared.actionOnItemClick == "openInBrowser" {
-			openInWebBrower(sender.clickedRow)
+			openInWebBrower(objectItem(at: sender.clickedRow))
 		}
 		else if UserPreferences.shared.actionOnItemClick != "none" {
-			openPreviewForRow(sender.selectedRow)
+			openPreviewForRow(sender.clickedRow)
 		}
 	}
 
 	@objc func tableViewDoubleAction(_ sender: NSTableView) {
-		openInWebBrower(sender.clickedRow)
+		openInWebBrower(objectItem(at: sender.clickedRow))
 	}
 	
 	// MARK: -
@@ -805,14 +823,26 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		}
 
 		let object = objectList![row]
+
 		if object.kind == .rss || object.kind == .yt {
 
 			let channel = object.channel!
 			let item = object.item!
 
+			menu.addItem(THMenuItem(title: THLocalizedString("Open Link"), block: {() in
+				self.openInWebBrower(object)
+			}))
+
+			menu.addItem(NSMenuItem.separator())
+
+			let checked = item.checked
+			menu.addItem(THMenuItem(title: checked ? THLocalizedString("Unread") : THLocalizedString("Read"), block: {() in
+				self.mark(checked: !checked, row: row, item: item, channel: channel)
+			}))
+
 			let pinned = item.pinned
-			menu.addItem(THMenuItem(title: pinned == true ? THLocalizedString("Unpin") : THLocalizedString("Pin"), block: {() in
-				self.pin(!pinned, row: row, item: item, channel: channel)
+			menu.addItem(THMenuItem(title: pinned ? THLocalizedString("Unpin") : THLocalizedString("Pin"), block: {() in
+				self.mark(pinned: !pinned, row: row, item: item, channel: channel)
 			}))
 
 			menu.addItem(NSMenuItem.separator())
