@@ -51,7 +51,11 @@ class YtChannel: Channel {
 		videoId = YtChannelVideoId.th_object(fromDictionaryRepresentation: dictionaryRepresentation, forKey: "videoId")!
 	}
 
-	func hasUnreaded() -> Bool {
+	override func displayName() -> String {
+		title ?? link?.th_reducedHost ?? "nil"
+	}
+
+	override func hasUnreaded() -> Bool {
 		return items.contains(where: { $0.checked == false })
 	}
 

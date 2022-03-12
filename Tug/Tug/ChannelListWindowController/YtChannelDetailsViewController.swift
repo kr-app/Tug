@@ -39,24 +39,7 @@ class YtChannelDetailsViewController: NSViewController {
 	// MARK: -
 
 	@IBAction func onOffAction(_ sender: NSSwitch) {
-//		let row = self.tableView.selectedRow
-//		if row == -1 {
-//			return
-//		}
-//
-//		let disabled = sender.state == .off
-//
-//		let object = objectList![row]
-//		let channel = object["channel"] as! Channel
-//
-//		RssChannelManager.shared.setAttribute(disabled: disabled, channel: channel.identifier)
-//		reloadSelectedRow()
-//
-//		if disabled == false {
-//			RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
-//				self.updateUISelection()
-//			})
-//		}
+		YtChannelManager.shared.setAttribute(disabled: sender.state == .off, channel: channel.identifier)
 	}
 
 	@IBAction func urlChangeAction(_ sender: NSTextField) {

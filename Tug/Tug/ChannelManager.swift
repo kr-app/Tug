@@ -26,8 +26,8 @@ class ChannelManager {
 		}
 
 		channel.cancel()
-		if channel.remove(fromDir: dirPath) == false {
-			THLogError("can not remove channel:\(channel)")
+		if channel.trashFile(fromDir: dirPath) == false {
+			THLogError("can not trash channel:\(channel)")
 		}
 	}
 

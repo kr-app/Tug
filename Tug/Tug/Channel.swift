@@ -9,11 +9,10 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 	var onCreation = false
 
 	var url: URL?
-	var link: URL?
 
 	var disabled = false
 	var title: String?
-	var webLink: URL?
+	var link: URL?
 	var poster: URL?
 
 	var items = [ChannelItem]()
@@ -29,7 +28,15 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 	// MARK: -
 
 	func displayTitle() -> String {
-		return self.title ?? self.url?.th_reducedHost ?? self.link?.th_reducedHost ?? "nil"
+		return self.title ?? self.link?.th_reducedHost ?? self.url?.th_reducedHost ?? "nil"
+	}
+
+	func displayName() -> String {
+		THFatalError("not implemented")
+	}
+
+	func hasUnreaded() -> Bool {
+		THFatalError("not implemented")
 	}
 
 	// MARK: -
@@ -41,13 +48,12 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 		coder.setDate(creationDate, forKey: "creationDate")
 
 		coder.setUrl(url, forKey: "url")
-		coder.setUrl(link, forKey: "link")
 		coder.setDate(lastUpdate, forKey: "lastUpdate")
 		coder.setString(lastError, forKey: "lastError")
 
 		coder.setBool(disabled, forKey: "disabled")
 		coder.setString(title, forKey: "title")
-		coder.setUrl(webLink, forKey: "webLink")
+		coder.setUrl(link, forKey: "link")
 		coder.setUrl(poster, forKey: "poster")
 
 		coder.setObjects(items, forKey: "items")
@@ -64,13 +70,12 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 		}
 
 		url = dictionaryRepresentation.url(forKey: "url")
-		link = dictionaryRepresentation.url(forKey: "link")
 		lastUpdate = dictionaryRepresentation.date(forKey: "lastUpdate")
 		lastError = dictionaryRepresentation.string(forKey: "lastError")
 
 		disabled = dictionaryRepresentation.bool(forKey: "disabled") ?? false
 		title = dictionaryRepresentation.string(forKey: "title")
-		webLink = dictionaryRepresentation.url(forKey: "webLink") ?? dictionaryRepresentation.url(forKey: "link")
+		link = dictionaryRepresentation.url(forKey: "link") ?? dictionaryRepresentation.url(forKey: "webLink")
 		poster = dictionaryRepresentation.url(forKey:  "poster")
 	}
 
@@ -105,7 +110,7 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 		return true
 	}
 
-	func remove(fromDir dirPath: String) -> Bool {
+	func trashFile(fromDir dirPath: String) -> Bool {
 		let path = dirPath.th_appendingPathComponent(getFilename(withExt: "plist"))
 
 		if FileManager.default.fileExists(atPath: path) == true {

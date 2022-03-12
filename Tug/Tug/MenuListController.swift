@@ -585,7 +585,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 					self.mark(checked: !checked, row: row, item: item, channel: channel)
 					tableView.rowActionsVisible = false
 				})
-				checkedRa.backgroundColor = .cyan
+				checkedRa.backgroundColor = .blue
 
 				let pinned = item.pinned
 				let pTitle = pinned == true ? THLocalizedString("Unpin") : THLocalizedString("Pin")

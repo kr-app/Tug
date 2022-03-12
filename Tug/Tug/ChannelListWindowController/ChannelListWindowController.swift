@@ -17,9 +17,32 @@ class ChannelListFooter: NSView {
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
+class ChannelCellView: NSTableCellView {
+
+	var onError = false
+
+	override var backgroundStyle: NSView.BackgroundStyle { didSet {
+		applyCurrentColors(backgroundStyle)
+	}}
+
+	private func applyCurrentColors(_ style: NSView.BackgroundStyle) {
+		textField?.textColor = onError ? .red : style == .emphasized ? .white : .textColor
+	}
+}
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
 fileprivate struct ObjectItem {
 	let kind: Int
-	let channel: Channel
+	let title: String?
+	let channel: Channel?
+
+	init(kind: Int, title: String? = nil, channel: Channel? = nil) {
+		self.kind = kind
+		self.title = title
+		self.channel = channel
+	}
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -49,6 +72,12 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 	private var channelOnCreation: Channel?
 	
 	// MARK: -
+
+	fileprivate func managerFromChannel(_ channel: Channel) -> ChannelManager? {
+		return channel is RssChannel ? RssChannelManager.shared : channel is YtChannel ? YtChannelManager.shared : nil
+	}
+
+	// MARK: -
 	
 	override func windowDidLoad() {
 		super.windowDidLoad()
@@ -68,21 +97,9 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		minusButton.actionBlock = {() in
 			let row = self.tableView.selectedRow
 
-			let object = self.objectList![row]
-			let channel = object.channel
-
-			let title = THLocalizedString("Are you sure you want to delete \"") + channel.url!.th_reducedHost + "\""
-			let msg = channel.url?.absoluteString
-			let alert = NSAlert(withTitle: title, message: msg, buttons: [THLocalizedString("Delete"), THLocalizedString("Cancel")])
-
-			alert.beginSheetModal(for: self.window!, completionHandler: {(response: NSApplication.ModalResponse) in
-				if response == .alertFirstButtonReturn {
-					DispatchQueue.main.async {
-						RssChannelManager.shared.removeChannel(channel.identifier)
-						self.updateUI()
-					}
-				}
-			})
+			if let object = row == -1 ? nil : self.objectList![row] {
+				self.removeObject(object)
+			}
 		}
 
 		updateUI()
@@ -105,11 +122,13 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 	private func updateUIObjectList() {
 		var objectList = [ObjectItem]()
 
-		for channel in RssChannelManager.shared.channels {
+		objectList.append(ObjectItem(kind: 10, title: THLocalizedString("News Rss")))
+		for channel in RssChannelManager.shared.channels.sorted(by: { $0.displayName() < $1.displayName() }) {
 			objectList.append(ObjectItem(kind: 1, channel: channel))
 		}
 
-		for channel in YtChannelManager.shared.channels {
+		objectList.append(ObjectItem(kind: 10, title: THLocalizedString("YouTube")))
+		for channel in YtChannelManager.shared.channels.sorted(by: { $0.displayName() < $1.displayName() }) {
 			objectList.append(ObjectItem(kind: 2, channel: channel))
 		}
 
@@ -149,7 +168,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		}
 
 		if object.kind == 1 {
-			let channel = object.channel
+			let channel = object.channel!
 
 			c_icon.image = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
 			c_titleLabel.objectValue = channel.title
@@ -175,35 +194,67 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		
 		tableView.th_reloadData(forRowIndexes: IndexSet(integer: row))
 	}
+
+	private func removeObject(_ object: ObjectItem) {
+		guard let channel = object.channel
+		else {
+			return
+		}
+
+		let title = THLocalizedString("Are you sure you want to delete \"") + channel.displayName() + "\""
+		let msg = channel.link?.absoluteString ?? channel.url?.absoluteString
+		let alert = NSAlert(withTitle: title, message: msg, buttons: [THLocalizedString("Delete"), THLocalizedString("Cancel")])
+
+		alert.beginSheetModal(for: self.window!, completionHandler: {(response: NSApplication.ModalResponse) in
+			if response == .alertFirstButtonReturn {
+				DispatchQueue.main.async {
+					self.managerFromChannel(channel)?.removeChannel(channel.identifier)
+					self.updateUI()
+				}
+			}
+		})
+	}
 	
 	// MARK: -
 	
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		return objectList?.count ?? 0
 	}
-	
+
+	func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool {
+		let item = objectList![row]
+		return item.kind == 10
+	}
+
+	func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+		return 24.0
+	}
+
 	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 
-//		let selectedRow = self.tableView.selectedRow
-
 		let object = objectList![row]
-		let channel = object.channel
-		
-		let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell_id"), owner: self) as! NSTableCellView
+
+		if object.kind == 10 {
+			let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell_group_id"), owner: self) as! NSTableCellView
+			cell.textField?.objectValue = object.title
+			return cell
+		}
+
+		let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell_id"), owner: self) as! ChannelCellView
+		let channel = object.channel!
 
 		var icon: NSImage?
-
 		if object.kind == 1 {
 			icon = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
-			cell.textField?.stringValue = channel.url?.th_reducedHost ?? channel.url?.absoluteString ?? ""
 		}
 		else if object.kind == 2 {
 			icon = THWebIconLoader.shared.icon(forHost: channel.link?.host, startUpdate: true, allowsGeneric: true)
-			cell.textField?.stringValue = channel.title ?? channel.link?.th_reducedHost ?? ""
 		}
 
-		cell.imageView?.image =  channel.disabled ? icon?.th_imageGray() : icon
-//		cell.textField?.textColor = channel.lastError != nil ? .red : (selectedRow == row ? .white : .black)
+		cell.onError = channel.lastError != nil
+		cell.textField?.stringValue = channel.displayName()
+		cell.textField?.font = channel.hasUnreaded() ? NSFont.boldSystemFont(ofSize: NSFont.systemFontSize(for: .small)) : NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .small))
+		cell.imageView?.image = channel.disabled ? icon?.th_imageGray() : icon
 
 		return cell
 	}
@@ -211,46 +262,64 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 	func tableViewSelectionDidChange(_ notification: Notification) {
 		updateUISelection()
 	}
-	
-	// MARK: -
 
 	func menuNeedsUpdate(_ menu: NSMenu) {
 		menu.removeAllItems()
 
 		let row = tableView.clickedRow
-		if row == -1 {
+		let object = row == -1 ? nil : objectList![row]
+
+		guard let object = object, let channel = object.channel
+		else {
 			return
 		}
 
-		let object = objectList![row]
-
 		menu.addItem(THMenuItem(title: THLocalizedString("Reveal in Finder"), block: {() in
-			if object.kind == 1 {
-				RssChannelManager.shared.revealFile(channel: object.channel.identifier)
-			}
-			else if object.kind == 2 {
-				YtChannelManager.shared.revealFile(channel: object.channel.identifier)
-			}
+			self.managerFromChannel(channel)?.revealFile(channel: channel.identifier)
 		}))
 
 		menu.addItem(NSMenuItem.separator())
 
 		menu.addItem(THMenuItem(title: THLocalizedString("Remove"), block: {() in
+			self.removeObject(object)
 		}))
+	}
+
+	@IBAction func tableViewDoubleAction(_ sender: NSTableView) {
+		let row = self.tableView.selectedRow
+
+		let object = row == -1 ? nil : objectList![row]
+		let channel = object?.channel
+
+		guard let link = channel?.link
+		else {
+			return
+		}
+
+		DispatchQueue.main.async {
+			if THFirefoxScriptingTools.createWindowIfNecessary() == false {
+				THLogError("createWindowIfNecessary == false link:\(link)")
+			}
+
+			THOpenInBrowser.shared.open(url: link, completion: {(ok: Bool) in
+				if ok == false {
+					THLogError("open == false link:\(link)")
+				}
+			})
+		}
 	}
 
 	// MARK: -
 
 	@IBAction func onOffAction(_ sender: NSSwitch) {
 		let row = self.tableView.selectedRow
-		if row == -1 {
-			return
-		}
-		
 		let disabled = sender.state == .off
 
-		let object = objectList![row]
-		let channel = object.channel
+		let object = row == -1 ? nil : objectList![row]
+		guard let channel = object?.channel
+		else {
+			return
+		}
 
 		RssChannelManager.shared.setAttribute(disabled: disabled, channel: channel.identifier)
 		reloadSelectedRow()
@@ -270,7 +339,11 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 
 		let object = objectList![row]
 		let kind = object.kind
-		let channel = object.channel
+
+		guard let channel = object.channel
+		else {
+			return
+		}
 
 		let url = c_urlField.stringValue.trimmingCharacters(in: .whitespaces)
 	
@@ -307,7 +380,10 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		}
 
 		let object = objectList![row]
-		let channel = object.channel
+		guard let channel = object.channel
+		else {
+			return
+		}
 
 		RssChannelManager.shared.clean(channel: channel.identifier)
 	

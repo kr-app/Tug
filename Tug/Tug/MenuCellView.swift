@@ -104,7 +104,7 @@ class MenuCellView : THHighlightedTableCellView {
 			// icon
 			var img = THIconDownloader.shared.icon(atURL: item.thumbnail, startUpdate: true)
 			if img == nil {
-				img = THWebIconLoader.shared.icon(forHost: channel.webLink?.host ?? channel.url?.host, startUpdate: true, allowsGeneric: true)
+				img = THWebIconLoader.shared.icon(forHost: channel.link?.host ?? channel.url?.host, startUpdate: true, allowsGeneric: true)
 			}
 			if isHighlighted == false && item.checked == true && item.pinned == false {
 				img = img?.th_imageGray()//.th_image(withCorner: 6.0)

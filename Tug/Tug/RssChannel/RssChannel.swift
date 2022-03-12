@@ -44,6 +44,16 @@ class RssChannel: Channel {
 	
 	// MARK: -
 
+	override func displayName() -> String {
+		link?.th_reducedHost ?? url?.th_reducedHost ?? url?.absoluteString ?? "nil"
+	}
+
+	override func hasUnreaded() -> Bool {
+		return items.contains(where: {$0.checkedDate == nil })
+	}
+
+	// MARK: -
+
 	func unreaded() -> Int {
 		var r = 0
 		for item in items {
@@ -54,16 +64,12 @@ class RssChannel: Channel {
 		return r
 	}
 
-	func hasUnreaded() -> Bool {
-		return items.contains(where: {$0.checkedDate == nil })
-	}
-
 	func hasRecent(refDate: TimeInterval) -> Bool {
 		return items.contains(where: {$0.isRecent(refDate: refDate) })
 	}
 	
 	func contains(stringValue: String) -> Bool {
-		for s in [self.url?.absoluteString, self.webLink?.absoluteString] {
+		for s in [self.url?.absoluteString, self.link?.absoluteString] {
 			if s != nil && s!.contains(stringValue) == true {
 				return true
 			}
@@ -101,7 +107,7 @@ class RssChannel: Channel {
 			self.title = title
 		}
 		if let link = p.generalItem.value(named: "link")?.content {
-			self.webLink = URL(string: link)
+			self.link = URL(string: link)
 		}
 
 		var date_error_log_once = false
