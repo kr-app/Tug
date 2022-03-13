@@ -12,8 +12,8 @@ struct YtChannelItemVideoLink {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class YtChannelItem: ChannelItem {
 
-	override init() {
-		super.init()
+	override init(identifier: String, received: Date) {
+		super.init(identifier: identifier, received: received)
 	}
 
 	override func dictionaryRepresentation() -> THDictionaryRepresentation {

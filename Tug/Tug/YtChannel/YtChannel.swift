@@ -183,8 +183,8 @@ class YtChannel: Channel {
 
 				nbItems += 1
 
-				let identifier = c.childNamed("id")?.childs()?.first?.content()
-				if identifier == nil {
+				guard let identifier = c.childNamed("id")?.childs()?.first?.content()
+				else {
 					THLogError("identifier == nil c:\(c)")
 					continue
 				}
@@ -229,20 +229,20 @@ class YtChannel: Channel {
 
 				let old_feed = items.first(where: { $0.identifier == identifier })
 
-				let item = YtChannelItem()
-
-				item.identifier = identifier
-				item.title = title
-
+				let received: Date!
 				if onCreation == true {
-					item.received = updatedDate ?? publishedDate ?? Date()
+					received = updatedDate ?? publishedDate ?? Date()
 				}
 				else {
-					item.received = old_feed?.received ?? Date()
+					received = old_feed?.received ?? Date()
 				}
+
+				let item = YtChannelItem(identifier: identifier, received: received)
+
 				item.published = old_feed?.published ?? publishedDate
 //				item.updated = updatedDate ?? old_feed!.updated ?? Date()
 
+				item.title = title
 				item.link = link != nil ? URL(string: link!) : nil
 				item.content = content
 				item.thumbnail = thumbnail != nil ? URL(string: thumbnail!) : nil

@@ -5,8 +5,8 @@ import Cocoa
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class ChannelItem: NSObject, THDictionarySerializationProtocol {
 
-	var identifier: String!
-	var received: Date!
+	var identifier: String
+	var received: Date
 
 	var published: Date?
 	var updated: Date?
@@ -28,14 +28,16 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 		th_description("identifier: \(identifier) published: \(published) updated:\(updated) title: \(title?.th_truncate(max: 20))")
 	}
 
-	override init() {
+	init(identifier: String, received: Date) {
+		self.identifier = identifier
+		self.received = received
 	}
 
 	func dictionaryRepresentation() -> THDictionaryRepresentation {
 		let coder = THDictionaryRepresentation()
 
-		coder.setString(identifier!, forKey: "identifier")
-		coder.setDate(received!, forKey: "received")
+		coder.setString(identifier, forKey: "identifier")
+		coder.setDate(received, forKey: "received")
 
 		coder.setDate(published, forKey: "published")
 		coder.setDate(updated, forKey: "updated")
@@ -69,7 +71,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 		pinndedDate = dictionaryRepresentation.date(forKey: "pinndedDate")
 
 		if checkedDate == nil && dictionaryRepresentation.bool(forKey: "checked") == true {
-			checkedDate = received ?? Date()
+			checkedDate = received
 		}
 	}
 

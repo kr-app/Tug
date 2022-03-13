@@ -81,6 +81,17 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	// MARK: -
 
+	func contains(stringValue: String) -> Bool {
+		for s in [self.title, self.url?.absoluteString, self.link?.absoluteString] {
+			if s != nil && s!.contains(stringValue) == true {
+				return true
+			}
+		}
+		return false
+	}
+
+	// MARK: -
+
 	func getFilename(withExt ext: String) -> String {
 		return "\(identifier)".th_appendingPathExtension(ext)
 	}

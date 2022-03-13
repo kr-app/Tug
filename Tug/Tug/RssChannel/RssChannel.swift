@@ -68,15 +68,6 @@ class RssChannel: Channel {
 		return items.contains(where: {$0.isRecent(refDate: refDate) })
 	}
 	
-	func contains(stringValue: String) -> Bool {
-		for s in [self.url?.absoluteString, self.link?.absoluteString] {
-			if s != nil && s!.contains(stringValue) == true {
-				return true
-			}
-		}
-		return false
-	}
-
 	// MARK: -
 	
 	override func updateRequest() -> URLRequest {
@@ -173,11 +164,10 @@ class RssChannel: Channel {
 
 			let old_item = items.first(where: { $0.identifier == identifier })
 
-			let item = RssChannelItem()
+			let received = old_item?.received ?? Date()
 
-			item.identifier = identifier
+			let item = RssChannelItem(identifier: identifier, received: received)
 
-			item.received = old_item?.received ?? Date()
 			item.published = old_item?.published ?? pubDate
 			item.updated = pubDate
 			

@@ -86,6 +86,10 @@ class YtChannelManager: ChannelManager {
 		channels.first(where: { $0.identifier == identifier } )
 	}
 
+	override func recentRefDate() -> TimeInterval {
+		Date().timeIntervalSinceReferenceDate - 1.5.th_day
+	}
+
 	private func channel(withVideoId videoId: YtChannelVideoId) -> YtChannel? {
 		return channels.first(where: { $0.videoId == videoId })
 	}
@@ -107,25 +111,25 @@ class YtChannelManager: ChannelManager {
 		return r
 	}
 
-	func unreadedChannels() -> [YtChannel] {
-		let channels = self.channels.filter( { $0.disabled == false && $0.hasUnreaded() } )
-		return channels.sorted(by: {
-			if let p0 = $0.items.first?.wallDate, let p1 = $1.items.first?.wallDate {
-				return p0 > p1
-			}
-			return false
-		})
-	}
+//	func unreadedChannels() -> [YtChannel] {
+//		let channels = self.channels.filter( { $0.disabled == false && $0.hasUnreaded() } )
+//		return channels.sorted(by: {
+//			if let p0 = $0.items.first?.wallDate, let p1 = $1.items.first?.wallDate {
+//				return p0 > p1
+//			}
+//			return false
+//		})
+//	}
 
-	func recentChannels(afterDate dateRef: TimeInterval) -> [YtChannel] {
-		let channels = self.channels.filter( { $0.disabled == false && $0.hasRecent(refDate: dateRef) } )
-		return channels.sorted(by: {
-			if let p0 = $0.items.first?.wallDate, let p1 = $1.items.first?.wallDate {
-				return p0 > p1
-			}
-			return false
-		})
-	}
+//	func recentChannels(afterDate dateRef: TimeInterval) -> [YtChannel] {
+//		let channels = self.channels.filter( { $0.disabled == false && $0.hasRecent(refDate: dateRef) } )
+//		return channels.sorted(by: {
+//			if let p0 = $0.items.first?.wallDate, let p1 = $1.items.first?.wallDate {
+//				return p0 > p1
+//			}
+//			return false
+//		})
+//	}
 
 	// MARK: -
 	

@@ -79,7 +79,7 @@ class RssChannelManager: ChannelManager {
 	
 	// MARK: -
 	
-	func recentRefDate() -> TimeInterval {
+	override func recentRefDate() -> TimeInterval {
 		Date().timeIntervalSinceReferenceDate - 0.66.th_day
 	}
 

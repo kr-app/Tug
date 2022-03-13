@@ -340,105 +340,81 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 		var objectList = [MenuObjectItem]()
 
-		if showYt {
-
-			if let channels = YtChannelManager.shared.channelsOnError() {
-				objectList.append(itemFromChannelsOnError(channels))
-			}
-
-			let unreadedChannels = YtChannelManager.shared.unreadedChannels()
-			for channel in unreadedChannels {
-				for item in channel.items.filter( {$0.checked == false }) {
-					objectList.append(MenuObjectItem(kind: .yt, channel: channel, item: item))
-				}
-			}
+		// On error
+		if let channels = YtChannelManager.shared.channelsOnError() {
+			objectList.append(itemFromChannelsOnError(channels))
 		}
 
-		if showRss == true {
-			let recentRef = RssChannelManager.shared.recentRefDate()
-			let channels = RssChannelManager.shared.channels//.wallChannels()//.wallChannels(withDateRef: recentRef)
-			var items = [(channel: Channel, item: ChannelItem)]()
+		if let channels = RssChannelManager.shared.channelsOnError() {
+			objectList.append(itemFromChannelsOnError(channels))
+		}
+
+		var items = [(kind: MenuObjectKind, channel: Channel, item: ChannelItem)]()
+
+		let managers: [(kind: MenuObjectKind, shared: ChannelManager, channels: [Channel])] = [	(kind: .yt, YtChannelManager.shared, YtChannelManager.shared.channels),
+																																						(kind: .rss, RssChannelManager.shared, channels: RssChannelManager.shared.channels)]
+
+		for manager in managers {
+			let recentRef = manager.shared.recentRefDate()
+			let channels = manager.channels.filter( { $0.disabled == false }) //.wallChannels()//.wallChannels(withDateRef: recentRef)
 
 			for channel in channels {
 
 				if searchedText != nil && channel.contains(stringValue: searchedText!) == true {
 					for item in channel.items {
-						items.append((channel: channel, item: item))
+						items.append((kind: manager.kind, channel: channel, item: item))
 					}
 					continue
 				}
 
-				for item in channel.items/*.filter({ $0.checked == false }) */{
-					if item.checked == true && item.isRecent(refDate: recentRef) == false {
-						continue
-					}
-					if searchedText != nil && item.contains(stringValue: searchedText!) == false {
-						continue
-					}
-					items.append((channel: channel, item: item))
-	//				if max >= 5 {
-	//					break
-	//				}
-	//				max += 1
-				}
-			}
-
-			items.sort(by: {
-				let rcv0 = $0.item.received!
-				let rcv1 = $1.item.received!
-
-				if rcv0 == rcv1 {
-					if let up0 = $0.item.published, let up1 = $1.item.published {
-						return up0 > up1
-					}
-				}
-
-				return rcv0 > rcv1
-			})
-
-			// On error
-			if let channels = RssChannelManager.shared.channelsOnError() {
-				objectList.append(itemFromChannelsOnError(channels))
-			}
-
-	//		if menu.th_lastItem()?.isSeparatorItem == false {
-	//			menu.addItem(NSMenuItem.separator())
-	//		}
-
-			// Items
-
-			let unreadedItems = items.filter({ $0.item.pinned == false && $0.item.checked == false })
-			if unreadedItems.count > 0 {
-				for item in unreadedItems {
-					objectList.append(MenuObjectItem(kind: .rss, channel: item.channel, item: item.item))
-				}
-//				objectList.append(ObjectItem(kind: .separator))
-			}
-
-			if showYt {
-				let recentRef = Date().timeIntervalSinceReferenceDate - 1.5.th_day
-				let recentChannels = YtChannelManager.shared.recentChannels(afterDate: recentRef)
-
-				for channel in recentChannels {
-					for item in channel.items {
-						if item.checked == true && item.isRecent(refDate: recentRef) == true {
-							objectList.append(MenuObjectItem(kind: .yt, channel: channel, item: item))
+				for item in channel.items {
+					if let searchedText = searchedText {
+						if item.contains(stringValue: searchedText) == false {
+							continue
 						}
 					}
+					else if item.checked == true && item.pinned == false && item.isRecent(refDate: recentRef) == false {
+						continue
+					}
+					items.append((kind: manager.kind, channel: channel, item: item))
+				}
+			}
+		}
+
+		items.sort(by: {
+			let rcv0 = $0.item.received
+			let rcv1 = $1.item.received
+
+			if rcv0 == rcv1 {
+				if let up0 = $0.item.published, let up1 = $1.item.published {
+					return up0 > up1
 				}
 			}
 
-			let pinnedItems = items.filter({ $0.item.pinned == true })
-			if pinnedItems.count > 0 {
-				for item in pinnedItems {
-					objectList.append(MenuObjectItem(kind: .rss, channel: item.channel, item: item.item))
-				}
-//				objectList.append(MenuObjectItem(kind: .separator))
-			}
+			return rcv0 > rcv1
+		})
 
-			for item in items.filter({ $0.channel.disabled == false && $0.item.pinned == false && $0.item.checked == true }) {
-				objectList.append(MenuObjectItem(kind: .rss, channel: item.channel, item: item.item))
+		// unreadedItems
+		let unreadedItems = items.filter({ $0.item.pinned == false && $0.item.checked == false })
+		if unreadedItems.count > 0 {
+			for item in unreadedItems {
+				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
 			}
+//			objectList.append(ObjectItem(kind: .separator))
+		}
+
+		// pinnedItems
+		let pinnedItems = items.filter({ $0.item.pinned == true })
+		if pinnedItems.count > 0 {
+			for item in pinnedItems {
+				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
+			}
+//			objectList.append(MenuObjectItem(kind: .separator))
+		}
+
+		// others
+		for item in items.filter({ $0.item.pinned == false && $0.item.checked == true }) {
+			objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
 		}
 
 		self.objectList = objectList

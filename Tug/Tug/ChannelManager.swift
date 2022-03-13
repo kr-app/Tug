@@ -31,13 +31,17 @@ class ChannelManager: NSObject {
 		}
 	}
 
+	func recentRefDate() -> TimeInterval {
+		THFatalError("not implemented")
+	}
+
 	func synchronise(channel: Channel, immediately: Bool = false) {
 		channel.synchronise(dirPath: dirPath, immediately: immediately)
 	}
 
 	func noteChange(channel: Channel, item: ChannelItem? = nil) {
 		if let item = item {
-			NotificationCenter.default.post(name: Self.channelItemUpdatedNotification, object: self, userInfo: ["channel": channel, "item": item.identifier!])
+			NotificationCenter.default.post(name: Self.channelItemUpdatedNotification, object: self, userInfo: ["channel": channel, "item": item.identifier])
 			return
 		}
 
@@ -93,7 +97,7 @@ extension ChannelManager {
 		   return
 		}
 
-		guard let r_item = channel.items.first(where: {$0.identifier == item.identifier! })
+		guard let r_item = channel.items.first(where: {$0.identifier == item.identifier })
 		else {
 		   return
 		}
@@ -125,7 +129,7 @@ extension ChannelManager {
 			return
 		}
 
-		channel.items.removeAll(where: {$0.identifier == item.identifier! })
+		channel.items.removeAll(where: {$0.identifier == item.identifier })
 
 		synchronise(channel: channel, immediately: true)
 		noteChange(channel: channel)
@@ -146,7 +150,7 @@ extension ChannelManager {
 
 		let path = "/" + Self.th_className + "/" + channel.identifier!
 		if let item = item {
-			return path + "/" + item.identifier!
+			return path + "/" + item.identifier
 		}
 		return path
 	}
