@@ -173,12 +173,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	}
 
 	private func mark(checked: Bool? = nil, pinned: Bool? = nil, row: Int, item: ChannelItem, channel: Channel) {
-		if let channel = channel as? RssChannel {
-			RssChannelManager.shared.mark(checked: checked, pinned: pinned, item: item, channel: channel.identifier)
-		}
-		else if let channel = channel as? YtChannel {
-			YtChannelManager.shared.mark(checked: checked, pinned: pinned, item: item, channel: channel.identifier)
-		}
+		ChannelManager.managerOfChannel(channel)?.mark(checked: checked, pinned: pinned, item: item, channel: channel.identifier)
 
 //		let cellView = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as? MenuCellView
 //		cellView?.updateCell(forObject: object)
@@ -188,13 +183,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	}
 
 	private func delete(item: ChannelItem, channel: Channel) {
-		if let channel = channel as? RssChannel {
-			RssChannelManager.shared.removeItem(item, channel: channel.identifier)
-		}
-		else if let channel = channel as? YtChannel {
-			YtChannelManager.shared.removeItem(item, channel: channel.identifier)
-		}
-
+		ChannelManager.managerOfChannel(channel)?.removeItem(item, channel: channel.identifier)
 		self.updateUI()
 	}
 
@@ -418,7 +407,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 			// Items
 
-			let unreadedItems = items.filter({ $0.item.pinned == false && $0.item.checkedDate == nil })
+			let unreadedItems = items.filter({ $0.item.pinned == false && $0.item.checked == false })
 			if unreadedItems.count > 0 {
 				for item in unreadedItems {
 					objectList.append(MenuObjectItem(kind: .rss, channel: item.channel, item: item.item))
@@ -447,7 +436,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 //				objectList.append(MenuObjectItem(kind: .separator))
 			}
 
-			for item in items.filter({ $0.channel.disabled == false && $0.item.pinned == false && $0.item.checkedDate != nil }) {
+			for item in items.filter({ $0.channel.disabled == false && $0.item.pinned == false && $0.item.checked == true }) {
 				objectList.append(MenuObjectItem(kind: .rss, channel: item.channel, item: item.item))
 			}
 		}
@@ -774,12 +763,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 				return
 			}
 
-			if let channel = channel as? RssChannel {
-				RssChannelManager.shared.mark(checked: true, item: item, channel: channel.identifier)
-			}
-			else if let channel = channel as? YtChannel {
-				YtChannelManager.shared.mark(checked: true, item: item, channel: channel.identifier)
-			}
+			ChannelManager.managerOfChannel(channel)?.mark(checked: true, item: item, channel: channel.identifier)
 
 			DispatchQueue.main.async {
 				if THFirefoxScriptingTools.createWindowIfNecessary() == false {

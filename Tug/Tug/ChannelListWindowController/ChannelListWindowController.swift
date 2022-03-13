@@ -72,12 +72,6 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 	private var channelOnCreation: Channel?
 	
 	// MARK: -
-
-	fileprivate func managerFromChannel(_ channel: Channel) -> ChannelManager? {
-		return channel is RssChannel ? RssChannelManager.shared : channel is YtChannel ? YtChannelManager.shared : nil
-	}
-
-	// MARK: -
 	
 	override func windowDidLoad() {
 		super.windowDidLoad()
@@ -208,7 +202,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		alert.beginSheetModal(for: self.window!, completionHandler: {(response: NSApplication.ModalResponse) in
 			if response == .alertFirstButtonReturn {
 				DispatchQueue.main.async {
-					self.managerFromChannel(channel)?.removeChannel(channel.identifier)
+					ChannelManager.managerOfChannel(channel)?.removeChannel(channel.identifier)
 					self.updateUI()
 				}
 			}
@@ -275,7 +269,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		}
 
 		menu.addItem(THMenuItem(title: THLocalizedString("Reveal in Finder"), block: {() in
-			self.managerFromChannel(channel)?.revealFile(channel: channel.identifier)
+			ChannelManager.managerOfChannel(channel)?.revealFile(channel: channel.identifier)
 		}))
 
 		menu.addItem(NSMenuItem.separator())
@@ -283,6 +277,15 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		menu.addItem(THMenuItem(title: THLocalizedString("Remove"), block: {() in
 			self.removeObject(object)
 		}))
+	}
+
+	@IBAction func tableViewAction(_ sender: NSTableView) {
+		let row = self.tableView.selectedRow
+
+		let object = row == -1 ? nil : objectList![row]
+		let channel = object?.channel
+
+		UserDefaults.standard.set(ChannelManager.managerOfChannel(channel)?.pathOfChannel(channel), forKey: "selected")
 	}
 
 	@IBAction func tableViewDoubleAction(_ sender: NSTableView) {

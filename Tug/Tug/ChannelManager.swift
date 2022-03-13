@@ -3,7 +3,7 @@
 import Foundation
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-class ChannelManager {
+class ChannelManager: NSObject {
 
 	static let channelUpdatedNotification = Notification.Name("ChannelManager-channelUpdatedNotification")
 	static let channelItemUpdatedNotification = Notification.Name("ChannelManager-channelItemUpdatedNotification")
@@ -138,6 +138,19 @@ extension ChannelManager {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 extension ChannelManager {
 
+	func pathOfChannel(_ channel: Channel?, item: ChannelItem? = nil) -> String? {
+		guard let channel = channel
+		else {
+			return nil
+		}
+
+		let path = "/" + Self.th_className + "/" + channel.identifier!
+		if let item = item {
+			return path + "/" + item.identifier!
+		}
+		return path
+	}
+
 	func revealFile(channel channelId: String) {
 		guard let channel = channel(withId: channelId)
 		else {
@@ -146,6 +159,21 @@ extension ChannelManager {
 
 		let fileUrl = channel.getFileUrl(dirPath: dirPath)
 		NSWorkspace.shared.activateFileViewerSelecting([fileUrl])
+	}
+
+}
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+extension ChannelManager {
+
+	static func managerOfChannel(_ channel: Channel?) -> ChannelManager? {
+		guard let channel = channel
+		else {
+			return nil
+		}
+		return channel is RssChannel ? RssChannelManager.shared : channel is YtChannel ? YtChannelManager.shared : nil
 	}
 
 }

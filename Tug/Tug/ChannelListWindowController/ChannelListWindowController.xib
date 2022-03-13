@@ -103,6 +103,7 @@
                                         </tableColumn>
                                     </tableColumns>
                                     <connections>
+                                        <action selector="tableViewAction:" target="-2" id="Dey-5I-118"/>
                                         <action trigger="doubleAction" selector="tableViewDoubleAction:" target="-2" id="RNF-ss-2D4"/>
                                         <outlet property="dataSource" destination="-2" id="i9u-1E-d0r"/>
                                         <outlet property="delegate" destination="-2" id="rBN-5O-jJi"/>

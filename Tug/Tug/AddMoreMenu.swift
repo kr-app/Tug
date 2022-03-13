@@ -59,13 +59,13 @@ class AddMoreMenu: NSObject, NSMenuDelegate {
 
 	@objc func mi_menuAction(_ sender: NSMenuItem) {
 		if sender.tag == 12 { // add rss
-			let rss = sender.representedObject as! RssFromSource
+//			let rss = sender.representedObject as! RssFromSource
 //			if RssChannelManager.shared.addChannel(url: rss.rss) == nil {
 //				THLogError("addChannel == nil rss:\(rss)")
 //			}
 		}
 		else if sender.tag == 13 { // add url
-			let url = sender.representedObject as! URL
+//			let url = sender.representedObject as! URL
 //			if RssChannelManager.shared.addChannel(url: url) == nil {
 //				THLogError("addChannel == nil url:\(url)")
 //			}

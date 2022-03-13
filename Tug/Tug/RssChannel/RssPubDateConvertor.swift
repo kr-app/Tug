@@ -1,6 +1,7 @@
 // PubDateConvertor.swift
 
 import Cocoa
+import UniformTypeIdentifiers
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 struct PubDateConvertor {
@@ -50,29 +51,21 @@ struct PubDateConvertor {
 struct MediaUrlExtractor {
 
 	static func urlFromEnclosure(item: THRSSFeedItem) -> String? {
-
-		guard let mUrl = item.value(named: "enclosure")?.attributes?["url"] as? String
+		guard let url = item.value(named: "enclosure")?.attributes?["url"] as? String
 		else {
 			return nil
 		}
 
-		var take = false
-
-		var type = item.value(named: "enclosure")?.attributes?["type"] as? String
-		if type == nil {
-			type = item.value(named: "enclosure")?.attributes?["mimetype"] as? String
+		var mimeType = item.value(named: "enclosure")?.attributes?["type"] as? String
+		if mimeType == nil {
+			mimeType = item.value(named: "enclosure")?.attributes?["mimetype"] as? String
 		}
 
-		if let type = type {
-			if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, type as CFString, nil)?.takeRetainedValue() {
-				take = UTTypeConformsTo(uti, kUTTypeImage)
-			}
-		}
-		else {
-			take = true
+		if let mimeType = mimeType, let type = UTType(mimeType: mimeType) {
+			return type.conforms(to: .image) ? url : nil
 		}
 
-		return take == true ? mUrl : nil
+		return nil
 	}
 
 	static func urlImgSrc(fromContent content: String) -> String? {
