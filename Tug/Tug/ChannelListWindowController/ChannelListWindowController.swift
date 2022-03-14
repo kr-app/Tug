@@ -300,7 +300,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		}
 
 		DispatchQueue.main.async {
-			if THFirefoxScriptingTools.createWindowIfNecessary() == false {
+			if THWebBrowserScriptingTools.createWindowIfNecessary() == false {
 				THLogError("createWindowIfNecessary == false link:\(link)")
 			}
 

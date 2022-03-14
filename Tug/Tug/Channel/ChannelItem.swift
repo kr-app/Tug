@@ -20,7 +20,6 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 	var checkedDate: Date?
 	var pinndedDate: Date?
 
-	var wallDate: Date { get { return received }}
 	var checked: Bool { get { return checkedDate != nil } }
 	var pinned: Bool { get { return pinndedDate != nil } }
 
@@ -83,7 +82,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 extension ChannelItem {
 
 	func isRecent(refDate: TimeInterval) -> Bool {
-		if self.wallDate.timeIntervalSinceReferenceDate >= refDate {
+		if self.received.timeIntervalSinceReferenceDate >= refDate {
 			return true
 		}
 		return false

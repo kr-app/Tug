@@ -97,7 +97,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 
 	// MARK: -
 
-	@objc func timerAppActivatedAction(_ sender: Timer) {
+	@objc private func timerAppActivatedAction(_ sender: Timer) {
 		let frontapp = NSWorkspace.shared.frontmostApplication
 		
 		if let appId = frontapp?.bundleIdentifier {
@@ -121,7 +121,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 
 	// MARK: -
 	
-	@objc func barItemAction() {
+	@objc private func barItemAction() {
 		if paneWindowIsVisible() == true {
 			hidePaneWindow(animated: true, restore: true)
 		}

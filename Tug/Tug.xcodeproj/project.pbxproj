@@ -54,7 +54,6 @@
 		647B34EB2668F11000785E10 /* THOpenInBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647B34EA2668F11000785E10 /* THOpenInBrowser.swift */; };
 		64898D74256131E8002945CE /* THFileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64898D73256131E8002945CE /* THFileManagerExtensions.swift */; };
 		648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B3661256AD47F00D3D29F /* THStringExtensions.swift */; };
-		648FC491256591E10067B491 /* AddMoreMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648FC490256591E10067B491 /* AddMoreMenu.swift */; };
 		649212E7255873D7002E3F78 /* THFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649212E6255873D7002E3F78 /* THFoundation.swift */; };
 		6492EC6226C98C8E0023F935 /* THWebPageAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492EC6126C98C8E0023F935 /* THWebPageAttributes.swift */; };
 		64AB664E2476D17200587F1D /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AB664D2476D17200587F1D /* THExtensions.swift */; };
@@ -66,7 +65,7 @@
 		64C5721722A555FB000B6EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C5721622A555FB000B6EC3 /* Assets.xcassets */; };
 		64C5721A22A555FB000B6EC3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64C5721822A555FB000B6EC3 /* MainMenu.xib */; };
 		64CC07C6269B002B003D9392 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C5269B002B003D9392 /* HeaderView.swift */; };
-		64CC07C8269B011D003D9392 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C7269B011D003D9392 /* SettingsMenu.swift */; };
+		64CC07C8269B011D003D9392 /* MoreMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C7269B011D003D9392 /* MoreMenu.swift */; };
 		64CC07CA269B089F003D9392 /* THNSMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C9269B089F003D9392 /* THNSMenuExtensions.swift */; };
 		64CC07D5269B5BD3003D9392 /* PPPanePreviewWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07D3269B557A003D9392 /* PPPanePreviewWindow.swift */; };
 		64CE9A2C25BF70A6004EC688 /* THUnixCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CE9A2A25BF70A6004EC688 /* THUnixCommand.m */; };
@@ -102,7 +101,7 @@
 		BE78028027D90AF8000366DD /* MenuObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE78027F27D90AF8000366DD /* MenuObject.swift */; };
 		BECD72A427DA3CDE00A001FE /* YtChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD72A327DA3CDD00A001FE /* YtChannelItem.swift */; };
 		BECD72A827DA3EAF00A001FE /* RssChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD72A727DA3EAF00A001FE /* RssChannelItem.swift */; };
-		BEED9BB727DB9C010032B610 /* THFirefoxScriptingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED9BB627DB9C010032B610 /* THFirefoxScriptingTools.swift */; };
+		BEED9BB727DB9C010032B610 /* THWebBrowserScriptingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED9BB627DB9C010032B610 /* THWebBrowserScriptingTools.swift */; };
 		BEED9BBE27DB9C1F0032B610 /* THAsScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED9BB927DB9C1F0032B610 /* THAsScript.swift */; };
 		BEED9BC427DBD6230032B610 /* YtChannelDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED9BC227DBD6230032B610 /* YtChannelDetailsViewController.swift */; };
 		BEED9BC527DBD6230032B610 /* YtChannelDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEED9BC327DBD6230032B610 /* YtChannelDetailsViewController.xib */; };
@@ -176,7 +175,6 @@
 		647B34EA2668F11000785E10 /* THOpenInBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THOpenInBrowser.swift; sourceTree = "<group>"; };
 		64898D73256131E8002945CE /* THFileManagerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFileManagerExtensions.swift; sourceTree = "<group>"; };
 		648B3661256AD47F00D3D29F /* THStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THStringExtensions.swift; sourceTree = "<group>"; };
-		648FC490256591E10067B491 /* AddMoreMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMoreMenu.swift; sourceTree = "<group>"; };
 		649212E6255873D7002E3F78 /* THFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFoundation.swift; sourceTree = "<group>"; };
 		6492EC6126C98C8E0023F935 /* THWebPageAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THWebPageAttributes.swift; sourceTree = "<group>"; };
 		64AB664D2476D17200587F1D /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
@@ -189,7 +187,7 @@
 		64C5721922A555FB000B6EC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		64C5721B22A555FB000B6EC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64CC07C5269B002B003D9392 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		64CC07C7269B011D003D9392 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		64CC07C7269B011D003D9392 /* MoreMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenu.swift; sourceTree = "<group>"; };
 		64CC07C9269B089F003D9392 /* THNSMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNSMenuExtensions.swift; sourceTree = "<group>"; };
 		64CC07D3269B557A003D9392 /* PPPanePreviewWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPPanePreviewWindow.swift; sourceTree = "<group>"; };
 		64CE9A2A25BF70A6004EC688 /* THUnixCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THUnixCommand.m; sourceTree = "<group>"; };
@@ -232,7 +230,7 @@
 		BE78027F27D90AF8000366DD /* MenuObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuObject.swift; sourceTree = "<group>"; };
 		BECD72A327DA3CDD00A001FE /* YtChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelItem.swift; sourceTree = "<group>"; };
 		BECD72A727DA3EAF00A001FE /* RssChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItem.swift; sourceTree = "<group>"; };
-		BEED9BB627DB9C010032B610 /* THFirefoxScriptingTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFirefoxScriptingTools.swift; sourceTree = "<group>"; };
+		BEED9BB627DB9C010032B610 /* THWebBrowserScriptingTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THWebBrowserScriptingTools.swift; sourceTree = "<group>"; };
 		BEED9BB927DB9C1F0032B610 /* THAsScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THAsScript.swift; sourceTree = "<group>"; };
 		BEED9BC227DBD6230032B610 /* YtChannelDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YtChannelDetailsViewController.swift; sourceTree = "<group>"; };
 		BEED9BC327DBD6230032B610 /* YtChannelDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YtChannelDetailsViewController.xib; sourceTree = "<group>"; };
@@ -274,11 +272,11 @@
 		642642AA22A5CA97007B0EAB /* THUserSpace */ = {
 			isa = PBXGroup;
 			children = (
-				BEED9BB627DB9C010032B610 /* THFirefoxScriptingTools.swift */,
 				64576AF926C26BF500CE9356 /* THFrontmostAppSaver.swift */,
 				6401518F269C54C000C4DF9A /* THHelperRunningApp.swift */,
 				647B34EA2668F11000785E10 /* THOpenInBrowser.swift */,
 				64BACF3F26AC3547000E4F97 /* THParentAppAlive.swift */,
+				BEED9BB627DB9C010032B610 /* THWebBrowserScriptingTools.swift */,
 			);
 			path = THUserSpace;
 			sourceTree = "<group>";
@@ -370,16 +368,11 @@
 		64C5721322A555F9000B6EC3 /* Tug */ = {
 			isa = PBXGroup;
 			children = (
-				BE323AFE27DA2A5700F6021D /* ChannelItem.swift */,
-				BE32396627D9F1E500F6021D /* Channel.swift */,
-				BE323AFC27DA1E1F00F6021D /* ChannelManager.swift */,
-				BE4F8D0827D95E5100A30B3E /* ChannelStringExtension.swift */,
-				BE4F8D0627D95E5100A30B3E /* RssChannel */,
-				BE4F8CFB27D95E4F00A30B3E /* YtChannel */,
 				64DC4D21269A42A9006BAA4B /* StatusIcon.swift */,
 				6424BCBE269F54F8008E7084 /* UserPreferences.swift */,
 				64015180269C533C00C4DF9A /* PreferencesWindowController.swift */,
 				64015182269C534A00C4DF9A /* PreferencesWindowController.xib */,
+				BEED9BC627DFCB6A0032B610 /* Channel */,
 				BEED9BC127DBD5F90032B610 /* ChannelListWindowController */,
 				64CC07D0269B20FB003D9392 /* MenuList */,
 				6426434722A5CF40007B0EAB /* Bridging-Header.h */,
@@ -395,8 +388,7 @@
 		64CC07D0269B20FB003D9392 /* MenuList */ = {
 			isa = PBXGroup;
 			children = (
-				648FC490256591E10067B491 /* AddMoreMenu.swift */,
-				64CC07C7269B011D003D9392 /* SettingsMenu.swift */,
+				64CC07C7269B011D003D9392 /* MoreMenu.swift */,
 				64CC07C5269B002B003D9392 /* HeaderView.swift */,
 				643F07462699F843002DDA3B /* MenuCellView.swift */,
 				BE78027F27D90AF8000366DD /* MenuObject.swift */,
@@ -528,6 +520,19 @@
 				BEED9BC327DBD6230032B610 /* YtChannelDetailsViewController.xib */,
 			);
 			path = ChannelListWindowController;
+			sourceTree = "<group>";
+		};
+		BEED9BC627DFCB6A0032B610 /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				BE323AFE27DA2A5700F6021D /* ChannelItem.swift */,
+				BE32396627D9F1E500F6021D /* Channel.swift */,
+				BE323AFC27DA1E1F00F6021D /* ChannelManager.swift */,
+				BE4F8D0827D95E5100A30B3E /* ChannelStringExtension.swift */,
+				BE4F8D0627D95E5100A30B3E /* RssChannel */,
+				BE4F8CFB27D95E4F00A30B3E /* YtChannel */,
+			);
+			path = Channel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -672,9 +677,9 @@
 				64DC4D22269A42A9006BAA4B /* StatusIcon.swift in Sources */,
 				64015199269C54D000C4DF9A /* THHotKey.m in Sources */,
 				BE4F8D1127D95E5100A30B3E /* RssChannelItemFilter.swift in Sources */,
-				BEED9BB727DB9C010032B610 /* THFirefoxScriptingTools.swift in Sources */,
+				BEED9BB727DB9C010032B610 /* THWebBrowserScriptingTools.swift in Sources */,
 				BE78028027D90AF8000366DD /* MenuObject.swift in Sources */,
-				64CC07C8269B011D003D9392 /* SettingsMenu.swift in Sources */,
+				64CC07C8269B011D003D9392 /* MoreMenu.swift in Sources */,
 				64774B5D256ADE0500D9D5B3 /* THRunningApp.swift in Sources */,
 				BE4F8D1027D95E5100A30B3E /* RssPubDateConvertor.swift in Sources */,
 				BE32396727D9F1E500F6021D /* Channel.swift in Sources */,
@@ -706,7 +711,6 @@
 				64BD394D256EF1D300988D08 /* THDataExtensions.swift in Sources */,
 				BECD72A827DA3EAF00A001FE /* RssChannelItem.swift in Sources */,
 				64015198269C54D000C4DF9A /* THHotKeyFieldView.m in Sources */,
-				648FC491256591E10067B491 /* AddMoreMenu.swift in Sources */,
 				BE4F8D0127D95E4F00A30B3E /* YtChannelVideoId.swift in Sources */,
 				BE323AFD27DA1E1F00F6021D /* ChannelManager.swift in Sources */,
 				643417DB267551080046CD56 /* THLogger.swift in Sources */,

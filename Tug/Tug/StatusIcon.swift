@@ -42,7 +42,7 @@ extension NSStatusBarButton {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class StatusIcon: NSObject {
 
-	@objc var barItem: NSStatusItem!
+	var barItem: NSStatusItem!
 	var statusItemWindow: NSWindow? { get { barItem.button!.window } }
 
 	private let barIcon = NSImage(named: "tug_bar")!.th_copyAndResize(NSMakeSize(16.0, 16.0))!

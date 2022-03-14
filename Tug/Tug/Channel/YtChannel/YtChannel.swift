@@ -268,7 +268,7 @@ class YtChannel: Channel {
 				}
 		
 				items.append(item)
-				items.sort(by: { $0.wallDate >  $1.wallDate })
+				items.sort(by: { $0.received >  $1.received })
 			}
 		}
 

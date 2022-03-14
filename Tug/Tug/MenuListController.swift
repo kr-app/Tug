@@ -105,7 +105,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		}
 	}
 	
-	@objc func n_iconDownloaderDidLoad(_ notification: Notification) {
+	@objc private func n_iconDownloaderDidLoad(_ notification: Notification) {
 		guard 	let url = notification.userInfo?["url"] as? URL,
 					let objectList = objectList
 		else {
@@ -335,9 +335,6 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			return MenuObjectItem(kind: .error, error: title)
 		}
 
-		let showRss = true
-		let showYt = true
-
 		var objectList = [MenuObjectItem]()
 
 		// On error
@@ -397,6 +394,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		// unreadedItems
 		let unreadedItems = items.filter({ $0.item.pinned == false && $0.item.checked == false })
 		if unreadedItems.count > 0 {
+			objectList.append(MenuObjectItem(kind: .group, title: THLocalizedString("Unread")))
 			for item in unreadedItems {
 				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
 			}
@@ -406,6 +404,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		// pinnedItems
 		let pinnedItems = items.filter({ $0.item.pinned == true })
 		if pinnedItems.count > 0 {
+			objectList.append(MenuObjectItem(kind: .group, title: THLocalizedString("Pinned")))
 			for item in pinnedItems {
 				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
 			}
@@ -413,8 +412,34 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		}
 
 		// others
-		for item in items.filter({ $0.item.pinned == false && $0.item.checked == true }) {
-			objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
+		let others = items.filter({ $0.item.pinned == false && $0.item.checked == true })
+
+		let now = Date()
+		let todayTime = Calendar.current.th_midnight(of: now).timeIntervalSince1970
+		let yesterdayTime = Calendar.current.th_midnight(of: Calendar.current.date(byAdding: .day, value: -1, to: now)!).timeIntervalSince1970
+
+		let todays = others.filter( { $0.item.received.timeIntervalSince1970 >= todayTime })
+		if todays.count > 0 {
+			objectList.append(MenuObjectItem(kind: .group, title: THLocalizedString("Today")))
+			for item in todays {
+				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
+			}
+		}
+
+		let yesterdays = others.filter( { $0.item.received.timeIntervalSince1970 >= yesterdayTime && $0.item.received.timeIntervalSince1970 < todayTime })
+		if yesterdays.count > 0 {
+			objectList.append(MenuObjectItem(kind: .group, title: THLocalizedString("Yesterday")))
+			for item in yesterdays {
+				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
+			}
+		}
+
+		let recents = others.filter( { $0.item.received.timeIntervalSince1970 < yesterdayTime })
+		if recents.count > 0 {
+			objectList.append(MenuObjectItem(kind: .group, title: THLocalizedString("Recents")))
+			for item in recents {
+				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
+			}
 		}
 
 		self.objectList = objectList
@@ -461,8 +486,13 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		return objectList?.count ?? 0
 	}
 
-	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-		return objectList![row]
+//	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+//		return objectList![row]
+//	}
+
+	func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool {
+		let item = objectList![row]
+		return item.kind == .group
 	}
 	
 	func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
@@ -483,15 +513,20 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 			return rowView!
 		}
+		else if object.kind == .separator {
+//			let rowView = MenuListSepRowView(frame: .zero)
+//			return rowView
+		}
+		else if object.kind == .group {
+			let rowView = GroupRowView(frame: .zero)
+			rowView.backgroundColor = .white
+			return rowView
+		}
 		else if object.kind == .error {
 			let rowView = MenuListErrRowView(frame: .zero)
 			return rowView
 		}
-		else if object.kind == .separator {
-			let rowView = MenuListSepRowView(frame: .zero)
-			return rowView
-		}
-		
+
 		return nil
 	}
 
@@ -503,6 +538,15 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			cell.updateCell(forObject: object)
 			return cell
 		}
+		else if object.kind == .separator {
+			let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sep_cell_id"), owner: self) as! NSTableCellView
+			return cell
+		}
+		else if object.kind == .group {
+			let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "group_cell_id"), owner: self) as! NSTableCellView
+			cell.textField?.objectValue = object.title
+			return cell
+		}
 		else if object.kind == .error {
 			let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "onerror_cell_id"), owner: self) as! NSTableCellView
 
@@ -511,17 +555,13 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 			return cell
 		}
-		else if object.kind == .separator {
-			let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sep_cell_id"), owner: self) as! NSTableCellView
-			return cell
-		}
-		
+
 		return nil
 	}
 	
 	func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		let object = objectList![row]
-		return object.kind == .separator ? 19.0 : object.kind == .error ? 57.0 : tableView.rowHeight
+		return object.kind == .separator ? 19.0 :object.kind == .group ? 24.0 : object.kind == .error ? 57.0 : tableView.rowHeight
 	}
 
 	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
@@ -575,7 +615,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		return []
 	}
 
-	@objc func highlightedTableView(_ tableView: THHighlightedTableView, didHighlightRow highlightedRow : Int, previousHighlightedRow: Int) {
+	func highlightedTableView(_ tableView: THHighlightedTableView, didHighlightRow highlightedRow : Int, previousHighlightedRow: Int) {
 
 		if previousHighlightedRow != -1 {
 			let rowView = tableView.rowView(atRow: previousHighlightedRow, makeIfNecessary: false) as? MenuListRowView
@@ -640,7 +680,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		return nil
 	}
 
-	@objc func openPreviewOfCurrentItem() {
+	@objc private func openPreviewOfCurrentItem() {
 		var previewItemId: String?
 		
 		var channel: Channel?
@@ -742,7 +782,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			ChannelManager.managerOfChannel(channel)?.mark(checked: true, item: item, channel: channel.identifier)
 
 			DispatchQueue.main.async {
-				if THFirefoxScriptingTools.createWindowIfNecessary() == false {
+				if THWebBrowserScriptingTools.createWindowIfNecessary() == false {
 					THLogError("createWindowIfNecessary == false link:\(link)")
 				}
 
@@ -768,7 +808,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		}
 	}
 
-	@objc func tableViewDoubleAction(_ sender: NSTableView) {
+	@objc private func tableViewDoubleAction(_ sender: NSTableView) {
 		openInWebBrower(objectItem(at: sender.clickedRow))
 	}
 	

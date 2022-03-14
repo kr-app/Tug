@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +33,7 @@
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="onerror_cell_id" width="480" minWidth="40" maxWidth="10000" id="bri-Jw-MaQ">
+                                    <tableColumn identifier="item" width="480" minWidth="40" maxWidth="10000" id="bri-Jw-MaQ">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -105,6 +104,24 @@ Pq</string>
                                                 <rect key="frame" x="0.0" y="148" width="480" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </tableCellView>
+                                            <tableCellView identifier="group_cell_id" id="hpU-bD-uuS">
+                                                <rect key="frame" x="0.0" y="165" width="480" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I49-dh-4BB">
+                                                        <rect key="frame" x="10" y="5" width="460" height="16"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Jgt-97-OlD">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <connections>
+                                                    <outlet property="textField" destination="I49-dh-4BB" id="ELU-pa-h2S"/>
+                                                </connections>
+                                            </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>
                                 </tableColumns>
@@ -167,15 +184,5 @@ Pq</string>
             </subviews>
             <point key="canvasLocation" x="-22" y="-168"/>
         </customView>
-        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Wpa-5R-dKe">
-            <rect key="frame" x="0.0" y="0.0" width="37" height="16"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="PPt-CH-3wy">
-                <font key="font" usesAppearanceFont="YES"/>
-                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-            </textFieldCell>
-            <point key="canvasLocation" x="43" y="-340"/>
-        </textField>
     </objects>
 </document>

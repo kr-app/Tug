@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	// MARK: -
 	
 #if DEBUG
-	@objc func test() {
+	@objc private func test() {
 		if TH_isDebuggerAttached() == false {
 			return
 		}
@@ -56,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	// MARK: -
 	
-	@objc func n_panePreviewRequest(_ notification: Notification) {
+	@objc private func n_panePreviewRequest(_ notification: Notification) {
 		THLogDebug("notification:\(notification)")
 
 		guard let info = notification.userInfo

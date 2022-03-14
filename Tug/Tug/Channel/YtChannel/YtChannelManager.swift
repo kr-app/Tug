@@ -46,7 +46,7 @@ class YtChannelManager: ChannelManager {
 		var printables = [YtChannel]()
 
 		for channel in channels {
-			guard let recentFeed = channel.items.first?.wallDate
+			guard let recentFeed = channel.items.first?.received
 			else {
 				continue
 			}
@@ -58,13 +58,29 @@ class YtChannelManager: ChannelManager {
 			printables.append(channel)
 		}
 	
-		printables.sort(by: { $0.items.first!.wallDate <  $1.items.first!.wallDate })
-		let p = printables.map({ "\($0.items.first!.wallDate), \($0.title!)" })
+		printables.sort(by: { $0.items.first!.received <  $1.items.first!.received })
+		let p = printables.map({ "\($0.items.first!.received), \($0.title!)" })
 
 		THLogInfo("channel without recent (15 days) publication:\(p as NSArray)")
 	}
 
 	// MARK: -
+
+	func addChannel(videoId: YtChannelVideoId) -> Bool {
+		if self.channel(withVideoId: videoId) != nil {
+			THLogError("another channel found with videoId:\(videoId)")
+			return false
+		}
+
+		let channel = YtChannel(videoId: videoId)
+		channels.append(channel)
+
+		if channel.save(toDir: dirPath) == false {
+			THLogError("save == false channel:\(channel)")
+		}
+
+		return true
+	}
 
 	func refresh(force: Bool = false) {
 		if force == true {
@@ -82,16 +98,16 @@ class YtChannelManager: ChannelManager {
 		return r.isEmpty ? nil : r
 	}
 
+	func channel(withVideoId videoId: YtChannelVideoId) -> YtChannel? {
+		return channels.first(where: { $0.videoId == videoId })
+	}
+
 	override func channel(withId identifier: String) -> Channel? {
 		channels.first(where: { $0.identifier == identifier } )
 	}
 
 	override func recentRefDate() -> TimeInterval {
 		Date().timeIntervalSinceReferenceDate - 1.5.th_day
-	}
-
-	private func channel(withVideoId videoId: YtChannelVideoId) -> YtChannel? {
-		return channels.first(where: { $0.videoId == videoId })
 	}
 
 	override func removeChannel(_ channelId: String) {
@@ -156,28 +172,6 @@ class YtChannelManager: ChannelManager {
 			self.startUpdateOfNextChannel()
 		})
 	}
-	
-	// MARK: -
-	
-//	func set(videoId: YtChannelVideoId, for channel: YtChannel) {
-//
-//		if self.channel(forBookmark: site.identifier) != nil {
-//			return false
-//		}
-//
-//		if YtChannelVideoIdExtractor.videoId(for: site.asURL!) != nil {
-//			return false
-//		}
-//
-//		let channel = YtChannel(bookmarkId: site.identifier, videoId: videoId)
-//		channels.append(channel)
-//
-//		if channel.save(toDir: dirPath) == false {
-//			THLogError("save == false channel:\(channel)")
-//		}
-//
-//		return true
-//	}
 
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------

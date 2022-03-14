@@ -53,7 +53,7 @@ struct YtChannelVideoId: Equatable, THDictionarySerializationProtocol {
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-class YtChannelVideoIdExtractor: NSObject {
+struct YtChannelVideoIdExtractor {
 
 	// pb cookies accept
 	/*class func loadVideoId(fromUrl url: URL) -> String? {
@@ -77,7 +77,7 @@ class YtChannelVideoIdExtractor: NSObject {
 		}
 	}*/
 
-	class func extractVideoId(fromSource html: String) -> YtChannelVideoId? {
+	static func extractVideoId(fromSource html: String) -> YtChannelVideoId? {
 		let ss = html as NSString
 
 		let rS = ss.range(of: "<meta itemprop=\"channelId\" content=\"", options: .caseInsensitive)
@@ -94,7 +94,7 @@ class YtChannelVideoIdExtractor: NSObject {
 		return nil
 	}
 
-	class func videoId(for site: URL) -> YtChannelVideoId? {
+/*	static func videoId(for site: URL) -> YtChannelVideoId? {
 
 		let uComps = site.pathComponents
 	
@@ -148,7 +148,7 @@ class YtChannelVideoIdExtractor: NSObject {
 		}
 
 		return nil
-	}
+	}*/
 
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
