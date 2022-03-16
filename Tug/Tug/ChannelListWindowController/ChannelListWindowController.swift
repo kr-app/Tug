@@ -67,7 +67,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 	@IBOutlet var plusButton: THNSButtonBlock!
 	@IBOutlet var minusButton: THNSButtonBlock!
 	
-	private let todayDf = THTodayDateFormatter(todayFormat: "HMS", otherFormatter: DateFormatter(dateStyle: .medium, timeStyle: .medium))
+	private let todayDateFormatter = THTodayDateFormatter(todayFormat: "HMS", otherFormatter: DateFormatter(dateStyle: .medium, timeStyle: .medium))
 	private var objectList: [ObjectItem]?
 	private var channelOnCreation: Channel?
 	
@@ -164,16 +164,17 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		if object.kind == 1 {
 			let channel = object.channel!
 
-			c_icon.image = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
+			c_icon.image = THFavIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
 			c_titleLabel.objectValue = channel.title
 			c_onOff.state = channel.disabled == true ? .off : .on
 
 			c_urlField.objectValue = channel.url?.absoluteString
 
 			let lu = channel.lastUpdate
-			c_lastUpdateLabel.stringValue = lu != nil ? todayDf.string(from: lu!) : "--"
+			c_lastUpdateLabel.stringValue = lu != nil ? todayDateFormatter.string(from: lu!) : "--"
 
-			c_lastErrorLabel.stringValue = channel.lastError ?? "--"
+			c_lastErrorLabel.stringValue = channel.lastError?.error ?? "--"
+			c_lastErrorLabel.toolTip = channel.lastError?.date == nil ? nil : todayDateFormatter.string(from: channel.lastError!.date)
 		}
 		else if object.kind == 2 {
 			ytDetailsViewController.updateUI(object.channel as! YtChannel)
@@ -239,10 +240,10 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 
 		var icon: NSImage?
 		if object.kind == 1 {
-			icon = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
+			icon = THFavIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
 		}
 		else if object.kind == 2 {
-			icon = THWebIconLoader.shared.icon(forHost: channel.link?.host, startUpdate: true, allowsGeneric: true)
+			icon = THFavIconLoader.shared.icon(forHost: channel.link?.host, startUpdate: true, allowsGeneric: true)
 		}
 
 		cell.onError = channel.lastError != nil

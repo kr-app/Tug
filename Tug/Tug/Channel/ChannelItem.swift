@@ -110,7 +110,7 @@ extension ChannelItem {
 
 	func contains(stringValue: String) -> Bool {
 		for s in [self.title, self.content, self.link?.absoluteString] {
-			if s != nil && s!.range(of: stringValue, options: .caseInsensitive) != nil {
+			if s?.th_isLike(stringValue) == true {
 				return true
 			}
 		}

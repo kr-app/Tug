@@ -4,9 +4,7 @@ import Cocoa
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate,
-													MenuListControllerDelegateProtocol,
-													THHotKeyCenterProtocol {
+class AppDelegate: NSObject, NSApplicationDelegate, MenuListControllerDelegateProtocol, THHotKeyCenterProtocol {
 	
 	@IBOutlet weak var channelsWin: NSWindow?
 
@@ -28,16 +26,6 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 #if DEBUG
 		THRunningApp.killOtherApps()
 #endif
-
-		THIconDownloader.shared.setDiskRetention(3.0.th_day)
-		THIconDownloader.shared.configuration.validity = 0.0
-		THIconDownloader.shared.configuration.maxSize = 84.0
-		THIconDownloader.shared.configuration.cropIcon = true
-		THIconDownloader.shared.configuration.excludedHosts = ["static.latribune.fr"]
-		THIconDownloader.shared.configuration.inMemory = 25
-
-		THWebIconLoader.shared.configuration.validity = 0.0
-		THWebIconLoader.shared.configuration.excludedHosts = THIconDownloader.shared.configuration.excludedHosts
 
 		THHelperRunningApp.shared.configure(withAppIdentifier: "com.kr-app.TugViewer")
 
@@ -70,6 +58,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
+		PPPaneRequester.shared.requestHide(withAnimation: false)
 //		RssChannelManager.shared.synchronise()
 	}
 
@@ -224,25 +213,10 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 	// MARK: -
 
 	@objc private func n_channelUpdated(_ notification: Notification) {
-
-		let channel = notification.userInfo!["channel"] as! Channel
-		//let item = notification.userInfo!["item"] as? ChannelItem
-
-		for item in channel.items {
-			if item.checked == true || THIconDownloader.shared.hasData(forIconUrl: item.thumbnail) == true {
-				continue
-			}
-			THIconDownloader.shared.loadIcon(atURL: item.thumbnail)
-		}
-
 		barIcon.updateBadge()
 	}
 
 	@objc private func n_channelItemUpdated(_ notification: Notification) {
-
-//		let channel = notification.userInfo!["channel"] as! Channel
-//		let item = notification.userInfo!["item"] as! ChannelItem
-
 		barIcon.updateBadge()
 	}
 

@@ -12,7 +12,7 @@ class YtChannelDetailsViewController: NSViewController {
 	@IBOutlet var lastUpdateLabel: NSTextField!
 	@IBOutlet var lastErrorLabel: NSTextField!
 
-	private let todayDf = THTodayDateFormatter(todayFormat: "HMS", otherFormatter: DateFormatter(dateStyle: .medium, timeStyle: .medium))
+	private let todayDateFormatter = THTodayDateFormatter(todayFormat: "HMS", otherFormatter: DateFormatter(dateStyle: .medium, timeStyle: .medium))
 	private var channel: YtChannel!
 
 	// MARK: -
@@ -23,17 +23,21 @@ class YtChannelDetailsViewController: NSViewController {
 
 	func updateUI(_ channel: YtChannel) {
 		self.channel = channel
+		updateUI()
+	}
 
-		iconView.image = THWebIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
+	private func updateUI() {
+		iconView.image = THFavIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
 		titleLabel.objectValue = channel.title
 		onOff.state = channel.disabled == true ? .off : .on
 
 		videoIdLabel.objectValue = channel.videoId.identifier
 
 		let lu = channel.lastUpdate
-		lastUpdateLabel.stringValue = lu != nil ? todayDf.string(from: lu!) : "--"
+		lastUpdateLabel.stringValue = lu != nil ? todayDateFormatter.string(from: lu!) : "--"
 
-		lastErrorLabel.stringValue = channel.lastError ?? "--"
+		lastErrorLabel.stringValue = channel.lastError?.error ?? "--"
+		lastErrorLabel.toolTip = channel.lastError?.date == nil ? nil : todayDateFormatter.string(from: channel.lastError!.date)
 	}
 
 	// MARK: -
@@ -81,19 +85,10 @@ class YtChannelDetailsViewController: NSViewController {
 	}
 
 	@IBAction func cleanAction(_ sender: NSButton) {
-//		let row = self.tableView.selectedRow
-//		if row == -1 {
-//			return
-//		}
-//
-//		let object = objectList![row]
-//		let channel = object["channel"] as! Channel
-//
-//		RssChannelManager.shared.clean(channel: channel.identifier)
-//
-//		RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
-//			self.updateUISelection()
-//		})
+		YtChannelManager.shared.clean(channel: channel.identifier)
+		YtChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+			self.updateUI()
+		})
 	}
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------

@@ -93,17 +93,17 @@ class YtChannelManager: ChannelManager {
 
 	// MARK: -
 
-	func channelsOnError() -> [YtChannel]? {
-		let r = channels.filter( { $0.lastError != nil } )
-		return r.isEmpty ? nil : r
-	}
-
 	func channel(withVideoId videoId: YtChannelVideoId) -> YtChannel? {
 		return channels.first(where: { $0.videoId == videoId })
 	}
 
 	override func channel(withId identifier: String) -> Channel? {
 		channels.first(where: { $0.identifier == identifier } )
+	}
+
+	override func channelsOnError() -> [Channel]? {
+		let r = channels.filter( { $0.lastError != nil } )
+		return r.isEmpty ? nil : r
 	}
 
 	override func recentRefDate() -> TimeInterval {

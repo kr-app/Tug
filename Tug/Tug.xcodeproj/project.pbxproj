@@ -68,7 +68,6 @@
 		64CC07C8269B011D003D9392 /* MoreMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C7269B011D003D9392 /* MoreMenu.swift */; };
 		64CC07CA269B089F003D9392 /* THNSMenuExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07C9269B089F003D9392 /* THNSMenuExtensions.swift */; };
 		64CC07D5269B5BD3003D9392 /* PPPanePreviewWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC07D3269B557A003D9392 /* PPPanePreviewWindow.swift */; };
-		64CE9A2C25BF70A6004EC688 /* THUnixCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CE9A2A25BF70A6004EC688 /* THUnixCommand.m */; };
 		64DC4D22269A42A9006BAA4B /* StatusIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DC4D21269A42A9006BAA4B /* StatusIcon.swift */; };
 		64E4B03822AD2B2C001E2340 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E4B03422AD2B22001E2340 /* libxml2.2.tbd */; };
 		64E727A22699AFC1000B516A /* MenuListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E727A12699AFC1000B516A /* MenuListController.swift */; };
@@ -99,6 +98,8 @@
 		BE4F8D1127D95E5100A30B3E /* RssChannelItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0727D95E5100A30B3E /* RssChannelItemFilter.swift */; };
 		BE4F8D1227D95E5100A30B3E /* RssChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0B27D95E5100A30B3E /* RssChannel.swift */; };
 		BE78028027D90AF8000366DD /* MenuObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE78027F27D90AF8000366DD /* MenuObject.swift */; };
+		BE82720F27E0C3B100CF91B3 /* ChannelIconLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */; };
+		BE82721127E1133800CF91B3 /* YtChannelDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82721027E1133800CF91B3 /* YtChannelDataTransformer.swift */; };
 		BECD72A427DA3CDE00A001FE /* YtChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD72A327DA3CDD00A001FE /* YtChannelItem.swift */; };
 		BECD72A827DA3EAF00A001FE /* RssChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD72A727DA3EAF00A001FE /* RssChannelItem.swift */; };
 		BEED9BB727DB9C010032B610 /* THWebBrowserScriptingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED9BB627DB9C010032B610 /* THWebBrowserScriptingTools.swift */; };
@@ -190,8 +191,6 @@
 		64CC07C7269B011D003D9392 /* MoreMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenu.swift; sourceTree = "<group>"; };
 		64CC07C9269B089F003D9392 /* THNSMenuExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNSMenuExtensions.swift; sourceTree = "<group>"; };
 		64CC07D3269B557A003D9392 /* PPPanePreviewWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPPanePreviewWindow.swift; sourceTree = "<group>"; };
-		64CE9A2A25BF70A6004EC688 /* THUnixCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THUnixCommand.m; sourceTree = "<group>"; };
-		64CE9A2B25BF70A6004EC688 /* THUnixCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THUnixCommand.h; sourceTree = "<group>"; };
 		64DC4D1A269A3329006BAA4B /* TugViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TugViewer.entitlements; sourceTree = "<group>"; };
 		64DC4D21269A42A9006BAA4B /* StatusIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusIcon.swift; sourceTree = "<group>"; };
 		64E4B03422AD2B22001E2340 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
@@ -215,6 +214,7 @@
 		BE0B09DC27D7F91E00DEE577 /* THColoredView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THColoredView.swift; sourceTree = "<group>"; };
 		BE0B09FB27D7F9A900DEE577 /* THFinderMdItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFinderMdItem.h; sourceTree = "<group>"; };
 		BE0B09FC27D7F9A900DEE577 /* THFinderMdItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFinderMdItem.m; sourceTree = "<group>"; };
+		BE2D76E227E089E1004B0B88 /* Tug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tug.entitlements; sourceTree = "<group>"; };
 		BE32396627D9F1E500F6021D /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		BE323AFC27DA1E1F00F6021D /* ChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelManager.swift; sourceTree = "<group>"; };
 		BE323AFE27DA2A5700F6021D /* ChannelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItem.swift; sourceTree = "<group>"; };
@@ -228,6 +228,8 @@
 		BE4F8D0B27D95E5100A30B3E /* RssChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannel.swift; sourceTree = "<group>"; };
 		BE4F8D0C27D95E5100A30B3E /* RssChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannelManager.swift; sourceTree = "<group>"; };
 		BE78027F27D90AF8000366DD /* MenuObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuObject.swift; sourceTree = "<group>"; };
+		BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelIconLoader.swift; sourceTree = "<group>"; };
+		BE82721027E1133800CF91B3 /* YtChannelDataTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelDataTransformer.swift; sourceTree = "<group>"; };
 		BECD72A327DA3CDD00A001FE /* YtChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelItem.swift; sourceTree = "<group>"; };
 		BECD72A727DA3EAF00A001FE /* RssChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItem.swift; sourceTree = "<group>"; };
 		BEED9BB627DB9C010032B610 /* THWebBrowserScriptingTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THWebBrowserScriptingTools.swift; sourceTree = "<group>"; };
@@ -296,8 +298,6 @@
 				642642FC22A5CAEA007B0EAB /* THFoundation.m */,
 				6426431322A5CAEA007B0EAB /* THLog.h */,
 				642642FF22A5CAEA007B0EAB /* THLog.m */,
-				64CE9A2B25BF70A6004EC688 /* THUnixCommand.h */,
-				64CE9A2A25BF70A6004EC688 /* THUnixCommand.m */,
 			);
 			path = THFoundation;
 			sourceTree = "<group>";
@@ -368,6 +368,7 @@
 		64C5721322A555F9000B6EC3 /* Tug */ = {
 			isa = PBXGroup;
 			children = (
+				BE2D76E227E089E1004B0B88 /* Tug.entitlements */,
 				64DC4D21269A42A9006BAA4B /* StatusIcon.swift */,
 				6424BCBE269F54F8008E7084 /* UserPreferences.swift */,
 				64015180269C533C00C4DF9A /* PreferencesWindowController.swift */,
@@ -484,6 +485,7 @@
 			children = (
 				BE4F8CFD27D95E4F00A30B3E /* YtChannelVideoId.swift */,
 				BE4F8CFC27D95E4F00A30B3E /* YtChannelFilter.swift */,
+				BE82721027E1133800CF91B3 /* YtChannelDataTransformer.swift */,
 				BECD72A327DA3CDD00A001FE /* YtChannelItem.swift */,
 				BE4F8CFE27D95E4F00A30B3E /* YtChannel.swift */,
 				BE4F8CFF27D95E4F00A30B3E /* YtChannelManager.swift */,
@@ -529,6 +531,7 @@
 				BE32396627D9F1E500F6021D /* Channel.swift */,
 				BE323AFC27DA1E1F00F6021D /* ChannelManager.swift */,
 				BE4F8D0827D95E5100A30B3E /* ChannelStringExtension.swift */,
+				BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */,
 				BE4F8D0627D95E5100A30B3E /* RssChannel */,
 				BE4F8CFB27D95E4F00A30B3E /* YtChannel */,
 			);
@@ -581,7 +584,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Michaël Parrot";
 				TargetAttributes = {
 					6458CE8C2698DEE200E3885F = {
@@ -686,6 +689,7 @@
 				BE0B09DD27D7F91E00DEE577 /* THColoredView.swift in Sources */,
 				BE4F8D0F27D95E5100A30B3E /* ChannelStringExtension.swift in Sources */,
 				64CC07CA269B089F003D9392 /* THNSMenuExtensions.swift in Sources */,
+				BE82721127E1133800CF91B3 /* YtChannelDataTransformer.swift in Sources */,
 				BE0B09D227D7F8F500DEE577 /* THXMLElement.m in Sources */,
 				640151C5269C70B200C4DF9A /* ChannelListWindowController.swift in Sources */,
 				6458CEAF2698E58100E3885F /* PPPaneRequester.swift in Sources */,
@@ -709,6 +713,7 @@
 				BE4F8D0D27D95E5100A30B3E /* RssChannelManager.swift in Sources */,
 				644C3E492576A63600127BC6 /* THOSAppearance.swift in Sources */,
 				64BD394D256EF1D300988D08 /* THDataExtensions.swift in Sources */,
+				BE82720F27E0C3B100CF91B3 /* ChannelIconLoader.swift in Sources */,
 				BECD72A827DA3EAF00A001FE /* RssChannelItem.swift in Sources */,
 				64015198269C54D000C4DF9A /* THHotKeyFieldView.m in Sources */,
 				BE4F8D0127D95E4F00A30B3E /* YtChannelVideoId.swift in Sources */,
@@ -730,7 +735,6 @@
 				BEED9BC427DBD6230032B610 /* YtChannelDetailsViewController.swift in Sources */,
 				BE4F8D1227D95E5100A30B3E /* RssChannel.swift in Sources */,
 				64EDAB5C2680A1E8001D5AC0 /* THDictionarySerialization.swift in Sources */,
-				64CE9A2C25BF70A6004EC688 /* THUnixCommand.m in Sources */,
 				64F3559A26C1D82E00B18F41 /* THAppInLoginItem.swift in Sources */,
 				640151D6269C7F5600C4DF9A /* THLocalizedString.swift in Sources */,
 				6473AF172545B842006003A8 /* THLog.swift in Sources */,
@@ -787,11 +791,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TugViewer/TugViewer.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = 56HL22VV9A;
+				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -816,7 +820,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TugViewer/TugViewer.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 100;
@@ -963,32 +967,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tug/Tug.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 56HL22VV9A;
-				ENABLE_HARDENED_RUNTIME = NO;
-				HEADER_SEARCH_PATHS = $SDKROOT/usr/include/libxml2;
-				INFOPLIST_FILE = Tug/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kr-app.com.Tug";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Tug/Bridging-Header.h";
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "TH_APP-Swift.h";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		64C5722122A555FB000B6EC3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Tug/Tug.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
 				ENABLE_HARDENED_RUNTIME = NO;
@@ -1000,6 +980,32 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kr-app.com.Tug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tug/Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "TH_APP-Swift.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		64C5722122A555FB000B6EC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Tug/Tug.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
+				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = $SDKROOT/usr/include/libxml2;
+				INFOPLIST_FILE = Tug/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kr-app.com.Tug";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tug/Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "TH_APP-Swift.h";
 				SWIFT_VERSION = 5.0;

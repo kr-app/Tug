@@ -83,17 +83,17 @@ class RssChannelManager: ChannelManager {
 		Date().timeIntervalSinceReferenceDate - 0.66.th_day
 	}
 
-	func channelsOnError() -> [RssChannel]? {
-		let r = channels.filter( { $0.lastError != nil } )
-		return r.isEmpty ? nil : r
-	}
-
 	func channel(withUrl url: URL) -> RssChannel? {
 		channels.first(where: { $0.url == url } )
 	}
 	
 	override func channel(withId identifier: String) -> Channel? {
 		channels.first(where: { $0.identifier == identifier } )
+	}
+
+	override func channelsOnError() -> [Channel]? {
+		let r = channels.filter( { $0.lastError != nil } )
+		return r.isEmpty ? nil : r
 	}
 
 	override func removeChannel(_ channelId: String) {
@@ -202,24 +202,5 @@ class RssChannelManager: ChannelManager {
 		return false
 	}
 
-	func updateChannel(_ channelId: String, completion: @escaping () -> Void) {
-		guard let channel = channel(withId: channelId)
-		else {
-			return
-		}
-
-		channel.update(urlSession: urlSession, completion: {(ok: Bool, error: String?) in
-			if ok == false {
-				THLogError("ok == false error:\(error)")
-			}
-
-			if channel.save(toDir: self.dirPath) == false {
-				THLogError("can not save channel:\(channel)")
-			}
-
-			completion()
-			NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
-		})
-	}
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------

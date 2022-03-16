@@ -49,7 +49,8 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 		coder.setUrl(url, forKey: "url")
 		coder.setDate(lastUpdate, forKey: "lastUpdate")
-		coder.setString(lastError, forKey: "lastError")
+		coder.setDate(lastError?.date, forKey: "lastError-date")
+		coder.setString(lastError?.error, forKey: "lastError-error")
 
 		coder.setBool(disabled, forKey: "disabled")
 		coder.setString(title, forKey: "title")
@@ -71,7 +72,9 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 		url = dictionaryRepresentation.url(forKey: "url")
 		lastUpdate = dictionaryRepresentation.date(forKey: "lastUpdate")
-		lastError = dictionaryRepresentation.string(forKey: "lastError")
+		if let lastErrorDate = dictionaryRepresentation.date(forKey: "lastError-date"), let lastErrorError = dictionaryRepresentation.string(forKey: "lastError-error") {
+			lastError = (date: lastErrorDate, error: lastErrorError)
+		}
 
 		disabled = dictionaryRepresentation.bool(forKey: "disabled") ?? false
 		title = dictionaryRepresentation.string(forKey: "title")
@@ -83,7 +86,7 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	func contains(stringValue: String) -> Bool {
 		for s in [self.title, self.url?.absoluteString, self.link?.absoluteString] {
-			if s != nil && s!.contains(stringValue) == true {
+			if s != nil && s!.th_isLike(stringValue) == true {
 				return true
 			}
 		}
@@ -103,7 +106,7 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	func save(toDir dirPath: String) -> Bool {
 		let path = dirPath.th_appendingPathComponent(getFilename(withExt: "plist"))
-		THLogDebug("path:\(path.th_abbreviatingWithTildeInPath())")
+		THLogDebug("path:\(path.th_abbreviatingWithTildeInPath)")
 
 		if dictionaryRepresentation().write(toFile: path) == false {
 			THLogError("write == false path:\(path)")

@@ -1,6 +1,6 @@
 //  ChannelManager.swift
 
-import Foundation
+import Cocoa
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class ChannelManager: NSObject {
@@ -17,6 +17,10 @@ class ChannelManager: NSObject {
 
 	func channel(withId: String) -> Channel? {
 		return nil
+	}
+
+	func channelsOnError() -> [Channel]? {
+		THFatalError("not implemented")
 	}
 
 	func removeChannel(_ channelId: String) {
@@ -84,6 +88,25 @@ extension ChannelManager {
 		noteChange(channel: channel)
 	}
 
+	func updateChannel(_ channelId: String, completion: @escaping () -> Void) {
+		guard let channel = channel(withId: channelId)
+		else {
+			return
+		}
+
+		channel.update(urlSession: urlSession, completion: {(ok: Bool, error: String?) in
+			if ok == false {
+				THLogError("ok == false error:\(error)")
+			}
+
+			if channel.save(toDir: self.dirPath) == false {
+				THLogError("can not save channel:\(channel)")
+			}
+
+			completion()
+			NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
+		})
+	}
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 

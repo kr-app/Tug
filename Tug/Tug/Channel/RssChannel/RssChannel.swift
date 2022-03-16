@@ -7,7 +7,7 @@ class RssChannel: Channel {
 
 	class func channel(fromFile path: String) -> Self? {
 		let channel = Self.th_unarchive(fromDictionaryRepresentationAtPath: path)
-		channel?.identifier = path.th_lastPathComponent.th_deletingPathExtension()
+		channel?.identifier = path.th_lastPathComponent.th_deletingPathExtension
 		return channel
 	}
 
@@ -104,6 +104,7 @@ class RssChannel: Channel {
 		var date_error_log_once = false
 		var extracted_media_log_once = false
 		let pubDateConvertor = PubDateConvertor()
+		let nowDate = Date()
 
 		for item in p.items {
 
@@ -164,7 +165,7 @@ class RssChannel: Channel {
 
 			let old_item = items.first(where: { $0.identifier == identifier })
 
-			let received = old_item?.received ?? Date()
+			let received = old_item?.received ?? nowDate
 
 			let item = RssChannelItem(identifier: identifier, received: received)
 

@@ -18,13 +18,13 @@ struct YtChannelFilter {
 
 	func ruleFor(channel: YtChannel, item: ChannelItem) -> YtChannelFilterRule {
 
-		if channel.videoId.identifier == "UC2MGuhIaOP6YLpUx106kTQw" { //International Federation of Sport Climbing
-			if let title = item.title {
+		let videoId = channel.videoId!
 
+		if videoId.identifier == "UC2MGuhIaOP6YLpUx106kTQw" { //International Federation of Sport Climbing
+			if let title = item.title {
 				if title.lowercased().contains("Paraclimbing".lowercased()) == true {
 					return .markReaded
 				}
-
 				for sf in [	" Lead highlights",
 								" Speed highlights",
 								" Lead qualifications highlights",
@@ -53,11 +53,19 @@ struct YtChannelFilter {
 				}
 			}
 		}
-		else if channel.videoId.identifier == "UC__xRB5L4toU9yYawt_lIKg" { // BLAST
+		else if videoId.kind == .channelId && videoId.identifier == "UC__xRB5L4toU9yYawt_lIKg" { // BLAST
 			if let title = item.title {
 				if title.hasSuffix("- LE JOURNAL") == true {
 					return .ignore
 				}
+			}
+		}
+		else if videoId.kind == .channelId && videoId.identifier == "UCgGb7tN3tIH5_Kk05D1J_bA" { // RMC
+			if let title = item.title {
+				if title.contains("EN DIRECT") && title.hasSuffix("invité de RMC") {
+					return .none
+				}
+				return .ignore
 			}
 		}
 

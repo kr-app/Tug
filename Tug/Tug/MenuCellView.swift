@@ -102,9 +102,9 @@ class MenuCellView : THHighlightedTableCellView {
 			let itemColor = isHighlighted == true ? .white : item.checked ? NSColor(calibratedWhite: 0.33, alpha: 1.0): .black
 
 			// icon
-			var img = THIconDownloader.shared.icon(atURL: item.thumbnail, startUpdate: true)
+			var img = ChannelIconLoader.shared.iconDownloader.icon(atURL: item.thumbnail, startUpdate: true)
 			if img == nil {
-				img = THWebIconLoader.shared.icon(forHost: channel.link?.host ?? channel.url?.host, startUpdate: true, allowsGeneric: true)
+				img = THFavIconLoader.shared.icon(forHost: channel.link?.host ?? channel.url?.host, startUpdate: true, allowsGeneric: true)
 			}
 			if isHighlighted == false && item.checked == true && item.pinned == false {
 				img = img?.th_imageGray()//.th_image(withCorner: 6.0)
@@ -166,13 +166,13 @@ class MenuCellView : THHighlightedTableCellView {
 			self.infoLabel.stringValue = info
 
 //				// icon
-//				var img = THIconDownloader.shared.icon(atURL: item.thumbnail, startUpdate: true)
+//				var img = ChannelManager.sharedIconDownloaded().icon(atURL: item.thumbnail, startUpdate: true)
 //				let corner: CGFloat = 6.0
 //
 //				img = img?.th_image(withCorner: corner)
 //
 //				if img == nil {
-//					let m_sz = THIconDownloader.shared.configuration.maxSize
+//					let m_sz = ChannelManager.sharedIconDownloaded().configuration.maxSize
 //					let i_sz = NSSize(m_sz, (m_sz * 0.75).rounded(.down))
 //					let i = NSImage(size: i_sz)
 //

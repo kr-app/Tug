@@ -320,30 +320,26 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	
 	private func updateUIIObjectList() {
 
-		func itemFromChannelsOnError(_ channels: [Channel]) -> MenuObjectItem {
-			let channel = channels.first!
-
-			var title: String!
-			if channels.count == 1 {
-				title = "\"\(channel.displayTitle())\" " + THLocalizedString("is on error") + "\n" + (channel.lastError ?? "?")
-			}
-			else {
-				title = "\(channels.count) " + THLocalizedString("channels on error")
-				title += "\n" + (channel.lastError ?? "?")
-			}
-
-			return MenuObjectItem(kind: .error, error: title)
-		}
-
 		var objectList = [MenuObjectItem]()
 
 		// On error
-		if let channels = YtChannelManager.shared.channelsOnError() {
-			objectList.append(itemFromChannelsOnError(channels))
-		}
+		for manager in [YtChannelManager.shared, RssChannelManager.shared] {
+			if let channels = manager.channelsOnError() {
+				let channel = channels.first!
 
-		if let channels = RssChannelManager.shared.channelsOnError() {
-			objectList.append(itemFromChannelsOnError(channels))
+				var title: String!
+				if channels.count == 1 {
+					title = "\"\(channel.displayTitle())\" " + THLocalizedString("is on error") + "\n"
+				}
+				else {
+					title = "\(channels.count) " + THLocalizedString("channels on error")
+				}
+
+				title += channel.lastError!.error
+				title += DateFormatter.th_YMD_HMS.string(from: channel.lastError!.date)
+
+				objectList.append(MenuObjectItem(kind: .error, error: title))
+			}
 		}
 
 		var items = [(kind: MenuObjectKind, channel: Channel, item: ChannelItem)]()

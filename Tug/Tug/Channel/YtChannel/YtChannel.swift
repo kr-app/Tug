@@ -29,7 +29,7 @@ class YtChannel: Channel {
 
 	class func channel(fromFile path: String) -> YtChannel? {
 		let channel = Self.th_unarchive(fromDictionaryRepresentationAtPath: path)
-		channel?.identifier = String(path.th_lastPathComponent.th_deletingPathExtension().dropFirst("channel-yt-".count))
+		channel?.identifier = String(path.th_lastPathComponent.th_deletingPathExtension.dropFirst("channel-yt-".count))
 		return channel
 	}
 	
@@ -167,7 +167,8 @@ class YtChannel: Channel {
 
 		let isoDateFormatter = ISO8601DateFormatter()
 		var nbItems = 0
-
+		let nowDate = Date()
+	
 		for c in childs {
 			if c.name() == "title" {
 				if let title = c.childs()?.first?.content() {
@@ -196,8 +197,8 @@ class YtChannel: Channel {
 				
 				let group = c.childNamed("group")
 				var thumbnail = group?.childNamed("thumbnail")?.attribute(forKey: "url") as? String
-				var content = group?.childNamed("description")?.childs()?.first?.content()?.th_truncate(max: 300)
-				content = content?.replacingOccurrences(of: "\n\n", with: "\n")
+				var content = group?.childNamed("description")?.childs()?.first?.content()
+				content = content == nil ? nil : YtChannelDataTransformer.transform(contentText: content!, forChannel: videoId)
 
 				let views = group?.childNamed("community")?.childNamed("statistics")?.attribute(forKey: "views") as? String
 
@@ -208,7 +209,7 @@ class YtChannel: Channel {
 				}
 
 				if thumbnail != nil && thumbnail?.th_lastPathComponent == "hqdefault.jpg" {
-					thumbnail = thumbnail?.th_deletingLastPathComponent().th_appendingPathComponent("mqdefault.jpg")
+					thumbnail = thumbnail?.th_deletingLastPathComponent.th_appendingPathComponent("mqdefault.jpg")
 				}
 
 				var publishedDate = published != nil ? isoDateFormatter.date(from: published!) : nil
@@ -231,10 +232,10 @@ class YtChannel: Channel {
 
 				let received: Date!
 				if onCreation == true {
-					received = updatedDate ?? publishedDate ?? Date()
+					received = updatedDate ?? publishedDate ?? nowDate
 				}
 				else {
-					received = old_feed?.received ?? Date()
+					received = old_feed?.received ?? nowDate
 				}
 
 				let item = YtChannelItem(identifier: identifier, received: received)
@@ -261,7 +262,7 @@ class YtChannel: Channel {
 				let rule = YtChannelFilter.shared.ruleFor(channel: self, item: item)
 				if rule == .markReaded {
 //					log(.info, "excluded item:\(item)")
-					item.checkedDate = Date()
+					item.checkedDate = nowDate
 				}
 				else if rule == .ignore {
 					continue
