@@ -86,7 +86,7 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	func contains(stringValue: String) -> Bool {
 		for s in [self.title, self.url?.absoluteString, self.link?.absoluteString] {
-			if s != nil && s!.th_isLike(stringValue) == true {
+			if s?.th_containsLike(stringValue) == true {
 				return true
 			}
 		}

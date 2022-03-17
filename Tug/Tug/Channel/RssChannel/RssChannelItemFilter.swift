@@ -72,14 +72,14 @@ class RssChannelFilter: NSObject, THDictionarySerializationProtocol {
 			}
 		}
 		else if titleFilter.mode == .contains {
-			if itemTitle.th_isLike(titleFilter.stringValue) {
+			if itemTitle.th_containsLike(titleFilter.stringValue) {
 				return true
 			}
 		}
 		else if titleFilter.mode == .containsArray {
 			let strings = titleFilter.value as! [String]
 			for string in strings {
-				if itemTitle.th_isLike(string) == false {
+				if itemTitle.th_containsLike(string) == false {
 					return false
 				}
 			}

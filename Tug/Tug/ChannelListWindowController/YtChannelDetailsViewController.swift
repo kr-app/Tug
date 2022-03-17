@@ -66,22 +66,22 @@ class YtChannelDetailsViewController: NSViewController {
 //		}
 //
 //		if kind == 2 {
-//			RssChannelManager.shared.addChannel(url: nUrl, startUpdate: false)
+//			YtChannelManager.shared.addChannel(url: nUrl, startUpdate: false)
 //			channelOnCreation = nil
 //			self.updateUI()
 //
-//			RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+//			YtChannelManager.shared.updateChannel(channel.identifier, completion: {() in
 //				self.updateUISelection()
 //			})
 //
 //			return
 //		}
 //
-//		RssChannelManager.shared.setAttribute(url: nUrl, channel: channel.identifier)
-//
-//		RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
-//			self.updateUISelection()
-//		})
+//		YtChannelManager.shared.setAttribute(url: nUrl, channel: channel.identifier)
+
+		YtChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+			self.updateUI()
+		})
 	}
 
 	@IBAction func cleanAction(_ sender: NSButton) {

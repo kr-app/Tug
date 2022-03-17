@@ -118,7 +118,7 @@ class RssChannel: Channel {
 			}
 
 			let link = item.value(named: "link")?.content
-			var content = item.value(named: "description")?.content?.th_truncate(max: 300, by: .byTruncatingTail)
+			var content = item.value(named: "description")?.content?.th_truncate(max: 150, by: .byTruncatingTail)
 
 			let guid = item.value(named: "guid")?.content
 			var mediaUrl = item.value(named: "media:content")?.attributes?["url"] as? String

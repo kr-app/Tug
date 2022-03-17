@@ -37,7 +37,6 @@ class HeaderView: NSView, THOverViewDelegateProtocol {
 //			sender.drawRepString(withAttrs: attrs, rect: rect, offSet: NSPoint(0.0, 1.0))
 			sender.drawRepImage(opacity: state == .pressed ? 0.5 : state == .highlighted ? 1.0 : 0.9, centerdInRect: sender.bounds)
 		}
-
 	}
 	
 	func overView(_ sender: THOverView, didPressed withInfo: [String : Any]?) {

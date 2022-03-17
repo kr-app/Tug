@@ -13,9 +13,7 @@ class YtChannelManager: ChannelManager {
 	
 	override init(dirPath: String) {
 		super.init(dirPath: dirPath)
-
 		loadChannels()
-		printChannelsWithNoRecentPublications(delayInDays: 15)
 	}
 
 	private func loadChannels() {
@@ -35,33 +33,6 @@ class YtChannelManager: ChannelManager {
 		}
 
 		THLogInfo("\(channels.count) channels")
-	}
-	
-	// MARK: -
-	
-	private func printChannelsWithNoRecentPublications(delayInDays: Int) {
-
-		let now = Date().timeIntervalSinceReferenceDate
-		let timeRef = now - TimeInterval(delayInDays).th_day
-		var printables = [YtChannel]()
-
-		for channel in channels {
-			guard let recentFeed = channel.items.first?.received
-			else {
-				continue
-			}
-
-			if recentFeed.timeIntervalSinceReferenceDate > timeRef  {
-				continue
-			}
-			
-			printables.append(channel)
-		}
-	
-		printables.sort(by: { $0.items.first!.received <  $1.items.first!.received })
-		let p = printables.map({ "\($0.items.first!.received), \($0.title!)" })
-
-		THLogInfo("channel without recent (15 days) publication:\(p as NSArray)")
 	}
 
 	// MARK: -

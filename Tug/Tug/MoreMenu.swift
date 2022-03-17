@@ -60,7 +60,7 @@ class MoreMenu: NSObject, NSMenuDelegate {
 		// URL - from pasteboard
 		var url: URL? = nil
 		if let string = NSPasteboard.general.string(forType: .string) {
-			if string.count > 5 && string.count < 1024 && string.contains(".") == true && string.contains("/") == true {
+			if string.count > 5 && string.count < 1024 && string.contains(".") && string.contains("/") {
 				url = URL(string: string)
 			}
 		}

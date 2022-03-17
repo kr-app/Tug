@@ -96,6 +96,8 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 			}
 		}
 
+		NotificationCenter.default.addObserver(self, selector: #selector(n_channelUpdated), name: ChannelManager.channelUpdatedNotification, object: nil)
+
 		updateUI()
 	}
 	
@@ -105,7 +107,25 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		}
 		super.showWindow(sender)
 	}
-	
+
+	// MARK: -
+
+	@objc private func n_channelUpdated(_ notification: Notification) {
+		let channel = notification.userInfo!["channel"] as! Channel
+		//let item = notification.userInfo!["item"] as? ChannelItem
+
+		let kind = channel is RssChannel ? 1: channel is YtChannel ? 2 : 0
+
+		var row = 0
+		for object in objectList! {
+			if object.kind == kind && channel.identifier == object.channel?.identifier {
+				self.tableView.th_reloadData(forRowIndexes: IndexSet(integer: row))
+				break
+			}
+			row += 1
+		}
+	}
+
 	// MARK: -
 	
 	private func updateUI() {
@@ -248,7 +268,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 
 		cell.onError = channel.lastError != nil
 		cell.textField?.stringValue = channel.displayName()
-		cell.textField?.font = channel.hasUnreaded() ? NSFont.boldSystemFont(ofSize: NSFont.systemFontSize(for: .small)) : NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .small))
+		cell.textField?.font = channel.hasUnreaded() ? NSFont.th_boldSystemFont(ofControlSize: .small) : NSFont.th_systemFont(ofControlSize: .small)
 		cell.imageView?.image = channel.disabled ? icon?.th_imageGray() : icon
 
 		return cell

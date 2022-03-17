@@ -24,7 +24,11 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 	var pinned: Bool { get { return pinndedDate != nil } }
 
 	override var description: String {
-		th_description("identifier: \(identifier) published: \(published) updated:\(updated) title: \(title?.th_truncate(max: 20))")
+		var d = "identifier: \(identifier) received: \(received) published: \(published)"
+		if let updated = updated {
+			 d += " updated:\(updated)"
+		}
+		return th_description(d + " title: \(title)")
 	}
 
 	init(identifier: String, received: Date) {
@@ -110,7 +114,7 @@ extension ChannelItem {
 
 	func contains(stringValue: String) -> Bool {
 		for s in [self.title, self.content, self.link?.absoluteString] {
-			if s?.th_isLike(stringValue) == true {
+			if s?.th_containsLike(stringValue) == true {
 				return true
 			}
 		}

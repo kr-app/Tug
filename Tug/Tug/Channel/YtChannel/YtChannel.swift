@@ -8,13 +8,7 @@ class YtChannel: Channel {
 	private(set) var videoId: YtChannelVideoId!
 
 	override var description: String {
-		let lastItem = items.sorted(by: { ($0.published ?? $0.received)!  >  ($1.published ?? $1.received)! }).first
-
-		if title != nil && TH_isDebuggerAttached() {
-			return th_description("\(title) lastItem:\(lastItem)")
-		}
-	
-		return th_description("identifier:\(identifier) videoId:\(videoId) title:\(title) lastItem:\(lastItem)")
+		th_description("identifier:\(identifier) videoId:\(videoId) title:\(title)")
 	}
 
 	init(videoId: YtChannelVideoId) {
@@ -281,6 +275,24 @@ class YtChannel: Channel {
 		}
 
 		return nil
+	}
+
+}
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+extension YtChannel {
+
+	func hasNoRecentPublications(delayInDays: Int) -> Bool? {
+		let dateRef = Calendar.current.date(byAdding: .day, value: -delayInDays, to: Date())!
+
+		guard let recentItem = self.items.first?.received // .sorted(by: <#T##(ChannelItem, ChannelItem) throws -> Bool#>).first?.received
+		else {
+			return nil
+		}
+
+		return recentItem < dateRef
 	}
 
 }
