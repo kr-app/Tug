@@ -66,7 +66,7 @@ class RssChannelManager: ChannelManager {
 	}
 
 	func refresh(force: Bool = false) {
-		filterManager?.synchronize()
+		filterManager?.synchronizeFromDisk()
 		
 		if force == true {
 			for channel in channels {

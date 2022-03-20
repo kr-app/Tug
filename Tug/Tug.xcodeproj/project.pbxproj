@@ -95,7 +95,7 @@
 		BE4F8D0D27D95E5100A30B3E /* RssChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0C27D95E5100A30B3E /* RssChannelManager.swift */; };
 		BE4F8D0F27D95E5100A30B3E /* ChannelStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0827D95E5100A30B3E /* ChannelStringExtension.swift */; };
 		BE4F8D1027D95E5100A30B3E /* RssPubDateConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0A27D95E5100A30B3E /* RssPubDateConvertor.swift */; };
-		BE4F8D1127D95E5100A30B3E /* RssChannelItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0727D95E5100A30B3E /* RssChannelItemFilter.swift */; };
+		BE4F8D1127D95E5100A30B3E /* RssChannelFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0727D95E5100A30B3E /* RssChannelFilter.swift */; };
 		BE4F8D1227D95E5100A30B3E /* RssChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0B27D95E5100A30B3E /* RssChannel.swift */; };
 		BE78028027D90AF8000366DD /* MenuObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE78027F27D90AF8000366DD /* MenuObject.swift */; };
 		BE82720F27E0C3B100CF91B3 /* ChannelIconLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */; };
@@ -222,7 +222,7 @@
 		BE4F8CFD27D95E4F00A30B3E /* YtChannelVideoId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YtChannelVideoId.swift; sourceTree = "<group>"; };
 		BE4F8CFE27D95E4F00A30B3E /* YtChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YtChannel.swift; sourceTree = "<group>"; };
 		BE4F8CFF27D95E4F00A30B3E /* YtChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YtChannelManager.swift; sourceTree = "<group>"; };
-		BE4F8D0727D95E5100A30B3E /* RssChannelItemFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannelItemFilter.swift; sourceTree = "<group>"; };
+		BE4F8D0727D95E5100A30B3E /* RssChannelFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannelFilter.swift; sourceTree = "<group>"; };
 		BE4F8D0827D95E5100A30B3E /* ChannelStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelStringExtension.swift; sourceTree = "<group>"; };
 		BE4F8D0A27D95E5100A30B3E /* RssPubDateConvertor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssPubDateConvertor.swift; sourceTree = "<group>"; };
 		BE4F8D0B27D95E5100A30B3E /* RssChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannel.swift; sourceTree = "<group>"; };
@@ -497,7 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				BE4F8D0A27D95E5100A30B3E /* RssPubDateConvertor.swift */,
-				BE4F8D0727D95E5100A30B3E /* RssChannelItemFilter.swift */,
+				BE4F8D0727D95E5100A30B3E /* RssChannelFilter.swift */,
 				BECD72A727DA3EAF00A001FE /* RssChannelItem.swift */,
 				BE4F8D0B27D95E5100A30B3E /* RssChannel.swift */,
 				BE4F8D0C27D95E5100A30B3E /* RssChannelManager.swift */,
@@ -679,7 +679,7 @@
 			files = (
 				64DC4D22269A42A9006BAA4B /* StatusIcon.swift in Sources */,
 				64015199269C54D000C4DF9A /* THHotKey.m in Sources */,
-				BE4F8D1127D95E5100A30B3E /* RssChannelItemFilter.swift in Sources */,
+				BE4F8D1127D95E5100A30B3E /* RssChannelFilter.swift in Sources */,
 				BEED9BB727DB9C010032B610 /* THWebBrowserScriptingTools.swift in Sources */,
 				BE78028027D90AF8000366DD /* MenuObject.swift in Sources */,
 				64CC07C8269B011D003D9392 /* MoreMenu.swift in Sources */,

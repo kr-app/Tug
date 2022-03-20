@@ -3,87 +3,91 @@
 import Cocoa
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-enum RssChannelFilterStringMode: Int {
-	case begin = 1
-	case contains = 2
-	case containsArray = 3
+enum RssChannelFilterAction: Int {
+	case exclude = 1
 }
 
-class RssChannelFilterString: NSObject, THDictionarySerializationProtocol {
-	let mode: RssChannelFilterStringMode
-	var value: Any?
-	var stringValue: String { get { value as! String } }
-	
-	init(mode: RssChannelFilterStringMode, value: Any) {
-		self.mode = mode
+enum RssChannelFilterTarget: Int {
+	case title = 1
+}
+
+enum RssChannelFilterMode: Int {
+	case beginBy = 1
+	case containsLike = 2
+}
+
+struct RssChannelFilterVerbs {
+	let action: RssChannelFilterAction
+	let target: RssChannelFilterTarget
+	let mode: RssChannelFilterMode
+
+	private static let actions: [RssChannelFilterAction: String] = [.exclude: "exclude"]
+	private static let targets: [RssChannelFilterTarget: String] = [.title: "title"]
+	private static let modes: [RssChannelFilterMode: String] = [.beginBy: "begin", .containsLike: "containsLike"]
+
+	init?(fromStringRepresentation stringRepresentation: String?) {
+		guard let comps = stringRepresentation?.components(separatedBy: " "), comps.count == 3
+		else {
+			return nil
+		}
+
+		self.action = Self.actions.first(where: {$1 == comps[0] })!.key
+		self.target = Self.targets.first(where: {$1 == comps[1] })!.key
+		self.mode = Self.modes.first(where: {$1 == comps[2] })!.key
+	}
+
+	func stringRepresentation() -> String {
+		return Self.actions[action]! + " " + Self.targets[target]! + " " + Self.modes[mode]!
+	}
+}
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+class RssChannelFilter: NSObject, THDictionarySerializationProtocol {
+	let host: String?
+	let verbs: RssChannelFilterVerbs
+	let value: Any
+
+	init(host: String? = nil, verbs: RssChannelFilterVerbs, value: Any) {
+		self.host = host
+		self.verbs = verbs
 		self.value = value
 	}
 	
 	override var description: String {
-		th_description("mode:\(mode) value:\(value)")
+		th_description("host:\(host) verbs:\(verbs.stringRepresentation()) value:\(value)")
 	}
 
-	func dictionaryRepresentation() -> THDictionaryRepresentation {
-		let coder = THDictionaryRepresentation()
-		coder.setInt(mode.rawValue, forKey: "mode")
-		coder.setAnyValue(value, forKey: "value")
-		return coder
-	}
-
-	required init(withDictionaryRepresentation dictionaryRepresentation: THDictionaryRepresentation) {
-		mode = RssChannelFilterStringMode(rawValue: dictionaryRepresentation.int(forKey: "mode")!)!
-		value = dictionaryRepresentation.anyValue(forKey: "value") ?? dictionaryRepresentation.string(forKey: "string")!
-	}
-
-}
-//--------------------------------------------------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------------------------------------------------
-enum RssChannelFilterKind: Int {
-	case exclude = 1
-}
-
-class RssChannelFilter: NSObject, THDictionarySerializationProtocol {
-	var kind: RssChannelFilterKind = .exclude
-	let host: String?
-	let titleFilter: RssChannelFilterString
-
-	init(host: String? = nil, titleFilter: RssChannelFilterString) {
-		self.host = host
-		self.titleFilter = titleFilter
-	}
-	
-	override var description: String {
-		th_description("kind:\(kind) host:\(host) titleFilter:\(titleFilter)")
-	}
-
-	func match(withHost channelHost: String, itemTitle: String) -> Bool {
+	func excluded(channelUrl: String, itemTitle: String) -> Bool {
 
 		if let host = self.host {
-			if channelHost.contains(host) == false {
+			if channelUrl.contains(host) == false {
 				return false
 			}
 		}
 
-		if titleFilter.mode == .begin {
-			if itemTitle.th_hasPrefixInsensitive(titleFilter.stringValue) {
-				return true
-			}
-		}
-		else if titleFilter.mode == .contains {
-			if itemTitle.th_containsLike(titleFilter.stringValue) {
-				return true
-			}
-		}
-		else if titleFilter.mode == .containsArray {
-			let strings = titleFilter.value as! [String]
-			for string in strings {
-				if itemTitle.th_containsLike(string) == false {
-					return false
+		if verbs.target == .title {
+			if verbs.mode == .beginBy {
+				if itemTitle.th_hasPrefixInsensitive(value as! String) {
+					return true
 				}
 			}
-			return strings.count > 0
+			else if verbs.mode == .containsLike {
+				if let values = value as? [String] {
+					for string in values {
+						if itemTitle.th_containsLike(string) == false {
+							return false
+						}
+					}
+					return true
+				}
+				else if let value = self.value as? String {
+					if itemTitle.th_containsLike(value) {
+						return true
+					}
+				}
+			}
 		}
 
 		return false
@@ -91,16 +95,18 @@ class RssChannelFilter: NSObject, THDictionarySerializationProtocol {
 	
 	func dictionaryRepresentation() -> THDictionaryRepresentation {
 		let coder = THDictionaryRepresentation()
-		coder.setInt(kind.rawValue, forKey: "kind")
+
 		coder.setString(host, forKey: "host")
-		coder.setObject(titleFilter, forKey: "titleFilter")
+		coder.setString(verbs.stringRepresentation(), forKey: "verbs")
+		coder.setAnyValue(value, forKey: "value")
+
 		return coder
 	}
 
 	required init(withDictionaryRepresentation dictionaryRepresentation: THDictionaryRepresentation) {
-		kind = RssChannelFilterKind(rawValue: dictionaryRepresentation.int(forKey: "kind")!)!
-		host = dictionaryRepresentation.string(forKey: "host")
-		titleFilter = RssChannelFilterString.th_object(fromDictionaryRepresentation: dictionaryRepresentation, forKey: "titleFilter") ?? RssChannelFilterString.th_object(fromDictionaryRepresentation: dictionaryRepresentation, forKey: "title")!
+		self.host = dictionaryRepresentation.string(forKey: "host")
+		self.verbs = RssChannelFilterVerbs(fromStringRepresentation: dictionaryRepresentation.string(forKey: "verbs")!)!
+		self.value = dictionaryRepresentation.anyValue(forKey: "value")!
 	}
 
 }
@@ -123,8 +129,16 @@ class RssChannelFilterManager {
 			self.fileStamps = FileManager.th_modDate1970(atPath: filePath)
 		}
 	}
-	
-	func synchronize() {
+
+	func printToConsole() {
+		THLogDebug("filters:\(filters.count)")
+
+		for (idx, filter) in filters.enumerated() {
+			THLogDebug("filter \(idx) host:\(filter.host) verbs:\(filter.verbs.stringRepresentation()) value:\(filter.value)")
+		}
+	}
+
+	func synchronizeFromDisk() {
 		if FileManager.default.fileExists(atPath: filePath) == false {
 			return
 		}
@@ -136,6 +150,8 @@ class RssChannelFilterManager {
 
 		self.filters = filters(fromFile: filePath) ?? []
 		self.fileStamps = modDate
+
+		printToConsole()
 	}
 	
 	private func filters(fromFile file: String) -> [RssChannelFilter]? {
@@ -154,21 +170,19 @@ class RssChannelFilterManager {
 			THLogError("filters == nil file:\(file)")
 			return nil
 		}
-		
-		for filter in filters {
-			THLogInfo("filter:\(filter)")
-		}
 
 		return filters
 	}
 	
-	private func save() -> Bool {
+	func synchronizeToDisk() -> Bool {
 		let rep = THDictionaryRepresentation()
+
 		rep.setObjects(filters, forKey: "filters")
 		if rep.write(toFile: filePath) == false {
 			THLogError("write == false filePath:\(filePath)")
 			return false
 		}
+
 		return true
 	}
 
@@ -183,14 +197,14 @@ class RssChannelFilterManager {
 		
 		filters.append(filter)
 		
-		if save() == false {
-			THLogError("save == false")
+		if synchronizeToDisk() == false {
+			THLogError("synchronizeToDisk == false")
 		}
 	}
 
-	func excludedChannel(_ channel: RssChannel, byTitle title: String) -> Bool {
+	func isExcludedItem(itemTitle: String, channel: RssChannel) -> Bool {
 		let url = channel.url!.absoluteString
-		return filters.contains(where: { $0.match(withHost: url, itemTitle: title) == true })
+		return filters.contains(where: { $0.excluded(channelUrl: url , itemTitle: itemTitle) == true })
 	}
 
 }

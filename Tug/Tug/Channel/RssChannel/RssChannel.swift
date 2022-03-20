@@ -101,6 +101,7 @@ class RssChannel: Channel {
 			self.link = URL(string: link)
 		}
 
+		let linkAsId = self.url!.host!.contains("lesechos.fr")
 		var date_error_log_once = false
 		var extracted_media_log_once = false
 		let pubDateConvertor = PubDateConvertor()
@@ -111,7 +112,7 @@ class RssChannel: Channel {
 			let title = item.value(named: "title")?.content
 
 			if let title = title {
-				if RssChannelFilterManager.shared.excludedChannel(self, byTitle: title) == true {
+				if RssChannelFilterManager.shared.isExcludedItem(itemTitle: title, channel: self) == true {
 					THLogInfo("excluded item:\(item)")
 					continue
 				}
@@ -120,7 +121,9 @@ class RssChannel: Channel {
 			let link = item.value(named: "link")?.content
 			var content = item.value(named: "description")?.content?.th_truncate(max: 150, by: .byTruncatingTail)
 
-			let guid = item.value(named: "guid")?.content
+			let guid = linkAsId ? nil : item.value(named: "guid")?.content
+//			let guidPermaLink = item.value(named: "guid")?.attributes?["isPermaLink"] as? String
+
 			var mediaUrl = item.value(named: "media:content")?.attributes?["url"] as? String
 			let date = item.value(named: "pubDate")?.content
 
@@ -212,9 +215,9 @@ class RssChannel: Channel {
 				}
 			}
 
-			if items.first(where: { $0.isLike(item) }) != nil {
-				THLogError("found like item for item:\(item)")
-				items.removeAll(where: { $0.isLike(item) == true })
+			if let dupItem = items.firstIndex(where: { $0.isLike(item) }) {
+				THLogError("found like duplicated item. dupItem:\(items[dupItem]) item:\(item)")
+				items.remove(at: dupItem)
 			}
 
 //			if onCreation == true {

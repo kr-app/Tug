@@ -35,7 +35,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuListControllerDelegatePr
 		let menu = NSMenu()
 		menu.addItem(NSMenuItem(title: "nil", action: nil, keyEquivalent: ""))
 		barIcon.barItem.button!.menu = menu
-	
+
+		RssChannelFilterManager.shared.printToConsole()
+		//RssChannelFilterManager.shared.synchronizeToDisk()
+
 		if THNetworkStatus.hasNetwork() == true {
 			RssChannelManager.shared.refresh()
 			YtChannelManager.shared.refresh()
