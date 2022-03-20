@@ -270,6 +270,11 @@ class YtChannel: Channel {
 		onCreation = false
 //		nbReceivedItems = nbItems
 
+		if markAllRead == true {
+			markAllRead = false
+			items.forEach({ $0.checkedDate = nowDate })
+		}
+
 		if items.count > 100 {
 			items.removeLast(items.count - 100)
 		}

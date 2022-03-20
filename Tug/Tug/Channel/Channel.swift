@@ -7,6 +7,7 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 	var creationDate: Date!
 	var identifier: String!
 	var onCreation = false
+	var markAllRead = false
 
 	var url: URL?
 

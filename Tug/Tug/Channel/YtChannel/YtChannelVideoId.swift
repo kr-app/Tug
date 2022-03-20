@@ -11,10 +11,11 @@ enum YtChannelVideoIdKind: Int {
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-struct YtChannelVideoId: Equatable, THDictionarySerializationProtocol {
-
+struct YtChannelVideoId: Equatable, CustomStringConvertible, THDictionarySerializationProtocol {
 	let kind: YtChannelVideoIdKind
 	let identifier: String
+
+	var description: String { return "<\(Self.self) kind:\(kind.rawValue) identifier:\(identifier)>" }
 
 	func dictionaryRepresentation() -> THDictionaryRepresentation {
 		return THDictionaryRepresentation(values: ["kind": kind.rawValue, "identifier": identifier])

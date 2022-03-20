@@ -88,7 +88,7 @@ extension ChannelManager {
 		noteChange(channel: channel)
 	}
 
-	func updateChannel(_ channelId: String, completion: @escaping () -> Void) {
+	func updateChannel(_ channelId: String, completion: (() -> Void)?) {
 		guard let channel = channel(withId: channelId)
 		else {
 			return
@@ -103,7 +103,7 @@ extension ChannelManager {
 				THLogError("can not save channel:\(channel)")
 			}
 
-			completion()
+			completion?()
 			NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
 		})
 	}

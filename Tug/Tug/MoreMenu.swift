@@ -7,13 +7,8 @@ class MoreMenu: NSObject, NSMenuDelegate {
 	
 	static let shared = MoreMenu()
 
-	var menu: NSMenu!
-	
-	override init() {
-		super.init()
-		menu = NSMenu(title: "menu", delegate: self, autoenablesItems: false)
-	}
-	
+	lazy var menu = NSMenu(title: "menu", delegate: self, autoenablesItems: false)
+
 	func menuNeedsUpdate(_ menu: NSMenu) {
 
 		menu.removeAllItems()
@@ -69,7 +64,9 @@ class MoreMenu: NSObject, NSMenuDelegate {
 			menu.addItem(THMenuItem(title: THLocalizedString("Add \"\(url.th_reducedHost)\""), block: { () in
 				if RssChannelManager.shared.addChannel(url: url) == nil {
 					THLogError("addChannel == nil url:\(url)")
+					return
 				}
+				NSAlert(withTitle: "RssChannel \(url.th_reducedHost) added", message: url.absoluteString).runModal()
 			}))
 			menu.addItem(NSMenuItem(title: url.absoluteString, enabled: false))
 		}
@@ -89,8 +86,11 @@ class MoreMenu: NSObject, NSMenuDelegate {
 				menu.addItem(THMenuItem(title: THLocalizedString("Add \"\(feed.title)\""), block: { () in
 					if RssChannelManager.shared.addChannel(url: feed.rss) == nil {
 						THLogError("addChannel == nil feed:\(feed)")
+						return
 					}
+					NSAlert(withTitle: "RssChannel \(feed.title) added", message: feed.rss.absoluteString).runModal()
 				}))
+
 				menu.addItem(NSMenuItem(title: feed.rss.absoluteString, enabled: false))
 				menu.addItem(NSMenuItem(title: feed.site.th_reducedHost, enabled: false))
 				menu.addItem(NSMenuItem.separator())
@@ -108,8 +108,7 @@ class MoreMenu: NSObject, NSMenuDelegate {
 
 		let frontTab = THWebBrowserScriptingTools.getFrontTab()
 
-		if let frontTab = frontTab, !frontTab.empty {
-
+		if let frontTab = frontTab, frontTab.empty == false {
 			menu.addItem(THMenuItem(title: THLocalizedString("Add \"\(frontTab.title)\""), block: { () in
 				guard let url = frontTab.url, let source = THWebBrowserScriptingTools.sourceOfFrontTab(targetUrl: url)
 				else {
@@ -125,7 +124,10 @@ class MoreMenu: NSObject, NSMenuDelegate {
 
 				if YtChannelManager.shared.addChannel(videoId: videoId) == false {
 					THLogError("addChannel == false:\(frontTab)")
+					return
 				}
+
+				NSAlert(withTitle: "YtChannel \(frontTab.title) added", message: frontTab.url).runModal()
 			}))
 		}
 		else {

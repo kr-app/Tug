@@ -102,7 +102,6 @@ class RssChannel: Channel {
 		}
 
 		let linkAsId = self.url!.host!.contains("lesechos.fr")
-		var date_error_log_once = false
 		var extracted_media_log_once = false
 		let pubDateConvertor = PubDateConvertor()
 		let nowDate = Date()
@@ -127,19 +126,8 @@ class RssChannel: Channel {
 			var mediaUrl = item.value(named: "media:content")?.attributes?["url"] as? String
 			let date = item.value(named: "pubDate")?.content
 
-			var pubDate: Date?
-			if let date = date {
-				pubDate = pubDateConvertor.pubDate(from: date)
-				if pubDate == nil && date_error_log_once == false {
-					date_error_log_once = true
-					THLogError("can not convert date:\(date) for item:\(item)")
-				}
-			}
-			else {
-				date_error_log_once = true
-				THLogError("can not extract pubDate for item:\(item)")
-			}
-	
+			let pubDate = date != nil ? pubDateConvertor.pubDate(from: date!) : nil
+
 			if mediaUrl == nil {
 				mediaUrl = MediaUrlExtractor.urlFromEnclosure(item: item)
 
@@ -158,7 +146,13 @@ class RssChannel: Channel {
 				}
 			}
 
-			content = content?.th_purifiedHtmlBestAsPossible()
+			// gestion des &#039;
+			if let content_cf = content as CFString?, let decodedHtml = CFXMLCreateStringByUnescapingEntities(nil, content_cf, nil) as? String {
+				content = decodedHtml
+			}
+
+			// suppression des tags html
+			content = content?.th_purifiedHtmlTagBestAsPossible()
 			
 			guard let identifier = guid ?? link ?? date
 			else {

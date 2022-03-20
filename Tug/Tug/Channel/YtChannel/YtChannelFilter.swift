@@ -53,6 +53,13 @@ struct YtChannelFilter {
 				}
 			}
 		}
+		else if channel.title == "Geo History" {
+			if let title = item.title {
+				if title.hasSuffix(" - #Shorts") == true {
+					return .ignore
+				}
+			}
+		}
 		else if videoId.kind == .channelId && videoId.identifier == "UC__xRB5L4toU9yYawt_lIKg" { // BLAST
 			if let title = item.title {
 				if title.hasSuffix("- LE JOURNAL") == true {

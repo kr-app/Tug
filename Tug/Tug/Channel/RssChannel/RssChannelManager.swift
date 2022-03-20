@@ -48,6 +48,7 @@ class RssChannelManager: ChannelManager {
 
 	@discardableResult func addChannel(url: URL, startUpdate: Bool = true) -> RssChannel? {
 		if channel(withUrl: url) != nil {
+			THLogError("another channel found with url:\(url.absoluteString)")
 			return nil
 		}
 
@@ -59,7 +60,7 @@ class RssChannelManager: ChannelManager {
 		}
 
 		if startUpdate == true {
-			startUpdateOfNextChannel()
+			self.updateChannel(channel.identifier, completion: nil)
 		}
 
 		return channel

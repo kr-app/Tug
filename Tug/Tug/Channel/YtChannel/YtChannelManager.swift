@@ -37,17 +37,22 @@ class YtChannelManager: ChannelManager {
 
 	// MARK: -
 
-	func addChannel(videoId: YtChannelVideoId) -> Bool {
+	func addChannel(videoId: YtChannelVideoId, startUpdate: Bool = true) -> Bool {
 		if self.channel(withVideoId: videoId) != nil {
 			THLogError("another channel found with videoId:\(videoId)")
 			return false
 		}
 
 		let channel = YtChannel(videoId: videoId)
+		channel.markAllRead = true
 		channels.append(channel)
 
 		if channel.save(toDir: dirPath) == false {
 			THLogError("save == false channel:\(channel)")
+		}
+
+		if startUpdate == true {
+			self.updateChannel(channel.identifier, completion: nil)
 		}
 
 		return true

@@ -4,7 +4,7 @@ import Cocoa
 import UniformTypeIdentifiers
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-struct PubDateConvertor {
+class PubDateConvertor {
 	
 	private let df_iso = ISO8601DateFormatter()
 	private let df_alt0 = DateFormatter(dateFormat: "E, d MMM yyyy HH:mm:ss Z")
@@ -12,6 +12,7 @@ struct PubDateConvertor {
 	private let df_alt2 = DateFormatter(dateFormat: "E, dd MMM yyyy HH:mm:ss")
 	
 	private var df_alt2_tz: TimeZone?
+	private var onErrorOnce = false
 	
 	func pubDate(from string: String) -> Date? {
 		
@@ -38,6 +39,11 @@ struct PubDateConvertor {
 					return date
 				}
 			}
+		}
+
+		if onErrorOnce == false {
+			onErrorOnce = true
+			THLogError("can not convert date from string:\(string)")
 		}
 
 		return nil

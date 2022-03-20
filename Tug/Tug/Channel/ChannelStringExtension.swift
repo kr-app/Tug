@@ -5,7 +5,7 @@ import Cocoa
 //--------------------------------------------------------------------------------------------------------------------------------------------
 extension String {
 
-	func th_purifiedHtmlBestAsPossible() -> String {
+	func th_purifiedHtmlTagBestAsPossible() -> String {
 
 		if self.range(of: "<") == nil {
 			return self
