@@ -122,7 +122,7 @@ class RssChannelManager: ChannelManager {
 
 	func hasWallChannels(withDateRef dateRef: TimeInterval, atLeast: Int) -> Bool {
 		var nb = 0
-		for channel in channels {
+		for channel in channels.filter({ $0.disabled == false }) {
 			nb += channel.items.filter( {$0.checkedDate == nil && $0.isRecent(refDate: dateRef) }).count
 			if nb >= atLeast {
 				return true
@@ -130,6 +130,14 @@ class RssChannelManager: ChannelManager {
 		}
 		return false
 			//return channels.contains(where: { $0.hasUnreaded() && $0.hasRecent(refDate: dateRef) } )
+	}
+
+	func unreadedCount() -> Int {
+		var r = 0
+		for channel in channels.filter( { $0.disabled == false } ) {
+			r += channel.unreaded()
+		}
+		return r
 	}
 
 //	func wallChannels(withDateRef dateRef: TimeInterval) -> [RssChannel] {

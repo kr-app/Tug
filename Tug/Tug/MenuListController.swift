@@ -306,16 +306,11 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			return
 		}
 		
-		let channels = RssChannelManager.shared.channels//.wallChannels()//.wallChannels(withDateRef: recentRef)
-		var nbu = 0
-		for channel in channels {
-			nbu += channel.unreaded()
-		}
-
+		let rssUnread = RssChannelManager.shared.unreadedCount()
 		let ytUnread = YtChannelManager.shared.unreadedCount()
 
-		let nbItems = objectList?.count ?? 0
-		headerLabel.stringValue = "\(nbu + ytUnread)/\(nbItems)"
+		let nbItems = objectList?.filter( { $0.kind == .rss || $0.kind == .yt }).count ?? 0
+		headerLabel.stringValue = "\(rssUnread + ytUnread)/\(nbItems)"
 	}
 	
 	private func updateUIIObjectList() {

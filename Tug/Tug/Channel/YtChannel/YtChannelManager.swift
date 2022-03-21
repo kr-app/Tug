@@ -92,7 +92,7 @@ class YtChannelManager: ChannelManager {
 	}
 
 	func hasUnreaded() -> Bool {
-		channels.contains(where: { $0.hasUnreaded()})
+		channels.contains(where: { $0.disabled == false && $0.hasUnreaded()})
 	}
 
 	func unreadedCount() -> Int {

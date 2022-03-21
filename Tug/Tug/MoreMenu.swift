@@ -66,7 +66,7 @@ class MoreMenu: NSObject, NSMenuDelegate {
 					THLogError("addChannel == nil url:\(url)")
 					return
 				}
-				NSAlert(withTitle: "RssChannel \(url.th_reducedHost) added", message: url.absoluteString).runModal()
+				NSAlert(withTitle: "RssChannel \"\(url.th_reducedHost)\" added", message: url.absoluteString).runModal()
 			}))
 			menu.addItem(NSMenuItem(title: url.absoluteString, enabled: false))
 		}
@@ -88,7 +88,7 @@ class MoreMenu: NSObject, NSMenuDelegate {
 						THLogError("addChannel == nil feed:\(feed)")
 						return
 					}
-					NSAlert(withTitle: "RssChannel \(feed.title) added", message: feed.rss.absoluteString).runModal()
+					NSAlert(withTitle: "RssChannel \"\(feed.title)\" added", message: feed.rss.absoluteString).runModal()
 				}))
 
 				menu.addItem(NSMenuItem(title: feed.rss.absoluteString, enabled: false))
@@ -127,7 +127,7 @@ class MoreMenu: NSObject, NSMenuDelegate {
 					return
 				}
 
-				NSAlert(withTitle: "YtChannel \(frontTab.title) added", message: frontTab.url).runModal()
+				NSAlert(withTitle: "YtChannel \"\(frontTab.title)\" added", message: frontTab.url).runModal()
 			}))
 		}
 		else {
