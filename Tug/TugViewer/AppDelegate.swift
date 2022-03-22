@@ -16,10 +16,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 																				selector: #selector(n_panePreviewRequest),
 																				name: PPPaneRequester.requestNotificationName,
 																				object: nil)
-//#if DEBUG
-//		perform(#selector(test), with: nil, afterDelay: 1.0)
-//#endif
-
+#if DEBUG
+		perform(#selector(test), with: nil, afterDelay: 1.0)
+#endif
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {
@@ -74,10 +73,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				THLogError("point | link | screen, notification:\(notification)")
 				return
 			}
-	
-			let parentPid = info[PPPaneRequesterKey.parentPid] as! pid_t
-			parentAppAlive.update(withParentPid: parentPid)
-	
+
+			if TH_isDebuggerAttached() == false {
+				let parentPid = info[PPPaneRequesterKey.parentPid] as! pid_t
+				parentAppAlive.update(withParentPid: parentPid)
+			}
+
 			if previewController == nil {
 				previewController = PreviewController(nibName: "PreviewController", bundle: nil)
 				//previewController.delegate = self

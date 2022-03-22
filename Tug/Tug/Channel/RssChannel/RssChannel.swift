@@ -151,9 +151,14 @@ class RssChannel: Channel {
 				content = decodedHtml
 			}
 
+			// suppression des &nbsp; ?
+			if content?.contains("&nbsp;") == true {
+				content = content?.replacingOccurrences(of: "&nbsp;", with: " ")
+			}
+
 			// suppression des tags html
 			content = content?.th_purifiedHtmlTagBestAsPossible()
-			
+
 			guard let identifier = guid ?? link ?? date
 			else {
 				THLogError("can not obtain identifier for item:\(item)")

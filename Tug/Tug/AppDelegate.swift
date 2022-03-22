@@ -55,7 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuListControllerDelegatePr
 			RssChannelManager.shared.refresh()
 			YtChannelManager.shared.refresh()
 		})
-				
+
 		NotificationCenter.default.addObserver(self, selector: #selector(n_channelUpdated), name: ChannelManager.channelUpdatedNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(n_channelItemUpdated), name: ChannelManager.channelItemUpdatedNotification, object: nil)
 	}

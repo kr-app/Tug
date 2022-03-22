@@ -45,24 +45,24 @@ struct RssChannelFilterVerbs {
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class RssChannelFilter: NSObject, THDictionarySerializationProtocol {
-	let host: String?
+	let hosts: [String]?
 	let verbs: RssChannelFilterVerbs
 	let value: Any
 
-	init(host: String? = nil, verbs: RssChannelFilterVerbs, value: Any) {
-		self.host = host
+	init(hosts: [String]? = nil, verbs: RssChannelFilterVerbs, value: Any) {
+		self.hosts = hosts
 		self.verbs = verbs
 		self.value = value
 	}
 	
 	override var description: String {
-		th_description("host:\(host) verbs:\(verbs.stringRepresentation()) value:\(value)")
+		th_description("hosts:\(hosts) verbs:\(verbs.stringRepresentation()) value:\(value)")
 	}
 
 	func excluded(channelUrl: String, itemTitle: String) -> Bool {
 
-		if let host = self.host {
-			if channelUrl.contains(host) == false {
+		if let hosts = self.hosts {
+			if hosts.contains(where: { $0.contains(channelUrl) }) == false {
 				return false
 			}
 		}
@@ -96,7 +96,7 @@ class RssChannelFilter: NSObject, THDictionarySerializationProtocol {
 	func dictionaryRepresentation() -> THDictionaryRepresentation {
 		let coder = THDictionaryRepresentation()
 
-		coder.setString(host, forKey: "host")
+		coder.setString(hosts?.joined(separator: " "), forKey: "hosts")
 		coder.setString(verbs.stringRepresentation(), forKey: "verbs")
 		coder.setAnyValue(value, forKey: "value")
 
@@ -104,7 +104,7 @@ class RssChannelFilter: NSObject, THDictionarySerializationProtocol {
 	}
 
 	required init(withDictionaryRepresentation dictionaryRepresentation: THDictionaryRepresentation) {
-		self.host = dictionaryRepresentation.string(forKey: "host")
+		self.hosts = (dictionaryRepresentation.string(forKey: "hosts") ?? dictionaryRepresentation.string(forKey: "host"))?.components(separatedBy: " ")
 		self.verbs = RssChannelFilterVerbs(fromStringRepresentation: dictionaryRepresentation.string(forKey: "verbs")!)!
 		self.value = dictionaryRepresentation.anyValue(forKey: "value")!
 	}
@@ -134,7 +134,7 @@ class RssChannelFilterManager {
 		THLogDebug("filters:\(filters.count)")
 
 		for (idx, filter) in filters.enumerated() {
-			THLogDebug("filter \(idx) host:\(filter.host) verbs:\(filter.verbs.stringRepresentation()) value:\(filter.value)")
+			THLogDebug("filter \(idx) host:\(filter.hosts) verbs:\(filter.verbs.stringRepresentation()) value:\(filter.value)")
 		}
 	}
 

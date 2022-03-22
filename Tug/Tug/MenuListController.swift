@@ -651,12 +651,12 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	}
 	
 	private func closePreview(animated: Bool) {
-		previewItemIndex = -1
+		cancelUpdatePreview()
 		PPPaneRequester.shared.requestClose(withAnimation: animated)
 	}
 
 	private func hidePreview(animated: Bool) {
-		previewItemIndex = -1
+		cancelUpdatePreview()
 		PPPaneRequester.shared.requestHide(withAnimation: animated)
 	}
 	
@@ -672,6 +672,10 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	}
 
 	@objc private func openPreviewOfCurrentItem() {
+		if self.view.window == nil {
+			return
+		}
+
 		var previewItemId: String?
 		
 		var channel: Channel?
