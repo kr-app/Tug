@@ -8,25 +8,32 @@ enum RssChannelFilterAction: Int {
 }
 
 enum RssChannelFilterTarget: Int {
-	case title = 1
+	case title
 }
 
 enum RssChannelFilterMode: Int {
-	case beginBy = 1
-	case containsLike = 2
+	case beginBy
+	case containsLike
+}
+
+enum RssChannelFilterMask: Int {
+	case all
+	case any
 }
 
 struct RssChannelFilterVerbs {
 	let action: RssChannelFilterAction
 	let target: RssChannelFilterTarget
 	let mode: RssChannelFilterMode
+	let mask: RssChannelFilterMask
 
 	private static let actions: [RssChannelFilterAction: String] = [.exclude: "exclude"]
 	private static let targets: [RssChannelFilterTarget: String] = [.title: "title"]
 	private static let modes: [RssChannelFilterMode: String] = [.beginBy: "begin", .containsLike: "containsLike"]
+	private static let marks: [RssChannelFilterMask: String] = [.all: "all", .any: "any"]
 
 	init?(fromStringRepresentation stringRepresentation: String?) {
-		guard let comps = stringRepresentation?.components(separatedBy: " "), comps.count == 3
+		guard let comps = stringRepresentation?.components(separatedBy: " ")
 		else {
 			return nil
 		}
@@ -34,10 +41,11 @@ struct RssChannelFilterVerbs {
 		self.action = Self.actions.first(where: {$1 == comps[0] })!.key
 		self.target = Self.targets.first(where: {$1 == comps[1] })!.key
 		self.mode = Self.modes.first(where: {$1 == comps[2] })!.key
+		self.mask = comps.count == 4 ? Self.marks.first(where: {$1 == comps[3] })!.key : .all
 	}
 
 	func stringRepresentation() -> String {
-		return Self.actions[action]! + " " + Self.targets[target]! + " " + Self.modes[mode]!
+		return Self.actions[action]! + " " + Self.targets[target]! + " " + Self.modes[mode]! + " " + Self.marks[mask]!
 	}
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,25 +70,36 @@ class RssChannelFilter: NSObject, THDictionarySerializationProtocol {
 	func excluded(channelUrl: String, itemTitle: String) -> Bool {
 
 		if let hosts = self.hosts {
-			if hosts.contains(where: { $0.contains(channelUrl) }) == false {
+			if hosts.contains(where: { channelUrl.contains($0) }) == false {
 				return false
 			}
 		}
 
 		if verbs.target == .title {
 			if verbs.mode == .beginBy {
-				if itemTitle.th_hasPrefixInsensitive(value as! String) {
-					return true
+				if let values = value as? [String] {
+					if values.contains(where: { itemTitle.th_hasPrefixInsensitive($0) }) {
+						return true
+					}
+				}
+				else if let value = self.value as? String {
+					if itemTitle.th_hasPrefixInsensitive(value) {
+						return true
+					}
 				}
 			}
 			else if verbs.mode == .containsLike {
 				if let values = value as? [String] {
-					for string in values {
-						if itemTitle.th_containsLike(string) == false {
-							return false
+					if verbs.mask == .any {
+						if values.contains(where: { itemTitle.th_containsLike($0) }) {
+							return true
 						}
 					}
-					return true
+					else {
+						if !values.contains(where: { !itemTitle.th_containsLike($0) }) {
+							return true
+						}
+					}
 				}
 				else if let value = self.value as? String {
 					if itemTitle.th_containsLike(value) {

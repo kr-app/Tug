@@ -13,7 +13,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 
 	var title: String?
 	var link: URL?
-	var content: String?
+	var contentText: String?
 	var thumbnail: URL?
 	var views: Int?
 
@@ -47,7 +47,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 
 		coder.setString(title, forKey: "title")
 		coder.setUrl(link, forKey: "link")
-		coder.setString(content, forKey: "content")
+		coder.setString(contentText, forKey: "contentText")
 		coder.setUrl(thumbnail, forKey: "thumbnail")
 		coder.setInt(views, forKey: "views")
 
@@ -66,7 +66,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 
 		title = dictionaryRepresentation.string(forKey: "title")
 		link = dictionaryRepresentation.url(forKey: "link")
-		content = dictionaryRepresentation.string(forKey: "content")
+		contentText = dictionaryRepresentation.string(forKey: "contentText") ?? dictionaryRepresentation.string(forKey: "content")
 		thumbnail = dictionaryRepresentation.url(forKey: "thumbnail")
 		views = dictionaryRepresentation.int(forKey: "views")
 
@@ -92,28 +92,15 @@ extension ChannelItem {
 		return false
 	}
 
-	func isLike(_ item: ChannelItem) -> Bool {
-		guard let title = self.title, let itemTitle = item.title
-		else {
-			return false
+	func isLikeItem(with title: String?, pubDate: Date?) -> Bool {
+		if let title = title, let pubDate = pubDate {
+			return title == title && pubDate == pubDate
 		}
-		if title != itemTitle {
-			return false
-		}
-
-		if let link = self.link, let itemLink = item.link {
-			if link != itemLink {
-				return false
-			}
-		}
-
-		// le contenu (content) peut varié, être tronqué, etc.
-
-		return true
+		return false
 	}
 
 	func contains(stringValue: String) -> Bool {
-		for s in [self.title, self.content, self.link?.absoluteString] {
+		for s in [self.title, self.contentText, self.link?.absoluteString] {
 			if s?.th_containsLike(stringValue) == true {
 				return true
 			}

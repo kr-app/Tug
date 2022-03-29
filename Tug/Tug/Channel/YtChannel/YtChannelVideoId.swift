@@ -3,9 +3,9 @@
 import Cocoa
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-enum YtChannelVideoIdKind: Int {
-	case channelId = 0
-	case userId = 1
+enum YtChannelVideoIdKind: String {
+	case channelId
+	case userId
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -27,7 +27,13 @@ struct YtChannelVideoId: Equatable, CustomStringConvertible, THDictionarySeriali
 	}
 
 	init(withDictionaryRepresentation dictionaryRepresentation: THDictionaryRepresentation) {
-		self.kind = YtChannelVideoIdKind(rawValue: dictionaryRepresentation.int(forKey: "kind")!)!
+		if let kindStr = dictionaryRepresentation.string(forKey: "kind") {
+			self.kind = YtChannelVideoIdKind(rawValue: kindStr)!
+		}
+		else {
+			let kindInt = dictionaryRepresentation.int(forKey: "kind")!
+			self.kind = kindInt == 0 ? .channelId : kindInt == 1 ? .userId : YtChannelVideoIdKind(rawValue: "nil")!
+		}
 		self.identifier = dictionaryRepresentation.string(forKey: "identifier")!
 	}
 
@@ -79,19 +85,17 @@ struct YtChannelVideoIdExtractor {
 	}*/
 
 	static func extractVideoId(fromSource html: String) -> YtChannelVideoId? {
-		let ss = html as NSString
-
-		let rS = ss.range(of: "<meta itemprop=\"channelId\" content=\"", options: .caseInsensitive)
-		if rS.location != NSNotFound {
-			let rsEnd = rS.location + rS.length
-			let rE = ss.range(of: "\"", options: .caseInsensitive, range: NSMakeRange(rsEnd, ss.length - rsEnd), locale: nil)
-			if rE.location != NSNotFound {
-				let channelId = ss.substring(with: NSMakeRange(rsEnd, rE.location - rsEnd))
-				return YtChannelVideoId(kind: .channelId, identifier: channelId)
-			}
+		if let channelId = html.th_search(firstRangeOf: "<meta itemprop=\"channelId\" content=\"", endRange: "\"") {
+			return YtChannelVideoId(kind: .channelId, identifier: channelId)
 		}
-
 		THLogError("item property not found")
+		return nil
+	}
+
+	static func extractThumbnail(fromSource html: String) -> URL? {
+		if let thumbnail = html.th_search(firstRangeOf: "<link rel=\"image_src\" href=\"", endRange: "\"") {
+			return URL(string: thumbnail)
+		}
 		return nil
 	}
 

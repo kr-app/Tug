@@ -27,7 +27,13 @@ class YtChannelDetailsViewController: NSViewController {
 	}
 
 	private func updateUI() {
-		iconView.image = THFavIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
+
+		var icon: NSImage?
+		if let poster = channel.poster {
+			icon = THIconDownloader.shared.icon(atURL: poster, startUpdate: true)
+		}
+
+		iconView.image = icon ?? THFavIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
 		titleLabel.objectValue = channel.title
 		onOff.state = channel.disabled == true ? .off : .on
 

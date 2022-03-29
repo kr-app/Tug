@@ -7,7 +7,7 @@ struct YtChannelDataTransformer {
 
 	static func transform(contentText: String, forChannel videoId: YtChannelVideoId) -> String? {
 
-		var text = contentText.th_truncate(max: 150)
+		var text = contentText.th_truncate(max: 200)
 
 		if videoId.kind == .channelId && videoId.identifier == "UCgGb7tN3tIH5_Kk05D1J_bA" { // RMC
 			let p = "🔴 EN DIRECT - "

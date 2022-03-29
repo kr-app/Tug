@@ -18,6 +18,7 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	var items = [ChannelItem]()
 
+	private var iconVersion: Int?
 	private var synchronizeTimer: Timer?
 
 	// MARK: -
@@ -60,6 +61,8 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 		coder.setObjects(items, forKey: "items")
 
+		coder.setInt(iconVersion, forKey: "iconVersion")
+
 		return coder
 	}
 
@@ -81,6 +84,8 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 		title = dictionaryRepresentation.string(forKey: "title")
 		link = dictionaryRepresentation.url(forKey: "link") ?? dictionaryRepresentation.url(forKey: "webLink")
 		poster = dictionaryRepresentation.url(forKey:  "poster")
+
+		iconVersion = dictionaryRepresentation.int(forKey: "iconVersion")
 	}
 
 	// MARK: -
@@ -109,6 +114,19 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 		let path = dirPath.th_appendingPathComponent(getFilename(withExt: "plist"))
 		THLogDebug("path:\(path.th_abbreviatingWithTildeInPath)")
 
+		var icon: NSImage?
+		if iconVersion != 2 {
+			if let poster = poster {
+				icon = THIconDownloader.shared.icon(atURL: poster, startUpdate: false)
+			}
+			else if let host = url?.host {
+				icon = THFavIconLoader.shared.icon(forHost: host, startUpdate: false, allowsGeneric: false)
+			}
+			if icon != nil {
+				iconVersion = 1
+			}
+		}
+
 		if dictionaryRepresentation().write(toFile: path) == false {
 			THLogError("write == false path:\(path)")
 			return false
@@ -120,6 +138,10 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 		if THFinderMdItem.setMdItemWhereFroms([w], atPath: path) == false {
 			THLogError("setMdItemWhereFroms == false path:\(path)")
+		}
+
+		if let icon = icon {
+			NSWorkspace.shared.setIcon(icon, forFile: path)
 		}
 
 		return true
@@ -148,7 +170,7 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 			return
 		}
 
-		synchronizeTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: {(timer: Timer) in
+		synchronizeTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: {(timer: Timer) in
 			if self.save(toDir: dirPath) == false {
 				THLogError("save == false")
 			}

@@ -6,6 +6,7 @@ import Cocoa
 class YtChannel: Channel {
 
 	private(set) var videoId: YtChannelVideoId!
+	private var excludedItems = [String]()
 
 	override var description: String {
 		th_description("identifier:\(identifier) videoId:\(videoId) title:\(title)")
@@ -191,8 +192,8 @@ class YtChannel: Channel {
 				
 				let group = c.childNamed("group")
 				var thumbnail = group?.childNamed("thumbnail")?.attribute(forKey: "url") as? String
-				var content = group?.childNamed("description")?.childs()?.first?.content()
-				content = content == nil ? nil : YtChannelDataTransformer.transform(contentText: content!, forChannel: videoId)
+				var contentText = group?.childNamed("description")?.childs()?.first?.content()
+				contentText = contentText == nil ? nil : YtChannelDataTransformer.transform(contentText: contentText!, forChannel: videoId)
 
 				let views = group?.childNamed("community")?.childNamed("statistics")?.attribute(forKey: "views") as? String
 
@@ -232,6 +233,10 @@ class YtChannel: Channel {
 					received = old_feed?.received ?? nowDate
 				}
 
+				if excludedItems.contains(where: { $0 == identifier }) {
+					continue
+				}
+
 				let item = YtChannelItem(identifier: identifier, received: received)
 
 				item.published = old_feed?.published ?? publishedDate
@@ -239,7 +244,7 @@ class YtChannel: Channel {
 
 				item.title = title
 				item.link = link != nil ? URL(string: link!) : nil
-				item.content = content
+				item.contentText = contentText
 				item.thumbnail = thumbnail != nil ? URL(string: thumbnail!) : nil
 				item.views = views != nil ? Int(views!) : nil
 //				item.rating = rating
@@ -259,9 +264,15 @@ class YtChannel: Channel {
 					item.checkedDate = nowDate
 				}
 				else if rule == .ignore {
+					excludedItems.append(item.identifier)
+					THLogWarning("channel:\(self.title) ignore item:\(item.title ?? item.identifier)")
 					continue
 				}
-		
+				else if rule == .ignoreTemporaly {
+					THLogWarning("channel:\(self.title) ignore temporaly item:\(item.title ?? item.identifier)")
+					continue
+				}
+
 				items.append(item)
 				items.sort(by: { $0.received >  $1.received })
 			}

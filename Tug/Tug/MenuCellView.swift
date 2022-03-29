@@ -120,7 +120,7 @@ class MenuCellView : THHighlightedTableCellView {
 			if object.kind == .rss {
 				let title = (item.pinned ? "📌" : "") + (item.title ?? "--")
 				let mi_title = NSMutableAttributedString(string: title, attributes: attrsTitle)
-				if let text = item.content {
+				if let text = item.contentText {
 					mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrsSubTitle))
 				}
 				self.textField!.attributedStringValue = mi_title
@@ -129,7 +129,7 @@ class MenuCellView : THHighlightedTableCellView {
 				let title = (item.pinned ? "📌" : "") + channel.displayTitle()
 				let mi_title = NSMutableAttributedString(string: title, attributes: attrsTitle)
 				mi_title.append(NSAttributedString(string: "\n\(item.title)", attributes: attrsSubTitle))
-				if let text = item.content {
+				if let text = item.contentText {
 					mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrsSubTitle))
 				}
 				self.textField!.attributedStringValue = mi_title

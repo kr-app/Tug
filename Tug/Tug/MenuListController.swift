@@ -327,10 +327,10 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 					title = "\"\(channel.displayTitle())\" " + THLocalizedString("is on error") + "\n"
 				}
 				else {
-					title = "\(channels.count) " + THLocalizedString("channels on error")
+					title = "\(channels.count) " + THLocalizedString("channels on error") + "\n"
 				}
 
-				title += channel.lastError!.error
+				title += channel.lastError!.error + "\n"
 				title += DateFormatter.th_YMD_HMS.string(from: channel.lastError!.date)
 
 				objectList.append(MenuObjectItem(kind: .error, error: title))
@@ -447,10 +447,10 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		var headH = headerView.frame.size.height // self.topBarView.frame.size.height
 		headH += 6.0
 
-		let tableViewH = CGFloat(self.tableView.numberOfRows) * self.tableView.rowHeight
-//		for i in 0..<self.tableView.numberOfRows {
-//			tableViewH += tableView(self.tableView, heightOfRow: i)
-//		}
+		var tableViewH = 0.0
+		for object in objectList! {
+			tableViewH += object.rowHeight
+		}
 
 		let maxH = (screen.visibleFrame.size.height - 20.0).rounded(.down)
 		var wRect = win.frame
@@ -552,7 +552,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	
 	func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 		let object = objectList![row]
-		return object.kind == .separator ? 19.0 :object.kind == .group ? 24.0 : object.kind == .error ? 57.0 : tableView.rowHeight
+		return object.rowHeight
 	}
 
 	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {

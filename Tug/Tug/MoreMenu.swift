@@ -122,9 +122,14 @@ class MoreMenu: NSObject, NSMenuDelegate {
 					return
 				}
 
-				if YtChannelManager.shared.addChannel(videoId: videoId) == false {
+				guard let channel = YtChannelManager.shared.addChannel(videoId: videoId)
+				else {
 					THLogError("addChannel == false:\(frontTab)")
 					return
+				}
+
+				if let poster = YtChannelVideoIdExtractor.extractThumbnail(fromSource: source) {
+					channel.poster = poster
 				}
 
 				NSAlert(withTitle: "YtChannel \"\(frontTab.title)\" added", message: frontTab.url).runModal()

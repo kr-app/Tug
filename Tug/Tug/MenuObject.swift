@@ -17,5 +17,19 @@ struct MenuObjectItem {
 	var channel: Channel?
 	var item: ChannelItem?
 	var error: String?
+
+	var rowHeight: CGFloat {
+		switch self.kind {
+		case .rss, .yt:
+			return 88.0
+		case .separator:
+			return 19.0
+		case .group:
+			return 24.0
+		case .error:
+			return 57.0
+		}
+	}
+
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------

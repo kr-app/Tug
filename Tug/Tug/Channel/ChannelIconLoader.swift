@@ -11,7 +11,7 @@ class ChannelIconLoader: NSObject {
 	override init() {
 		super.init()
 
-		iconDownloader = THIconDownloader(identifier: "ChannelManager", cacheDir: FileManager.th_appCachesDir("THIconDownloader-ChannelManager"))
+		iconDownloader = THIconDownloader(directory: FileManager.th_appCachesDir("THIconDownloader-ChannelManager"))
 		iconDownloader.configuration.retention = 30.0.th_day
 		iconDownloader.configuration.maxSize = 84.0
 		iconDownloader.configuration.cropIcon = true
@@ -31,10 +31,10 @@ class ChannelIconLoader: NSObject {
 		//let item = notification.userInfo!["item"] as? ChannelItem
 
 		for item in channel.items {
-			if item.checked == true || THIconDownloader.shared.hasData(forIconUrl: item.thumbnail) == true {
+			if item.checked == true || iconDownloader.hasData(forIconUrl: item.thumbnail) == true {
 				continue
 			}
-			THIconDownloader.shared.loadIcon(atURL: item.thumbnail)
+			iconDownloader.loadIcon(atURL: item.thumbnail)
 		}
 	}
 

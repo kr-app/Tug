@@ -20,13 +20,14 @@ class ChannelListFooter: NSView {
 class ChannelCellView: NSTableCellView {
 
 	var onError = false
+	var disabled = false
 
 	override var backgroundStyle: NSView.BackgroundStyle { didSet {
 		applyCurrentColors(backgroundStyle)
 	}}
 
 	private func applyCurrentColors(_ style: NSView.BackgroundStyle) {
-		textField?.textColor = onError ? .red : style == .emphasized ? .white : .textColor
+		textField?.textColor = onError ? .red : disabled ? .gray : style == .emphasized ? .white : .textColor
 	}
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
@@ -263,10 +264,17 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 			icon = THFavIconLoader.shared.icon(forHost: channel.url?.host, startUpdate: true, allowsGeneric: true)
 		}
 		else if object.kind == 2 {
-			icon = THFavIconLoader.shared.icon(forHost: channel.link?.host, startUpdate: true, allowsGeneric: true)
+			if let poster = channel.poster {
+				icon = THIconDownloader.shared.icon(atURL: poster, startUpdate: true)?.th_resizedImage(withMaxSize: 16.0)
+			}
+			if icon == nil {
+				icon = THFavIconLoader.shared.icon(forHost: channel.link?.host, startUpdate: true, allowsGeneric: true)
+			}
 		}
 
 		cell.onError = channel.lastError != nil
+		cell.disabled = channel.disabled
+
 		cell.textField?.stringValue = channel.displayName()
 		cell.textField?.font = channel.hasUnreaded() ? NSFont.th_boldSystemFont(ofControlSize: .small) : NSFont.th_systemFont(ofControlSize: .small)
 		cell.imageView?.image = channel.disabled ? icon?.th_imageGray() : icon

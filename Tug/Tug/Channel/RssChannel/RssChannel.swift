@@ -5,6 +5,8 @@ import Cocoa
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class RssChannel: Channel {
 
+	private var excludedItems = [String]()
+
 	class func channel(fromFile path: String) -> Self? {
 		let channel = Self.th_unarchive(fromDictionaryRepresentationAtPath: path)
 		channel?.identifier = path.th_lastPathComponent.th_deletingPathExtension
@@ -108,17 +110,24 @@ class RssChannel: Channel {
 
 		for item in p.items {
 
-			let title = item.value(named: "title")?.content
+			var title = item.value(named: "title")?.content
+			while title?.contains("  ") == true {
+				title = title?.replacingOccurrences(of: "  ", with: " ")
+			}
 
 			if let title = title {
+				if excludedItems.contains(title) {
+					continue
+				}
 				if RssChannelFilterManager.shared.isExcludedItem(itemTitle: title, channel: self) == true {
-					THLogInfo("excluded item:\(item)")
+					THLogWarning("excluded item:\(item)")
+					excludedItems.append(title)
 					continue
 				}
 			}
 
 			let link = item.value(named: "link")?.content
-			var content = item.value(named: "description")?.content?.th_truncate(max: 150, by: .byTruncatingTail)
+			var contentText = item.value(named: "description")?.content
 
 			let guid = linkAsId ? nil : item.value(named: "guid")?.content
 //			let guidPermaLink = item.value(named: "guid")?.attributes?["isPermaLink"] as? String
@@ -131,8 +140,8 @@ class RssChannel: Channel {
 			if mediaUrl == nil {
 				mediaUrl = MediaUrlExtractor.urlFromEnclosure(item: item)
 
-				if mediaUrl == nil && content != nil {
-					mediaUrl = MediaUrlExtractor.urlImgSrc(fromContent: content!)
+				if mediaUrl == nil && contentText != nil {
+					mediaUrl = MediaUrlExtractor.urlImgSrc(fromContent: contentText!)
 					if mediaUrl != nil && extracted_media_log_once == false {
 						extracted_media_log_once = true
 						THLogInfo("mediaUrl:\(mediaUrl) extracted from content text for item:\(item)")
@@ -147,17 +156,19 @@ class RssChannel: Channel {
 			}
 
 			// gestion des &#039;
-			if let content_cf = content as CFString?, let decodedHtml = CFXMLCreateStringByUnescapingEntities(nil, content_cf, nil) as? String {
-				content = decodedHtml
+			if let content_cf = contentText as CFString?, let decodedHtml = CFXMLCreateStringByUnescapingEntities(nil, content_cf, nil) as? String {
+				contentText = decodedHtml
 			}
 
 			// suppression des &nbsp; ?
-			if content?.contains("&nbsp;") == true {
-				content = content?.replacingOccurrences(of: "&nbsp;", with: " ")
+			if contentText?.contains("&nbsp;") == true {
+				contentText = contentText?.replacingOccurrences(of: "&nbsp;", with: " ")
 			}
 
 			// suppression des tags html
-			content = content?.th_purifiedHtmlTagBestAsPossible()
+			contentText = contentText?.th_purifiedHtmlTagBestAsPossible()
+
+			contentText = contentText?.th_truncate(max: 200, by: .byTruncatingTail)
 
 			guard let identifier = guid ?? link ?? date
 			else {
@@ -165,7 +176,8 @@ class RssChannel: Channel {
 				return THLocalizedString("can not obtain item identifier")
 			}
 
-			let old_item = items.first(where: { $0.identifier == identifier })
+			let old_Idx = items.firstIndex(where: { $0.identifier == identifier || $0.isLikeItem(with: title, pubDate: pubDate) })
+			let old_item = old_Idx != nil ? items[old_Idx!] : nil
 
 			let received = old_item?.received ?? nowDate
 
@@ -176,16 +188,16 @@ class RssChannel: Channel {
 			
 			item.title = title
 			item.link = link != nil ? URL(string: link!) : nil
-			item.content = content
+			item.contentText = contentText
 
 			item.thumbnail = mediaUrl != nil ? URL(string: mediaUrl!) : nil
 
-			if old_item != nil {
-				items.removeAll(where: { $0.identifier == identifier })
+			if let old_Idx = old_Idx, let old_item = old_item {
+				items.remove(at: old_Idx)
 
-				item.checkedDate = old_item!.checkedDate
-				item.pinndedDate = old_item!.pinndedDate
-				item.thumbnail = old_item?.thumbnail
+				item.checkedDate = old_item.checkedDate
+				item.pinndedDate = old_item.pinndedDate
+				item.thumbnail = old_item.thumbnail
 			}
 
 			if item.thumbnail == nil {
@@ -214,10 +226,10 @@ class RssChannel: Channel {
 				}
 			}
 
-			if let dupItem = items.firstIndex(where: { $0.isLike(item) }) {
-				THLogError("found like duplicated item. dupItem:\(items[dupItem]) item:\(item)")
-				items.remove(at: dupItem)
-			}
+//			if let dupItem = items.firstIndex(where: { $0.isLike(item) }) {
+//				THLogError("found like duplicated item. dupItem:\(items[dupItem]) item:\(item)")
+//				items.remove(at: dupItem)
+//			}
 
 //			if onCreation == true {
 //				item.checked = true
