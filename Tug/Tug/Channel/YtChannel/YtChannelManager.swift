@@ -58,12 +58,14 @@ class YtChannelManager: ChannelManager {
 		return channel
 	}
 
-	func refresh(force: Bool = false) {
-		if force == true {
-			for channel in channels {
-				channel.lastUpdate = nil
-			}
+	func reloadAll() {
+		for channel in channels {
+			channel.lastUpdate = nil
 		}
+		startUpdateOfNextChannel()
+	}
+
+	func refresh() {
 		startUpdateOfNextChannel()
 	}
 
