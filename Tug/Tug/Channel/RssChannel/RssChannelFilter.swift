@@ -25,7 +25,7 @@ struct RssChannelFilterVerbs {
 	let action: RssChannelFilterAction
 	let target: RssChannelFilterTarget
 	let mode: RssChannelFilterMode
-	let mask: RssChannelFilterMask
+	let mask: RssChannelFilterMask?
 
 	private static let actions: [RssChannelFilterAction: String] = [.exclude: "exclude"]
 	private static let targets: [RssChannelFilterTarget: String] = [.title: "title"]
@@ -41,12 +41,17 @@ struct RssChannelFilterVerbs {
 		self.action = Self.actions.first(where: {$1 == comps[0] })!.key
 		self.target = Self.targets.first(where: {$1 == comps[1] })!.key
 		self.mode = Self.modes.first(where: {$1 == comps[2] })!.key
-		self.mask = comps.count == 4 ? Self.marks.first(where: {$1 == comps[3] })!.key : .all
+		self.mask = comps.count == 4 ? Self.marks.first(where: {$1 == comps[3] })!.key : nil
 	}
 
 	func stringRepresentation() -> String {
-		return Self.actions[action]! + " " + Self.targets[target]! + " " + Self.modes[mode]! + " " + Self.marks[mask]!
+		var rep = Self.actions[action]! + " " + Self.targets[target]! + " " + Self.modes[mode]!
+		if let mask = mask {
+			rep += " " + Self.marks[mask]!
+		}
+		return rep
 	}
+
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -126,6 +131,10 @@ class RssChannelFilter: NSObject, THDictionarySerializationProtocol {
 		self.hosts = (dictionaryRepresentation.string(forKey: "hosts") ?? dictionaryRepresentation.string(forKey: "host"))?.components(separatedBy: " ")
 		self.verbs = RssChannelFilterVerbs(fromStringRepresentation: dictionaryRepresentation.string(forKey: "verbs")!)!
 		self.value = dictionaryRepresentation.anyValue(forKey: "value")!
+
+		if verbs.mode == .containsLike && verbs.mask == nil && value is [String] {
+			THFatalError("invalid mask for hosts:\(hosts), verbs:\(verbs), value:\(value)")
+		}
 	}
 
 }

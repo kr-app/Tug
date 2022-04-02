@@ -845,19 +845,22 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			menu.addItem(THMenuItem(title: THLocalizedString("Copy Debug Info"), block: {() in
 				var string = ""
 
+				// channel
 				string += "channel identifier: \(channel.identifier)\n"
+				string += "channel title: \(channel.title)\n"
 				string += "channel url: \(channel.url?.absoluteString)\n"
 				string += "channel link: \(channel.link?.absoluteString)\n"
 
 				if let channel = channel as? RssChannel, let item = item as? RssChannelItem {
-					string += "\n"
-					string += "item identifier: \(item.identifier)\n"
 				}
 				else if let channel = channel as? YtChannel, let item = item as? YtChannelItem {
 					string += "channel videoId: kind: \(channel.videoId.kind.rawValue) id: \(channel.videoId.identifier)\n"
-					string += "\n"
-					string += "item identifier: \(item.identifier)\n"
 				}
+
+				// item
+				string += "\n"
+				string += "item identifier: \(item.identifier)\n"
+				string += "item title: \(item.title)\n"
 
 				NSPasteboard.general.clearContents()
 				NSPasteboard.general.setString(string, forType: .string)

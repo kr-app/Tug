@@ -88,13 +88,13 @@ class YtChannel: Channel {
 
 		let items = self.items.sorted(by: { ($0.published ?? $0.received)!  >  ($1.published ?? $1.received)! })
 		if items.isEmpty == true {
-			return luNow < -6.th_hour
+			return luNow < -1.th_hour
 		}
 
 		// plus de 15 jours -> 1 update / jour
 		let last = (items[0].published ?? items[0].received)!.timeIntervalSinceNow
 		if last < -15.th_day {
-			return luNow < -3.th_hour
+			return luNow < -1.th_hour
 		}
 
 		if title == "ARTE Découverte" || title == "ARTE" {
@@ -111,7 +111,7 @@ class YtChannel: Channel {
 
 			// le dernier + la moitier du temps normal -> 1 par jour
 			if (last + (normal / 2.0)) > Date().timeIntervalSinceReferenceDate {
-				return luNow < -6.th_hour
+				return luNow < -1.th_hour
 			}
 
 			if normalDay >= 3.0 {
@@ -198,7 +198,7 @@ class YtChannel: Channel {
 				let views = group?.childNamed("community")?.childNamed("statistics")?.attribute(forKey: "views") as? String
 
 				// live en attente…
-				if views != nil && Int(views!)! < 10 {
+				if views != nil && Int(views!)! == 0 {
 					THLogWarning("entry with identifier:\(identifier) title:\(title) excluded because zero view (LIVE)")
 					continue
 				}

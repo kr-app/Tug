@@ -44,7 +44,7 @@ struct YtChannelFilter {
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCgGb7tN3tIH5_Kk05D1J_bA" { // RMC
 			if let title = item.title {
-				if title.contains("EN DIRECT") && title.hasSuffix("invité de RMC") {
+				if title.contains("EN DIRECT") || title.hasSuffix("invité de RMC") || title.contains("Apolline de Malherbe") {
 					return .include
 				}
 				return .ignore
@@ -82,11 +82,9 @@ struct YtChannelFilter {
 				}
 			}
 		}
-		else if channel.title == "Geo History" {
-			if let title = item.title {
-				if title.hasSuffix(" - #Shorts") == true {
-					return .ignore
-				}
+		else if let title = item.title {
+			if title.contains("#short") || title.contains("#shorts") || title.contains("#Short") {
+				return .ignore
 			}
 		}
 

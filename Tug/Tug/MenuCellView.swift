@@ -148,7 +148,7 @@ class MenuCellView : THHighlightedTableCellView {
 
 			var info: String!
 			if object.kind == .rss {
-				info = "\(channel.url?.th_reducedHost) • " + (pubDate ?? "nil")
+				info = channel.displayName() + " • " + (pubDate ?? "nil")
 			}
 			else if object.kind == .yt {
 				info = pubDate ?? "nil"

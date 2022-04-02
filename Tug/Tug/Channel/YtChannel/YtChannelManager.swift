@@ -32,7 +32,19 @@ class YtChannelManager: ChannelManager {
 			}
 		}
 
-		THLogInfo("\(channels.count) channels")
+		var nbItems = 0
+		channels.forEach({ nbItems += $0.items.count })
+
+		var nbUnreaded = 0
+		channels.forEach({ nbUnreaded += $0.unreaded() })
+
+		var nbOnError = 0
+		channels.forEach({ nbOnError += ($0.lastError != nil) ? 1 : 0 })
+
+		var nbDisabled = 0
+		channels.forEach({ nbDisabled += $0.disabled ? 1 : 0 })
+
+		THLogInfo("\(channels.count) channels, items:\(nbItems), unreaded:\(nbUnreaded), onError:\(nbOnError), disabled:\(nbDisabled)")
 	}
 
 	// MARK: -
@@ -80,7 +92,7 @@ class YtChannelManager: ChannelManager {
 	}
 
 	override func channelsOnError() -> [Channel]? {
-		let r = channels.filter( { $0.lastError != nil } )
+		let r = channels.filter( { $0.disabled == false && $0.lastError != nil } )
 		return r.isEmpty ? nil : r
 	}
 

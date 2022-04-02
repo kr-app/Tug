@@ -480,9 +480,9 @@
 		BE4F8CFB27D95E4F00A30B3E /* YtChannel */ = {
 			isa = PBXGroup;
 			children = (
-				BE4F8CFD27D95E4F00A30B3E /* YtChannelVideoId.swift */,
 				BE4F8CFC27D95E4F00A30B3E /* YtChannelFilter.swift */,
 				BE82721027E1133800CF91B3 /* YtChannelDataTransformer.swift */,
+				BE4F8CFD27D95E4F00A30B3E /* YtChannelVideoId.swift */,
 				BECD72A327DA3CDD00A001FE /* YtChannelItem.swift */,
 				BE4F8CFE27D95E4F00A30B3E /* YtChannel.swift */,
 				BE4F8CFF27D95E4F00A30B3E /* YtChannelManager.swift */,

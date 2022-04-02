@@ -41,7 +41,13 @@ class RssChannelManager: ChannelManager {
 		var nbUnreaded = 0
 		channels.forEach({ nbUnreaded += $0.unreaded() })
 
-		THLogInfo("\(channels.count) channels, nbItems:\(nbItems), nbUnreaded:\(nbUnreaded)")
+		var nbOnError = 0
+		channels.forEach({ nbOnError += ($0.lastError != nil) ? 1 : 0 })
+
+		var nbDisabled = 0
+		channels.forEach({ nbDisabled += $0.disabled ? 1 : 0 })
+
+		THLogInfo("\(channels.count) channels, items:\(nbItems), unreaded:\(nbUnreaded), onError:\(nbOnError), disabled:\(nbDisabled)")
 	}
 	
 	// MARK: -
@@ -96,7 +102,7 @@ class RssChannelManager: ChannelManager {
 	}
 
 	override func channelsOnError() -> [Channel]? {
-		let r = channels.filter( { $0.lastError != nil } )
+		let r = channels.filter( { $0.disabled == false && $0.lastError != nil } )
 		return r.isEmpty ? nil : r
 	}
 

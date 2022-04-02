@@ -94,7 +94,7 @@ extension ChannelItem {
 
 	func isLikeItem(with title: String?, pubDate: Date?) -> Bool {
 		if let title = title, let pubDate = pubDate {
-			return title == title && pubDate == pubDate
+			return self.title == title && self.published == pubDate
 		}
 		return false
 	}
