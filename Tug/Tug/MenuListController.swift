@@ -337,7 +337,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			}
 		}
 
-		var items = [(kind: MenuObjectKind, channel: Channel, item: ChannelItem)]()
+		var items = [(score: Double, kind: MenuObjectKind, channel: Channel, item: ChannelItem)]()
 
 		let managers: [(kind: MenuObjectKind, shared: ChannelManager, channels: [Channel])] = [	(kind: .yt, YtChannelManager.shared, YtChannelManager.shared.channels),
 																																						(kind: .rss, RssChannelManager.shared, channels: RssChannelManager.shared.channels)]
@@ -348,9 +348,9 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 			for channel in channels {
 
-				if searchedText != nil && channel.contains(stringValue: searchedText!) == true {
+				if searchedText != nil && channel.match(searchValue: searchedText!) {
 					for item in channel.items {
-						items.append((kind: manager.kind, channel: channel, item: item))
+						items.append((score: 1.0, kind: manager.kind, channel: channel, item: item))
 					}
 					continue
 				}
@@ -364,12 +364,16 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 					else if item.checked == true && item.pinned == false && item.isRecent(refDate: recentRef) == false {
 						continue
 					}
-					items.append((kind: manager.kind, channel: channel, item: item))
+					items.append((score: 0.5, kind: manager.kind, channel: channel, item: item))
 				}
 			}
 		}
 
 		items.sort(by: {
+			if $0.score != $1.score {
+				return $0.score > $1.score
+			}
+
 			let rcv0 = $0.item.received
 			let rcv1 = $1.item.received
 
@@ -865,7 +869,6 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 				NSPasteboard.general.clearContents()
 				NSPasteboard.general.setString(string, forType: .string)
 			}))
-
 
 			menu.addItem(NSMenuItem.separator())
 

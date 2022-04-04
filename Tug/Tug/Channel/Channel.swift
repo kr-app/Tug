@@ -37,8 +37,24 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 		THFatalError("not implemented")
 	}
 
+	// MARK: -
+
 	func hasUnreaded() -> Bool {
-		THFatalError("not implemented")
+		return items.contains(where: {$0.checkedDate == nil })
+	}
+
+	func unreaded() -> Int {
+		var r = 0
+		for item in items {
+			if item.checkedDate == nil {
+				r += 1
+			}
+		}
+		return r
+	}
+
+	func hasRecent(refDate: TimeInterval) -> Bool {
+		return items.contains(where: {$0.isRecent(refDate: refDate) })
 	}
 
 	// MARK: -
@@ -90,9 +106,9 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	// MARK: -
 
-	func contains(stringValue: String) -> Bool {
+	func match(searchValue: String) -> Bool {
 		for s in [self.title, self.url?.absoluteString, self.link?.absoluteString] {
-			if s?.th_containsLike(stringValue) == true {
+			if s?.th_containsLike(searchValue) == true {
 				return true
 			}
 		}
@@ -100,6 +116,10 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 	}
 
 	// MARK: -
+
+	class func channel(fromFile path: String) -> Self? {
+		THFatalError("not implemented by subclass")
+	}
 
 	func getFilename(withExt ext: String) -> String {
 		return "\(identifier)".th_appendingPathExtension(ext)

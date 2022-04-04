@@ -22,7 +22,7 @@ class YtChannel: Channel {
 		THLogDebug("created new \(self)")
 	}
 
-	class func channel(fromFile path: String) -> YtChannel? {
+	override class func channel(fromFile path: String) -> Self? {
 		let channel = Self.th_unarchive(fromDictionaryRepresentationAtPath: path)
 		channel?.identifier = String(path.th_lastPathComponent.th_deletingPathExtension.dropFirst("channel-yt-".count))
 		return channel
@@ -48,24 +48,6 @@ class YtChannel: Channel {
 
 	override func displayName() -> String {
 		title ?? link?.th_reducedHost ?? "nil"
-	}
-
-	override func hasUnreaded() -> Bool {
-		return items.contains(where: { $0.checked == false })
-	}
-
-	func unreaded() -> Int {
-		var r = 0
-		for f in items {
-			if f.checked == false {
-				r += 1
-			}
-		}
-		return r
-	}
-
-	func hasRecent(refDate: TimeInterval) -> Bool {
-		return items.contains(where: { $0.isRecent(refDate: refDate) })
 	}
 
 	override func updateRequest() -> URLRequest {

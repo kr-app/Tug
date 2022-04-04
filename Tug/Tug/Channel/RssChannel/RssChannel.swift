@@ -7,7 +7,7 @@ class RssChannel: Channel {
 
 	private var excludedItems = [String]()
 
-	class func channel(fromFile path: String) -> Self? {
+	override class func channel(fromFile path: String) -> Self? {
 		let channel = Self.th_unarchive(fromDictionaryRepresentationAtPath: path)
 		channel?.identifier = path.th_lastPathComponent.th_deletingPathExtension
 		return channel
@@ -50,26 +50,6 @@ class RssChannel: Channel {
 		link?.th_reducedHost ?? url?.th_reducedHost ?? url?.absoluteString ?? "nil"
 	}
 
-	override func hasUnreaded() -> Bool {
-		return items.contains(where: {$0.checkedDate == nil })
-	}
-
-	// MARK: -
-
-	func unreaded() -> Int {
-		var r = 0
-		for item in items {
-			if item.checkedDate == nil {
-				r += 1
-			}
-		}
-		return r
-	}
-
-	func hasRecent(refDate: TimeInterval) -> Bool {
-		return items.contains(where: {$0.isRecent(refDate: refDate) })
-	}
-	
 	// MARK: -
 	
 	override func updateRequest() -> URLRequest {

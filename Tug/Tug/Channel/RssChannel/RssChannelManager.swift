@@ -6,49 +6,9 @@ import Cocoa
 class RssChannelManager: ChannelManager {
 
 	static let shared = RssChannelManager(dirPath: FileManager.th_documentsPath("RssChannels"))
-	
+	override class var channelClass: AnyClass { RssChannel.self }
+
 	var filterManager: RssChannelFilterManager?
-	private(set) var channels = [RssChannel]()
-
-	// MARK: -
-	
-	override init(dirPath: String) {
-		super.init(dirPath: dirPath)
-		loadChannels()
-	}
-
-	func loadChannels() {
-		let files = try! FileManager.default.contentsOfDirectory(	at: URL(fileURLWithPath: dirPath),
-																								includingPropertiesForKeys:nil,
-																								options: [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
-		for file in files {
-			if file.pathExtension != "plist" {
-				continue
-			}
-			if let channel = RssChannel.channel(fromFile: file.path) {
-				channels.append(channel)
-			}
-			else {
-				THLogError("channel == nil file:\(file)")
-			}
-		}
-	
-		channels.sort(by: { $0.creationDate < $1.creationDate })
-		
-		var nbItems = 0
-		channels.forEach({ nbItems += $0.items.count })
-
-		var nbUnreaded = 0
-		channels.forEach({ nbUnreaded += $0.unreaded() })
-
-		var nbOnError = 0
-		channels.forEach({ nbOnError += ($0.lastError != nil) ? 1 : 0 })
-
-		var nbDisabled = 0
-		channels.forEach({ nbDisabled += $0.disabled ? 1 : 0 })
-
-		THLogInfo("\(channels.count) channels, items:\(nbItems), unreaded:\(nbUnreaded), onError:\(nbOnError), disabled:\(nbDisabled)")
-	}
 	
 	// MARK: -
 
@@ -59,15 +19,7 @@ class RssChannelManager: ChannelManager {
 		}
 
 		let channel = RssChannel(url: url)
-		channels.append(channel)
-
-		if channel.save(toDir: dirPath) == false {
-			THLogError("can not save channel:\(channel)")
-		}
-
-		if startUpdate == true {
-			self.updateChannel(channel.identifier, completion: nil)
-		}
+		addChannel(channel, startUpdate: startUpdate)
 
 		return channel
 	}
@@ -93,42 +45,6 @@ class RssChannelManager: ChannelManager {
 		Date().timeIntervalSinceReferenceDate - 0.66.th_day
 	}
 
-	func channel(withUrl url: URL) -> RssChannel? {
-		channels.first(where: { $0.url == url } )
-	}
-	
-	override func channel(withId identifier: String) -> Channel? {
-		channels.first(where: { $0.identifier == identifier } )
-	}
-
-	override func channelsOnError() -> [Channel]? {
-		let r = channels.filter( { $0.disabled == false && $0.lastError != nil } )
-		return r.isEmpty ? nil : r
-	}
-
-	override func removeChannel(_ channelId: String) {
-		super.removeChannel(channelId)
-		channels.removeAll(where: {$0.identifier == channelId })
-	}
-
-//	func unreadedChannels() -> [RssChannel] {
-//		let r = channels.filter( { $0.unreaded() > 0 } )
-//		return r.sorted(by: {
-//			if let p0 = $0.items.first?.pubDate, let p1 = $1.items.first?.pubDate {
-//				return p0 > p1
-//			}
-//			return false
-//		})
-//	}
-
-//	func unreadedItems() -> Int {
-//		var r = 0
-//		for c in channels {
-//			r += c.unreaded()
-//		}
-//		return r
-//	}
-
 	func hasWallChannels(withDateRef dateRef: TimeInterval, atLeast: Int) -> Bool {
 		var nb = 0
 		for channel in channels.filter({ $0.disabled == false }) {
@@ -139,14 +55,6 @@ class RssChannelManager: ChannelManager {
 		}
 		return false
 			//return channels.contains(where: { $0.hasUnreaded() && $0.hasRecent(refDate: dateRef) } )
-	}
-
-	func unreadedCount() -> Int {
-		var r = 0
-		for channel in channels.filter( { $0.disabled == false } ) {
-			r += channel.unreaded()
-		}
-		return r
 	}
 
 //	func wallChannels(withDateRef dateRef: TimeInterval) -> [RssChannel] {
