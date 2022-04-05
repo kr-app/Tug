@@ -15,7 +15,7 @@ class ChannelIconLoader: NSObject {
 		iconDownloader.configuration.retention = 30.0.th_day
 		iconDownloader.configuration.maxSize = 84.0
 		iconDownloader.configuration.cropIcon = true
-		iconDownloader.configuration.excludedHosts = ["static.latribune.fr"]
+		//iconDownloader.configuration.excludedHosts = ["static.latribune.fr"]
 		iconDownloader.configuration.inMemory = 30
 
 		NotificationCenter.default.addObserver(self, selector: #selector(n_channelUpdated), name: ChannelManager.channelUpdatedNotification, object: nil)

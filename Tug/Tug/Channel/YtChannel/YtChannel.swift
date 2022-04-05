@@ -174,13 +174,15 @@ class YtChannel: Channel {
 				
 				let group = c.childNamed("group")
 				var thumbnail = group?.childNamed("thumbnail")?.attribute(forKey: "url") as? String
-				var contentText = group?.childNamed("description")?.childs()?.first?.content()
-				contentText = contentText == nil ? nil : YtChannelDataTransformer.transform(contentText: contentText!, forChannel: videoId)
+				let contentText = group?.childNamed("description")?.childs()?.first?.content()
 
-				let views = group?.childNamed("community")?.childNamed("statistics")?.attribute(forKey: "views") as? String
+				var views: Int?
+				if let viewsStr = group?.childNamed("community")?.childNamed("statistics")?.attribute(forKey: "views") as? String {
+					views = Int(viewsStr)
+				}
 
 				// live en attente…
-				if views != nil && Int(views!)! == 0 {
+				if views == 0 {
 					THLogWarning("entry with identifier:\(identifier) title:\(title) excluded because zero view (LIVE)")
 					continue
 				}
@@ -219,40 +221,36 @@ class YtChannel: Channel {
 					continue
 				}
 
+				let rule = YtChannelFilter.shared.ruleFor(channel: self, itemTitle: title, itemContentText: contentText, itemViews: views)
+				if rule == .ignore {
+					excludedItems.append(identifier)
+					THLogWarning("channel:\(self.title) ignore item:\(title)")
+					continue
+				}
+				else if rule == .ignoreTemporaly {
+					THLogWarning("channel:\(self.title) ignore temporaly item:\(title)")
+					continue
+				}
+
 				let item = YtChannelItem(identifier: identifier, received: received)
 
 				item.published = old_feed?.published ?? publishedDate
 //				item.updated = updatedDate ?? old_feed!.updated ?? Date()
 
-				item.title = title
+				item.title = YtChannelDataTransformer.transform(title: title, forChannel: videoId)
 				item.link = link != nil ? URL(string: link!) : nil
-				item.contentText = contentText
+				item.contentText = YtChannelDataTransformer.transform(contentText: contentText, forChannel: videoId)
 				item.thumbnail = thumbnail != nil ? URL(string: thumbnail!) : nil
-				item.views = views != nil ? Int(views!) : nil
-//				item.rating = rating
-				
+				item.views = views
+
 				if let old_feed = old_feed {
 					items.removeAll(where: { $0.identifier == identifier})
 					item.checkedDate = old_feed.checkedDate
 				}
-		
-//				if onCreation == true {
-//					item.checked = true
-//				}
 
-				let rule = YtChannelFilter.shared.ruleFor(channel: self, item: item)
 				if rule == .markReaded {
 //					log(.info, "excluded item:\(item)")
 					item.checkedDate = nowDate
-				}
-				else if rule == .ignore {
-					excludedItems.append(item.identifier)
-					THLogWarning("channel:\(self.title) ignore item:\(item.title ?? item.identifier)")
-					continue
-				}
-				else if rule == .ignoreTemporaly {
-					THLogWarning("channel:\(self.title) ignore temporaly item:\(item.title ?? item.identifier)")
-					continue
 				}
 
 				items.append(item)
@@ -273,24 +271,6 @@ class YtChannel: Channel {
 		}
 
 		return nil
-	}
-
-}
-//--------------------------------------------------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------------------------------------------------
-extension YtChannel {
-
-	func hasNoRecentPublications(delayInDays: Int) -> Bool? {
-		let dateRef = Calendar.current.date(byAdding: .day, value: -delayInDays, to: Date())!
-
-		guard let recentItem = self.items.first?.received // .sorted(by: <#T##(ChannelItem, ChannelItem) throws -> Bool#>).first?.received
-		else {
-			return nil
-		}
-
-		return recentItem < dateRef
 	}
 
 }

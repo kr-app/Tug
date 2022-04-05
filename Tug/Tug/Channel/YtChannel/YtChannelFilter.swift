@@ -17,12 +17,12 @@ struct YtChannelFilter {
 
 	static let shared = YtChannelFilter()
 
-	func ruleFor(channel: YtChannel, item: ChannelItem) -> YtChannelFilterRule {
+	func ruleFor(channel: YtChannel, itemTitle: String?, itemContentText: String?, itemViews: Int?) -> YtChannelFilterRule {
 
 		let videoId = channel.videoId!
 
 		if videoId.kind == .channelId && videoId.identifier == "UC2MGuhIaOP6YLpUx106kTQw" { //International Federation of Sport Climbing
-			if let title = item.title {
+			if let title = itemTitle {
 				// contains
 				if title.lowercased().contains("Paraclimbing".lowercased()) {
 					return .markReaded
@@ -36,14 +36,14 @@ struct YtChannelFilter {
 			}
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UC__xRB5L4toU9yYawt_lIKg" { // BLAST
-			if let title = item.title {
+			if let title = itemTitle {
 				if title.hasSuffix("- LE JOURNAL") == true {
 					return .ignore
 				}
 			}
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCgGb7tN3tIH5_Kk05D1J_bA" { // RMC
-			if let title = item.title {
+			if let title = itemTitle {
 				if title.contains("EN DIRECT") || title.hasSuffix("invité de RMC") || title.contains("Apolline de Malherbe") {
 					return .include
 				}
@@ -51,7 +51,7 @@ struct YtChannelFilter {
 			}
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCESTwDXpoMgiYBHipMdKTkQ" { // Sud Radio
-			if let views = item.views {
+			if let views = itemViews {
 				if views > 25_000 {
 					return .include
 				}
@@ -59,14 +59,14 @@ struct YtChannelFilter {
 			return .ignoreTemporaly
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCV6YKhpI0Bs5hSJ6frXM4nA" { // Y a que la vérité qui compte
-			if let description = item.contentText {
+			if let description = itemContentText {
 				if description.contains("#shorts") {
 					return .ignore
 				}
 			}
 		}
 		else if channel.title == "Skating ISU" {
-			if let title = item.title {
+			if let title = itemTitle {
 				for sf in [	"| Men FS |",
 								"Men Short Program |",
 								"Ice Dance Free Dance |",
@@ -82,7 +82,7 @@ struct YtChannelFilter {
 				}
 			}
 		}
-		else if let title = item.title {
+		else if let title = itemTitle {
 			if title.contains("#short") || title.contains("#shorts") || title.contains("#Short") {
 				return .ignore
 			}

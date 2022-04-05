@@ -184,16 +184,19 @@ class RssChannel: Channel {
 				if let link = item.link {
 
 					let a_finir = 1
-					if 	link.absoluteString.contains("aljazeera.com") ||
-						link.absoluteString.contains("lefigaro.fr") ||
-						link.absoluteString.contains("theskatingtimes.com") ||
-						link.absoluteString.contains("macg.co") ||
-						link.absoluteString.contains("macrumors.com") ||
-						link.absoluteString.contains("arstechnica") ||
-						link.absoluteString.contains("valeursactuelles.com") ||
-						link.absoluteString.contains("lopinion.fr") ||
-						link.absoluteString.contains("goldenskate.com") ||
-						link.absoluteString.contains("generation-trail.com") {
+					let host = link.host!
+
+					if 		host.contains("aljazeera.com") ||
+							host.contains("lefigaro.fr") ||
+							host.contains("theskatingtimes.com") ||
+							host.contains("macg.co") ||
+							host.contains("macrumors.com") ||
+							host.contains("arstechnica") ||
+							host.contains("valeursactuelles.com") ||
+							host.contains("lopinion.fr") ||
+							host.contains("goldenskate.com") ||
+							host.contains("themoscowtimes") ||
+							host.contains("generation-trail.com") {
 						item.articleImage = RssArticleImage(link: link)
 						item.articleImage!.start( {(ok: Bool, error: String?) in
 							if ok == false {
