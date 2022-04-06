@@ -5,8 +5,6 @@ import Cocoa
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class RssChannelItem: ChannelItem {
 
-	var articleImage: RssArticleImage?
-
 	override init(identifier: String, received: Date) {
 		super.init(identifier: identifier, received: received)
 	}

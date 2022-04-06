@@ -182,29 +182,21 @@ class RssChannel: Channel {
 
 			if item.thumbnail == nil {
 				if let link = item.link {
-
-					let a_finir = 1
-					let host = link.host!
-
-					if 		host.contains("aljazeera.com") ||
-							host.contains("lefigaro.fr") ||
-							host.contains("theskatingtimes.com") ||
-							host.contains("macg.co") ||
-							host.contains("macrumors.com") ||
-							host.contains("arstechnica") ||
-							host.contains("valeursactuelles.com") ||
-							host.contains("lopinion.fr") ||
-							host.contains("goldenskate.com") ||
-							host.contains("themoscowtimes") ||
-							host.contains("generation-trail.com") {
-						item.articleImage = RssArticleImage(link: link)
-						item.articleImage!.start( {(ok: Bool, error: String?) in
+					let pageItem = RssWebItemAttrs.item(for: link)
+					if pageItem == nil {
+						let pageItem = RssWebItemAttrs(link: link)
+						pageItem.start( {(ok: Bool, error: String?) in
 							if ok == false {
 								THLogError("link:\(link.absoluteString)")
 								return
 							}
-							item.thumbnail = item.articleImage?.extractedImage
+							if let thumbnail = pageItem.extractedImage {
+								item.thumbnail = thumbnail
+							}
 						})
+					}
+					else if let thumbnail = pageItem?.extractedImage {
+						item.thumbnail = thumbnail
 					}
 				}
 			}

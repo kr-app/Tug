@@ -76,7 +76,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	}
 	
 	deinit {
-		THLogInfo("")
+		THLogDebug("")
 	}
 
 	// MARK: -

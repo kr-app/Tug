@@ -38,6 +38,7 @@ class PreviewController: PPPanePreviewController, WKNavigationDelegate {
 	}
 
 	deinit {
+		THLogDebug("")
 	}
 
 	// MARK: -
