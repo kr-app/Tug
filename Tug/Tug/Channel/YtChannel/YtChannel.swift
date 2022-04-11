@@ -54,7 +54,7 @@ class YtChannel: Channel {
 		return URLRequest(url: videoId.url(), cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15.0)
 	}
 
-	func shouldUpdate() -> Bool {
+	override func shouldUpdate() -> Bool {
 
 		guard let lu = lastUpdate
 		else {
@@ -207,14 +207,14 @@ class YtChannel: Channel {
 					updatedDate = publishedDate
 				}
 
-				let old_feed = items.first(where: { $0.identifier == identifier })
+				let old_item = items.first(where: { $0.identifier == identifier })
 
 				let received: Date!
 				if onCreation == true {
 					received = updatedDate ?? publishedDate ?? nowDate
 				}
 				else {
-					received = old_feed?.received ?? nowDate
+					received = old_item?.received ?? nowDate
 				}
 
 				if excludedItems.contains(where: { $0 == identifier }) {
@@ -224,17 +224,17 @@ class YtChannel: Channel {
 				let rule = YtChannelFilter.shared.ruleFor(channel: self, itemTitle: title, itemContentText: contentText, itemViews: views)
 				if rule == .ignore {
 					excludedItems.append(identifier)
-					THLogWarning("channel:\(self.title) ignore item:\(title)")
+					THLogWarning("channel:\(self.title), ignore item:\(title)")
 					continue
 				}
 				else if rule == .ignoreTemporaly {
-					THLogWarning("channel:\(self.title) ignore temporaly item:\(title)")
+					THLogWarning("channel:\(self.title), ignore temporaly item:\(title)")
 					continue
 				}
 
 				let item = YtChannelItem(identifier: identifier, received: received)
 
-				item.published = old_feed?.published ?? publishedDate
+				item.published = old_item?.published ?? publishedDate
 //				item.updated = updatedDate ?? old_feed!.updated ?? Date()
 
 				item.title = YtChannelDataTransformer.transform(title: title, forChannel: videoId)
@@ -243,9 +243,11 @@ class YtChannel: Channel {
 				item.thumbnail = thumbnail != nil ? URL(string: thumbnail!) : nil
 				item.views = views
 
-				if let old_feed = old_feed {
-					items.removeAll(where: { $0.identifier == identifier})
-					item.checkedDate = old_feed.checkedDate
+				if let old_item = old_item {
+					items.removeAll(where: { $0.identifier == identifier })
+
+					item.pinndedDate = old_item.pinndedDate
+					item.checkedDate = old_item.checkedDate
 				}
 
 				if rule == .markReaded {

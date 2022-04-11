@@ -47,8 +47,6 @@ class YtChannelManager: ChannelManager {
 	// MARK: -
 	
 	func startUpdateOfNextChannel() {
-		let channels = self.channels as! [YtChannel]
-
 		if channels.contains(where: { $0.isUpdating == true }) == true {
 			return
 		}

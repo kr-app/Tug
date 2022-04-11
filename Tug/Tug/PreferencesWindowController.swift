@@ -36,7 +36,7 @@ class PreferencesWindowController : NSWindowController,
 		refreshInterval.menu!.addItem(NSMenuItem(title: THLocalizedString("15 minutes"), tag: 15, enabled: true))
 		refreshInterval.menu!.addItem(NSMenuItem(title: THLocalizedString("30 minutes"), tag: 30, enabled: true))
 		refreshInterval.menu!.addItem(NSMenuItem(title: THLocalizedString("1 hour"), tag: 60, enabled: true))
-		refreshInterval.selectItem(withTag: UserPreferences.shared.refreshInterval ?? 0)
+		refreshInterval.selectItem(withTag: Int(UserPreferences.shared.refreshInterval))
 		
 		actionOnClick.removeAllItems()
 		actionOnClick.menu!.addItem(NSMenuItem(title: THLocalizedString("None"), representedObject: "none", enabled: true))
@@ -87,7 +87,7 @@ class PreferencesWindowController : NSWindowController,
 	}
 
 	@IBAction func refreshIntervalPopAction(_ sender: NSPopUpButton) {
-		UserPreferences.shared.refreshInterval = sender.selectedItem?.tag
+		UserPreferences.shared.refreshInterval = TimeInterval(sender.selectedItem!.tag)
 		UserPreferences.shared.synchronize()
 	}
 

@@ -47,7 +47,12 @@ class RssChannel: Channel {
 	// MARK: -
 
 	override func displayName() -> String {
-		link?.th_reducedHost ?? url?.th_reducedHost ?? url?.absoluteString ?? "nil"
+		if let title = self.title {
+			if title.isEmpty == false && title.hasPrefix("{") == false && title.hasSuffix("}") == false {
+				return title
+			}
+		}
+		return link?.th_reducedHost ?? url?.th_reducedHost ?? "nil"
 	}
 
 	// MARK: -
@@ -55,7 +60,28 @@ class RssChannel: Channel {
 	override func updateRequest() -> URLRequest {
 		return URLRequest(url: self.url!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15.0)
 	}
-	
+
+	override func shouldUpdate() -> Bool {
+		guard let lu = lastUpdate
+		else {
+			return true
+		}
+
+		let luNow = lu.timeIntervalSinceNow
+
+		if lastError != nil {
+			return luNow <= -30.0
+		}
+
+		// moins de 5 min -> false
+		if luNow > -5.th_min {
+			return false
+		}
+
+		let refreshInterval = UserPreferences.shared.refreshInterval > 0 ? UserPreferences.shared.refreshInterval : 5.0.th_min
+		return luNow <= refreshInterval
+	}
+		
 	override func parse(data: Data) -> String? {
 
 #if DEBUG
@@ -182,21 +208,23 @@ class RssChannel: Channel {
 
 			if item.thumbnail == nil {
 				if let link = item.link {
-					let pageItem = RssWebItemAttrs.item(for: link)
-					if pageItem == nil {
-						let pageItem = RssWebItemAttrs(link: link)
-						pageItem.start( {(ok: Bool, error: String?) in
-							if ok == false {
-								THLogError("link:\(link.absoluteString)")
-								return
-							}
-							if let thumbnail = pageItem.extractedImage {
-								item.thumbnail = thumbnail
-							}
-						})
-					}
-					else if let thumbnail = pageItem?.extractedImage {
-						item.thumbnail = thumbnail
+					if RssWebItemAttrs.canStart(for: link) {
+						let pageItem = RssWebItemAttrs.item(for: link)
+						if pageItem == nil {
+							let pageItem = RssWebItemAttrs(link: link)
+							pageItem.start( {(ok: Bool, error: String?) in
+								if ok == false {
+									THLogError("link:\(link.absoluteString)")
+									return
+								}
+								if let thumbnail = pageItem.extractedImage {
+									item.thumbnail = thumbnail
+								}
+							})
+						}
+						else if let thumbnail = pageItem?.extractedImage {
+							item.thumbnail = thumbnail
+						}
 					}
 				}
 			}

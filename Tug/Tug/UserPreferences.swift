@@ -6,7 +6,7 @@ import Cocoa
 class UserPreferences: NSObject {
 	static let shared = UserPreferences()
 
-	var refreshInterval: Int?
+	var refreshInterval: TimeInterval = 0.0
 	var actionOnItemClick: String?
 	var previewHighlightMode: Int?
 
@@ -16,19 +16,15 @@ class UserPreferences: NSObject {
 	}
 	
 	private func loadFromUserDefaults() {
-		let ud = UserDefaults.standard
-
-		refreshInterval = ud.integer(forKey: "refreshInterval")
-		actionOnItemClick = ud.object(forKey: "actionOnItemClick") as? String
-		previewHighlightMode = ud.integer(forKey: "previewHighlightMode")
+		refreshInterval = TimeInterval(UserDefaults.standard.integer(forKey: "refreshInterval"))
+		actionOnItemClick = UserDefaults.standard.object(forKey: "actionOnItemClick") as? String
+		previewHighlightMode = UserDefaults.standard.integer(forKey: "previewHighlightMode")
 	}
 
 	func synchronize() {
-		let ud = UserDefaults.standard
-
-		ud.set((refreshInterval != nil && refreshInterval! > 0) ? refreshInterval! : nil, forKey: "refreshInterval")
-		ud.set(actionOnItemClick, forKey: "actionOnItemClick")
-		ud.set(previewHighlightMode, forKey: "previewHighlightMode")
+		UserDefaults.standard.set(refreshInterval > 0.0 ? Int(refreshInterval.rounded(.down)) : nil, forKey: "refreshInterval")
+		UserDefaults.standard.set(actionOnItemClick, forKey: "actionOnItemClick")
+		UserDefaults.standard.set(previewHighlightMode, forKey: "previewHighlightMode")
 	}
 
 }

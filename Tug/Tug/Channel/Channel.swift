@@ -39,6 +39,12 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	// MARK: -
 
+	func shouldUpdate() -> Bool {
+		THFatalError("not implemented")
+	}
+
+	// MARK: -
+
 	func hasUnreaded() -> Bool {
 		return items.contains(where: {$0.checkedDate == nil })
 	}

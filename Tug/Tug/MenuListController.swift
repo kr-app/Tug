@@ -300,16 +300,15 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	}
 	
 	private func updateUIHeader() {
-		
+		let nbItems = objectList?.filter( { $0.kind == .rss || $0.kind == .yt }).count ?? 0
+
 		if searchedText != nil {
-			headerLabel.stringValue = "\(objectList?.count)"
+			headerLabel.stringValue = "\(nbItems)"
 			return
 		}
 		
 		let rssUnread = RssChannelManager.shared.unreadedCount()
 		let ytUnread = YtChannelManager.shared.unreadedCount()
-
-		let nbItems = objectList?.filter( { $0.kind == .rss || $0.kind == .yt }).count ?? 0
 		headerLabel.stringValue = "\(rssUnread + ytUnread)/\(nbItems)"
 	}
 	
@@ -337,10 +336,10 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			}
 		}
 
-		var items = [(score: Double, kind: MenuObjectKind, channel: Channel, item: ChannelItem)]()
+		var items = [(order: Int, score: Double, kind: MenuObjectKind, channel: Channel, item: ChannelItem)]()
 
-		let managers: [(kind: MenuObjectKind, shared: ChannelManager, channels: [Channel])] = [	(kind: .yt, YtChannelManager.shared, YtChannelManager.shared.channels),
-																																						(kind: .rss, RssChannelManager.shared, channels: RssChannelManager.shared.channels)]
+		let managers: [(order: Int, kind: MenuObjectKind, shared: ChannelManager, channels: [Channel])] = [	(order: 1, kind: .yt, YtChannelManager.shared, YtChannelManager.shared.channels),
+																																											(order: 2, kind: .rss, RssChannelManager.shared, channels: RssChannelManager.shared.channels)]
 
 		for manager in managers {
 			let recentRef = manager.shared.recentRefDate()
@@ -350,7 +349,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 				if searchedText != nil && channel.match(searchValue: searchedText!) {
 					for item in channel.items {
-						items.append((score: 1.0, kind: manager.kind, channel: channel, item: item))
+						items.append((order: manager.order, score: 1.0, kind: manager.kind, channel: channel, item: item))
 					}
 					continue
 				}
@@ -364,7 +363,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 					else if item.checked == true && item.pinned == false && item.isRecent(refDate: recentRef) == false {
 						continue
 					}
-					items.append((score: 0.5, kind: manager.kind, channel: channel, item: item))
+					items.append((order: manager.order, score: 0.5, kind: manager.kind, channel: channel, item: item))
 				}
 			}
 		}
@@ -390,7 +389,12 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		let unreadedItems = items.filter({ $0.item.pinned == false && $0.item.checked == false })
 		if unreadedItems.count > 0 {
 			objectList.append(MenuObjectItem(kind: .group, title: THLocalizedString("Unread")))
-			for item in unreadedItems {
+			for item in unreadedItems.sorted(by: {
+				if $0.order != $1.order {
+					return $0.order < $1.order
+				}
+				return true
+			 }) {
 				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
 			}
 //			objectList.append(ObjectItem(kind: .separator))
