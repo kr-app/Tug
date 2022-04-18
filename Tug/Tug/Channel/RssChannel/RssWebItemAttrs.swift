@@ -69,6 +69,7 @@ class RssWebItemAttrs {
 
 	private func addToInvalidHost() {
 		guard let invalidHost = link.host else { return }
+	
 		if Self.invalidHosts.contains(invalidHost) == false {
 			Self.invalidHosts.append(invalidHost)
 		}

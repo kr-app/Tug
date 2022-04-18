@@ -82,6 +82,7 @@
 		BE0B09D327D7F8F500DEE577 /* THRssFeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09C427D7F8F500DEE577 /* THRssFeedParser.swift */; };
 		BE0B09DD27D7F91E00DEE577 /* THColoredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09DC27D7F91E00DEE577 /* THColoredView.swift */; };
 		BE0B09FD27D7F9A900DEE577 /* THFinderMdItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0B09FC27D7F9A900DEE577 /* THFinderMdItem.m */; };
+		BE2EA13528089FD600607EC3 /* ChannelDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2EA13428089FD600607EC3 /* ChannelDataTransformer.swift */; };
 		BE32396727D9F1E500F6021D /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32396627D9F1E500F6021D /* Channel.swift */; };
 		BE323AFD27DA1E1F00F6021D /* ChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE323AFC27DA1E1F00F6021D /* ChannelManager.swift */; };
 		BE323AFF27DA2A5700F6021D /* ChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE323AFE27DA2A5700F6021D /* ChannelItem.swift */; };
@@ -95,8 +96,14 @@
 		BE4F8D1127D95E5100A30B3E /* RssChannelFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0727D95E5100A30B3E /* RssChannelFilter.swift */; };
 		BE4F8D1227D95E5100A30B3E /* RssChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8D0B27D95E5100A30B3E /* RssChannel.swift */; };
 		BE78028027D90AF8000366DD /* MenuObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE78027F27D90AF8000366DD /* MenuObject.swift */; };
+		BE7DFF0128044ABA0081492C /* OdChannelFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DFEFB28044ABA0081492C /* OdChannelFilter.swift */; };
+		BE7DFF0228044ABB0081492C /* OdChannelVideoId.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DFEFC28044ABA0081492C /* OdChannelVideoId.swift */; };
+		BE7DFF0328044ABB0081492C /* OdChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DFEFD28044ABA0081492C /* OdChannelManager.swift */; };
+		BE7DFF0428044ABB0081492C /* OdChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DFEFE28044ABA0081492C /* OdChannelItem.swift */; };
+		BE7DFF0628044ABB0081492C /* OdChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DFF0028044ABA0081492C /* OdChannel.swift */; };
 		BE82720F27E0C3B100CF91B3 /* ChannelIconLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */; };
 		BE82721127E1133800CF91B3 /* YtChannelDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82721027E1133800CF91B3 /* YtChannelDataTransformer.swift */; };
+		BE9653D0280A033200987EA2 /* RssChannelDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9653CF280A033200987EA2 /* RssChannelDataTransformer.swift */; };
 		BEAC0AC627FE1EA000CB3454 /* THWebPageOgAttrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC0AC527FE1EA000CB3454 /* THWebPageOgAttrs.swift */; };
 		BEAC0AC827FE1FD200CB3454 /* THWebPageJsonLdAttrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC0AC727FE1FD200CB3454 /* THWebPageJsonLdAttrs.swift */; };
 		BEAC0ACA27FE21A200CB3454 /* RssWebItemAttrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC0AC927FE21A200CB3454 /* RssWebItemAttrs.swift */; };
@@ -215,6 +222,7 @@
 		BE0B09FB27D7F9A900DEE577 /* THFinderMdItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFinderMdItem.h; sourceTree = "<group>"; };
 		BE0B09FC27D7F9A900DEE577 /* THFinderMdItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFinderMdItem.m; sourceTree = "<group>"; };
 		BE2D76E227E089E1004B0B88 /* Tug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tug.entitlements; sourceTree = "<group>"; };
+		BE2EA13428089FD600607EC3 /* ChannelDataTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelDataTransformer.swift; sourceTree = "<group>"; };
 		BE32396627D9F1E500F6021D /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		BE323AFC27DA1E1F00F6021D /* ChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelManager.swift; sourceTree = "<group>"; };
 		BE323AFE27DA2A5700F6021D /* ChannelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItem.swift; sourceTree = "<group>"; };
@@ -228,8 +236,14 @@
 		BE4F8D0B27D95E5100A30B3E /* RssChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannel.swift; sourceTree = "<group>"; };
 		BE4F8D0C27D95E5100A30B3E /* RssChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannelManager.swift; sourceTree = "<group>"; };
 		BE78027F27D90AF8000366DD /* MenuObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuObject.swift; sourceTree = "<group>"; };
+		BE7DFEFB28044ABA0081492C /* OdChannelFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannelFilter.swift; sourceTree = "<group>"; };
+		BE7DFEFC28044ABA0081492C /* OdChannelVideoId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannelVideoId.swift; sourceTree = "<group>"; };
+		BE7DFEFD28044ABA0081492C /* OdChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannelManager.swift; sourceTree = "<group>"; };
+		BE7DFEFE28044ABA0081492C /* OdChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannelItem.swift; sourceTree = "<group>"; };
+		BE7DFF0028044ABA0081492C /* OdChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannel.swift; sourceTree = "<group>"; };
 		BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelIconLoader.swift; sourceTree = "<group>"; };
 		BE82721027E1133800CF91B3 /* YtChannelDataTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelDataTransformer.swift; sourceTree = "<group>"; };
+		BE9653CF280A033200987EA2 /* RssChannelDataTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannelDataTransformer.swift; sourceTree = "<group>"; };
 		BEAC0AC527FE1EA000CB3454 /* THWebPageOgAttrs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THWebPageOgAttrs.swift; sourceTree = "<group>"; };
 		BEAC0AC727FE1FD200CB3454 /* THWebPageJsonLdAttrs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THWebPageJsonLdAttrs.swift; sourceTree = "<group>"; };
 		BEAC0AC927FE21A200CB3454 /* RssWebItemAttrs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssWebItemAttrs.swift; sourceTree = "<group>"; };
@@ -503,12 +517,25 @@
 			children = (
 				BEAC0AC927FE21A200CB3454 /* RssWebItemAttrs.swift */,
 				BE4F8D0A27D95E5100A30B3E /* RssPubDateConvertor.swift */,
+				BE9653CF280A033200987EA2 /* RssChannelDataTransformer.swift */,
 				BE4F8D0727D95E5100A30B3E /* RssChannelFilter.swift */,
 				BECD72A727DA3EAF00A001FE /* RssChannelItem.swift */,
 				BE4F8D0B27D95E5100A30B3E /* RssChannel.swift */,
 				BE4F8D0C27D95E5100A30B3E /* RssChannelManager.swift */,
 			);
 			path = RssChannel;
+			sourceTree = "<group>";
+		};
+		BE7DFEFA28044A990081492C /* OdChannel */ = {
+			isa = PBXGroup;
+			children = (
+				BE7DFEFB28044ABA0081492C /* OdChannelFilter.swift */,
+				BE7DFEFC28044ABA0081492C /* OdChannelVideoId.swift */,
+				BE7DFEFE28044ABA0081492C /* OdChannelItem.swift */,
+				BE7DFF0028044ABA0081492C /* OdChannel.swift */,
+				BE7DFEFD28044ABA0081492C /* OdChannelManager.swift */,
+			);
+			path = OdChannel;
 			sourceTree = "<group>";
 		};
 		BEED9BB827DB9C1F0032B610 /* THAppleScript */ = {
@@ -537,9 +564,11 @@
 				BE32396627D9F1E500F6021D /* Channel.swift */,
 				BE323AFC27DA1E1F00F6021D /* ChannelManager.swift */,
 				BE4F8D0827D95E5100A30B3E /* ChannelStringExtension.swift */,
+				BE2EA13428089FD600607EC3 /* ChannelDataTransformer.swift */,
 				BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */,
 				BE4F8D0627D95E5100A30B3E /* RssChannel */,
 				BE4F8CFB27D95E4F00A30B3E /* YtChannel */,
+				BE7DFEFA28044A990081492C /* OdChannel */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -682,6 +711,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE9653D0280A033200987EA2 /* RssChannelDataTransformer.swift in Sources */,
 				64DC4D22269A42A9006BAA4B /* StatusIcon.swift in Sources */,
 				64015199269C54D000C4DF9A /* THHotKey.m in Sources */,
 				BE4F8D1127D95E5100A30B3E /* RssChannelFilter.swift in Sources */,
@@ -703,13 +733,18 @@
 				BE0B09FD27D7F9A900DEE577 /* THFinderMdItem.m in Sources */,
 				649212E7255873D7002E3F78 /* THFoundation.swift in Sources */,
 				64C5721522A555F9000B6EC3 /* AppDelegate.swift in Sources */,
+				BE2EA13528089FD600607EC3 /* ChannelDataTransformer.swift in Sources */,
 				BE0B09D327D7F8F500DEE577 /* THRssFeedParser.swift in Sources */,
 				64F3555A26C1D67000B18F41 /* THIconDownloader.swift in Sources */,
 				6424BCBF269F54F8008E7084 /* UserPreferences.swift in Sources */,
 				64576AFA26C26BF500CE9356 /* THFrontmostAppSaver.swift in Sources */,
+				BE7DFF0628044ABB0081492C /* OdChannel.swift in Sources */,
 				6426432822A5CAEA007B0EAB /* THLog.m in Sources */,
+				BE7DFF0328044ABB0081492C /* OdChannelManager.swift in Sources */,
+				BE7DFF0128044ABA0081492C /* OdChannelFilter.swift in Sources */,
 				6401519A269C54D000C4DF9A /* THHotKeyCenter.m in Sources */,
 				BEED9BBE27DB9C1F0032B610 /* THAsScript.swift in Sources */,
+				BE7DFF0428044ABB0081492C /* OdChannelItem.swift in Sources */,
 				64BA6384267F7C3900E044A3 /* THNetworkStatus.swift in Sources */,
 				BEAC0AC827FE1FD200CB3454 /* THWebPageJsonLdAttrs.swift in Sources */,
 				648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */,
@@ -730,6 +765,7 @@
 				64CC07C6269B002B003D9392 /* HeaderView.swift in Sources */,
 				646E18EE2567382D00CD1B2D /* THCocoaExtensions.swift in Sources */,
 				BECD72A427DA3CDE00A001FE /* YtChannelItem.swift in Sources */,
+				BE7DFF0228044ABB0081492C /* OdChannelVideoId.swift in Sources */,
 				6475383526ADC84400895ED6 /* THHighlightedTableView.swift in Sources */,
 				BE4F8D0527D95E4F00A30B3E /* YtChannelManager.swift in Sources */,
 				64015181269C533C00C4DF9A /* PreferencesWindowController.swift in Sources */,

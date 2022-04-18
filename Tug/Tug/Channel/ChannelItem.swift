@@ -19,6 +19,8 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 
 	var checkedDate: Date?
 	var pinndedDate: Date?
+	var ruleExcluded = false
+	var userDeleted = false
 
 	var checked: Bool { get { return checkedDate != nil } }
 	var pinned: Bool { get { return pinndedDate != nil } }
@@ -53,6 +55,8 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 
 		coder.setDate(checkedDate, forKey: "checkedDate")
 		coder.setDate(pinndedDate, forKey: "pinndedDate")
+		coder.setBool(ruleExcluded == true ? true : nil, forKey: "ruleExcluded")
+		coder.setBool(userDeleted == true ? true : nil, forKey: "userDeleted")
 
 		return coder
 	}
@@ -72,6 +76,8 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 
 		checkedDate = dictionaryRepresentation.date(forKey: "checkedDate")
 		pinndedDate = dictionaryRepresentation.date(forKey: "pinndedDate")
+		ruleExcluded = dictionaryRepresentation.bool(forKey: "ruleExcluded") ?? false
+		userDeleted = dictionaryRepresentation.bool(forKey: "userDeleted") ?? false
 
 		if checkedDate == nil && dictionaryRepresentation.bool(forKey: "checked") == true {
 			checkedDate = received

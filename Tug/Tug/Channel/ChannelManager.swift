@@ -110,6 +110,46 @@ class ChannelManager: NSObject {
 		NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
 	}
 
+	func reloadAll() {
+		for channel in channels {
+			channel.lastUpdate = nil
+		}
+		startUpdateOfNextChannel()
+	}
+
+	func refresh() {
+		startUpdateOfNextChannel()
+	}
+
+	func startUpdateOfNextChannel() {
+		if channels.contains(where: { $0.isUpdating == true }) == true {
+			return
+		}
+
+		guard let channel = channels.first(where: { $0.disabled == false && $0.shouldUpdate() == true })
+		else {
+			return
+		}
+
+		if THNetworkStatus.hasNetwork() == false {
+			THLogWarning("no network available")
+			return
+		}
+
+		channel.update(urlSession: urlSession, completion: {(ok: Bool, error: String?) in
+			if ok == false {
+				THLogError("ok == false error:\(error)")
+			}
+
+			if channel.save(toDir: self.dirPath) == false {
+				THLogError("can not save channel:\(channel)")
+			}
+
+			NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
+			self.startUpdateOfNextChannel()
+		})
+	}
+
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -216,13 +256,15 @@ extension ChannelManager {
 		noteChange(channel: channel, item: item)
 	}
 
-	func removeItem(_ item: ChannelItem, channel channelId: String) {
+	func deleteItem(_ item: ChannelItem, channel channelId: String) {
 		guard let channel = channel(withId: channelId)
 		else {
 			return
 		}
 
-		channel.items.removeAll(where: {$0.identifier == item.identifier })
+		for item in channel.items.filter({ $0.identifier == item.identifier }) {
+			item.userDeleted = true
+		}
 
 		synchronise(channel: channel, immediately: true)
 		noteChange(channel: channel)

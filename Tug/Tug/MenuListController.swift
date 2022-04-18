@@ -183,7 +183,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	}
 
 	private func delete(item: ChannelItem, channel: Channel) {
-		ChannelManager.managerOfChannel(channel)?.removeItem(item, channel: channel.identifier)
+		ChannelManager.managerOfChannel(channel)?.deleteItem(item, channel: channel.identifier)
 		self.updateUI()
 	}
 
@@ -348,13 +348,13 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			for channel in channels {
 
 				if searchedText != nil && channel.match(searchValue: searchedText!) {
-					for item in channel.items {
+					for item in channel.visibleItems {
 						items.append((order: manager.order, score: 1.0, kind: manager.kind, channel: channel, item: item))
 					}
 					continue
 				}
 
-				for item in channel.items {
+				for item in channel.visibleItems {
 					if let searchedText = searchedText {
 						if item.contains(stringValue: searchedText) == false {
 							continue
@@ -414,10 +414,20 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		let others = items.filter({ $0.item.pinned == false && $0.item.checked == true })
 
 		let now = Date()
+		let lastHourTime = Calendar.current.date(byAdding: .hour, value: -1, to: now)!.timeIntervalSince1970
+
+		let lastHours = others.filter( { $0.item.received.timeIntervalSince1970 >= lastHourTime })
+		if lastHours.count > 0 {
+			objectList.append(MenuObjectItem(kind: .group, title: THLocalizedString("Last Hour")))
+			for item in lastHours {
+				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
+			}
+		}
+
 		let todayTime = Calendar.current.th_midnight(of: now).timeIntervalSince1970
 		let yesterdayTime = Calendar.current.th_midnight(of: Calendar.current.date(byAdding: .day, value: -1, to: now)!).timeIntervalSince1970
 
-		let todays = others.filter( { $0.item.received.timeIntervalSince1970 >= todayTime })
+		let todays = others.filter( { $0.item.received.timeIntervalSince1970 >= todayTime && $0.item.received.timeIntervalSince1970 < lastHourTime })
 		if todays.count > 0 {
 			objectList.append(MenuObjectItem(kind: .group, title: THLocalizedString("Today")))
 			for item in todays {

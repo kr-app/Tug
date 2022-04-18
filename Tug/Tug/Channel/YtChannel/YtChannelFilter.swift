@@ -7,7 +7,6 @@ enum YtChannelFilterRule {
 	case include
 	case markReaded
 	case ignore
-	case ignoreTemporaly
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -22,14 +21,14 @@ struct YtChannelFilter {
 		let videoId = channel.videoId!
 
 		if videoId.kind == .channelId && videoId.identifier == "UC2MGuhIaOP6YLpUx106kTQw" { //International Federation of Sport Climbing
-			if let title = itemTitle {
+			if let title = itemTitle?.lowercased() {
 				// contains
-				if title.lowercased().contains("Paraclimbing".lowercased()) {
+				if title.contains("Paraclimbing".lowercased()) || title.contains(" highlights || ") {
 					return .markReaded
 				}
 				// suffix
 				for sf in ["highlights"] {
-					if title.th_hasSuffixInsensitive(" \(sf)") {
+					if title.hasPrefix(" \(sf)") {
 						return .markReaded
 					}
 				}
@@ -37,7 +36,7 @@ struct YtChannelFilter {
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UC__xRB5L4toU9yYawt_lIKg" { // BLAST
 			if let title = itemTitle {
-				if title.hasSuffix("- LE JOURNAL") == true {
+				if title.hasSuffix("- LE JOURNAL") {
 					return .ignore
 				}
 			}
@@ -50,13 +49,21 @@ struct YtChannelFilter {
 				return .ignore
 			}
 		}
+		else if videoId.kind == .channelId && videoId.identifier == "UCMRJqoSRIaakAJUJK104Z8Q" { // Touche pas à mon poste !
+			if let views = itemViews {
+				if views > 50_000 {
+					return .include
+				}
+			}
+			return .ignore
+		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCESTwDXpoMgiYBHipMdKTkQ" { // Sud Radio
 			if let views = itemViews {
 				if views > 25_000 {
 					return .include
 				}
 			}
-			return .ignoreTemporaly
+			return .ignore
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCV6YKhpI0Bs5hSJ6frXM4nA" { // Y a que la vérité qui compte
 			if let description = itemContentText {

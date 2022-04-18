@@ -6,7 +6,6 @@ import Cocoa
 class YtChannel: Channel {
 
 	private(set) var videoId: YtChannelVideoId!
-	private var excludedItems = [String]()
 
 	override var description: String {
 		th_description("identifier:\(identifier) videoId:\(videoId) title:\(title)")
@@ -62,6 +61,10 @@ class YtChannel: Channel {
 		}
 
 		let luNow = lu.timeIntervalSinceNow
+
+		if lastError != nil {
+			return luNow <= -15.0.th_min
+		}
 
 		// moins de 15 min -> false
 		if luNow > -15.th_min {
@@ -217,21 +220,6 @@ class YtChannel: Channel {
 					received = old_item?.received ?? nowDate
 				}
 
-				if excludedItems.contains(where: { $0 == identifier }) {
-					continue
-				}
-
-				let rule = YtChannelFilter.shared.ruleFor(channel: self, itemTitle: title, itemContentText: contentText, itemViews: views)
-				if rule == .ignore {
-					excludedItems.append(identifier)
-					THLogWarning("channel:\(self.title), ignore item:\(title)")
-					continue
-				}
-				else if rule == .ignoreTemporaly {
-					THLogWarning("channel:\(self.title), ignore temporaly item:\(title)")
-					continue
-				}
-
 				let item = YtChannelItem(identifier: identifier, received: received)
 
 				item.published = old_item?.published ?? publishedDate
@@ -250,9 +238,13 @@ class YtChannel: Channel {
 					item.checkedDate = old_item.checkedDate
 				}
 
+				let rule = YtChannelFilter.shared.ruleFor(channel: self, itemTitle: title, itemContentText: contentText, itemViews: views)
 				if rule == .markReaded {
-//					log(.info, "excluded item:\(item)")
 					item.checkedDate = nowDate
+				}
+				else if rule == .ignore {
+					THLogWarning("channel:\(self.title), ignore item:\(item)")
+					item.ruleExcluded = true
 				}
 
 				items.append(item)
@@ -268,8 +260,8 @@ class YtChannel: Channel {
 			items.forEach({ $0.checkedDate = nowDate })
 		}
 
-		if items.count > 100 {
-			items.removeLast(items.count - 100)
+		if items.count > 300 {
+			items.removeLast(items.count - 300)
 		}
 
 		return nil

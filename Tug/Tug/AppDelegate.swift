@@ -39,19 +39,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuListControllerDelegatePr
 		RssChannelFilterManager.shared.printToConsole()
 		//RssChannelFilterManager.shared.synchronizeToDisk()
 
-		if THNetworkStatus.hasNetwork() == true {
-			RssChannelManager.shared.refresh()
-			YtChannelManager.shared.refresh()
-		}
+		RssChannelManager.shared.refresh()
+		YtChannelManager.shared.refresh()
 
 		barIcon.updateBadge()
 
 		updator = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true, block: { (Timer) in
-			if THNetworkStatus.hasNetwork() == false {
-				THLogWarning("no network")
-				return
-			}
-
 			RssChannelManager.shared.refresh()
 			YtChannelManager.shared.refresh()
 		})

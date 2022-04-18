@@ -5,8 +5,6 @@ import Cocoa
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class RssChannel: Channel {
 
-	private var excludedItems = [String]()
-
 	override class func channel(fromFile path: String) -> Self? {
 		let channel = Self.th_unarchive(fromDictionaryRepresentationAtPath: path)
 		channel?.identifier = path.th_lastPathComponent.th_deletingPathExtension
@@ -70,7 +68,7 @@ class RssChannel: Channel {
 		let luNow = lu.timeIntervalSinceNow
 
 		if lastError != nil {
-			return luNow <= -30.0
+			return luNow <= -5.th_min
 		}
 
 		// moins de 5 min -> false
@@ -78,7 +76,7 @@ class RssChannel: Channel {
 			return false
 		}
 
-		let refreshInterval = UserPreferences.shared.refreshInterval > 0 ? UserPreferences.shared.refreshInterval : 5.0.th_min
+		let refreshInterval = /*UserPreferences.shared.refreshInterval > 0 ? UserPreferences.shared.refreshInterval : */15.0.th_min
 		return luNow <= refreshInterval
 	}
 		
@@ -116,22 +114,7 @@ class RssChannel: Channel {
 
 		for item in p.items {
 
-			var title = item.value(named: "title")?.content
-			while title?.contains("  ") == true {
-				title = title?.replacingOccurrences(of: "  ", with: " ")
-			}
-
-			if let title = title {
-				if excludedItems.contains(title) {
-					continue
-				}
-				if RssChannelFilterManager.shared.isExcludedItem(itemTitle: title, channel: self) == true {
-					THLogWarning("excluded item:\(item)")
-					excludedItems.append(title)
-					continue
-				}
-			}
-
+			let title = ChannelDataTransformer.transform(title: item.value(named: "title")?.content)
 			let link = item.value(named: "link")?.content
 			var contentText = item.value(named: "description")?.content
 
@@ -174,7 +157,7 @@ class RssChannel: Channel {
 			// suppression des tags html
 			contentText = contentText?.th_purifiedHtmlTagBestAsPossible()
 
-			contentText = contentText?.th_truncate(max: 200, by: .byTruncatingTail)
+			contentText = RssChannelDataTransformer.transform(contentText: contentText)
 
 			guard let identifier = guid ?? link ?? date
 			else {
@@ -214,7 +197,7 @@ class RssChannel: Channel {
 							let pageItem = RssWebItemAttrs(link: link)
 							pageItem.start( {(ok: Bool, error: String?) in
 								if ok == false {
-									THLogError("link:\(link.absoluteString)")
+									THLogError("item:\(item), link:\(link.absoluteString), error:\(error)")
 									return
 								}
 								if let thumbnail = pageItem.extractedImage {
@@ -229,20 +212,17 @@ class RssChannel: Channel {
 				}
 			}
 
-//			if let dupItem = items.firstIndex(where: { $0.isLike(item) }) {
-//				THLogError("found like duplicated item. dupItem:\(items[dupItem]) item:\(item)")
-//				items.remove(at: dupItem)
-//			}
-
-//			if onCreation == true {
-//				item.checked = true
-//			}
+			if let title = item.title {
+				if RssChannelFilterManager.shared.isExcludedItem(itemTitle: title, channel: self) {
+					item.ruleExcluded = true
+				}
+			}
 
 			items.append(item)
 			items.sort(by: { ($0.published ?? $0.received) >  ($1.published ?? $1.received) })
 		}
 
-		let max = 500
+		let max = 5000
 
 		if p.items.count > Int(max / 3) {
 			THLogError("received more than 100 items (\(p.items.count))")

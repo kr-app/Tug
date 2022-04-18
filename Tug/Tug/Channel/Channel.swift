@@ -17,6 +17,7 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 	var poster: URL?
 
 	var items = [ChannelItem]()
+	var visibleItems: [ChannelItem] { get { items.filter({ $0.ruleExcluded == false && $0.userDeleted == false }) }}
 
 	private var iconVersion: Int?
 	private var synchronizeTimer: Timer?
@@ -46,12 +47,12 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 	// MARK: -
 
 	func hasUnreaded() -> Bool {
-		return items.contains(where: {$0.checkedDate == nil })
+		return visibleItems.contains(where: { $0.checkedDate == nil })
 	}
 
 	func unreaded() -> Int {
 		var r = 0
-		for item in items {
+		for item in visibleItems {
 			if item.checkedDate == nil {
 				r += 1
 			}
@@ -59,9 +60,9 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 		return r
 	}
 
-	func hasRecent(refDate: TimeInterval) -> Bool {
-		return items.contains(where: {$0.isRecent(refDate: refDate) })
-	}
+//	func hasRecent(refDate: TimeInterval) -> Bool {
+//		return items.contains(where: { $0.isRecent(refDate: refDate) })
+//	}
 
 	// MARK: -
 

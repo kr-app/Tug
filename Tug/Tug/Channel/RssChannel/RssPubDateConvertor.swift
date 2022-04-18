@@ -10,7 +10,8 @@ class PubDateConvertor {
 	private let df_alt0 = DateFormatter(dateFormat: "E, d MMM yyyy HH:mm:ss Z")
 	private let df_alt1 = DateFormatter(dateFormat: "E, dd MMM yyyy HH:mm:ss zzz")
 	private let df_alt2 = DateFormatter(dateFormat: "E, dd MMM yyyy HH:mm:ss")
-	
+	//private let df_alt3 = DateFormatter(dateFormat: "E, dd MMM yyyy HH:mm:ss GMT")
+
 	private var df_alt2_tz: TimeZone?
 	private var onErrorOnce = false
 	
@@ -33,6 +34,7 @@ class PubDateConvertor {
 			if (string as NSString).range(of: " ", options: .backwards, range: NSRange(location: nbChars - 4, length: 4)).location != NSNotFound {
 				if df_alt2_tz == nil {
 					let tz = (string as NSString).substring(from: nbChars - 3)
+					df_alt2.locale = Locale(identifier: "en_US")
 					df_alt2.timeZone = TimeZone(abbreviation: tz)
 				}
 				if let date = df_alt2.date(from: String(string.dropLast(4))) {

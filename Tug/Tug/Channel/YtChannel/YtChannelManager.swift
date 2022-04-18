@@ -23,17 +23,6 @@ class YtChannelManager: ChannelManager {
 		return channel
 	}
 
-	func reloadAll() {
-		for channel in channels {
-			channel.lastUpdate = nil
-		}
-		startUpdateOfNextChannel()
-	}
-
-	func refresh() {
-		startUpdateOfNextChannel()
-	}
-
 	// MARK: -
 
 	func channel(withVideoId videoId: YtChannelVideoId) -> YtChannel? {
@@ -42,32 +31,6 @@ class YtChannelManager: ChannelManager {
 
 	override func recentRefDate() -> TimeInterval {
 		Date().timeIntervalSinceReferenceDate - 1.5.th_day
-	}
-
-	// MARK: -
-	
-	func startUpdateOfNextChannel() {
-		if channels.contains(where: { $0.isUpdating == true }) == true {
-			return
-		}
-
-		guard let channel = channels.first(where: { $0.disabled == false && $0.shouldUpdate() == true })
-		else {
-			return
-		}
-
-		channel.update(urlSession: urlSession, completion: {(ok: Bool, error: String?) in
-			if ok == false {
-				THLogError("ok == false error:\(error)")
-			}
-
-			if channel.save(toDir: self.dirPath) == false {
-				THLogError("can not save channel:\(channel)")
-			}
-
-			NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
-			self.startUpdateOfNextChannel()
-		})
 	}
 
 }

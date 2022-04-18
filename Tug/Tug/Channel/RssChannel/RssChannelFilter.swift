@@ -151,10 +151,15 @@ class RssChannelFilterManager {
 
 	init(filePath: String) {
 		self.filePath = filePath
-		
-		if let filters = filters(fromFile: filePath) {
-			self.filters = filters
-			self.fileStamps = FileManager.th_modDate1970(atPath: filePath)
+
+		if FileManager.default.fileExists(atPath: filePath) {
+			if let filters = filters(fromFile: filePath) {
+				self.filters = filters
+				self.fileStamps = FileManager.th_modDate1970(atPath: filePath)
+			}
+			else {
+				THLogError("filters == nil filePath:\(filePath)")
+			}
 		}
 	}
 
@@ -170,9 +175,9 @@ class RssChannelFilterManager {
 		if FileManager.default.fileExists(atPath: filePath) == false {
 			return
 		}
-		
+
 		let modDate = FileManager.th_modDate1970(atPath: filePath)
-		if modDate != nil && modDate == fileStamps {
+		if modDate == nil || modDate! == fileStamps {
 			return
 		}
 
@@ -181,12 +186,8 @@ class RssChannelFilterManager {
 
 		printToConsole()
 	}
-	
-	private func filters(fromFile file: String) -> [RssChannelFilter]? {
-		if FileManager.default.fileExists(atPath: file) == false {
-			return nil
-		}
 
+	private func filters(fromFile file: String) -> [RssChannelFilter]? {
 		guard let rep = THDictionaryRepresentation(contentsOfFile: file)
 		else {
 			THLogError("rep == nil file:\(file)")

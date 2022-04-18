@@ -30,7 +30,7 @@ class ChannelIconLoader: NSObject {
 		let channel = notification.userInfo!["channel"] as! Channel
 		//let item = notification.userInfo!["item"] as? ChannelItem
 
-		for item in channel.items {
+		for item in channel.visibleItems {
 			if item.checked == true || iconDownloader.hasData(forIconUrl: item.thumbnail) == true {
 				continue
 			}
