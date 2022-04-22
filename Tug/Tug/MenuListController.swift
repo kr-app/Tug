@@ -793,19 +793,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			}
 
 			ChannelManager.managerOfChannel(channel)?.mark(checked: true, item: item, channel: channel.identifier)
-
-			DispatchQueue.main.async {
-				if THWebBrowserScriptingTools.createWindowIfNecessary() == false {
-					THLogError("createWindowIfNecessary == false link:\(link)")
-				}
-
-				THOpenInBrowser.shared.open(url: link, completion: {(ok: Bool) in
-					if ok == false {
-						THLogError("open == false link:\(link)")
-					}
-				})
-			}
-
+			OpenWebLink(link)
 			delegate?.paneViewControllerDidPresentExternalItem(self)
 		}
 	}

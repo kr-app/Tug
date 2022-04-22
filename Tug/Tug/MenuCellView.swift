@@ -99,7 +99,7 @@ class MenuCellView : THHighlightedTableCellView {
 
 			//let isDark = self.effectiveAppearance.name == .darkAqua
 			let isHighlighted = isHighlightedRow || self.backgroundStyle == .emphasized
-			let itemColor = isHighlighted == true ? .white : item.checked ? NSColor(calibratedWhite: 0.33, alpha: 1.0): .black
+			let itemColor = isHighlighted == true ? .white : item.checked ? NSColor(calibratedWhite: 0.15, alpha: 1.0): .black
 
 			// icon
 			var img = ChannelIconLoader.shared.iconDownloader.icon(atURL: item.thumbnail, startUpdate: true)

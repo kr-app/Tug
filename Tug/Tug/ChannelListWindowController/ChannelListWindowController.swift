@@ -323,21 +323,8 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		let object = row == -1 ? nil : objectList![row]
 		let channel = object?.channel
 
-		guard let link = channel?.link
-		else {
-			return
-		}
-
-		DispatchQueue.main.async {
-			if THWebBrowserScriptingTools.createWindowIfNecessary() == false {
-				THLogError("createWindowIfNecessary == false link:\(link)")
-			}
-
-			THOpenInBrowser.shared.open(url: link, completion: {(ok: Bool) in
-				if ok == false {
-					THLogError("open == false link:\(link)")
-				}
-			})
+		if let link = channel?.link {
+			OpenWebLink(link)
 		}
 	}
 
