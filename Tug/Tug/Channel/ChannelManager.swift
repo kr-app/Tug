@@ -90,7 +90,7 @@ class ChannelManager: NSObject {
 			THLogError("can not trash channel:\(channel)")
 		}
 
-		channels.removeAll(where: {$0.identifier == channelId })
+		channels.removeAll(where: { $0.identifier == channelId })
 	}
 
 	func recentRefDate() -> TimeInterval {
@@ -230,7 +230,7 @@ extension ChannelManager {
 		   return
 		}
 
-		guard let r_item = channel.items.first(where: {$0.identifier == item.identifier })
+		guard let r_item = channel.items.first(where: { $0.identifier == item.identifier })
 		else {
 		   return
 		}

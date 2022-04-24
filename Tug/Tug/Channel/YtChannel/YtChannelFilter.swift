@@ -20,7 +20,7 @@ struct YtChannelFilter {
 
 		let videoId = channel.videoId!
 
-		if videoId.kind == .channelId && videoId.identifier == "UC2MGuhIaOP6YLpUx106kTQw" { //International Federation of Sport Climbing
+		if videoId.kind == .channelId && videoId.identifier == "UC2MGuhIaOP6YLpUx106kTQw" { // International Federation of Sport Climbing
 			if let title = itemTitle?.lowercased() {
 				// contains
 				if title.contains("Paraclimbing".lowercased()) || title.contains(" highlights || ") {
@@ -51,7 +51,7 @@ struct YtChannelFilter {
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCMRJqoSRIaakAJUJK104Z8Q" { // Touche pas à mon poste !
 			if let views = itemViews {
-				if views > 50_000 {
+				if views > 100_000 {
 					return .include
 				}
 			}

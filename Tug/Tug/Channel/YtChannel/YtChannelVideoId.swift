@@ -116,42 +116,6 @@ struct YtChannelVideoIdExtractor {
 
 		THLogWarning("can not extract video id from url, trying to get video id for site: \(site)")
 
-//		videoId = YtChannel.loadVideoId(fromUrl: site.asURL!)
-//		if videoId != nil {
-//			log(.info, "found videoId:/(videoId) for site:\(site)")
-//		}
-//		else {
-		if uComps.count == 4 && uComps[1] == "c" {
-			let channelName = uComps[uComps.count-2]
-			let vids = [	"MarcTouatiTV": "UCX0IqCxHb4xhdE9QPixAlfg",
-								"LibreRiche": "UCmvSTbXOOvxXj26vvQBasXg",
-								"CarsandEngines": "UCzaRja_k66jt-KoSBftRTgw",
-								"RoCarsTV": "UCPOhQupz3MwGSIBG0OqVnAg",
-								"CoupableDetout": "UCMPNysJ27EHTvLt0tGiSX0A",
-								"mellowclimbing": "UC5jRwTUqG15l-BcqQHbVFtA",
-								"USAClimbingOFFICIAL": "UCAthhtcB-Aa5yDg8ECTTqcA",
-								"120minutesRTS": "UCmzP_xaz-uyMMbac4DggR8A",
-								"MikeThurston": "UCzGLDaTu81nJDtWK10MniGg",
-								"YomiDenzel": "UChgE6R4QauGAJAlYiJOcCGw",
-								"BloginfluentFrance": "UCLLVFXmra3VHofacquH4EMA",
-								"CNBCMakeIt": "UCH5_L3ytGbBziX0CLuYdQ1Q",
-								"gabejedmo": "UCgZM50Ig7STDS0l6f_QnrXw",
-								"PaulineLaigneau": "UCjsDF21AUmQGr41n6SsInEw",
-								"SpacevidsTv1": "UCdF5d0UwSJJunRcRVzP1uDg",
-								"YeahRussia": "UCWf43GShTqMDdJN9pICYd2Q",
-								"Blast-info": "UC__xRB5L4toU9yYawt_lIKg",
-								"TVMountainMontBlanc": "UCuoT1bfbPqZT_1ULPcLutaQ",
-								"LeMédiaOfficiel": "UCT67YOMntJxfRnO_9bXDpvw",
-								"LatexFashionTV": "UCC3iGfxG5wG17GBe1PffP0Q",
-								"MSMOTORSCustom": "UCJw_IeqGUUY9ZJXVb9f-kPg",
-								"VirginGalactic": "UClcvOr7LV8tlJwJvkNMmnKg"
-							]
-
-			if let id = vids[channelName] {
-				return YtChannelVideoId(kind: .channelId, identifier: id)
-			}
-		}
-
 		return nil
 	}*/
 

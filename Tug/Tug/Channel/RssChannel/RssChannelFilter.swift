@@ -220,7 +220,7 @@ class RssChannelFilterManager {
 //			if f.titleFilter.mode == .begin || f.titleFilter
 //		}
 //
-//		if filters.contains(where: {$0.host == filter.host && $0.titleFilter.string == filter.titleFilter.string }) == true {
+//		if filters.contains(where: { $0.host == filter.host && $0.titleFilter.string == filter.titleFilter.string }) == true {
 //			return
 //		}
 		

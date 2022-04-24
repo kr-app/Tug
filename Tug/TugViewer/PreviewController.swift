@@ -9,7 +9,7 @@ class PreviewContainerView: NSView {
 	override func setFrameSize(_ newSize: NSSize) {
 		super.setFrameSize(newSize)
 
-		if let webView = self.subviews.first(where: {$0 is WKWebView }) {
+		if let webView = self.subviews.first(where: { $0 is WKWebView }) {
 			webView.frame.size = NSSize(newSize.width * 1.333, newSize.height * 1.333)
 		}
 	}
