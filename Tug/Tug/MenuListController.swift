@@ -73,6 +73,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		tableView.doubleAction = #selector(tableViewDoubleAction)
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(n_iconDownloaderDidLoad), name: THIconDownloader.didLoadNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(n_channelItemUpdated), name: ChannelManager.channelItemUpdatedNotification, object: nil)
 	}
 	
 	deinit {
@@ -105,6 +106,10 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		}
 	}
 	
+	@objc private func n_channelItemUpdated(_ notification: Notification) {
+		updateUIHeader()
+	}
+
 	@objc private func n_iconDownloaderDidLoad(_ notification: Notification) {
 		guard 	let url = notification.userInfo?["url"] as? URL,
 					let objectList = objectList
@@ -836,6 +841,13 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 			menu.addItem(NSMenuItem.separator())
 
+			menu.addItem(THMenuItem(title: THLocalizedString("Reload Channel"), block: {() in
+				ChannelManager.managerOfChannel(channel)?.updateChannel(channel, completion: { () in
+				})
+			}))
+
+			menu.addItem(NSMenuItem.separator())
+
 			let checked = item.checked
 			menu.addItem(THMenuItem(title: checked ? THLocalizedString("Unread") : THLocalizedString("Read"), block: {() in
 				self.mark(checked: !checked, row: row, item: item, channel: channel)
@@ -857,9 +869,8 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 				string += "channel url: \(channel.url?.absoluteString)\n"
 				string += "channel link: \(channel.link?.absoluteString)\n"
 
-				if let channel = channel as? RssChannel, let item = item as? RssChannelItem {
-				}
-				else if let channel = channel as? YtChannel, let item = item as? YtChannelItem {
+				// YtChannel
+				if let channel = channel as? YtChannel {
 					string += "channel videoId: kind: \(channel.videoId.kind.rawValue) id: \(channel.videoId.identifier)\n"
 				}
 

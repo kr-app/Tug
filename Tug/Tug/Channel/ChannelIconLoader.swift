@@ -19,7 +19,8 @@ class ChannelIconLoader: NSObject {
 		iconDownloader.configuration.inMemory = 30
 
 		NotificationCenter.default.addObserver(self, selector: #selector(n_channelUpdated), name: ChannelManager.channelUpdatedNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(n_channelItemUpdated), name: ChannelManager.channelItemUpdatedNotification, object: nil)
+		//NotificationCenter.default.addObserver(self, selector: #selector(n_channelItemUpdated), name: ChannelManager.channelItemUpdatedNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(n_webItemAttrsUpdated), name: RssWebItemAttrs.didUpdateAttributeNotification, object: nil)
 	}
 
 	func cleanIconDownloader() {
@@ -31,14 +32,22 @@ class ChannelIconLoader: NSObject {
 		//let item = notification.userInfo!["item"] as? ChannelItem
 
 		for item in channel.visibleItems {
-			if item.checked == true || iconDownloader.hasData(forIconUrl: item.thumbnail) == true {
+			if item.checked || iconDownloader.hasData(forIconUrl: item.thumbnail) {
 				continue
 			}
 			iconDownloader.loadIcon(atURL: item.thumbnail)
 		}
 	}
 
-	@objc private func n_channelItemUpdated(_ notification: Notification) {
+//	@objc private func n_channelItemUpdated(_ notification: Notification) {
+//	}
+
+	@objc private func 	n_webItemAttrsUpdated(_ notification: Notification) {
+		if let thumbnailUrl = notification.userInfo?["thumbnailUrl"] as? URL{
+			if iconDownloader.hasData(forIconUrl: thumbnailUrl) == false {
+				iconDownloader.loadIcon(atURL: thumbnailUrl)
+			}
+		}
 	}
 
 }

@@ -85,14 +85,13 @@ class YtChannelDetailsViewController: NSViewController {
 //
 //		YtChannelManager.shared.setAttribute(url: nUrl, channel: channel.identifier)
 
-		YtChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+		YtChannelManager.shared.updateChannel(channel, completion: {() in
 			self.updateUI()
 		})
 	}
 
 	@IBAction func cleanAction(_ sender: NSButton) {
-		YtChannelManager.shared.clean(channel: channel.identifier)
-		YtChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+		YtChannelManager.shared.updateChannel(channel, completion: {() in
 			self.updateUI()
 		})
 	}

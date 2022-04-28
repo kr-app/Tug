@@ -71,7 +71,7 @@ class PreviewController: PPPanePreviewController, WKNavigationDelegate {
 
 		let webPreferences = wConf.preferences
 		webPreferences.javaScriptCanOpenWindowsAutomatically = false
-//		webPreferences.minimumFontSize = 13.0
+		webPreferences.minimumFontSize = 13.0
 		webPreferences.isFraudulentWebsiteWarningEnabled = false
 
 		let margin: CGFloat = 0.0

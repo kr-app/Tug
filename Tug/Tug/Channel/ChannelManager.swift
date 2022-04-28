@@ -74,8 +74,8 @@ class ChannelManager: NSObject {
 			THLogError("can not save channel:\(channel)")
 		}
 
-		if startUpdate == true {
-			self.updateChannel(channel.identifier, completion: nil)
+		if startUpdate {
+			self.updateChannel(channel, completion: nil)
 		}
 	}
 
@@ -174,20 +174,8 @@ extension ChannelManager {
 		noteChange(channel: channel)
 	}
 
-	func clean(channel channelId: String) {
-		guard let channel = channel(withId: channelId)
-		else {
-			return
-		}
-
-		channel.items.removeAll()
-
-		synchronise(channel: channel)
-		noteChange(channel: channel)
-	}
-
-	func updateChannel(_ channelId: String, completion: (() -> Void)?) {
-		guard let channel = channel(withId: channelId)
+	func updateChannel(_ channel: Channel, completion: (() -> Void)?) {
+		guard let channel = self.channel(withId: channel.identifier)
 		else {
 			return
 		}
@@ -205,6 +193,7 @@ extension ChannelManager {
 			NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
 		})
 	}
+
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------
 

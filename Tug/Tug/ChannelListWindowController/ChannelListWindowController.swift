@@ -344,7 +344,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		reloadSelectedRow()
 
 		if disabled == false {
-			RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+			RssChannelManager.shared.updateChannel(channel, completion: {() in
 				self.updateUISelection()
 			})
 		}
@@ -378,7 +378,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 			channelOnCreation = nil
 			self.updateUI()
 
-			RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+			RssChannelManager.shared.updateChannel(channel, completion: {() in
 				self.updateUISelection()
 			})
 		
@@ -387,7 +387,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 
 		RssChannelManager.shared.setAttribute(url: nUrl, channel: channel.identifier)
 	
-		RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+		RssChannelManager.shared.updateChannel(channel, completion: {() in
 			self.updateUISelection()
 		})
 	}
@@ -403,10 +403,8 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		else {
 			return
 		}
-
-		RssChannelManager.shared.clean(channel: channel.identifier)
 	
-		RssChannelManager.shared.updateChannel(channel.identifier, completion: {() in
+		RssChannelManager.shared.updateChannel(channel, completion: {() in
 			self.updateUISelection()
 		})
 	}

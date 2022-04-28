@@ -4,6 +4,8 @@ import Cocoa
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 class RssWebItemAttrs {
+	static let didUpdateAttributeNotification = Notification.Name("RssWebItemAttrs-didUpdateAttributeNotification")
+
 	private static let urlSession = URLSession(configuration: URLSessionConfiguration.th_ephemeral())
 	
 	private static var items = [RssWebItemAttrs]()
@@ -38,18 +40,22 @@ class RssWebItemAttrs {
 				THLogInfo("cancelled")
 				return
 			}
+
 			if let rep = response as? HTTPURLResponse, let data = data {
 				if rep.statusCode == 200 {
+
 					if let html = String(data: data, encoding: .utf8) {
 						if let image = THWebPageOgAttrs.extractImage(html) {
 							self.extractedImage = image
 						//	let json = THWebPageJsonLdAttrs.extract(html)
 							DispatchQueue.main.async {
 								completion(true, nil)
+								NotificationCenter.default.post(name: Self.didUpdateAttributeNotification, object: self, userInfo: ["thumbnailUrl": image])
 							}
 							return
 						}
 					}
+
 					self.addToInvalidHost()
 					DispatchQueue.main.async {
 						completion(false, "og image not found")
@@ -57,7 +63,8 @@ class RssWebItemAttrs {
 					return
 				}
 			}
-			self.addToInvalidHost()
+
+			//self.addToInvalidHost()
 			let errorMsg = error?.localizedDescription ?? (response as? HTTPURLResponse)?.th_displayStatus()
 			DispatchQueue.main.async {
 				THLogError("request:\(request.url?.absoluteString), error:\(errorMsg)")
