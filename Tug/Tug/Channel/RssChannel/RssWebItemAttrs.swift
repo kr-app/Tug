@@ -46,6 +46,7 @@ class RssWebItemAttrs {
 
 					if let html = String(data: data, encoding: .utf8) {
 						if let image = THWebPageOgAttrs.extractImage(html) {
+							self.removeToInvalidHost()
 							self.extractedImage = image
 						//	let json = THWebPageJsonLdAttrs.extract(html)
 							DispatchQueue.main.async {
@@ -60,6 +61,7 @@ class RssWebItemAttrs {
 					DispatchQueue.main.async {
 						completion(false, "og image not found")
 					}
+
 					return
 				}
 			}
@@ -82,6 +84,11 @@ class RssWebItemAttrs {
 		}
 	}
 
+	private func removeToInvalidHost() {
+		if let invalidHost = link.host, Self.invalidHosts.contains(invalidHost) {
+			Self.invalidHosts.removeAll(where: { $0 == invalidHost })
+		}
+	}
 	func stop() {
 		task?.cancel()
 		task = nil

@@ -179,23 +179,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuListControllerDelegatePr
 										0.0)
 
 		menuListController = MenuListController(delegate: self)
-		menuListController?.showWindow(inZone: zone, onScreen: screen, completion: {() in
-		})
+		menuListController?.showWindow(in: zone, onScreen: screen)
 	
 		if UserPreferences.shared.actionOnItemClick == nil {
 			if THHelperRunningApp.shared.openApp(wait: false) == false {
 				THLogError("openApp == false")
 			}
 		}
-
 	}
 	
 	private func hidePaneWindow(animated: Bool, restore: Bool) {
-		if menuListController == nil || menuListController!.canHidePaneWindow() == false {
+		guard let menu = menuListController, menu.canHidePaneWindow()
+		else {
 			return
 		}
 
-		menuListController!.hideWindow(completion: { () in
+		menu.hideWindow(completion: { () in
+			if menu != self.menuListController {
+				return
+			}
 
 			self.menuListController = nil
 			self.barIcon.setIsPressed(false)

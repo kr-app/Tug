@@ -201,15 +201,14 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		return myWindow!.attachedSheet == nil
 	}
 
-	func showWindow(inZone: NSRect, onScreen screen: NSScreen, completion: @escaping () -> Void) {
+	func showWindow(in zone: NSRect, onScreen screen: NSScreen) {
 		if myWindow != nil || isShowing == true {
-			completion()
 			return
 		}
 
 		isShowing = true
 
-		var zone = inZone
+		var zone = zone
 		if zone.origin.x < 0.0 {
 			zone.origin.x *= -1.0
 		}
@@ -235,7 +234,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 														backing: .buffered,
 														defer: true,
 														screen: screen)
-//		win.level = .statusBar // NSStatusWindowLevel
+		win.level = .statusBar // NSStatusWindowLevel
 		win.hasShadow = true
 		win.backgroundColor = .clear
 		win.isOpaque = false
@@ -257,7 +256,6 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			win.animator().alphaValue = 1.0
 		}, completionHandler: {() in
 			self.isShowing = false
-			completion()
 		})
 	
 	}
@@ -290,7 +288,6 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			win.orderOut(nil)
 			completion()
 		})
-
 	}
 
 	// MARK: -
@@ -377,17 +374,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			if $0.score != $1.score {
 				return $0.score > $1.score
 			}
-
-			let rcv0 = $0.item.received
-			let rcv1 = $1.item.received
-
-			if rcv0 == rcv1 {
-				if let up0 = $0.item.published, let up1 = $1.item.published {
-					return up0 > up1
-				}
-			}
-
-			return rcv0 > rcv1
+			return $0.item.sorted(compared: $1.item)
 		})
 
 		// unreadedItems
@@ -398,7 +385,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 				if $0.order != $1.order {
 					return $0.order < $1.order
 				}
-				return true
+				return $0.item.sorted(compared: $1.item)
 			 }) {
 				objectList.append(MenuObjectItem(kind: item.kind, channel: item.channel, item: item.item))
 			}

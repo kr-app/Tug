@@ -152,14 +152,12 @@ class RssChannelFilterManager {
 	init(filePath: String) {
 		self.filePath = filePath
 
-		if FileManager.default.fileExists(atPath: filePath) {
-			if let filters = filters(fromFile: filePath) {
-				self.filters = filters
-				self.fileStamps = FileManager.th_modDate1970(atPath: filePath)
-			}
-			else {
-				THLogError("filters == nil filePath:\(filePath)")
-			}
+		if let filters = filters(fromFile: filePath) {
+			self.filters = filters
+			self.fileStamps = FileManager.th_modDate1970(atPath: filePath)
+		}
+		else {
+			THLogError("filters == nil filePath:\(filePath)")
 		}
 	}
 
@@ -172,12 +170,13 @@ class RssChannelFilterManager {
 	}
 
 	func synchronizeFromDisk() {
-		if FileManager.default.fileExists(atPath: filePath) == false {
+		guard let modDate = FileManager.th_modDate1970(atPath: filePath)
+		else {
+			THLogError("modDate == nil filePath:\(filePath)")
 			return
 		}
 
-		let modDate = FileManager.th_modDate1970(atPath: filePath)
-		if modDate == nil || modDate! == fileStamps {
+		if modDate == fileStamps {
 			return
 		}
 
