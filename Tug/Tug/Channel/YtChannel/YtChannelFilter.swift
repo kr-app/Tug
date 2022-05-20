@@ -34,13 +34,6 @@ struct YtChannelFilter {
 				}
 			}
 		}
-		else if videoId.kind == .channelId && videoId.identifier == "UC__xRB5L4toU9yYawt_lIKg" { // BLAST
-			if let title = itemTitle {
-				if title.hasSuffix("- LE JOURNAL") {
-					return .ignore
-				}
-			}
-		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCgGb7tN3tIH5_Kk05D1J_bA" { // RMC
 			if let title = itemTitle {
 				if title.contains("EN DIRECT") || title.hasSuffix("invité de RMC") || title.contains("Apolline de Malherbe") {
@@ -51,7 +44,7 @@ struct YtChannelFilter {
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCMRJqoSRIaakAJUJK104Z8Q" { // Touche pas à mon poste !
 			if let views = itemViews {
-				if views > 100_000 {
+				if views > 150_000 {
 					return .include
 				}
 			}
@@ -59,18 +52,11 @@ struct YtChannelFilter {
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCESTwDXpoMgiYBHipMdKTkQ" { // Sud Radio
 			if let views = itemViews {
-				if views > 25_000 {
+				if views > 50_000 {
 					return .include
 				}
 			}
 			return .ignore
-		}
-		else if videoId.kind == .channelId && videoId.identifier == "UCV6YKhpI0Bs5hSJ6frXM4nA" { // Y a que la vérité qui compte
-			if let description = itemContentText {
-				if description.contains("#shorts") {
-					return .ignore
-				}
-			}
 		}
 		else if channel.title == "Skating ISU" {
 			if let title = itemTitle {

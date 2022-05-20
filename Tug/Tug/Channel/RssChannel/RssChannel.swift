@@ -56,7 +56,7 @@ class RssChannel: Channel {
 	// MARK: -
 	
 	override func updateRequest() -> URLRequest {
-		return URLRequest(url: self.url!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15.0)
+		URLRequest(url: self.url!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15.0)
 	}
 
 	override func shouldUpdate() -> Bool {
@@ -83,18 +83,10 @@ class RssChannel: Channel {
 	override func parse(data: Data) -> String? {
 
 #if DEBUG
-		let cachesDir = FileManager.th_appCachesDir("RssChannel")
-		let d_path = cachesDir.th_appendingPathComponent("\(identifier).xml")
-
-		if TH_isDebuggerAttached() == true {
-			try! data.write(to: URL(fileURLWithPath: d_path))
-		}
-		else if FileManager.default.fileExists(atPath: d_path) == true {
-			try! FileManager.default.removeItem(atPath: d_path)
-		}
+		data.writeDebugOutput(to: FileManager.th_appCachesDir("RssChannel").th_appendingPathComponent("\(identifier).xml"))
 #endif
 
-		let p = THRSSFeedParser(data: data)
+		let p = THRSSFeedParser(data: data, sourceInfo: url)
 		if p.parse() == false {
 			let pe = p.lastError
 			return THLocalizedString("Can not parse RSS" + (pe != nil ? " (\(pe))" : ""))
@@ -121,14 +113,12 @@ class RssChannel: Channel {
 			let guid = linkAsId ? nil : item.value(named: "guid")?.content
 //			let guidPermaLink = item.value(named: "guid")?.attributes?["isPermaLink"] as? String
 
-			var mediaUrl = item.value(named: "media:content")?.attributes?["url"] as? String
+			var mediaUrl = MediaUrlExtractor.urlFromMediaContent(item: item) ?? MediaUrlExtractor.urlFromEnclosure(item: item)
 			let date = item.value(named: "pubDate")?.content
 
 			let pubDate = date != nil ? pubDateConvertor.pubDate(from: date!) : nil
 
 			if mediaUrl == nil {
-				mediaUrl = MediaUrlExtractor.urlFromEnclosure(item: item)
-
 				if mediaUrl == nil && contentText != nil {
 					mediaUrl = MediaUrlExtractor.urlImgSrc(fromContent: contentText!)
 					if mediaUrl != nil && extracted_media_log_once == false {
@@ -143,6 +133,8 @@ class RssChannel: Channel {
 					mediaUrl = nil
 				}
 			}
+
+			let category = item.value(named: "category")?.content
 
 			// gestion des &#039;
 			if let content_cf = contentText as CFString?, let decodedHtml = CFXMLCreateStringByUnescapingEntities(nil, content_cf, nil) as? String {
@@ -180,6 +172,7 @@ class RssChannel: Channel {
 			item.contentText = contentText
 
 			item.thumbnail = mediaUrl != nil ? URL(string: mediaUrl!) : nil
+			item.category = category
 
 			if let old_Idx = old_Idx, let old_item = old_item {
 				items.remove(at: old_Idx)

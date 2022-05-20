@@ -12,11 +12,12 @@ class ChannelIconLoader: NSObject {
 		super.init()
 
 		iconDownloader = THIconDownloader(directory: FileManager.th_appCachesDir("THIconDownloader-ChannelManager"))
-		iconDownloader.configuration.retention = 30.0.th_day
+		iconDownloader.configuration.retention = 7.0.th_day
 		iconDownloader.configuration.maxSize = 84.0
 		iconDownloader.configuration.cropIcon = true
 		//iconDownloader.configuration.excludedHosts = ["static.latribune.fr"]
 		iconDownloader.configuration.inMemory = 30
+		iconDownloader.applyUpdate()
 
 		NotificationCenter.default.addObserver(self, selector: #selector(n_channelUpdated), name: ChannelManager.channelUpdatedNotification, object: nil)
 		//NotificationCenter.default.addObserver(self, selector: #selector(n_channelItemUpdated), name: ChannelManager.channelItemUpdatedNotification, object: nil)

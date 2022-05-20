@@ -16,6 +16,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 	var contentText: String?
 	var thumbnail: URL?
 	var views: Int?
+	var category: String?
 
 	var checkedDate: Date?
 	var pinndedDate: Date?
@@ -52,6 +53,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 		coder.setString(contentText, forKey: "contentText")
 		coder.setUrl(thumbnail, forKey: "thumbnail")
 		coder.setInt(views, forKey: "views")
+		coder.setString(category, forKey: "category")
 
 		coder.setDate(checkedDate, forKey: "checkedDate")
 		coder.setDate(pinndedDate, forKey: "pinndedDate")
@@ -73,6 +75,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 		contentText = dictionaryRepresentation.string(forKey: "contentText") ?? dictionaryRepresentation.string(forKey: "content")
 		thumbnail = dictionaryRepresentation.url(forKey: "thumbnail")
 		views = dictionaryRepresentation.int(forKey: "views")
+		category = dictionaryRepresentation.string(forKey: "category")
 
 		checkedDate = dictionaryRepresentation.date(forKey: "checkedDate")
 		pinndedDate = dictionaryRepresentation.date(forKey: "pinndedDate")
@@ -106,7 +109,7 @@ extension ChannelItem {
 	}
 
 	func contains(stringValue: String) -> Bool {
-		for s in [self.title, self.contentText, self.link?.absoluteString] {
+		for s in [self.title, self.contentText, self.link?.absoluteString, self.category] {
 			if s?.th_containsLike(stringValue) == true {
 				return true
 			}

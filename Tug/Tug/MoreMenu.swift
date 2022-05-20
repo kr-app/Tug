@@ -32,16 +32,14 @@ class MoreMenu: NSObject, NSMenuDelegate {
 		menu.addItem(THMenuItem(title: THLocalizedString("Preferences…"), block: { () in
 			PreferencesWindowController.shared.showWindow(nil)
 		}))
+		menu.addItem(THMenuItem(title: THLocalizedString("Channel List…"), block: { () in
+			ChannelListWindowController.shared.showWindow(nil)
+		}))
 
 		menu.addItem(NSMenuItem.separator())
 		menu.addItem(THMenuItem(title: THLocalizedString("Reload All"), block: { () in
 			RssChannelManager.shared.reloadAll()
 			YtChannelManager.shared.reloadAll()
-		}))
-
-		menu.addItem(NSMenuItem.separator())
-		menu.addItem(THMenuItem(title: THLocalizedString("Channel List…"), block: { () in
-			ChannelListWindowController.shared.showWindow(nil)
 		}))
 
 		menu.addItem(NSMenuItem.separator())

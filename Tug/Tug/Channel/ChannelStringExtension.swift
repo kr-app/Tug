@@ -3,6 +3,24 @@
 import Cocoa
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
+extension Data {
+
+#if DEBUG
+	func writeDebugOutput(to path: String) {
+		if TH_isDebuggerAttached() == true {
+			try! self.write(to: URL(fileURLWithPath: path))
+		}
+		else if FileManager.default.fileExists(atPath: path) {
+			try! FileManager.default.removeItem(atPath: path)
+		}
+	}
+#endif
+
+}
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
 extension String {
 
 	func th_purifiedHtmlTagBestAsPossible() -> String {

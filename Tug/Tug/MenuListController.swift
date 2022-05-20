@@ -111,14 +111,16 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 	}
 
 	@objc private func n_iconDownloaderDidLoad(_ notification: Notification) {
-		guard 	let url = notification.userInfo?["url"] as? URL,
-					let objectList = objectList
+		guard let url = notification.userInfo?["url"] as? URL
 		else {
 			return
 		}
 
-		if let firstIdx = objectList.firstIndex(where: { ($0.kind == .rss || $0.kind == .yt) && $0.item!.thumbnail == url }) {
-			tableView.th_reloadData(forRowIndexes: IndexSet(integer: firstIdx), columnIndexes: nil)
+		let rows = tableView.rows(in: tableView.visibleRect)
+		let objectList = objectList?[rows.lowerBound...rows.upperBound]
+
+		if let firstIdx = objectList?.firstIndex(where: { ($0.kind == .rss || $0.kind == .yt) && $0.item!.thumbnail == url }) {
+			tableView.th_reloadData(forRowIndexes: IndexSet(integer: rows.lowerBound + firstIdx))
 		}
 	}
 	
@@ -323,18 +325,20 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			if let channels = manager.channelsOnError() {
 				let channel = channels.first!
 
-				var title: String!
+				var title = DateFormatter.th_YMD_HMS.string(from: channel.lastError!.date) + "\n"
+				var tooltip: String?
+
 				if channels.count == 1 {
-					title = "\"\(channel.displayTitle())\" " + THLocalizedString("is on error") + "\n"
+					title = channel.displayTitle() + "\n"
 				}
 				else {
 					title = "\(channels.count) " + THLocalizedString("channels on error") + "\n"
+					tooltip = channels.map( { $0.displayTitle() }).joined(separator: "\n")
 				}
 
-				title += channel.lastError!.error + "\n"
-				title += DateFormatter.th_YMD_HMS.string(from: channel.lastError!.date)
+				title += channel.lastError!.error
 
-				objectList.append(MenuObjectItem(kind: .error, error: title))
+				objectList.append(MenuObjectItem(kind: .error, error: title, tooltip: tooltip))
 			}
 		}
 
@@ -462,14 +466,13 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			tableViewH += object.rowHeight
 		}
 
-		let maxH = (screen.visibleFrame.size.height - 20.0).rounded(.down)
-		var wRect = win.frame
-
 		var nH = headH + tableViewH + tableView.enclosingScrollView!.frame.origin.y
+		let maxH = (screen.visibleFrame.size.height - 20.0).rounded(.down)
 		if nH > maxH {
 			nH = maxH
 		}
 
+		var wRect = win.frame
 		wRect.origin.y += wRect.size.height - nH
 		wRect.size.height = nH
 
@@ -865,6 +868,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 				string += "\n"
 				string += "item identifier: \(item.identifier)\n"
 				string += "item title: \(item.title)\n"
+				string += "item category: \(item.category)\n"
 
 				NSPasteboard.general.clearContents()
 				NSPasteboard.general.setString(string, forType: .string)

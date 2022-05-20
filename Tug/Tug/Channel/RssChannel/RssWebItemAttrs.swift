@@ -17,7 +17,13 @@ class RssWebItemAttrs {
 	private var task: URLSessionTask?
 
 	static func canStart(for link: URL) -> Bool {
-		guard let host = link.host else { return false }
+		guard let host = link.host
+		else {
+			return false
+		}
+		if ["tass.com"].contains(host) {
+			return false
+		}
 		return Self.invalidHosts.contains(host) == false
 	}
 
@@ -56,6 +62,8 @@ class RssWebItemAttrs {
 							return
 						}
 					}
+
+					data.writeDebugOutput(to: FileManager.th_appCachesDir("RssWabItemAttrs").th_appendingPathComponent("\(self.link.host!).html"))
 
 					self.addToInvalidHost()
 					DispatchQueue.main.async {

@@ -44,6 +44,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuListControllerDelegatePr
 
 		barIcon.updateBadge()
 
+		THHotKeyCenter.shared().register(THHotKeyRepresentation.init(fromUserDefaultsWithTag: 1))
+
 		updator = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true, block: { (Timer) in
 			RssChannelManager.shared.refresh()
 			YtChannelManager.shared.refresh()
@@ -116,7 +118,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuListControllerDelegatePr
 		}
 	}
 
-	func hotKeyCenter(_ sender: THHotKeyCenter, pressedHotKey hotKey: [AnyHashable : Any]?) {
+	@objc func hotKeyCenter(_ sender: THHotKeyCenter, pressedHotKey hotKey: [AnyHashable : Any]?) {
 		barItemAction()
 	}
 
@@ -155,7 +157,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuListControllerDelegatePr
 		else {
 			return
 		}
-		
+
+		self.barIcon.setIsPressed(true)
+
 //		if timerMenubar == nil {
 //			timerMenubar = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(timerMenubarAction), userInfo: nil, repeats: true)
 //		}

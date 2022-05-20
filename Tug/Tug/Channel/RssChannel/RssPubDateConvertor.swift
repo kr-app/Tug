@@ -58,6 +58,14 @@ class PubDateConvertor {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 struct MediaUrlExtractor {
 
+	static func urlFromMediaContent(item: THRSSFeedItem) -> String? {
+		guard let url = item.value(named: "media:content")?.attributes?["url"] as? String
+		else {
+			return nil
+		}
+		return url
+	}
+
 	static func urlFromEnclosure(item: THRSSFeedItem) -> String? {
 		guard let url = item.value(named: "enclosure")?.attributes?["url"] as? String
 		else {

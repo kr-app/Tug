@@ -17,6 +17,7 @@ struct MenuObjectItem {
 	var channel: Channel?
 	var item: ChannelItem?
 	var error: String?
+	var tooltip: String?
 
 	var rowHeight: CGFloat {
 		switch self.kind {

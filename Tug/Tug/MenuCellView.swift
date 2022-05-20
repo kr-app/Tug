@@ -99,7 +99,7 @@ class MenuCellView : THHighlightedTableCellView {
 
 			//let isDark = self.effectiveAppearance.name == .darkAqua
 			let isHighlighted = isHighlightedRow || self.backgroundStyle == .emphasized
-			let itemColor = isHighlighted == true ? .white : item.checked ? NSColor(calibratedWhite: 0.15, alpha: 1.0): .black
+			let itemColor = isHighlighted == true ? .white : item.checked ? NSColor(calibratedWhite: 0.25, alpha: 1.0): .black
 
 			// icon
 			var img = ChannelIconLoader.shared.iconDownloader.icon(atURL: item.thumbnail, startUpdate: true)
@@ -118,7 +118,7 @@ class MenuCellView : THHighlightedTableCellView {
 			let attrsSubTitle: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 13.0), .foregroundColor: itemColor, .baselineOffset: 2.0]
 
 			if object.kind == .rss {
-				let title = (item.pinned ? "📌" : "") + (item.title ?? "--")
+				let title = (item.pinned ? "📌" : "") + /*(item.category != nil ? ("[" + item.category! + "] ") : "") +*/ (item.title ?? "--")
 				let mi_title = NSMutableAttributedString(string: title, attributes: attrsTitle)
 				if let text = item.contentText {
 					mi_title.append(NSAttributedString(string: "\n\(text)", attributes: attrsSubTitle))

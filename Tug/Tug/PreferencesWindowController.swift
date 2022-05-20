@@ -3,9 +3,7 @@
 import Cocoa
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-class PreferencesWindowController : NSWindowController,
-																NSWindowDelegate,
-																THHotKeyFieldViewChangeObserverProtocol {
+class PreferencesWindowController : NSWindowController, NSWindowDelegate, THHotKeyFieldViewChangeObserverProtocol {
 
 	static let shared = PreferencesWindowController(windowNibName: "PreferencesWindowController")
 
@@ -22,10 +20,10 @@ class PreferencesWindowController : NSWindowController,
 	
 		self.window!.title = THLocalizedString("Tug Preferences")
 
-		let hotKey = THHotKeyRepresentation.fromUserDefaults()
+		let hotKey = THHotKeyRepresentation.init(fromUserDefaultsWithTag: 1)
 		hotKeyButton.state = (hotKey != nil && hotKey!.isEnabled == true) ? .on : .off
 		hotKeyField.setControlSize(hotKeyButton.controlSize)
-		hotKeyField.setChangeObserver(self,
+		hotKeyField.setChangeObserver(	self,
 																keyCode: hotKey?.keyCode ?? 0,
 																modifierFlags: hotKey?.modifierFlags ?? 0,
 																isEnabled: hotKey?.isEnabled ?? false)
@@ -74,18 +72,6 @@ class PreferencesWindowController : NSWindowController,
 		self.hotKeyField.setIsEnabled(sender.state == .on)
 	}
 
-	// MARK: -
-
-	func hotKeyFieldView(_ sender: THHotKeyFieldView!, didChangeWithKeyCode keyCode: UInt, modifierFlags: UInt, isEnabled: Bool) -> Bool {
-		THHotKeyRepresentation(keyCode: keyCode, modifierFlags: modifierFlags, isEnabled: isEnabled).saveToUserDefaults()
-		
-		if isEnabled == true {
-			return THHotKeyCenter.shared().registerHotKey(withKeyCode: keyCode, modifierFlags: modifierFlags, tag: 1)
-		}
-
-		return THHotKeyCenter.shared().unregisterHotKey(withTag: 1)
-	}
-
 	@IBAction func refreshIntervalPopAction(_ sender: NSPopUpButton) {
 		UserPreferences.shared.refreshInterval = TimeInterval(sender.selectedItem!.tag)
 		UserPreferences.shared.synchronize()
@@ -99,6 +85,16 @@ class PreferencesWindowController : NSWindowController,
 	@IBAction func previewPopAction(_ sender: NSPopUpButton) {
 		UserPreferences.shared.previewHighlightMode = sender.selectedItem?.tag
 		UserPreferences.shared.synchronize()
+	}
+
+	// MARK: -
+
+	@objc func hotKeyFieldView(_ sender: THHotKeyFieldView!, didChangeWithKeyCode keyCode: UInt, modifierFlags: UInt, isEnabled: Bool) -> Bool {
+		THHotKeyRepresentation(keyCode: keyCode, modifierFlags: modifierFlags, isEnabled: isEnabled).saveToUserDefaults(withTag: 1)
+		if isEnabled {
+			return THHotKeyCenter.shared().registerHotKey(withKeyCode: keyCode, modifierFlags: modifierFlags, tag: 1)
+		}
+		return THHotKeyCenter.shared().unregisterHotKey(withTag: 1)
 	}
 
 }

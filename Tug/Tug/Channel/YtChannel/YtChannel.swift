@@ -110,18 +110,7 @@ class YtChannel: Channel {
 	override func parse(data: Data) -> String? {
 
 #if DEBUG
-		let cachesDir = FileManager.th_appCachesDir("YtChannel")
-		let filename = getFilename(withExt: "xml")
-		let p = cachesDir.th_appendingPathComponent(filename)
-
-		if TH_isDebuggerAttached() == true {
-			try! data.write(to: URL(fileURLWithPath: p))
-		}
-		else if FileManager.default.fileExists(atPath: cachesDir) == true {
-			if FileManager.default.th_removeItem(atPath: cachesDir) == false {
-				THLogError("th_removeItem == false cachesDir:\(cachesDir)")
-			}
-		}
+		data.writeDebugOutput(to: FileManager.th_appCachesDir("YtChannel").th_appendingPathComponent(getFilename(withExt: "xml")))
 #endif
 
 		let options = THXMLParserOptions_recover
