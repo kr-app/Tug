@@ -76,8 +76,9 @@ class RssWebItemAttrs {
 
 			//self.addToInvalidHost()
 			let errorMsg = error?.localizedDescription ?? (response as? HTTPURLResponse)?.th_displayStatus()
+			THLogError("request:\(request.url?.absoluteString), error:\(errorMsg)")
+
 			DispatchQueue.main.async {
-				THLogError("request:\(request.url?.absoluteString), error:\(errorMsg)")
 				completion(false, errorMsg)
 			}
 		})

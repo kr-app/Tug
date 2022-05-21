@@ -145,7 +145,10 @@ class ChannelManager: NSObject {
 				THLogError("can not save channel:\(channel)")
 			}
 
-			NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
+			DispatchQueue.main.async {
+				NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
+			}
+
 			self.startUpdateOfNextChannel()
 		})
 	}
@@ -189,8 +192,10 @@ extension ChannelManager {
 				THLogError("can not save channel:\(channel)")
 			}
 
-			completion?()
-			NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
+			DispatchQueue.main.async {
+				completion?()
+				NotificationCenter.default.post(name: Self.channelUpdatedNotification, object: self, userInfo: ["channel": channel])
+			}
 		})
 	}
 
