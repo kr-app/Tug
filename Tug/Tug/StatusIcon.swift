@@ -56,7 +56,7 @@ class StatusIcon: NSObject {
 		var hasUnread = RssChannelManager.shared.hasWallChannels(withDateRef: ref, atLeast: 10)
 
 		if hasUnread == false {
-			hasUnread = YtChannelManager.shared.hasUnreaded()
+			hasUnread = YtChannelManager.shared.hasUnread()
 		}
 
 		let transp = THOSAppearance.hasReduceTransparency()

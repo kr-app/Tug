@@ -276,7 +276,7 @@ class ChannelListWindowController : NSWindowController, NSTableViewDataSource, N
 		cell.disabled = channel.disabled
 
 		cell.textField?.stringValue = channel.displayName()
-		cell.textField?.font = channel.hasUnreaded() ? NSFont.th_boldSystemFont(ofControlSize: .small) : NSFont.th_systemFont(ofControlSize: .small)
+		cell.textField?.font = channel.hasUnread() ? NSFont.th_boldSystemFont(ofControlSize: .small) : NSFont.th_systemFont(ofControlSize: .small)
 		cell.imageView?.image = channel.disabled ? icon?.th_imageGray() : icon
 
 		return cell

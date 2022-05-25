@@ -311,8 +311,8 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			return
 		}
 		
-		let rssUnread = RssChannelManager.shared.unreadedCount()
-		let ytUnread = YtChannelManager.shared.unreadedCount()
+		let rssUnread = RssChannelManager.shared.unreadCount()
+		let ytUnread = YtChannelManager.shared.unreadCount()
 		headerLabel.stringValue = "\(rssUnread + ytUnread)/\(nbItems)"
 	}
 	
@@ -381,11 +381,11 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 			return $0.item.sorted(compared: $1.item)
 		})
 
-		// unreadedItems
-		let unreadedItems = items.filter({ $0.item.pinned == false && $0.item.checked == false })
-		if unreadedItems.count > 0 {
+		// unreadItems
+		let unreadItems = items.filter({ $0.item.pinned == false && $0.item.checked == false })
+		if unreadItems.count > 0 {
 			objectList.append(MenuObjectItem(kind: .group, title: THLocalizedString("Unread")))
-			for item in unreadedItems.sorted(by: {
+			for item in unreadItems.sorted(by: {
 				if $0.order != $1.order {
 					return $0.order < $1.order
 				}

@@ -70,7 +70,6 @@
 		64E727A22699AFC1000B516A /* MenuListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E727A12699AFC1000B516A /* MenuListController.swift */; };
 		64E727C72699B228000B516A /* THOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E727AB2699B228000B516A /* THOverView.swift */; };
 		64E727DA2699B442000B516A /* MenuListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E727D92699B442000B516A /* MenuListController.xib */; };
-		64EDAB5C2680A1E8001D5AC0 /* THDictionarySerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */; };
 		64F08F4E25606F6200857C8E /* THFormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */; };
 		64F3555A26C1D67000B18F41 /* THIconDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3555726C1D67000B18F41 /* THIconDownloader.swift */; };
 		64F3555C26C1D67000B18F41 /* THDistantItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3555926C1D67000B18F41 /* THDistantItem.swift */; };
@@ -87,6 +86,8 @@
 		BE323AFD27DA1E1F00F6021D /* ChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE323AFC27DA1E1F00F6021D /* ChannelManager.swift */; };
 		BE323AFF27DA2A5700F6021D /* ChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE323AFE27DA2A5700F6021D /* ChannelItem.swift */; };
 		BE3B86F92812B81D00EC2448 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B86F82812B81D00EC2448 /* Tools.swift */; };
+		BE439C45283EAD8D002A59F4 /* THDictionarySerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C44283EAD8D002A59F4 /* THDictionarySerialization.swift */; };
+		BE439C4B283EAEC9002A59F4 /* THScaledWebViewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C49283EAEB6002A59F4 /* THScaledWebViewContainerView.swift */; };
 		BE4F8D0127D95E4F00A30B3E /* YtChannelVideoId.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8CFD27D95E4F00A30B3E /* YtChannelVideoId.swift */; };
 		BE4F8D0227D95E4F00A30B3E /* YtChannelFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8CFC27D95E4F00A30B3E /* YtChannelFilter.swift */; };
 		BE4F8D0427D95E4F00A30B3E /* YtChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F8CFE27D95E4F00A30B3E /* YtChannel.swift */; };
@@ -209,7 +210,6 @@
 		64E727A12699AFC1000B516A /* MenuListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListController.swift; sourceTree = "<group>"; };
 		64E727AB2699B228000B516A /* THOverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THOverView.swift; sourceTree = "<group>"; };
 		64E727D92699B442000B516A /* MenuListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuListController.xib; sourceTree = "<group>"; };
-		64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THDictionarySerialization.swift; sourceTree = "<group>"; };
 		64F08F4D25606F6200857C8E /* THFormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFormatterExtensions.swift; sourceTree = "<group>"; };
 		64F3555726C1D67000B18F41 /* THIconDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THIconDownloader.swift; sourceTree = "<group>"; };
 		64F3555926C1D67000B18F41 /* THDistantItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THDistantItem.swift; sourceTree = "<group>"; };
@@ -231,6 +231,8 @@
 		BE323AFC27DA1E1F00F6021D /* ChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelManager.swift; sourceTree = "<group>"; };
 		BE323AFE27DA2A5700F6021D /* ChannelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItem.swift; sourceTree = "<group>"; };
 		BE3B86F82812B81D00EC2448 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		BE439C44283EAD8D002A59F4 /* THDictionarySerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THDictionarySerialization.swift; sourceTree = "<group>"; };
+		BE439C49283EAEB6002A59F4 /* THScaledWebViewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THScaledWebViewContainerView.swift; sourceTree = "<group>"; };
 		BE4F8CFC27D95E4F00A30B3E /* YtChannelFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YtChannelFilter.swift; sourceTree = "<group>"; };
 		BE4F8CFD27D95E4F00A30B3E /* YtChannelVideoId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YtChannelVideoId.swift; sourceTree = "<group>"; };
 		BE4F8CFE27D95E4F00A30B3E /* YtChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YtChannel.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 		BE4F8D0A27D95E5100A30B3E /* RssPubDateConvertor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssPubDateConvertor.swift; sourceTree = "<group>"; };
 		BE4F8D0B27D95E5100A30B3E /* RssChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannel.swift; sourceTree = "<group>"; };
 		BE4F8D0C27D95E5100A30B3E /* RssChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannelManager.swift; sourceTree = "<group>"; };
+		BE56EF15281BC320008B6792 /* StringExtensionHTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionHTML.swift; sourceTree = "<group>"; };
 		BE78027F27D90AF8000366DD /* MenuObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuObject.swift; sourceTree = "<group>"; };
 		BE7DFEFB28044ABA0081492C /* OdChannelFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannelFilter.swift; sourceTree = "<group>"; };
 		BE7DFEFC28044ABA0081492C /* OdChannelVideoId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannelVideoId.swift; sourceTree = "<group>"; };
@@ -311,8 +314,8 @@
 		642642FB22A5CAEA007B0EAB /* THFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				BE439C44283EAD8D002A59F4 /* THDictionarySerialization.swift */,
 				649212E6255873D7002E3F78 /* THFoundation.swift */,
-				64EDAB5B2680A1E8001D5AC0 /* THDictionarySerialization.swift */,
 				6473AF162545B842006003A8 /* THLog.swift */,
 				643417DA267551080046CD56 /* THLogger.swift */,
 				640151D5269C7F5600C4DF9A /* THLocalizedString.swift */,
@@ -443,6 +446,7 @@
 				64E727AB2699B228000B516A /* THOverView.swift */,
 				640151C9269C779B00C4DF9A /* THNSButtonBlock.swift */,
 				6475383426ADC84400895ED6 /* THHighlightedTableView.swift */,
+				BE439C49283EAEB6002A59F4 /* THScaledWebViewContainerView.swift */,
 			);
 			path = THView;
 			sourceTree = "<group>";
@@ -576,6 +580,7 @@
 				BE4F8D0827D95E5100A30B3E /* ChannelStringExtension.swift */,
 				BE2EA13428089FD600607EC3 /* ChannelDataTransformer.swift */,
 				BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */,
+				BE56EF15281BC320008B6792 /* StringExtensionHTML.swift */,
 				BE4F8D0627D95E5100A30B3E /* RssChannel */,
 				BE4F8CFB27D95E4F00A30B3E /* YtChannel */,
 				BE7DFEFA28044A990081492C /* OdChannel */,
@@ -629,7 +634,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = "Michaël Parrot";
 				TargetAttributes = {
 					6458CE8C2698DEE200E3885F = {
@@ -703,6 +708,7 @@
 				6458CEBE2698F1CD00E3885F /* THExtensions.swift in Sources */,
 				6458CEBF2698F1E400E3885F /* THFormatterExtensions.swift in Sources */,
 				6458CEC22698F21800E3885F /* THStringExtensions.swift in Sources */,
+				BE439C4B283EAEC9002A59F4 /* THScaledWebViewContainerView.swift in Sources */,
 				6458CEC02698F1F300E3885F /* THFileManagerExtensions.swift in Sources */,
 				6458CEB42698E8CC00E3885F /* THLog.swift in Sources */,
 				64CC07D5269B5BD3003D9392 /* PPPanePreviewWindow.swift in Sources */,
@@ -767,6 +773,7 @@
 				BE3B86F92812B81D00EC2448 /* Tools.swift in Sources */,
 				BE323AFF27DA2A5700F6021D /* ChannelItem.swift in Sources */,
 				BE4F8D0D27D95E5100A30B3E /* RssChannelManager.swift in Sources */,
+				BE439C45283EAD8D002A59F4 /* THDictionarySerialization.swift in Sources */,
 				644C3E492576A63600127BC6 /* THOSAppearance.swift in Sources */,
 				64BD394D256EF1D300988D08 /* THDataExtensions.swift in Sources */,
 				BE82720F27E0C3B100CF91B3 /* ChannelIconLoader.swift in Sources */,
@@ -792,7 +799,6 @@
 				64E727C72699B228000B516A /* THOverView.swift in Sources */,
 				BEED9BC427DBD6230032B610 /* YtChannelDetailsViewController.swift in Sources */,
 				BE4F8D1227D95E5100A30B3E /* RssChannel.swift in Sources */,
-				64EDAB5C2680A1E8001D5AC0 /* THDictionarySerialization.swift in Sources */,
 				64F3559A26C1D82E00B18F41 /* THAppInLoginItem.swift in Sources */,
 				640151D6269C7F5600C4DF9A /* THLocalizedString.swift in Sources */,
 				6473AF172545B842006003A8 /* THLog.swift in Sources */,
@@ -1029,7 +1035,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
-				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = $SDKROOT/usr/include/libxml2;
 				INFOPLIST_FILE = Tug/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

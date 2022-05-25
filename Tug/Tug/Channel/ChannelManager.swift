@@ -42,8 +42,8 @@ class ChannelManager: NSObject {
 		var nbItems = 0
 		channels.forEach({ nbItems += $0.items.count })
 
-		var nbUnreaded = 0
-		channels.forEach({ nbUnreaded += $0.unreaded() })
+		var nbUnread = 0
+		channels.forEach({ nbUnread += $0.unread() })
 
 		var nbOnError = 0
 		channels.forEach({ nbOnError += ($0.lastError != nil) ? 1 : 0 })
@@ -51,7 +51,7 @@ class ChannelManager: NSObject {
 		var nbDisabled = 0
 		channels.forEach({ nbDisabled += $0.disabled ? 1 : 0 })
 
-		THLogInfo("\(channels.count) channels, items:\(nbItems), unreaded:\(nbUnreaded), onError:\(nbOnError), disabled:\(nbDisabled)")
+		THLogInfo("\(channels.count) channels, items:\(nbItems), unread:\(nbUnread), onError:\(nbOnError), disabled:\(nbDisabled)")
 	}
 
 	func channel(withId identifier: String) -> Channel? {
@@ -206,14 +206,14 @@ extension ChannelManager {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 extension ChannelManager {
 
-	func hasUnreaded() -> Bool {
-		channels.contains(where: { $0.disabled == false && $0.hasUnreaded()})
+	func hasUnread() -> Bool {
+		channels.contains(where: { $0.disabled == false && $0.hasUnread()})
 	}
 
-	func unreadedCount() -> Int {
+	func unreadCount() -> Int {
 		var r = 0
 		for channel in channels.filter( { $0.disabled == false } ) {
-			r += channel.unreaded()
+			r += channel.unread()
 		}
 		return r
 	}

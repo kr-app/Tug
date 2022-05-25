@@ -4,20 +4,6 @@ import Cocoa
 import WebKit
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
-class PreviewContainerView: NSView {
-
-	override func setFrameSize(_ newSize: NSSize) {
-		super.setFrameSize(newSize)
-
-		if let webView = self.subviews.first(where: { $0 is WKWebView }) {
-			webView.frame.size = NSSize(newSize.width * 1.333, newSize.height * 1.333)
-		}
-	}
-}
-//--------------------------------------------------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------------------------------------------------
 class PreviewController: PPPanePreviewController, WKNavigationDelegate {
 
 	@IBOutlet var mErrorTitleLabel: NSTextField!
@@ -75,15 +61,14 @@ class PreviewController: PPPanePreviewController, WKNavigationDelegate {
 		webPreferences.isFraudulentWebsiteWarningEnabled = false
 
 		let margin: CGFloat = 0.0
-		let containerView = PreviewContainerView(frame: NSRect(	margin,
-																										margin,
-																										self.view.frame.width - (margin * 2.0),
-																										self.view.frame.height - (margin * 2.0)))
+		let containerView = THScaledWebViewContainerView(	frame: NSRect(	margin,
+																															margin,
+																															self.view.frame.width - margin * 2.0,
+																															self.view.frame.height - margin * 2.0),
+																								scale: 0.75)
 		containerView.autoresizingMask = [.width, .height]
-		containerView.scaleUnitSquare(to: NSSize(0.75, 0.75))
 
-		let webView = WKWebView(	frame: NSRect(0.0, 0.0, containerView.frame.width * 1.333, containerView.frame.height * 1.333),
-														configuration: wConf)
+		let webView = WKWebView(frame: NSRect(0.0, 0.0, containerView.frame.width, containerView.frame.height), configuration: wConf)
 		webView.autoresizingMask = [.width, .height]
 		webView.navigationDelegate = self
 //		webView.allowsMagnification = true

@@ -46,11 +46,11 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 
 	// MARK: -
 
-	func hasUnreaded() -> Bool {
+	func hasUnread() -> Bool {
 		return visibleItems.contains(where: { $0.checkedDate == nil })
 	}
 
-	func unreaded() -> Int {
+	func unread() -> Int {
 		var r = 0
 		for item in visibleItems {
 			if item.checkedDate == nil {

@@ -44,7 +44,7 @@ struct YtChannelFilter {
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCMRJqoSRIaakAJUJK104Z8Q" { // Touche pas à mon poste !
 			if let views = itemViews {
-				if views > 150_000 {
+				if views > 100_000 {
 					return .include
 				}
 			}
@@ -52,7 +52,7 @@ struct YtChannelFilter {
 		}
 		else if videoId.kind == .channelId && videoId.identifier == "UCESTwDXpoMgiYBHipMdKTkQ" { // Sud Radio
 			if let views = itemViews {
-				if views > 50_000 {
+				if views > 25_000 {
 					return .include
 				}
 			}
