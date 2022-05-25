@@ -30,6 +30,7 @@ class MoreMenu: NSObject, NSMenuDelegate {
 
 		menu.addItem(NSMenuItem.separator())
 		menu.addItem(THMenuItem(title: THLocalizedString("Preferences…"), block: { () in
+			NSApplication.shared.activate(ignoringOtherApps: true)
 			PreferencesWindowController.shared.showWindow(nil)
 		}))
 		menu.addItem(THMenuItem(title: THLocalizedString("Channel List…"), block: { () in
