@@ -7,7 +7,7 @@ extension Data {
 
 #if DEBUG
 	func writeDebugOutput(to path: String) {
-		if TH_isDebuggerAttached() == true {
+		if THRunningApp.isDebuggerAttached() == true {
 			try! self.write(to: URL(fileURLWithPath: path))
 		}
 		else if FileManager.default.fileExists(atPath: path) {

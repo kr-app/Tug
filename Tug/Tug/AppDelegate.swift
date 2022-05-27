@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuListControllerDelegatePr
 	// MARK:-
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		THLogInfo("config:\(THRunningApp.config())")
+		THLogInfo("config:\(THRunningApp.config() as NSDictionary))")
 
 #if DEBUG
 		THRunningApp.killOtherApps()
