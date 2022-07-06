@@ -168,7 +168,7 @@ class Channel: THDistantObject, THDictionarySerializationProtocol {
 		}
 
 		if let icon = icon {
-			NSWorkspace.shared.setIcon(icon, forFile: path)
+			THFinderTools.setIcon(icon, forFile: path)
 		}
 
 		return true

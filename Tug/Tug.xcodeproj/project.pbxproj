@@ -53,7 +53,7 @@
 		64898D74256131E8002945CE /* THFileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64898D73256131E8002945CE /* THFileManagerExtensions.swift */; };
 		648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B3661256AD47F00D3D29F /* THStringExtensions.swift */; };
 		649212E7255873D7002E3F78 /* THFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649212E6255873D7002E3F78 /* THFoundation.swift */; };
-		6492EC6226C98C8E0023F935 /* THWebPageRssAttrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492EC6126C98C8E0023F935 /* THWebPageRssAttrs.swift */; };
+		6492EC6226C98C8E0023F935 /* THWebPageAttrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492EC6126C98C8E0023F935 /* THWebPageAttrs.swift */; };
 		64AB664E2476D17200587F1D /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AB664D2476D17200587F1D /* THExtensions.swift */; };
 		64BA6384267F7C3900E044A3 /* THNetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6383267F7C3900E044A3 /* THNetworkStatus.swift */; };
 		64BACF4026AC3547000E4F97 /* THParentAppAlive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BACF3F26AC3547000E4F97 /* THParentAppAlive.swift */; };
@@ -103,11 +103,11 @@
 		BE7DFF0328044ABB0081492C /* OdChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DFEFD28044ABA0081492C /* OdChannelManager.swift */; };
 		BE7DFF0428044ABB0081492C /* OdChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DFEFE28044ABA0081492C /* OdChannelItem.swift */; };
 		BE7DFF0628044ABB0081492C /* OdChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DFF0028044ABA0081492C /* OdChannel.swift */; };
+		BE7FEC962845EDEA00A07ECA /* THFinderTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7FEC952845EDEA00A07ECA /* THFinderTools.swift */; };
+		BE7FEC992845EE5100A07ECA /* THSpecialFilename.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7FEC982845EE5100A07ECA /* THSpecialFilename.m */; };
 		BE82720F27E0C3B100CF91B3 /* ChannelIconLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */; };
 		BE82721127E1133800CF91B3 /* YtChannelDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82721027E1133800CF91B3 /* YtChannelDataTransformer.swift */; };
 		BE9653D0280A033200987EA2 /* RssChannelDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9653CF280A033200987EA2 /* RssChannelDataTransformer.swift */; };
-		BEAC0AC627FE1EA000CB3454 /* THWebPageOgAttrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC0AC527FE1EA000CB3454 /* THWebPageOgAttrs.swift */; };
-		BEAC0AC827FE1FD200CB3454 /* THWebPageJsonLdAttrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC0AC727FE1FD200CB3454 /* THWebPageJsonLdAttrs.swift */; };
 		BEAC0ACA27FE21A200CB3454 /* RssWebItemAttrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC0AC927FE21A200CB3454 /* RssWebItemAttrs.swift */; };
 		BECD72A427DA3CDE00A001FE /* YtChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD72A327DA3CDD00A001FE /* YtChannelItem.swift */; };
 		BECD72A827DA3EAF00A001FE /* RssChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD72A727DA3EAF00A001FE /* RssChannelItem.swift */; };
@@ -189,7 +189,7 @@
 		64898D73256131E8002945CE /* THFileManagerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFileManagerExtensions.swift; sourceTree = "<group>"; };
 		648B3661256AD47F00D3D29F /* THStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THStringExtensions.swift; sourceTree = "<group>"; };
 		649212E6255873D7002E3F78 /* THFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFoundation.swift; sourceTree = "<group>"; };
-		6492EC6126C98C8E0023F935 /* THWebPageRssAttrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THWebPageRssAttrs.swift; sourceTree = "<group>"; };
+		6492EC6126C98C8E0023F935 /* THWebPageAttrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THWebPageAttrs.swift; sourceTree = "<group>"; };
 		64AB664D2476D17200587F1D /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
 		64BA6383267F7C3900E044A3 /* THNetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THNetworkStatus.swift; sourceTree = "<group>"; };
 		64BACF3F26AC3547000E4F97 /* THParentAppAlive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THParentAppAlive.swift; sourceTree = "<group>"; };
@@ -249,11 +249,12 @@
 		BE7DFEFD28044ABA0081492C /* OdChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannelManager.swift; sourceTree = "<group>"; };
 		BE7DFEFE28044ABA0081492C /* OdChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannelItem.swift; sourceTree = "<group>"; };
 		BE7DFF0028044ABA0081492C /* OdChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdChannel.swift; sourceTree = "<group>"; };
+		BE7FEC952845EDEA00A07ECA /* THFinderTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THFinderTools.swift; sourceTree = "<group>"; };
+		BE7FEC972845EE5100A07ECA /* THSpecialFilename.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSpecialFilename.h; sourceTree = "<group>"; };
+		BE7FEC982845EE5100A07ECA /* THSpecialFilename.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSpecialFilename.m; sourceTree = "<group>"; };
 		BE82720E27E0C3B100CF91B3 /* ChannelIconLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelIconLoader.swift; sourceTree = "<group>"; };
 		BE82721027E1133800CF91B3 /* YtChannelDataTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelDataTransformer.swift; sourceTree = "<group>"; };
 		BE9653CF280A033200987EA2 /* RssChannelDataTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssChannelDataTransformer.swift; sourceTree = "<group>"; };
-		BEAC0AC527FE1EA000CB3454 /* THWebPageOgAttrs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THWebPageOgAttrs.swift; sourceTree = "<group>"; };
-		BEAC0AC727FE1FD200CB3454 /* THWebPageJsonLdAttrs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THWebPageJsonLdAttrs.swift; sourceTree = "<group>"; };
 		BEAC0AC927FE21A200CB3454 /* RssWebItemAttrs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssWebItemAttrs.swift; sourceTree = "<group>"; };
 		BECD72A327DA3CDD00A001FE /* YtChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YtChannelItem.swift; sourceTree = "<group>"; };
 		BECD72A727DA3EAF00A001FE /* RssChannelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssChannelItem.swift; sourceTree = "<group>"; };
@@ -456,9 +457,7 @@
 			children = (
 				64F3555726C1D67000B18F41 /* THIconDownloader.swift */,
 				64F3555926C1D67000B18F41 /* THDistantItem.swift */,
-				6492EC6126C98C8E0023F935 /* THWebPageRssAttrs.swift */,
-				BEAC0AC527FE1EA000CB3454 /* THWebPageOgAttrs.swift */,
-				BEAC0AC727FE1FD200CB3454 /* THWebPageJsonLdAttrs.swift */,
+				6492EC6126C98C8E0023F935 /* THWebPageAttrs.swift */,
 			);
 			path = THDistant;
 			sourceTree = "<group>";
@@ -466,7 +465,10 @@
 		64F3558426C1D82E00B18F41 /* THFinderFile */ = {
 			isa = PBXGroup;
 			children = (
+				BE7FEC952845EDEA00A07ECA /* THFinderTools.swift */,
 				64F3558A26C1D82E00B18F41 /* THAppInLoginItem.swift */,
+				BE7FEC972845EE5100A07ECA /* THSpecialFilename.h */,
+				BE7FEC982845EE5100A07ECA /* THSpecialFilename.m */,
 				BE0B09FB27D7F9A900DEE577 /* THFinderMdItem.h */,
 				BE0B09FC27D7F9A900DEE577 /* THFinderMdItem.m */,
 				64F3559126C1D82E00B18F41 /* THSharedLoginItems.h */,
@@ -634,7 +636,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "Michaël Parrot";
 				TargetAttributes = {
 					6458CE8C2698DEE200E3885F = {
@@ -734,7 +736,6 @@
 				64015199269C54D000C4DF9A /* THHotKey.m in Sources */,
 				BE4F8D1127D95E5100A30B3E /* RssChannelFilter.swift in Sources */,
 				BEED9BB727DB9C010032B610 /* THWebBrowserScriptingTools.swift in Sources */,
-				BEAC0AC627FE1EA000CB3454 /* THWebPageOgAttrs.swift in Sources */,
 				BE78028027D90AF8000366DD /* MenuObject.swift in Sources */,
 				64CC07C8269B011D003D9392 /* MoreMenu.swift in Sources */,
 				BEAC0ACA27FE21A200CB3454 /* RssWebItemAttrs.swift in Sources */,
@@ -764,7 +765,6 @@
 				BEED9BBE27DB9C1F0032B610 /* THAsScript.swift in Sources */,
 				BE7DFF0428044ABB0081492C /* OdChannelItem.swift in Sources */,
 				64BA6384267F7C3900E044A3 /* THNetworkStatus.swift in Sources */,
-				BEAC0AC827FE1FD200CB3454 /* THWebPageJsonLdAttrs.swift in Sources */,
 				648B3662256AD47F00D3D29F /* THStringExtensions.swift in Sources */,
 				BED5681C27E8FFD200E5743E /* THFoundation.m in Sources */,
 				64AB664E2476D17200587F1D /* THExtensions.swift in Sources */,
@@ -783,6 +783,7 @@
 				BE323AFD27DA1E1F00F6021D /* ChannelManager.swift in Sources */,
 				643417DB267551080046CD56 /* THLogger.swift in Sources */,
 				64CC07C6269B002B003D9392 /* HeaderView.swift in Sources */,
+				BE7FEC962845EDEA00A07ECA /* THFinderTools.swift in Sources */,
 				646E18EE2567382D00CD1B2D /* THCocoaExtensions.swift in Sources */,
 				BECD72A427DA3CDE00A001FE /* YtChannelItem.swift in Sources */,
 				BE7DFF0228044ABB0081492C /* OdChannelVideoId.swift in Sources */,
@@ -794,7 +795,8 @@
 				64898D74256131E8002945CE /* THFileManagerExtensions.swift in Sources */,
 				BE0B09D127D7F8F500DEE577 /* THXMLParser.m in Sources */,
 				BEF20783281053E70023A10F /* THURLExtensions.swift in Sources */,
-				6492EC6226C98C8E0023F935 /* THWebPageRssAttrs.swift in Sources */,
+				6492EC6226C98C8E0023F935 /* THWebPageAttrs.swift in Sources */,
+				BE7FEC992845EE5100A07ECA /* THSpecialFilename.m in Sources */,
 				647B34EB2668F11000785E10 /* THOpenInBrowser.swift in Sources */,
 				64E727C72699B228000B516A /* THOverView.swift in Sources */,
 				BEED9BC427DBD6230032B610 /* YtChannelDetailsViewController.swift in Sources */,
@@ -858,7 +860,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -870,6 +873,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kr-app.TugViewer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -887,7 +891,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 56HL22VV9A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = TugViewer/Info.plist;
@@ -895,6 +900,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kr-app.TugViewer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -940,6 +946,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -958,7 +965,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1004,6 +1011,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1017,7 +1025,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -1034,6 +1042,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = $SDKROOT/usr/include/libxml2;
@@ -1042,6 +1052,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kr-app.com.Tug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1059,6 +1070,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = W6TJ6MYN9Y;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = $SDKROOT/usr/include/libxml2;
@@ -1067,6 +1080,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kr-app.com.Tug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

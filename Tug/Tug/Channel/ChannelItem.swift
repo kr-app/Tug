@@ -16,6 +16,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 	var contentText: String?
 	var thumbnail: URL?
 	var views: Int?
+	var commentCount: Int?
 	var category: String?
 
 	var checkedDate: Date?
@@ -53,6 +54,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 		coder.setString(contentText, forKey: "contentText")
 		coder.setUrl(thumbnail, forKey: "thumbnail")
 		coder.setInt(views, forKey: "views")
+		coder.setInt(commentCount, forKey: "commentCount")
 		coder.setString(category, forKey: "category")
 
 		coder.setDate(checkedDate, forKey: "checkedDate")
@@ -75,6 +77,7 @@ class ChannelItem: NSObject, THDictionarySerializationProtocol {
 		contentText = dictionaryRepresentation.string(forKey: "contentText") ?? dictionaryRepresentation.string(forKey: "content")
 		thumbnail = dictionaryRepresentation.url(forKey: "thumbnail")
 		views = dictionaryRepresentation.int(forKey: "views")
+		commentCount = dictionaryRepresentation.int(forKey: "commentCount")
 		category = dictionaryRepresentation.string(forKey: "category")
 
 		checkedDate = dictionaryRepresentation.date(forKey: "checkedDate")
@@ -124,6 +127,19 @@ extension ChannelItem {
 //--------------------------------------------------------------------------------------------------------------------------------------------
 extension ChannelItem {
 
+	func displayCommentCount() -> String? {
+		guard let v = commentCount
+		else {
+			return nil
+		}
+
+		if v > 1 {
+			return "\(v)"
+		}
+
+		return "\(v)"
+	}
+
 	func displayViews() -> String? {
 		guard let v = views
 		else {
@@ -140,7 +156,7 @@ extension ChannelItem {
 			return String(v) + " views"
 		}
 
-		return v == 1 ? "1 view" : "0 view"
+		return "\(v) view"
 	}
 
 }

@@ -180,30 +180,36 @@ class RssChannel: Channel {
 				item.checkedDate = old_item.checkedDate
 				item.pinndedDate = old_item.pinndedDate
 				item.thumbnail = old_item.thumbnail
+				item.commentCount = old_item.commentCount
 			}
 
-			if item.thumbnail == nil {
+//			if item.thumbnail == nil {
 				if let link = item.link {
 					if RssWebItemAttrs.canStart(for: link) {
-						let pageItem = RssWebItemAttrs.item(for: link)
-						if pageItem == nil {
+//						let pageItem = RssWebItemAttrs.item(for: link)
+	//					if pageItem == nil {
 							let pageItem = RssWebItemAttrs(link: link)
-							pageItem.start( {(ok: Bool, error: String?) in
-								if ok == false {
+
+							pageItem.start( {(attrs: [String: Any]?, error: String?) in
+								guard let attrs = attrs
+								else {
 									THLogError("item:\(item), link:\(link.absoluteString), error:\(error)")
 									return
 								}
-								if let thumbnail = pageItem.extractedImage {
+								if let thumbnail = attrs[RssWebItemAttrKey.ogImage.rawValue] as? URL {
 									item.thumbnail = thumbnail
 								}
+								if let commentCount = attrs[RssWebItemAttrKey.commentCount.rawValue] as? Int {
+									item.commentCount = commentCount
+								}
 							})
-						}
-						else if let thumbnail = pageItem?.extractedImage {
-							item.thumbnail = thumbnail
-						}
+//						}
+//						else if let thumbnail = pageItem?.extractedImage {
+//							item.thumbnail = thumbnail
+//						}
 					}
 				}
-			}
+	//		}
 
 			if let title = item.title {
 				if RssChannelFilterManager.shared.isExcludedItem(itemTitle: title, channel: self) {

@@ -15,6 +15,7 @@
 // THFinderFile
 #import "THFinderMdItem.h"
 #import "THSharedLoginItems.h"
+#import "THSpecialFilename.h"
 
 // THXmlParser
 #import "THXMLParser.h"

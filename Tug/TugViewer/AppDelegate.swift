@@ -12,6 +12,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		THLogInfo("config:\(THRunningApp.config())")
 
+		let a_clean_cookies = 1
+
 		DistributedNotificationCenter.default.addObserver(self,
 																				selector: #selector(n_panePreviewRequest),
 																				name: PPPaneRequester.requestNotificationName,
@@ -28,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 #if DEBUG
 	@objc private func test() {
-		if TH_isDebuggerAttached() == false {
+		if THRunningApp.isDebuggerAttached() == false {
 			return
 		}
 		
@@ -74,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				return
 			}
 
-			if TH_isDebuggerAttached() == false {
+			if THRunningApp.isDebuggerAttached() == false {
 				let parentPid = info[PPPaneRequesterKey.parentPid] as! pid_t
 				parentAppAlive.update(withParentPid: parentPid)
 			}

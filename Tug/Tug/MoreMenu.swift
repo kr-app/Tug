@@ -13,13 +13,16 @@ class MoreMenu: NSObject, NSMenuDelegate {
 
 		menu.removeAllItems()
 
-		if menu.title == "add-rss-menu" {
-			loadAddRssMenu(menu)
+		if menu.title == "micd-menu" {
+			loadMicdMenu(menu)
 			return
 		}
-
-		if menu.title == "add-yt-menu" {
-			loadAddYtMenu(menu)
+		else if menu.title == "rss-menu" {
+			loadRssMenu(menu)
+			return
+		}
+		else if menu.title == "yt-menu" {
+			loadYtMenu(menu)
 			return
 		}
 
@@ -44,8 +47,9 @@ class MoreMenu: NSObject, NSMenuDelegate {
 		}))
 
 		menu.addItem(NSMenuItem.separator())
-		menu.addItem(NSMenuItem(title: THLocalizedString("RSS Feed"), submenu: NSMenu(title: "add-rss-menu", delegate: self, autoenablesItems: false)))
-		menu.addItem(NSMenuItem(title: THLocalizedString("Yt Channel"), submenu: NSMenu(title: "add-yt-menu", delegate: self, autoenablesItems: false)))
+		menu.addItem(NSMenuItem(title: THLocalizedString("Send to Micd"), submenu: NSMenu(title: "micd-menu", delegate: self, autoenablesItems: false)))
+		menu.addItem(NSMenuItem(title: THLocalizedString("RSS Feed"), submenu: NSMenu(title: "rss-menu", delegate: self, autoenablesItems: false)))
+		menu.addItem(NSMenuItem(title: THLocalizedString("Yt Channel"), submenu: NSMenu(title: "yt-menu", delegate: self, autoenablesItems: false)))
 
 		menu.addItem(NSMenuItem.separator())
 		menu.addItem(THMenuItem(title: THLocalizedString("Quit"), block: { () in
@@ -55,17 +59,19 @@ class MoreMenu: NSObject, NSMenuDelegate {
 
 	// MARK: -
 
-	private func loadAddRssMenu(_ menu: NSMenu) {
-
-		// URL - from pasteboard
-		var url: URL? = nil
-		if let string = NSPasteboard.general.string(forType: .string) {
-			if string.count > 5 && string.count < 1024 && string.contains(".") && string.contains("/") {
-				url = URL(string: string)
-			}
+	private func loadMicdMenu(_ menu: NSMenu) {
+		if let url = ExtractClipboardUrl() {
+			menu.addItem(THMenuItem(title: THLocalizedString("Send \"\(url.th_presentableUrl())\" to micd"), block: { () in
+				SendToMicd(url)
+			}))
 		}
+		else {
+			menu.addItem(NSMenuItem(title: THLocalizedString("No URL in pasteboard"), enabled: false))
+		}
+	}
 
-		if let url = url {
+	private func loadRssMenu(_ menu: NSMenu) {
+		if let url = ExtractClipboardUrl() {
 			menu.addItem(THMenuItem(title: THLocalizedString("Add \"\(url.th_reducedHost)\""), block: { () in
 				if RssChannelManager.shared.addChannel(url: url) == nil {
 					THLogError("addChannel == nil url:\(url)")
@@ -104,13 +110,9 @@ class MoreMenu: NSObject, NSMenuDelegate {
 		else {
 			menu.addItem(NSMenuItem(title: THLocalizedString("No Rss feed found"), enabled: false))
 		}
-
 	}
 
-	// MARK: -
-
-	private func loadAddYtMenu(_ menu: NSMenu) {
-
+	private func loadYtMenu(_ menu: NSMenu) {
 		let frontTab = THWebBrowserScriptingTools.getFrontTab()
 
 		if let frontTab = frontTab, frontTab.empty == false {

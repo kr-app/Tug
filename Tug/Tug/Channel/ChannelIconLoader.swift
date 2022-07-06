@@ -44,7 +44,7 @@ class ChannelIconLoader: NSObject {
 //	}
 
 	@objc private func 	n_webItemAttrsUpdated(_ notification: Notification) {
-		if let thumbnailUrl = notification.userInfo?["thumbnailUrl"] as? URL{
+		if let attrs = notification.userInfo?["attrs"] as? [String: Any], let thumbnailUrl = attrs[RssWebItemAttrKey.ogImage.rawValue] as? URL {
 			if iconDownloader.hasData(forIconUrl: thumbnailUrl) == false {
 				iconDownloader.loadIcon(atURL: thumbnailUrl)
 			}

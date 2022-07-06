@@ -74,6 +74,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(n_iconDownloaderDidLoad), name: THIconDownloader.didLoadNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(n_channelItemUpdated), name: ChannelManager.channelItemUpdatedNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(n_webItemAttrsUpdated), name: RssWebItemAttrs.didUpdateAttributeNotification, object: nil)
 	}
 	
 	deinit {
@@ -117,10 +118,24 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 		}
 
 		let rows = tableView.rows(in: tableView.visibleRect)
-		let objectList = objectList?[rows.lowerBound...rows.upperBound]
+		let objectList = objectList?[rows.lowerBound..<rows.upperBound]
 
 		if let firstIdx = objectList?.firstIndex(where: { ($0.kind == .rss || $0.kind == .yt) && $0.item!.thumbnail == url }) {
 			tableView.th_reloadData(forRowIndexes: IndexSet(integer: rows.lowerBound + firstIdx))
+		}
+	}
+
+	@objc private func n_webItemAttrsUpdated(_ notification: Notification) {
+		if 	let link = notification.userInfo?["link"] as? URL,
+			let attrs = notification.userInfo?["attrs"] as? [String: Any],
+			let commentCount = attrs[RssWebItemAttrKey.commentCount.rawValue] as? Int {
+
+			let rows = tableView.rows(in: tableView.visibleRect)
+			let objectList = objectList?[rows.lowerBound..<rows.upperBound]
+
+			if let firstIdx = objectList?.firstIndex(where: { ($0.kind == .rss) && $0.item!.link == link }) {
+				tableView.th_reloadData(forRowIndexes: IndexSet(integer: rows.lowerBound + firstIdx))
+			}
 		}
 	}
 	
@@ -850,6 +865,10 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 
 			menu.addItem(NSMenuItem.separator())
 
+			menu.addItem(THMenuItem(title: THLocalizedString("Send to micd"), block: {() in
+				SendToMicd(item.link!)
+			}))
+
 			menu.addItem(THMenuItem(title: THLocalizedString("Copy Debug Info"), block: {() in
 				var string = ""
 
@@ -869,6 +888,7 @@ class MenuListController: NSViewController,	NSWindowDelegate,
 				string += "item identifier: \(item.identifier)\n"
 				string += "item title: \(item.title)\n"
 				string += "item category: \(item.category)\n"
+				string += "item link: \(item.link?.absoluteString)\n"
 
 				NSPasteboard.general.clearContents()
 				NSPasteboard.general.setString(string, forType: .string)
